@@ -1,0 +1,41 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Video locale QC5</title><style>
+html,body{margin:0;height:100%;background:#10171c;color:#e1e9ec;font:12px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body{position:relative;overflow:hidden}video{display:block;width:100%;height:100%;object-fit:contain}#message{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);padding:8px 12px;background:#10171ce6;border-radius:8px;max-width:80%;text-align:center}#message[hidden]{display:none}.controls{position:absolute;bottom:0;left:0;right:0;display:flex;align-items:center;gap:10px;padding:7px 10px;background:#10171ce8;opacity:0;transition:opacity .15s}body:hover .controls,body:focus-within .controls{opacity:1}.controls button{width:35px;height:32px;display:grid;place-items:center;background:transparent;border:0;border-radius:5px;color:inherit;cursor:pointer}.controls button:hover{background:#ffffff18}.controls svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.6}.controls input{width:80px;accent-color:#80c6b5;height:20px}.controls label{display:flex;align-items:center}#listen-status{font-size:10px;color:#b0c0c7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#fullscreen{margin-left:auto;font-size:19px}#listen-button[aria-pressed=true] .mute-line{display:none}button:focus-visible,input:focus-visible{outline:2px solid #80c6b5;outline-offset:2px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}@media(hover:none){.controls{opacity:1}}@media(max-width:400px){#listen-status{max-width:90px}.controls{gap:5px}}@media(prefers-reduced-motion:reduce){.controls{transition:none}}
+#viewport{position:absolute;inset:0;overflow:hidden}#video.zoomed{cursor:grab;touch-action:none}#video.dragging{cursor:grabbing}.zoom-controls{display:flex;align-items:center;gap:2px}.controls .zoom-controls button{width:30px}.controls #zoom-reset{width:42px;font-size:12px;font-variant-numeric:tabular-nums}.controls button:disabled{opacity:.35;cursor:default}#listen-status{flex:1;min-width:0}@media(max-width:480px){.controls{gap:5px}.controls input{width:60px}#listen-status{max-width:90px}}
+</style></head><body>
+<div id="viewport"><video id="video" autoplay muted playsinline aria-label="Video in diretta della camera"></video></div>
+<p id="message" role="status">Connessione al video…</p>
+<div class="controls" role="group" aria-label="Controlli del lettore">
+ <button id="listen-button" data-compact="1" type="button" aria-label="Attiva audio" title="Attiva audio" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4zM15 8c3 2 3 6 0 8M18 5c5 4 5 10 0 14"/><path class="mute-line" d="M3 3l18 18"/></svg></button>
+ <label><span class="sr-only">Volume</span><input id="listen-volume" aria-label="Volume" type="range" min="0" max="1" step="0.05" value="0.7"></label>
+ <span id="listen-status" role="status">Audio disattivato</span>
+ <div class="zoom-controls" role="group" aria-label="Zoom digitale">
+  <button id="zoom-out" type="button" aria-label="Riduci zoom digitale" title="Riduci zoom digitale" disabled>−</button>
+  <button id="zoom-reset" type="button" aria-label="Zoom digitale 1×; ripristina inquadratura" title="Ripristina inquadratura">1×</button>
+  <button id="zoom-in" type="button" aria-label="Aumenta zoom digitale" title="Aumenta zoom digitale">+</button>
+ </div>
+ <button id="fullscreen" type="button" aria-label="Schermo intero" title="Schermo intero">⛶</button>
+</div>
+<!-- QC5_LOCALE_BOOTSTRAP -->
+<script src="listen.js"></script><script src="media.js"></script><script>
+document.getElementById('fullscreen').addEventListener('click',function(){var p=document.fullscreenElement?document.exitFullscreen&&document.exitFullscreen():document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();if(p&&p.catch)p.catch(function(){})});
+/* QC5_DIGITAL_ZOOM: browser-only crop; no camera command or extra stream. */
+(function(){
+ var video=document.getElementById('video'),view=document.getElementById('viewport'),minus=document.getElementById('zoom-out'),plus=document.getElementById('zoom-in'),reset=document.getElementById('zoom-reset');
+ var zoom=1,x=0,y=0,drag=null;
+ function render(){
+  var w=view.clientWidth,h=view.clientHeight,ratio=video.videoWidth&&video.videoHeight?video.videoWidth/video.videoHeight:16/9;
+  var width=Math.min(w,h*ratio),height=width/ratio,maxX=Math.max(0,(width*zoom-w)/2),maxY=Math.max(0,(height*zoom-h)/2);
+  x=Math.max(-maxX,Math.min(maxX,x));y=Math.max(-maxY,Math.min(maxY,y));
+  video.style.transform='translate('+x+'px,'+y+'px) scale('+zoom+')';video.classList.toggle('zoomed',zoom>1);
+  minus.disabled=zoom===1;plus.disabled=zoom===4;reset.textContent=zoom.toLocaleString(qc5Locale.language,{maximumFractionDigits:2})+'×';reset.setAttribute('aria-label',qc5Text("Zoom digitale ")+reset.textContent+qc5Text("; ripristina inquadratura"));
+ }
+ function end(){var previous=drag;drag=null;if(previous&&video.hasPointerCapture&&video.hasPointerCapture(previous.id))video.releasePointerCapture(previous.id);video.classList.remove('dragging');}
+ function change(value){end();zoom=Math.max(1,Math.min(4,value));if(zoom===1)x=y=0;render();}
+ minus.addEventListener('click',function(){change(zoom-.25)});plus.addEventListener('click',function(){change(zoom+.25)});reset.addEventListener('click',function(){x=y=0;change(1)});
+ video.addEventListener('pointerdown',function(e){if(zoom===1||e.button!==0||drag)return;drag={id:e.pointerId,x:e.clientX,y:e.clientY,left:x,top:y};video.setPointerCapture(e.pointerId);video.classList.add('dragging');e.preventDefault();});
+ video.addEventListener('pointermove',function(e){if(!drag||e.pointerId!==drag.id)return;x=drag.left+e.clientX-drag.x;y=drag.top+e.clientY-drag.y;render();e.preventDefault();});
+ ['pointerup','pointercancel','lostpointercapture'].forEach(function(name){video.addEventListener(name,function(e){if(drag&&e.pointerId===drag.id)end();});});
+ window.addEventListener('resize',render);document.addEventListener('fullscreenchange',render);video.addEventListener('loadedmetadata',render);render();
+})();
+</script></body></html>

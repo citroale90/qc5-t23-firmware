@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>VeePai QC5 · Hack UI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root {
+  --bg:#0c0e13;--bg-card:#151820;--bg-hover:#1c2030;--border:#2a2e3a;
+  --text:#c8ccd4;--text-dim:#6b7280;--accent:#22d3ee;--accent-dim:#0e7490;
+  --green:#34d399;--red:#f87171;--amber:#fbbf24;
+  --fm:'Courier New',Courier,monospace;--fs:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+  --radius:8px;--glow:0 0 20px rgba(34,211,238,0.15);
+}
+:root.light {
+  --bg:#f0f2f5;--bg-card:#fff;--bg-hover:#e8eaef;--border:#d1d5db;
+  --text:#1f2937;--text-dim:#6b7280;--accent:#0891b2;--glow:0 4px 12px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px}
+body{font-family:var(--fs);background:var(--bg);color:var(--text);min-height:100dvh;padding:12px;transition:background .3s,color .3s}
+.shell{max-width:720px;margin:0 auto}
+header{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border);margin-bottom:16px}
+header h1{font-family:var(--fm);font-size:1.15rem;font-weight:700;color:var(--accent);letter-spacing:-.02em}
+header h1 .dim{color:var(--text-dim);font-weight:400}
+.theme-btn{background:none;border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 10px;cursor:pointer;font-size:.85rem;transition:border-color .2s}
+.theme-btn:hover{border-color:var(--accent)}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;transition:box-shadow .2s}
+.card:focus-within{box-shadow:var(--glow)}
+.card-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;user-select:none;-webkit-user-select:none;transition:background .15s}
+.card-head:hover{background:var(--bg-hover)}
+.card-head h2{font-family:var(--fm);font-size:.9rem;font-weight:600;display:flex;align-items:center;gap:8px}
+.card-head .chv{transition:transform .25s;color:var(--text-dim);font-size:.75rem}
+.card.open .card-head .chv{transform:rotate(90deg)}
+.card-body{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s;padding:0 16px}
+.card.open .card-body{max-height:2000px;padding:0 16px 16px}
+.btn{font-family:var(--fm);font-size:.8rem;font-weight:600;letter-spacing:.02em;border:1px solid var(--border);background:var(--bg-hover);color:var(--text);padding:10px 14px;border-radius:6px;cursor:pointer;transition:all .15s;text-align:center;width:100%}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn:active{transform:scale(0.97)}
+#talk-button{transition:background .15s,color .15s,border-color .15s}
+#talk-button:active{transform:none}
+#talk-button[aria-pressed="true"]{background:rgba(248,113,113,.12);border-color:var(--red);color:var(--red)}
+.btn.on{border-color:var(--green);color:var(--green)}
+.btn.off{border-color:var(--red);color:var(--red)}
+.btn.on:hover{background:rgba(52,211,153,.1)}
+.btn.off:hover{background:rgba(248,113,113,.1)}
+.btn.accent{border-color:var(--accent);color:var(--accent)}
+.btn.accent:hover{background:rgba(34,211,238,.1)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.ptz-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-width:260px;margin:12px auto}
+.ptz-pad .btn{padding:16px 8px;font-size:1.3rem}
+.ptz-center{display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-weight:700;color:var(--accent);font-size:.7rem;letter-spacing:.1em}
+.preset-bar{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center}
+.preset-bar .btn{width:auto;padding:8px 14px}
+.preset-input{font-family:var(--fm);font-size:.8rem;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;flex:1;min-width:100px}
+.preset-input:focus{outline:none;border-color:var(--accent)}
+.info-grid{display:grid;grid-template-columns:auto 1fr;gap:1px;font-family:var(--fm);font-size:.8rem;border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.info-grid span{padding:10px 12px;background:var(--bg-card)}
+.info-grid span:nth-child(odd){color:var(--text-dim);background:var(--bg-hover);white-space:nowrap}
+#toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%) translateY(80px);font-family:var(--fm);font-size:.8rem;padding:10px 20px;border-radius:8px;background:var(--bg-card);border:1px solid var(--border);color:var(--text);opacity:0;transition:transform .3s,opacity .3s;z-index:100;max-width:90vw;text-align:center;pointer-events:none}
+#toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+#toast.ok{border-color:var(--green);color:var(--green)}
+#toast.err{border-color:var(--red);color:var(--red)}
+#toast.wait{border-color:var(--amber);color:var(--amber)}
+.rtsp-list{list-style:none;padding:0}
+.rtsp-list li{font-family:var(--fm);font-size:.78rem;padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px}
+.rtsp-list li:last-child{border-bottom:none}
+.rtsp-list .tag{font-size:.7rem;padding:2px 8px;border-radius:4px;background:var(--bg-hover);color:var(--text-dim);white-space:nowrap}
+.rtsp-list a{color:var(--accent);text-decoration:none;word-break:break-all}
+.sec-label{font-family:var(--fm);font-size:.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;margin:12px 0 8px}
+.live-frame{width:100%;aspect-ratio:16/9;border:1px solid var(--border);border-radius:6px;margin:10px 0}
+.live-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 10px;margin:10px 0;align-items:start}
+.live-actions>.btn{min-width:0;min-height:50px;height:100%;line-height:1.35;padding:10px 8px}
+.live-actions>.btn:active{transform:none}
+.live-action-help{min-width:0;min-height:4.2em;font-size:.75rem;line-height:1.4;color:var(--text-dim);overflow-wrap:anywhere}
+.live-action-help>a{display:block;margin-top:4px;color:var(--accent)}
+.live-action-help>a[hidden]{display:none}
+footer{text-align:center;font-size:.75rem;color:var(--text-dim);padding:20px 0 10px;font-family:var(--fm)}
+footer a{color:var(--accent);text-decoration:none}
+.ha-code{font-family:var(--fm);font-size:.75rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px;overflow-x:auto;white-space:pre;color:var(--text-dim);line-height:1.5;margin-top:8px}
+.rec-bar{display:flex;align-items:center;gap:8px;margin:8px 0}
+.rec-dot{width:12px;height:12px;border-radius:50%;background:var(--text-dim);display:inline-block;transition:background .3s}
+.rec-dot.active{background:var(--red);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.rec-time{font-family:var(--fm);font-size:.78rem;color:var(--text-dim)}
+.rec-list{margin-top:10px;max-height:200px;overflow-y:auto}
+.rec-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-family:var(--fm);font-size:.75rem;gap:8px}
+.rec-item:last-child{border-bottom:none}
+.rec-item .rec-info{flex:1;color:var(--text-dim)}
+.rec-item .rec-size{color:var(--text-dim);white-space:nowrap}
+.rec-item .btn{width:auto;padding:6px 10px;font-size:.7rem}
+.toggle-wrap{display:flex;align-items:center;gap:8px;margin-left:auto}
+.toggle-label{font-family:var(--fm);font-size:.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.06em}
+.toggle{position:relative;width:44px;height:24px;cursor:pointer;display:inline-block}
+.toggle input{opacity:0;width:0;height:0}
+.toggle .slider{position:absolute;top:0;left:0;right:0;bottom:0;background:var(--border);border-radius:12px;transition:.3s}
+.toggle .slider:before{content:"";position:absolute;width:18px;height:18px;left:3px;bottom:3px;background:var(--text-dim);border-radius:50%;transition:.3s}
+.toggle input:checked+.slider{background:var(--accent)}
+.toggle input:checked+.slider:before{transform:translateX(20px);background:#fff}
+.motion-info{font-family:var(--fm);font-size:.7rem;color:var(--text-dim)}
+.motion-info .val{color:var(--accent)}
+.motion-info .alert{color:var(--red)}
+a.btn{text-decoration:none}.rec-item{flex-wrap:wrap}.rec-item .rec-info{min-width:150px;overflow-wrap:anywhere}.rec-item a.btn{display:inline-flex;width:auto}.card-body{transition:padding .2s}.card.open .card-body{max-height:none}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<header>
+  <h1>veepai<span class="dim" id="camera-name">::VeePai QC5</span></h1>
+  <label id="qc5-language-control" style="margin-left:auto;margin-right:8px"></label>
+  <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="Cambia tema">&#127769;</button>
+</header>
+
+<div id="camera-status" style="padding:10px 0;font-size:.8rem;color:var(--text-dim)">Connessione alla camera…</div>
+<div id="command-status" role="status" aria-live="polite" style="font-size:.82rem;padding:8px 0;min-height:1.4em;color:var(--text-dim)">Pronto per i comandi locali</div>
+<!-- PTZ -->
+<div class="card open" id="card-ptz">
+  <div class="card-head" onclick="toggle('card-ptz')">
+    <h2>&#128377;&#65039; PTZ &amp; Live</h2><span class="chv">&#9654;</span>
+  </div>
+  <div class="card-body">
+    <iframe class="live-frame" id="live-frame" title="Video e audio locali" src="about:blank" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <div style="font-size:.75rem;color:var(--text-dim)">Audio e volume sono nel lettore. Tieni premuto Parla per usare l’altoparlante della camera.</div>
+    <div class="live-actions">
+      <button class="btn" id="reconnect-button" onclick="videoReload()" aria-describedby="video-status">↻ Riconnetti video</button>
+      <button class="btn" id="talk-button" type="button" disabled aria-pressed="false" aria-describedby="talk-status" style="touch-action:none;user-select:none">🎙 Tieni premuto per parlare</button>
+      <div class="live-action-help"><span id="video-status" role="status">Connessione al video…</span></div>
+      <div class="live-action-help"><span id="talk-status" role="status" aria-live="polite">Interfono in attesa della camera</span></div>
+    </div>
+    <label style="font-size:.8rem;display:flex;align-items:center;gap:8px;margin:8px 0"><input id="talk-processing" type="checkbox">Riduci eco e rumore</label>
+    <div class="rec-bar" style="display:none">
+      <span class="rec-dot" id="rec-dot"></span>
+      <button class="btn off" id="rec-btn" onclick="recToggle()" style="width:auto;padding:8px 16px">&#9679; REC</button>
+      <span class="rec-time" id="rec-time"></span>
+    </div>
+    <div class="ptz-pad">
+      <button class="btn" onclick="cmd('ptzlu')" title="Su-Sinistra">&#8598;</button>
+      <button class="btn" onclick="cmd('ptzu')"  title="Su">&#8593;</button>
+      <button class="btn" onclick="cmd('ptzru')" title="Su-Destra">&#8599;</button>
+      <button class="btn" onclick="cmd('ptzl')"  title="Sinistra">&#8592;</button>
+      <button class="ptz-center" id="ptz-stop" onclick="cmd('ptzstop')" title="Ferma movimento">STOP</button>
+      <button class="btn" onclick="cmd('ptzr')"  title="Destra">&#8594;</button>
+      <button class="btn" onclick="cmd('ptzld')" title="Giu-Sinistra">&#8601;</button>
+      <button class="btn" onclick="cmd('ptzd')"  title="Giu">&#8595;</button>
+      <button class="btn" onclick="cmd('ptzrd')" title="Giu-Destra">&#8600;</button>
+    </div>
+    <div class="sec-label">Preset</div>
+    <div class="preset-bar">
+      <input class="preset-input" id="preset-name" placeholder="nome preset..." maxlength="20">
+      <button class="btn accent" onclick="presetSave()">&#128190; Salva</button>
+    </div>
+    <div class="preset-bar" id="preset-list"></div>
+  </div>
+</div>
+
+<!-- Registrazioni: servizio locale opzionale, come nelle Augentix -->
+<div class="card" id="card-rec" style="display:none">
+  <div class="card-head" onclick="toggle('card-rec')">
+    <h2>&#128308; Registrazioni</h2><span class="chv">&#9654;</span>
+  </div>
+  <div class="card-body">
+    <p id="record-status" style="font-size:.82rem;line-height:1.6">Lettura del registratore…</p>
+    <p style="font-size:.78rem;color:var(--text-dim);line-height:1.6;margin:10px 0">La registrazione avviene nella camera. La destinazione si imposta nel file <code>config.txt</code>.</p>
+    <button class="btn off" id="rec-stop-now" onclick="recStopNow()" hidden disabled>■ Ferma registrazione in corso</button>
+    <div class="sec-label">Rilevamento del movimento</div>
+    <button class="btn" id="motion-btn" onclick="motionToggle()" disabled>Attiva registrazione su movimento</button>
+    <p id="motion-status" role="status" style="font-size:.78rem;color:var(--text-dim);line-height:1.6;margin:8px 0 16px">Lettura del rilevatore locale…</p>
+    <div class="sec-label">File Registrati</div>
+    <button class="btn" onclick="recLoadList()">&#128260; Aggiorna lista</button>
+    <div id="rec-player" style="display:none;margin:12px 0">
+      <p id="rec-player-status" role="status" style="font-size:.78rem;margin-bottom:8px;color:var(--text-dim)"></p>
+      <video id="rec-video" controls style="width:100%;max-height:300px;background:#000;border-radius:6px"></video>
+      <button class="btn off" onclick="recPlayerClose()" style="margin-top:6px;width:auto;padding:6px 12px">&#10005; Chiudi</button>
+    </div>
+    <div class="rec-list" id="rec-list"></div>
+  </div>
+</div>
+
+<!-- IR / Day-Night -->
+<div class="card" id="card-ir">
+  <div class="card-head" onclick="toggle('card-ir')">
+    <h2>&#128262; IR &amp; Day/Night</h2><span class="chv">&#9654;</span>
+  </div>
+  <div class="card-body">
+    <div class="sec-label">White Light API</div>
+    <div class="g2">
+      <button class="btn on"  onclick="cmd('wlon')">WL ON</button>
+      <button class="btn off" onclick="cmd('wlof')">WL OFF</button>
+    </div>
+    <div class="sec-label">IR Control</div>
+    <div class="g2">
+      <button class="btn" onclick="cmd('ircutday')">&#9728; Day</button>
+      <button class="btn" onclick="cmd('ircutnig')">&#127769; Night</button>
+    </div>
+    <button class="btn" onclick="cmd('irauto')">Giorno/notte automatico</button>
+  </div>
+</div>
+
+<div class="card" id="card-wifi">
+  <div class="card-head" onclick="toggle('card-wifi')"><h2>&#128246; Wi-Fi</h2><span class="chv">&#9654;</span></div>
+  <div class="card-body"><p style="font-size:.82rem;color:var(--text-dim);line-height:1.6">Nome rete e password si impostano nel file <code>config.txt</code> sulla SD, nei campi <code>SSID</code> e <code>PWD</code>. Dopo aver salvato il file, premi «Applica configurazione SD». SSID vuoto mantiene la rete già memorizzata. La password non viene mostrata nella pagina.</p><a class="btn" href="/setup" data-qc5-locale-link style="display:block;text-decoration:none;margin:10px 0">Configura Wi-Fi dalla pagina web</a><button class="btn accent" onclick="cmd('wifi_apply')">Applica configurazione SD</button><p id="wifi-status" style="font-size:.8rem;margin-top:10px"></p></div>
+</div>
+<!-- Stream RTSP -->
+<div class="card" id="card-stream">
+  <div class="card-head" onclick="toggle('card-stream')">
+    <h2>&#128250; Stream RTSP</h2><span class="chv">&#9654;</span>
+  </div>
+  <div class="card-body">
+    <ul class="rtsp-list" id="rtsp-links"><li>Video locale disponibile nel lettore. Il flusso RTSP non è ancora attivo.</li></ul>
+  </div>
+</div>
+
+<!-- Home Assistant -->
+<div class="card" id="card-ha">
+  <div class="card-head" onclick="toggle('card-ha')">
+    <h2>&#127968; Home Assistant</h2><span class="chv">&#9654;</span>
+  </div>
+  <div class="card-body">
+    <p style="font-size:.82rem;color:var(--text-dim);margin-bottom:10px;">
+      Video e comandi locali: PTZ, luce bianca, IR Giorno/Notte e Automatico.
+      Scarica il pacchetto e segui le istruzioni nel file YAML.
+    </p>
+    <p style="font-size:.82rem;margin-bottom:10px">Video per Generic Camera (TCP): <code id="ha-stream-url">In attesa della camera…</code></p>
+    <p style="font-size:.78rem;color:var(--text-dim);margin-bottom:10px">I pulsanti diventano entità di Home Assistant, utilizzabili anche nelle automazioni. Gli IR seguono la modalità Giorno/Notte.</p>
+    <div class="ha-code" id="ha-yaml"></div>
+    <div class="g2" style="margin-top:10px"><button class="btn accent" onclick="copyHA()">&#128203; Copia YAML</button>
+    <button class="btn" id="ha-download" onclick="downloadHA()">Scarica YAML</button></div>
+  </div>
+</div>
+
+<!-- System Info -->
+<div class="card" id="card-sys">
+  <div class="card-head" onclick="toggle('card-sys')">
+    <h2>&#8505;&#65039; Sistema</h2><span class="chv">&#9654;</span>
+  </div>
+  <div class="card-body">
+    <div class="info-grid" id="sys-grid">
+      <span>IP</span><span>0.0.0.0</span>
+      <span>Hack</span><span>SD CARD / T23</span>
+      <span>Uptime</span><span>—</span>
+      <span>Data</span><span>—</span>
+    </div>
+    <button class="btn" style="margin-top:10px;" id="sys-refresh" onclick="refreshSys()">&#128260; Aggiorna</button>
+  </div>
+</div>
+
+<footer>
+  <a href="https://github.com/ant-thomas/zsgx1hacks" target="_blank">ZS-GX1 Hacks</a>
+  &middot; UI V4 di Alexandre / Jalecom &middot; adattamento VeePai QC5
+</footer>
+
+</div>
+
+<div id="toast"></div>
+
+
+<!-- QC5_LOCALE_BOOTSTRAP -->
+<script src="talk.js"></script>
+<script>
+/* -- Theme -- */
+(function(){
+  var s=localStorage.getItem('theme');
+  if(s==='light')document.documentElement.classList.add('light');
+  ubtn();
+})();
+function toggleTheme(){
+  document.documentElement.classList.toggle('light');
+  localStorage.setItem('theme',document.documentElement.classList.contains('light')?'light':'dark');
+  ubtn();
+}
+function ubtn(){
+  var b=document.getElementById('themeBtn');
+  if(b)b.innerHTML=document.documentElement.classList.contains('light')?'&#9728;&#65039;':'&#127769;';
+}
+
+/* -- Card collapse -- */
+function toggle(id){
+ document.getElementById(id).classList.toggle('open');
+ if(id==='card-rec')loadRecordingPanel();
+}
+
+/* -- Toast -- */
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+var _tt=null;
+function toast(msg,cls,dur){
+  var el=document.getElementById('toast');
+  el.textContent=msg;
+  el.className='show '+(cls||'');
+  clearTimeout(_tt);
+  _tt=setTimeout(function(){el.className=''},dur||2500);
+}
+
+/* -- Command API -- */
+var motorAvailable=false,lastCommandId=0,commandPending=0;
+var commandNames={ptzl:qc5Text("Sinistra"),ptzr:qc5Text("Destra"),ptzu:qc5Text("Su"),ptzd:qc5Text("Giù"),ptzlu:qc5Text("Su-sinistra"),ptzru:qc5Text("Su-destra"),ptzld:qc5Text("Giù-sinistra"),ptzrd:qc5Text("Giù-destra"),ptzstop:'Stop',preset_save:qc5Text("Salva preset"),preset_go:qc5Text("Richiama preset"),preset_del:qc5Text("Elimina preset"),wlon:qc5Text("Luce accesa"),wlof:qc5Text("Luce spenta"),ircutday:qc5Text("Giorno"),ircutnig:qc5Text("Notte"),irauto:qc5Text("Giorno/notte automatico"),wifi_apply:qc5Text("Configurazione Wi-Fi")};
+function commandStatus(id,label,message,ok){
+ if(id!==lastCommandId)return;
+ var el=document.getElementById('command-status');
+ el.textContent=(ok===true?'✓ ':ok===false?'✗ ':'⏳ ')+label+': '+message;
+ el.style.color=ok===false?'var(--red)':ok===true?'var(--accent)':'var(--text-dim)';
+}
+function cmd(c,extra,done){
+  if(commandPending&&c!=='ptzstop'){toast(qc5Text("Attendi il completamento del comando in corso"));return;}
+  if(((c.indexOf('ptz')===0&&c!=='ptzstop')||c==='preset_save'||c==='preset_go')&&!motorAvailable){toast(qc5Text("PTZ non disponibile: controllo motori in corso"),'err');return;}
+  commandPending++;
+  var requestId=++lastCommandId,label=commandNames[c]||c;
+  commandStatus(requestId,label,qc5Text("in corso"),null);
+  if(['wlon','wlof','ircutday','ircutnig','irauto'].indexOf(c)>=0){var frame=document.getElementById('live-frame');if(frame.contentWindow)frame.contentWindow.postMessage({qc5VideoPauseMs:4000},location.origin);}
+  var url='cgi-bin/webui?command='+encodeURIComponent(c);
+  if(extra)url+='&'+extra;
+  toast('\u23F3 '+c+'\u2026','wait',8000);
+  var xhr=new XMLHttpRequest();
+  xhr.open('GET',url,true);
+  xhr.timeout=20000;
+  xhr.onload=function(){
+    try{
+      var d=JSON.parse(xhr.responseText);
+      if(d.ok===true||d.ok==='true'){
+        commandStatus(requestId,label,qc5Text(d.result)||qc5Text("Completato"),true);
+        toast('\u2713 '+(qc5Text(d.result)||c),'ok');
+        if(done)done(d);if(c==='wifi_apply')refreshSys(true);
+      }else{
+        commandStatus(requestId,label,qc5Text(d.result)||qc5Text("Errore"),false);
+        toast('\u2717 '+(qc5Text(d.result)||qc5Text("errore")),'err');
+      }
+    }catch(e){
+      commandStatus(requestId,label,qc5Text("Risposta non valida"),false);
+      toast(qc5Text("✗ Risposta non valida"),'err');
+    }
+  };
+  xhr.onerror=function(){commandStatus(requestId,label,qc5Text("Rete non raggiungibile"),false);toast(qc5Text("✗ Rete non raggiungibile"),'err')};
+  xhr.onloadend=function(){commandPending=Math.max(0,commandPending-1)};
+  xhr.ontimeout=function(){commandStatus(requestId,label,qc5Text("La camera non risponde: riprova"),false);toast(qc5Text("✗ La camera non risponde: riprova"),'err')};
+  xhr.send();
+}
+
+/* -- PTZ Presets -- */
+function presetSave(){
+  var n=document.getElementById('preset-name').value.trim().replace(/[^a-zA-Z0-9_-]/g,'');
+  if(!n){toast(qc5Text("Inserisci un nome"),'err');return}
+  cmd('preset_save','preset_name='+encodeURIComponent(n),loadPresets);
+  document.getElementById('preset-name').value='';
+}
+function presetGo(n){cmd('preset_go','preset_name='+encodeURIComponent(n))}
+function presetDel(n){
+  if(confirm(qc5Text("Eliminare preset \"")+n+'"?')){
+    cmd('preset_del','preset_name='+encodeURIComponent(n),loadPresets);
+  }
+}
+function loadPresets(){
+  var xhr=new XMLHttpRequest();
+  xhr.open('GET','cgi-bin/webui?command=preset_list',true);
+  xhr.onload=function(){
+    try{
+      var d=JSON.parse(xhr.responseText);
+      var el=document.getElementById('preset-list');
+      if(!d.presets||d.presets.length===0){
+        el.innerHTML=qc5Text("<span style=\"font-size:.78rem;color:var(--text-dim)\">Nessun preset</span>");
+        return;
+      }
+      var h='';
+      for(var i=0;i<d.presets.length;i++){
+        var p=d.presets[i];
+        h+='<button class="btn accent" onclick="presetGo(\''+p+'\')">'+p+'</button>';
+        h+='<button class="btn off" onclick="presetDel(\''+p+'\')" style="width:auto;padding:8px 10px">\u2715</button>';
+      }
+      el.innerHTML=h;
+    }catch(e){}
+  };
+  xhr.send();
+}
+loadPresets();
+
+/* -- System info refresh -- */
+var sysBusy=false;
+function refreshSys(quiet){
+  if(sysBusy)return;
+  sysBusy=true;
+  var button=document.getElementById('sys-refresh');if(button)button.disabled=true;
+  var xhr=new XMLHttpRequest();
+  xhr.open('GET','cgi-bin/webui?command=sysinfo',true);
+  xhr.timeout=15000;
+  xhr.onload=function(){
+    try{
+      var d=JSON.parse(xhr.responseText);
+      if(!d.ok)throw new Error(qc5Text("Sysinfo non disponibile"));
+      var g=document.getElementById('sys-grid');
+      if(d.ok){ applyCameraInfo(d); }
+      if(g&&d.ok){
+        var h='<span>IP</span><span>'+esc((d.ip||'?'))+'</span>';
+        h+='<span>Hack</span><span>'+esc((d.hack||'?'))+'</span>';
+        h+='<span>Uptime</span><span>'+esc((d.uptime||'?'))+'</span>';
+        h+=qc5Text("<span>Data</span><span>")+esc((d.date||new Date().toLocaleString(qc5Locale.language)))+'</span>';
+        if(d.mem_total_kb){
+          var used=Math.round((d.mem_total_kb-d.mem_free_kb)/1024);
+          var total=Math.round(d.mem_total_kb/1024);
+          h+='<span>RAM</span><span>'+used+' / '+total+' MB</span>';
+        }
+        g.innerHTML=h;
+      }
+      if(!quiet)toast(qc5Text("✓ Info aggiornate"),'ok');
+    }catch(e){if(!quiet)toast(qc5Text("✗ Errore sysinfo"),'err')}
+  };
+  xhr.onerror=xhr.ontimeout=function(){if(!quiet)toast(qc5Text("Camera non raggiungibile"),'err')};
+  xhr.onloadend=function(){sysBusy=false;if(button)button.disabled=false};
+  xhr.send();
+}
+
+/* -- HA YAML generator -- */
+function renderHAYaml(id,info){
+ var prefix=String(id||'').toLowerCase().replace(/[^a-z0-9_]/g,'_');
+ if(!prefix){document.getElementById('ha-yaml').textContent=qc5Text("# Attendo il riconoscimento della camera.");document.getElementById('ha-stream-url').textContent=qc5Text("In attesa della camera");delete document.getElementById('ha-download').dataset.filename;document.getElementById('ha-download').disabled=true;return;}
+ if(!/^[a-z]/.test(prefix))prefix='camera_'+prefix;
+ var camBase=location.origin,label=info&&info.CAM_NAME||'QC5',stream=info&&info.RTSP_URL||'';
+ var entries=[['su',qc5Text("Su"),'ptzu','mdi:arrow-up'],['giu',qc5Text("Giù"),'ptzd','mdi:arrow-down'],['sinistra',qc5Text("Sinistra"),'ptzl','mdi:arrow-left'],['destra',qc5Text("Destra"),'ptzr','mdi:arrow-right'],['su_sinistra',qc5Text("Su sinistra"),'ptzlu','mdi:arrow-top-left'],['su_destra',qc5Text("Su destra"),'ptzru','mdi:arrow-top-right'],['giu_sinistra',qc5Text("Giù sinistra"),'ptzld','mdi:arrow-bottom-left'],['giu_destra',qc5Text("Giù destra"),'ptzrd','mdi:arrow-bottom-right'],['stop',qc5Text("Ferma movimento"),'ptzstop','mdi:stop'],['luce_on',qc5Text("Luce bianca accendi"),'wlon','mdi:lightbulb-on'],['luce_off',qc5Text("Luce bianca spegni"),'wlof','mdi:lightbulb-off'],['giorno',qc5Text("Giorno / IR disattivati"),'ircutday','mdi:white-balance-sunny'],['notte',qc5Text("Notte / IR attivati"),'ircutnig','mdi:weather-night'],['automatico',qc5Text("Giorno e notte automatici"),'irauto','mdi:theme-light-dark']];
+ var allowed=entries.map(function(e){return e[2]});
+ document.getElementById('ha-stream-url').textContent=stream||qc5Text("RTSP non ancora disponibile");
+ var y='# Home Assistant: '+prefix+'\n';
+ y+='# File: packages/'+prefix+'.yaml\n';
+ y+=qc5Text("# In configuration.yaml, sotto homeassistant, abilita:\n#   packages: !include_dir_named packages\n");
+ y+=qc5Text("# Unisci alla sezione homeassistant già presente, poi controlla la configurazione e riavvia HA.\n");
+ y+=qc5Text("# Video: aggiungi Generic Camera da Impostazioni > Dispositivi e servizi.\n");
+ y+=qc5Text("# Sorgente flusso: ")+(stream||qc5Text("indirizzo RTSP indicato dalla camera"))+qc5Text("\n# Trasporto RTSP: TCP. Immagine fissa: lascia vuoto.\n");
+ y+=qc5Text("# La funzione stream deve essere attiva (inclusa in default_config).\n");
+ y+=qc5Text("# IR segue il modo Giorno/Notte: non è un comando indipendente del LED IR.\n\n");
+ y+='rest_command:\n  '+prefix+'_comando:\n';
+ y+='    url: '+JSON.stringify(camBase+'/cgi-bin/webui?command={{ command }}')+'\n    method: GET\n    timeout: 20\n\n';
+ y+='script:\n  '+prefix+'_comando:\n    alias: '+JSON.stringify(label+qc5Text(" - comando locale"))+'\n    mode: queued\n    max: 5\n    sequence:\n';
+ y+='      - if: '+JSON.stringify('{{ command is not defined or command not in '+JSON.stringify(allowed)+' }}')+qc5Text("\n        then:\n          - stop: \"Comando camera non valido\"\n            error: true\n");
+ y+='      - action: rest_command.'+prefix+'_comando\n        data:\n          command: "{{ command }}"\n        response_variable: camera_response\n';
+ y+=qc5Text("      - if: \"{{ camera_response.status != 200 or camera_response.content is not mapping or not camera_response.content.get('ok', false) }}\"\n        then:\n          - stop: \"La camera non ha confermato il comando\"\n            error: true\n\n");
+ y+='template:\n  - button:\n';
+ entries.forEach(function(e){y+='      - name: '+JSON.stringify(label+' - '+e[1])+'\n        unique_id: '+prefix+'_'+e[0]+'\n        icon: '+e[3]+'\n        press:\n          - action: script.'+prefix+'_comando\n            data:\n              command: '+e[2]+'\n';});
+ document.getElementById('ha-yaml').textContent=y;
+ document.getElementById('ha-download').dataset.filename=prefix+'.yaml';
+ document.getElementById('ha-download').disabled=false;
+}
+function downloadHA(){
+ var button=document.getElementById('ha-download'),name=button.dataset.filename;
+ if(!name)return;
+ var url=URL.createObjectURL(new Blob([document.getElementById('ha-yaml').textContent],{type:'application/yaml;charset=utf-8'}));
+ var a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);
+ setTimeout(function(){URL.revokeObjectURL(url)},1000);
+}
+function copyHA(){
+ var text=document.getElementById('ha-yaml').textContent;
+ function fallback(){
+  var active=document.activeElement,ta=document.createElement('textarea');
+  ta.value=text;document.body.appendChild(ta);ta.select();var copied=false;
+  try{copied=document.execCommand('copy')}catch(error){}
+  document.body.removeChild(ta);if(active&&active.focus)active.focus();
+  toast(copied?qc5Text("✓ YAML copiato"):qc5Text("Seleziona e copia il testo YAML qui sopra"),copied?'ok':'err');
+ }
+ if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(text).then(function(){toast(qc5Text("✓ YAML copiato"),'ok')}).catch(fallback);
+ else fallback();
+}
+
+var CAM_ID="",REC_API="",nativeRecording=false,recBusy=false;
+
+function localUrl(s){try{var u=new URL(s,location.href);return /^https?:$/.test(u.protocol)?u.href:''}catch(e){return ''}}
+var initializedCamera=false,recordPanelLoaded=false,videoLastReload=0,recordPlaybackActive=false,livePlayerUrl='',intercomAvailable=false,liveTalkReady=false;
+function loadRecordingPanel(){
+ if(!nativeRecording||recordPanelLoaded||!document.getElementById('card-rec').classList.contains('open'))return;
+ recordPanelLoaded=true;recLoadList();motionCheckStatus();
+}
+window.qc5LiveIntercomReady=function(ready){
+ liveTalkReady=!!ready;
+ if(globalThis.qc5TalkController)globalThis.qc5TalkController.update(intercomAvailable&&liveTalkReady&&!recordPlaybackActive);
+};
+function videoPauseForRecording(){
+ recordPlaybackActive=true;
+ if(globalThis.qc5TalkController){globalThis.qc5TalkController.stop();globalThis.qc5TalkController.update(false);}
+ var frame=document.getElementById('live-frame');frame.removeAttribute('srcdoc');frame.src='about:blank';
+ document.getElementById('video-status').textContent=qc5Text("Video dal vivo sospeso durante la riproduzione");
+}
+function videoResumeAfterRecording(){
+ recordPlaybackActive=false;
+ var frame=document.getElementById('live-frame');if(livePlayerUrl)frame.src=livePlayerUrl;
+ if(globalThis.qc5TalkController)globalThis.qc5TalkController.update(intercomAvailable&&liveTalkReady);
+ document.getElementById('video-status').textContent=qc5Text("Ricollegamento video…");
+}
+function videoReload(){
+ if(recordPlaybackActive){recPlayerClose();return;}
+ var frame=document.getElementById('live-frame');
+ if(frame.src&&frame.src!=='about:blank'){frame.src=frame.src;videoLastReload=Date.now();document.getElementById('video-status').textContent=qc5Text("Ricollegamento video…");}
+}
+function applyCameraInfo(d){
+  intercomAvailable=!!(d.intercom&&d.intercom.available);
+  if(globalThis.qc5TalkController){globalThis.qc5TalkController.update(intercomAvailable&&liveTalkReady&&!recordPlaybackActive);}
+
+  document.getElementById('camera-name').textContent='::'+(d.CAM_NAME||'VeePai QC5');
+  CAM_ID=d.CAM_ID||''; REC_API=d.REC_API?localUrl(d.REC_API):'';
+  renderHAYaml(CAM_ID,d);
+  var ready=d.adapter&&d.adapter.bridge;
+  nativeRecording=!!(d.recording&&d.recording.available);
+  document.querySelector('.rec-bar').style.display=nativeRecording?'':'none';
+  document.getElementById('card-rec').style.display=nativeRecording?'':'none';
+  motorAvailable=!!(ready&&d.adapter.ptz_ready);
+  document.getElementById('camera-status').textContent=ready?qc5Text("Camera collegata in rete locale"):qc5Text("Connessione alla camera in corso");
+  document.querySelectorAll('#card-ptz .ptz-pad button,#card-ptz .preset-bar > button,#preset-name').forEach(function(el){el.disabled=!motorAvailable;});
+  var names={config_originale:qc5Text("Configurazione Wi-Fi originale"),credenziali_applicate:qc5Text("Credenziali SD applicate al Wi-Fi"),credenziali_corrispondenti:qc5Text("Credenziali SD corrispondenti alla rete memorizzata"),config_non_valida:qc5Text("Controlla SSID e PWD nel file config.txt"),driver_in_avvio:qc5Text("Wi-Fi in avvio"),config_sd_letta:qc5Text("Configurazione SD letta")};
+  var w=d.adapter&&d.adapter.wifi;
+  var setup={attesa_wifi:qc5Text("In attesa della connessione Wi-Fi"),completata_locale:qc5Text("Configurazione iniziale locale completata"),configurazione_preservata:qc5Text("Configurazione esistente conservata"),esito_da_verificare:qc5Text("Completamento locale da verificare"),configurazione_non_leggibile:qc5Text("Completamento locale da verificare")};
+  document.getElementById('wifi-status').textContent=(names[w]||qc5Text("Stato Wi-Fi da verificare"))+(setup[d.adapter&&d.adapter.local_setup]?' · '+setup[d.adapter.local_setup]:'');
+  var frame=document.getElementById('live-frame');
+  if(ready&&d.adapter.video){livePlayerUrl=qc5Locale.url('/live.html');if(!recordPlaybackActive&&frame.src!==livePlayerUrl){frame.removeAttribute('srcdoc');frame.src=livePlayerUrl;}}
+  var links=document.getElementById('rtsp-links');links.replaceChildren();
+  if(/^rtsp:\/\//.test(d.RTSP_URL||'')){var li=document.createElement('li'),a=document.createElement('a');a.href=d.RTSP_URL;a.textContent=d.RTSP_URL;li.appendChild(a);links.appendChild(li);}
+  else{var li=document.createElement('li');li.textContent=qc5Text("Video locale disponibile nel lettore. Il flusso RTSP non è ancora attivo.");links.appendChild(li);}
+  if(!initializedCamera&&nativeRecording){initializedCamera=true;recCheckStatus();}
+  loadRecordingPanel();
+}
+document.getElementById('live-frame').srcdoc=qc5Text("<body style=\"background:#0c0e13;color:#6b7280;font:14px sans-serif;display:grid;place-items:center;height:90vh;margin:0\">Video locale non configurato</body>");
+refreshSys();
+setInterval(function(){if(!document.hidden)refreshSys(true)},30000);
+setInterval(function(){if(nativeRecording&&!document.hidden&&!recBusy)recCheckStatus()},10000);
+setInterval(function(){if(nativeRecording&&!document.hidden&&document.getElementById('card-rec').classList.contains('open'))motionCheckStatus()},30000);
+</script>
+<script src="record.js"></script>
+<script src="motion.js"></script>
+</body>
+</html>

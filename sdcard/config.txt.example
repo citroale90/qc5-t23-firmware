@@ -1,0 +1,80 @@
+# VeePai QC5-YA V82 / Ingenic T23. Questo file è letto come dati, non eseguito.
+# Mantieni config.txt FUORI dalla cartella hack/www.
+# Puoi usare virgolette semplici o doppie; $, #, &, apici e = restano letterali.
+# SSID vuoto = mantieni il Wi-Fi già memorizzato nella camera.
+HACK_ENABLE=1
+SSID=""
+PWD=""
+# WPA/WPA2: da 8 a 63 byte. SSID: massimo 32 byte UTF-8.
+WIFI_APPLY=1
+WIFI_OPEN=0
+# Completa la configurazione iniziale localmente dopo connessione Wi-Fi e DHCP.
+# Mantiene qualsiasi associazione gia salvata; non silenzia il microfono.
+LOCAL_SETUP=1
+
+CAM_NAME="VeePai QC5"
+# Identificativo automatico diverso per ogni unita; nessun IP o seriale da impostare.
+CAM_ID="auto"
+WEB_PORT=80
+# HTTPS viene fornito dal reverse proxy locale (per esempio Caddy).
+# La camera serve WebUI, video e interfono solo in HTTP/WebSocket.
+# Interfono: durata massima per pressione, da 1 a 30 secondi.
+TALK_MAX_SECONDS=30
+# Flusso diretto dalla camera per VLC/NVR, senza un ponte sul NAS.
+RTSP_ENABLE=1
+RTSP_PORT=8554
+# Il BusyBox stock QC5 non include ftpd. Abilitare solo con un BusyBox compatibile.
+FTP_ENABLE=0
+FTP_PORT=21
+
+# Destinazione del registratore nativo: sd | smb | ftp.
+# Per Samba/FTP vengono trasferiti i segmenti completati; la copia SD resta
+# gestita dal registratore. Ogni camera usa la propria identita automaticamente.
+RECORD_TARGET=sd
+# 0: invia soltanto i video completati dopo l'attivazione. 1: includi l'archivio.
+RECORD_EXPORT_EXISTING=0
+RECORD_PATH="recordings"
+RECORD_IO_TIMEOUT=8
+SMB_HOST=""
+SMB_SHARE=""
+SMB_USER=""
+SMB_PASSWORD=""
+SMB_DOMAIN=""
+FTP_HOST=""
+FTP_USER=""
+FTP_PASSWORD=""
+# FTP_PORT sopra riguarda il servizio in ascolto sulla camera. La porta del
+# NAS destinatario si imposta qui; il valore standard e 21.
+RECORD_FTP_PORT=21
+
+# Opzionali: servizi locali già usati dalle Augentix. Non usare il nome di un'altra cam.
+# Nei due URL video puoi usare {CAM_ID}: viene sostituito con l'identita
+# della camera corrente. Lo stesso config.txt puo cosi essere usato su piu unita.
+RESTREAMER_URL=""
+REC_API=""
+RTSP_URL=""
+
+# Il router locale viene rilevato automaticamente dalla tabella di routing.
+# Imposta GATEWAY solo se necessario; deve essere un indirizzo della tua LAN.
+GATEWAY=""
+WATCHDOG_INTERVAL=30
+WIFI_RETRY_AFTER=3
+STOCK_FALLBACK_AFTER=6
+
+# SSH root locale senza password, avvio automatico nel firmware candidato.
+# La chiave del server resta sulla SD; senza SD viene generata in RAM.
+SSH_ENABLE=1
+SSH_PORT=22
+
+# Orologio: solo NTP locale, senza server Internet di riserva.
+# auto = router predefinito del Wi-Fi; oppure IP privato del proprio server NTP.
+# Il parametro viene letto all'avvio. NTP_ENABLE=0 disattiva la sincronizzazione.
+NTP_ENABLE=1
+NTP_SERVER="auto"
+
+# Registrazione: nessuna registrazione continua al primo avvio.
+# Le scelte dei pulsanti della WebUI vengono salvate qui sulla SD.
+RECORD_CONTINUOUS=0
+MOTION_ENABLE=0
+# Chiusura del filmato dopo questo numero di secondi senza movimento (1-60).
+MOTION_POST_SECONDS=5

@@ -1,0 +1,5 @@
+#ifndef QC5_VERSION_H
+#define QC5_VERSION_H
+#define QC5_VERSION "0.6.7-hw"
+#define QC5_GATEWAY_MARKER "QC5_GATEWAY_VERSION:" QC5_VERSION
+#endif
