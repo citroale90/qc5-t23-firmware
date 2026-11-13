@@ -53,7 +53,8 @@ retains each unit's own loader and manifest, and includes offline PC tools
 for card preparation, reuse and recovery without an AI or server.
 The shared R44 runtime is qualified; the new kit's first cold installation
 on an untouched twin remains physically unqualified.
-See [source, verification and instructions](native/installer/common/README.md).
+Download the [common SD ZIP and instructions](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r44-sd-originali-rc1).
+See [source and verification](native/installer/common/README.md).
 The common image is separate from the existing per-unit migration package.
 
 ## Repository layout

@@ -41,7 +41,9 @@ The Linux modules declare GPL; the QC5 modifications are GPL-2.0-only.
 Upstream copyright notices and per-file terms are retained, not replaced
 with a new blanket license. The patch and source lock let maintainers
 inspect and reproduce those exact sources instead of relying on a binary
-module. No upstream firmware image or manufacturer dump is redistributed.
+module. The source reconstruction tools include no upstream firmware or manufacturer
+dump. The R44 SD binary release separately includes the unchanged radio
+firmware; that does not apply the Linux driver's GPL grant to those blobs.
 
 This **does not provide the source for the binary firmware inside the
 radio**. The driver still loads revision-specific FMAC patches, tables and

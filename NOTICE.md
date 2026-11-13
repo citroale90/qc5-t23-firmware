@@ -27,11 +27,19 @@ The repository does not claim a single new license for all historical UI
 and third-party contributions. Public source visibility alone does not
 settle a missing license grant for unrelated imported code.
 
-Binary AIC8800 radio firmware, original bootloader images, vendor firmware
-dumps, private sensor profiles, generated producer nonces, Wi-Fi secrets,
-SSH identities and per-camera update/recovery capsules are not published.
-External reference headers with unresolved per-file redistribution terms
-are also omitted, rather than silently assigned a project license.
+Original bootloader images, vendor flash dumps, Wi-Fi secrets, SSH identities
+and per-camera update/recovery capsules are excluded from public assets.
+The common R44 SD binary kit includes unchanged AIC8800 radio firmware and
+compiled media inputs. It is not represented as a wholly open-source firmware
+or as a new license grant for unmarked third-party code. The source tree keeps
+unmarked external reference headers omitted pending permission/provenance work.
+
+The upstream OpenIMP notice is explicit that licensing is per file and that
+unmarked files have no explicit grant. The native source manifest lists the
+remaining media references and generated inputs. Their outstanding status is
+not removed by publishing a binary kit. The release provides per-component
+notices and existing license texts; these do not establish missing permissions
+or imply complete corresponding-source availability for the whole image.
 
 See [`docs/open-source-status.md`](docs/open-source-status.md) for the
 component inventory and the distinction between driver source and the

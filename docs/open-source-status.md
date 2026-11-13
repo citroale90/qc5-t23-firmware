@@ -60,8 +60,12 @@ The unchanged radio dependencies are:
 - `fmacfw_patch_tbl_8800dc_u02.bin`
 
 They execute inside the radio, not as Linux drivers. Their presence does not
-itself imply cloud communication. No radio binary, original flash dump,
-password, private key or per-unit installation capsule is published here.
+itself imply cloud communication. The source tree contains no radio binaries or factory dumps. The common R44
+SD release includes unchanged radio firmware and compiled media inputs.
+Original flash dumps, passwords, private keys and per-unit installation
+capsules remain excluded. Existing per-file terms and outstanding source/
+provenance gaps are documented in NOTICE.md; binary publication does not
+resolve or relicense those components.
 
 Qwen assists source comparisons sequentially. Its output is checked against
 actual source, compiled hashes and hardware results; it is not evidence of

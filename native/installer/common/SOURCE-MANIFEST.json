@@ -23,5 +23,7 @@
   "production_read_write_MTD_open_absent": true,
   "native_image_sha256": "27ad668d31bf024c1a0416b9d1597a3ae0a09f8467ee81159926ecc678386f87",
   "binary_payload_and_factory_dumps_published": false,
-  "per_unit_data_published": false
+  "per_unit_data_published": false,
+  "manifest_scope": "public source directory; binary release assets documented separately",
+  "common_native_image_release": "r44-sd-originali-rc1"
 }

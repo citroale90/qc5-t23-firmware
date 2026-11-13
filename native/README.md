@@ -91,7 +91,8 @@ four remaining external descriptor/ROI files require a license grant or
 replacement. The manifest lists these
 gaps instead of replacing them with invented data.
 
-No ready-to-flash capsule is published. The validated update/recovery pair
+No per-unit update/recovery capsule or factory dump is published. The common
+R44 image is available in the [SD prerelease](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r44-sd-originali-rc1). The validated update/recovery pair
 is specific to its owner's camera and depends on matching original backup
 fingerprints. A package for another unit must be prepared from that unit's
 own verified backups. Do not copy another unit's PARAM, keys or identities.

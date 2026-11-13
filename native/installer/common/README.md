@@ -19,7 +19,7 @@ KERNEL/ROOT/SYSTEM transaction. Recovery still requires intact U-Boot.
 
 ## Operator workflow
 
-Use the private common kit and its [quick guide](AVVIO-RAPIDO.txt): extract it,
+Download the [R44 SD kit](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r44-sd-originali-rc1) and use its [quick guide](AVVIO-RAPIDO.txt): extract it,
 run `python3 prepara_sd.py --sd /mounted/card`, optionally edit root `config.txt`,
 then insert it into the powered-off original camera. Power on holding Reset
 for about three seconds and leave power applied for at least fifteen minutes.
@@ -62,6 +62,6 @@ The production build passes `QC5_PREPARE_ONLY`; the historical Linux write
 entry is compiled out. The shipped kit uses hash-pinned, qualified binaries.
 A different compiler/output requires requalification, not a blind substitution.
 The shared U-Boot source and payload pin are in the parent directory. These
-sources do not make the complete native-image assembler portable: binary radio
-firmware and per-camera factory backups are not GitHub assets. The common kit
-is supplied privately without any unit's original dump or identity.
+sources do not make the complete native-image assembler portable: the binary release includes unchanged radio firmware, while factory backups
+and per-unit identities remain excluded. Per-file terms and outstanding
+source/provenance gaps remain documented in NOTICE.md and the release notices.
