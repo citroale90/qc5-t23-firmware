@@ -1,0 +1,21 @@
+BACKUP PRIVATO DELLA SINGOLA CAMERA — NON USARE SU UN'ALTRA UNITÀ
+original-1.bin e original-2.bin: due letture identiche della flash da 8 MiB.
+QC5FULL.BIN: ripristino originale; QC5UPD.BIN: R44 legata a questa unità.
+Q73BOOT.IMG e manifest.json: caricatore e versione abbinati al backup.
+
+Dal computer, con la SD montata:
+  python3 ripristina_sd.py --sd PERCORSO_SD --elenca
+  python3 ripristina_sd.py --sd PERCORSO_SD --prepara-ripristino \
+    --backup qc5-backups/unit-XXXXXX
+Sostituisci XXXXXX con il nome di QUESTA cartella.
+Espelli la SD, inseriscila nella camera corretta spenta e accendi senza
+Reset. Attendi almeno 15 minuti. Dopo il ripristino rimuovi la SD prima
+che la camera venga accesa di nuovo o disattivala dal computer.
+
+Senza Python: togli dalla radice il file che inizia con system.bin;sh,
+copia da QUESTA cartella Q73BOOT.IMG, QC5FULL.BIN, Q73LOG.BIN nella radice
+SD; per ultimo copia ARM-RESTORE.BIN nella radice come Q73ARM.BIN.
+Non mescolare caricatore/capsule di cartelle diverse. Non eseguire mai
+nel terminale il nome del file system.bin;sh.
+Il recupero dipende da U-Boot funzionante e dalla SD corretta. Non ripara
+un bootloader danneggiato. Conserva questa cartella anche fuori dalla SD.

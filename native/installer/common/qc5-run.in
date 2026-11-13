@@ -1,0 +1,24 @@
+#!/bin/sh
+unset LD_PRELOAD
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+export LD_LIBRARY_PATH=/lib:/usr/lib
+P=/mnt/sda0/qc5-installer
+RAM=/tmp/qc5-installer-cold
+O=/bin/busybox
+[ -d "$P" ] && [ ! -L "$P" ] || exit 1
+exec >> "$P/ingresso.log" 2>&1
+printf 'QC5_COLD_SD_ENTRY pid=%s\n' "$$"
+[ ! -e "$RAM" ] && [ ! -L "$RAM" ] || exit 1
+value=$("$O" md5sum "$P/busybox") || exit 1
+[ "${value%% *}" = @BUSYBOX_MD5@ ] || exit 1
+value=$("$O" md5sum "$P/run.sh") || exit 1
+[ "${value%% *}" = @RUN_MD5@ ] || exit 1
+"$O" mkdir -m 700 "$RAM" || exit 1
+"$O" cp "$P/busybox" "$RAM/busybox" || exit 1
+"$O" cp "$P/run.sh" "$RAM/run.sh" || exit 1
+"$O" chmod 700 "$RAM/busybox" "$RAM/run.sh" || exit 1
+value=$("$O" md5sum "$RAM/busybox") || exit 1
+[ "${value%% *}" = @BUSYBOX_MD5@ ] || exit 1
+value=$("$O" md5sum "$RAM/run.sh") || exit 1
+[ "${value%% *}" = @RUN_MD5@ ] || exit 1
+exec "$RAM/busybox" sh "$RAM/run.sh"

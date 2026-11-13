@@ -45,6 +45,17 @@ The [R43-to-R44 migration](docs/migration-from-r43.md) preserves Wi-Fi, SSH
 identity and settings. The per-unit install/recovery kit remains private;
 source publication does not distribute another camera's backup or identity.
 
+## Factory twin-camera SD installer
+
+A separate common R44 SD kit now automates two verified full backups and
+per-unit update/recovery capsules on compatible factory QC5 cameras. It
+retains each unit's own loader and manifest, and includes offline PC tools
+for card preparation, reuse and recovery without an AI or server.
+The shared R44 runtime is qualified; the new kit's first cold installation
+on an untouched twin remains physically unqualified.
+See [source, verification and instructions](native/installer/common/README.md).
+The common image is separate from the existing per-unit migration package.
+
 ## Repository layout
 
 - `src/` contains the gateway, media and control code, Wi-Fi helpers, recording tools, and application verifier.

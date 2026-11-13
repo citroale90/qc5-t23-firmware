@@ -1,0 +1,19 @@
+{
+  "passed_offline": true,
+  "generic_C_cases": 25,
+  "ENV_MIPS_instruction_cases": 20,
+  "real_shell_flow_cases": 4,
+  "recovery_CLI_cases": 9,
+  "PC_preparation_and_reuse_cases": 13,
+  "whole_U_Boot_model_cases": 7,
+  "current_camera_accessed": false,
+  "physical_twin_installation_still_pending": true,
+  "native_payload_sha256": "27ad668d31bf024c1a0416b9d1597a3ae0a09f8467ee81159926ecc678386f87",
+  "common_kit_contains_no_original_unit_backup": true,
+  "each_unit_saves_own_loader_manifest": true,
+  "offline_PC_tools_do_not_format_or_access_raw_devices": true,
+  "Qwen_review": "064; only verified findings accepted; strict kernel/entry checks retained; no backup pruning",
+  "factory_MAC_decoded_before_flash": true,
+  "second_simulated_unit_has_distinct_valid_MAC": true,
+  "invalid_factory_PARAM_rejected": true
+}

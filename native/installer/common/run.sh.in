@@ -1,0 +1,144 @@
+#!/bin/sh
+# Cold original SD entry only. Later NOR installation belongs to U-Boot.
+set -eu
+unset LD_PRELOAD
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+export LD_LIBRARY_PATH=/lib:/usr/lib
+umask 077
+ulimit -c 0
+SD=/mnt/sda0
+P=$SD/qc5-installer
+RAM=/tmp/qc5-installer-cold
+B=$RAM/busybox
+CRITICAL=0
+exec >> "$P/avvio.log" 2>&1
+printf 'QC5_COLD_BOOT_BEGIN pid=%s\n' "$$"
+fail() {
+ echo "QC5_INSTALLER_FAILED_$1" >&2
+ # Never return into rcS after any attempted policy update. The SD journal
+ # and per-unit backups remain available for inspection and recovery.
+ if [ "$CRITICAL" = 1 ];then while :;do "$B" sleep 1;done;fi
+ exit 1
+}
+on_exit() {
+ status=$?
+ if [ "$CRITICAL" = 1 ];then
+  echo "QC5_CRITICAL_EXIT_BLOCKED code=$status" >&2
+  while :;do "$B" sleep 1;done
+ fi
+ return "$status"
+}
+trap on_exit 0
+trap 'fail INTERRUPTED' 1 2 3 15
+[ -x "$B" ] || fail RAM_BUSYBOX
+check() { value=$("$B" sha256sum "$1") || fail HASH_READ;[ "${value%% *}" = "$2" ] || fail HASH_MISMATCH; }
+check "$B" @BUSYBOX_SHA@
+check "$P/prepare" @PREPARE_SHA@
+check "$P/env-template.ko" @ENV_HELPER_SHA@
+check "$P/Q73BOOT.IMG" @LOADER_SHA@
+action=$("$B" cat "$P/AZIONE.txt")
+case "$action" in INSTALLA|CONTROLLA) :;; *) fail UNKNOWN_ACTION;;esac
+[ "$("$B" uname -r)" = 3.10.14__isvp_pike_1.0__ ] || fail KERNEL_PROFILE
+[ -z "$("$B" pidof vp_project auto_ota vp_update systemcall 2>/dev/null || true)" ] || fail OEM_SERVICES_RUNNING
+ancestor=$PPID;found=0
+for depth in 1 2 3 4 5 6;do
+ case "$ancestor" in ''|*[!0-9]*) fail ENTRY_PARENT;;esac
+ [ "$ancestor" -gt 1 ] || break
+ exe=$("$B" readlink "/proc/$ancestor/exe" 2>/dev/null || true)
+ if [ "$exe" = /usr/sbin/tfUpgrade ];then
+  check "/proc/$ancestor/exe" @TFUPGRADE_SHA@
+  found=1;break
+ fi
+ parent=
+ while read -r key value rest;do [ "$key" != PPid: ] || parent=$value;done < "/proc/$ancestor/status"
+ ancestor=$parent
+done
+[ "$found" = 1 ] || fail NOT_COLD_SD_ENTRY
+"$B" awk '$1=="/dev/mmcblk0p1"&&$2=="/mnt/sda0"&&$3=="vfat"&&$4~/^rw,/{ok=1}END{exit !ok}' /proc/mounts || fail SD_MOUNT
+spc=$("$B" dd if=/dev/mmcblk0p1 bs=512 count=1 2>/dev/null | "$B" od -An -tu1 -j13 -N1 | "$B" tr -d ' \n')
+case "$spc" in 16|32|64|128) :;; *) fail FAT_CLUSTER_SIZE;;esac
+[ ! -L "$SD/qc5-backups" ] || fail BACKUP_PATH
+"$B" mkdir -p "$SD/qc5-backups" || fail BACKUP_DIRECTORY
+"$B" cp "$P/prepare" "$RAM/prepare" || fail RAM_PREPARER
+"$B" chmod 700 "$RAM/prepare"
+check "$RAM/prepare" @PREPARE_SHA@
+echo QC5_PREPARER_BEGIN
+U=$("$RAM/prepare" --prepare "$P/native.img" "$SD/qc5-backups" "$P/env-template.ko") || fail BACKUP_OR_PROFILE
+case "$U" in "$SD"/qc5-backups/unit-??????) :;; *) fail PREPARED_DIRECTORY;;esac
+[ -f "$U/READY" ] && [ ! -L "$U/READY" ] || fail PREPARED_STATUS
+exec >> "$U/bootstrap.log" 2>&1
+echo QC5_PER_UNIT_BACKUP_AND_CAPSULES_VERIFIED
+for name in Q73BOOT.IMG manifest.json;do
+ "$B" cp "$P/$name" "$U/$name" || fail PER_UNIT_LOADER_BACKUP
+ "$B" cmp "$P/$name" "$U/$name" || fail PER_UNIT_LOADER_READBACK
+done
+"$B" cp "$P/RIPRISTINO.txt" "$U/RIPRISTINO.txt" || fail PER_UNIT_GUIDE_BACKUP
+for name in Q73BOOT.IMG.new Q73LOG.BIN.new QC5UPD.BIN.new QC5FULL.BIN.new Q73ARM.BIN.new qc5-current-unit.txt config.txt;do
+ [ ! -L "$SD/$name" ] || fail ROOT_SYMLINK
+ [ ! -e "$SD/$name" ] || [ -f "$SD/$name" ] || fail ROOT_FILE_TYPE
+done
+echo "${U#"$SD/"}" > "$SD/qc5-current-unit.txt"
+# Archive only names owned by this installer; leave recordings/config alone.
+"$B" mkdir "$U/previous-root"
+for name in Q73BOOT.IMG Q73ARM.BIN Q73LOG.BIN QC5UPD.BIN QC5FULL.BIN;do
+ if [ -e "$SD/$name" ] || [ -L "$SD/$name" ];then
+  [ -f "$SD/$name" ] && [ ! -L "$SD/$name" ] || fail ROOT_FILE_TYPE
+  "$B" cp "$SD/$name" "$U/previous-root/$name" || fail OLD_ROOT_BACKUP
+ fi
+done
+# Zero the marker before publishing replacement files. During this window
+# no transaction can start, and the new loader refuses an OEM fall-through.
+"$B" cp "$U/ARM-OFF.BIN" "$SD/Q73ARM.BIN" || fail ARM_ZERO_WRITE
+"$B" cmp "$U/ARM-OFF.BIN" "$SD/Q73ARM.BIN" || fail ARM_ZERO_READBACK
+for name in Q73BOOT.IMG Q73LOG.BIN QC5UPD.BIN QC5FULL.BIN;do
+ source=$U/$name
+ [ "$name" != Q73BOOT.IMG ] || source=$P/$name
+ "$B" cp "$source" "$SD/$name.new" || fail SD_STAGE_COPY
+ "$B" cmp "$source" "$SD/$name.new" || fail SD_STAGE_READBACK
+ "$B" mv -f "$SD/$name.new" "$SD/$name" || fail SD_STAGE_PUBLISH
+done
+if [ ! -e "$SD/config.txt" ];then "$B" cp "$P/config.txt.example" "$SD/config.txt" || fail CONFIG_CREATE;fi
+"$B" sync
+same_boot() {
+ expected=$("$B" sha256sum "$1") || return 1
+ actual=$("$B" sha256sum /dev/mtd0ro) || return 1
+ [ "${expected%% *}" = "${actual%% *}" ]
+}
+same_boot "$U/BOOT.original.bin" || fail BOOT_CHANGED_AFTER_BACKUP
+check /usr/sbin/sfc_lock @SFC_LOCK_SHA@
+need=$("$B" cat "$U/NEEDENV")
+case "$need" in 0|1) :;; *) fail POLICY_STATUS;;esac
+# The OEM init locked NOR before tfUpgrade. Leave it writable for the
+# following U-Boot-owned transaction; production contains no updater.
+CRITICAL=1
+if [ "$action" = CONTROLLA ];then
+ [ "$need" = 0 ] || fail PREFLIGHT_REQUIRES_EXISTING_SD_POLICY
+else
+ /usr/sbin/sfc_lock unlock || fail NOR_UNLOCK
+fi
+if [ "$action" = INSTALLA ] && [ "$need" = 1 ];then
+ "$B" cp "$U/env-unit.ko" "$RAM/env-unit.ko" || fail RAM_ENV_HELPER
+ "$B" cmp "$U/env-unit.ko" "$RAM/env-unit.ko" || fail RAM_ENV_READBACK
+ [ -z "$("$B" grep '^qc5_env_sector ' /proc/modules)" ] || fail ENV_HELPER_ALREADY_LOADED
+ "$B" insmod "$RAM/env-unit.ko" || fail ENV_SECTOR_ERASE
+ "$B" rmmod qc5_env_sector || fail ENV_HELPER_UNLOAD
+ same_boot "$U/BOOT.erased.bin" || fail ENV_ERASE_READBACK
+ "$B" dd if="$U/ENV-PENDING.BIN" of=/dev/mtd0 bs=4096 seek=60 count=1 conv=notrunc || fail ENV_PAYLOAD_WRITE
+ same_boot "$U/BOOT.pending.bin" || fail ENV_PAYLOAD_READBACK
+ "$B" dd if="$U/ENV-CRC.BIN" of=/dev/mtd0 bs=4 seek=61440 count=1 conv=notrunc || fail ENV_CRC_COMMIT
+fi
+same_boot "$U/BOOT.expected.bin" || fail FINAL_POLICY_READBACK
+echo QC5_SD_RECOVERY_POLICY_VERIFIED
+# Publish the one transaction marker last, after all persistent readbacks.
+arm_source=$U/ARM-INSTALL.BIN
+if [ "$action" = CONTROLLA ];then
+ printf 'QC5C73\r\n' > "$RAM/check-arm"
+ arm_source=$RAM/check-arm
+fi
+"$B" cp "$arm_source" "$SD/Q73ARM.BIN.new"
+"$B" cmp "$arm_source" "$SD/Q73ARM.BIN.new" || fail ARM_READBACK
+"$B" mv -f "$SD/Q73ARM.BIN.new" "$SD/Q73ARM.BIN"
+"$B" sync
+echo "QC5_NATIVE_INSTALLER_READY action=$action REBOOTING_TO_UBOOT"
+"$B" reboot -f
+while :;do "$B" sleep 1;done

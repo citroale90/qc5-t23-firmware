@@ -1,0 +1,30 @@
+QC5 R44 — SD PER LE GEMELLE ANCORA ORIGINALI
+
+1. Estrai questo ZIP in una cartella del computer. Usa una SD FAT32/MBR,
+   cluster da 8–64 KiB, con almeno 160 MiB liberi. Non usare exFAT o GPT.
+2. Dal computer esegui, dalla cartella estratta:
+   python3 prepara_sd.py --sd "/percorso/della/SD"
+   Sul Mac, per esempio: --sd "/Volumes/SENZA NOME"
+   Non formatta e non elimina registrazioni o backup esistenti.
+3. Facoltativo: modifica SSID e PWD nel config.txt della radice della SD.
+   Senza credenziali, dopo l'installazione usa l'hotspot QC5-xxxxxx e
+   http://192.168.168.1/setup per scegliere la rete e inserire la password.
+4. Espelli normalmente la SD. Inseriscila nella gemella ORIGINALE spenta.
+   Alimenta tenendo Reset e rilascialo dopo circa 3 secondi. Lascia
+   alimentata almeno 15 minuti, senza QR, altri Reset o spegnimenti.
+5. Il backup e il ripristino vengono creati automaticamente per questa
+   unità. Dopo l'installazione apri il nuovo IP del router in HTTP,
+   oppure la pagina del tuo proxy locale. SSH root e RTSP sono disponibili.
+
+Per un'altra gemella: rimetti la SD nel computer ed esegui nuovamente
+prepara_sd.py. I vecchi backup vengono conservati, senza clonare identità.
+
+RIPRISTINO (camera spenta, SD nel computer)
+  python3 ripristina_sd.py --sd "/percorso/SD" --elenca
+  python3 ripristina_sd.py --sd "/percorso/SD" --prepara-ripristino
+Per scegliere un'altra unità aggiungi --backup qc5-backups/unit-XXXXXX.
+Espelli la SD, inseriscila nella camera del backup, accendi SENZA Reset e
+attendi 15 minuti. Dopo il ripristino togli la SD prima della prossima
+accensione, o esegui --disattiva dal computer.
+
+Dettagli e limiti: LEGGIMI.txt. Stato della transazione: --stato.

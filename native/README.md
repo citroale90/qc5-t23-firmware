@@ -101,3 +101,13 @@ a damaged bootloader. A factory restore replaces KERNEL/ROOT/SYSTEM and
 clears the native Wi-Fi/SSH areas; it does not preserve them like a native
 upgrade. After factory restore, disable the SD loader or remove the card
 before the next boot. No recovery operation was triggered for publication.
+
+## Common first installation on factory twins
+
+The separate [common SD installer](installer/common/README.md) now automates
+the required per-camera backups and capsule binding on supported original
+firmware. It includes a PC copier and recovery/reuse tool, and stores the
+matching loader/manifest with every backup. No reference unit's factory
+dump or SSH/Wi-Fi identity is included in the common kit. First cold
+installation of this new kit on an untouched twin is still physically
+unqualified; the runtime and shared U-Boot installer have separate proof.

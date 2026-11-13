@@ -1,0 +1,90 @@
+QC5 R44 RC1 — INSTALLATORE SD COMUNE PER UNITÀ ANCORA ORIGINALI
+
+COSA FA
+Installa la stessa immagine Linux 7.3.1 R44 verificata sulla camera di
+riferimento. Il pacchetto è comune; backup, capsule, MAC e chiave SSH
+appartengono alla singola camera. Non servono IA, NAS, Internet o app.
+Il computer serve per preparare la SD e conservarne i backup.
+Python 3.9+ serve per gli strumenti del computer, non sulla camera.
+
+COMPATIBILITÀ CONTROLLATA
+QC5_YA_CODE_V82, T23DL, GC1084, AIC8800DC USB, NOR 8 MiB.
+Sono ammessi soltanto il bootloader, il kernel originale 3.10.14 pike e
+le immagini ROOT/SYSTEM del profilo verificato. Varianti di firmware,
+layout o dati nelle aree riservate sconosciuti vengono rifiutati prima
+dell'aggiornamento. Non è un firmware universale per tutte le T23.
+L'installazione a freddo di questa nuova confezione su una gemella ancora
+originale resta da collaudare fisicamente. Sono passati i controlli del
+preparatore, del flusso degli script e dei sette casi con U-Boot originale
+in emulazione. R44 e il verificatore sono già installati e verificati
+sulla camera di riferimento. QUALIFICA.json distingue queste prove.
+
+PREPARAZIONE E INSTALLAZIONE
+Segui AVVIO-RAPIDO.txt. Il comando prepara_sd.py copia soltanto i file del
+pacchetto, verifica i checksum e conserva config.txt, registrazioni e backup.
+Le copie sono effettuate come dati, senza propagare attributi del Finder.
+La scheda deve già essere FAT32 con tabella MBR, una sola partizione,
+cluster da 8, 16, 32 o 64 KiB e almeno 160 MiB liberi.
+Il programma non formatta e non accede a dischi grezzi.
+Non modificare i nomi, specialmente il file vuoto che inizia con
+system.bin;sh. Copialo come file; non eseguire quel nome nel terminale.
+
+Alla prima accensione con Reset (circa 3 secondi) l'originale avvia il
+preparatore. Esso legge tutta la flash due volte, rilegge e confronta i
+backup e genera aggiornamento e ripristino nella cartella:
+  qc5-backups/unit-XXXXXX/
+La coppia include le impronte WWW/PARAM della camera: il caricatore rifiuta
+backup di un'altra unità. Vengono conservati anche caricatore, manifesto
+e istruzioni locali, così un futuro pacchetto non li sostituisce.
+
+Solo dopo le verifiche vengono preparati l'avvio e il recupero SD. Se
+necessario viene aggiornato il solo settore da 4 KiB delle impostazioni
+U-Boot, con CRC scritto per ultimo e rilettura dell'intero BOOT. Il codice
+di U-Boot non viene scritto. Il sistema riavvia automaticamente verso il
+verificatore U-Boot, che scrive e rilegge KERNEL/ROOT/SYSTEM.
+BOOT, WWW e PARAM restano invariati; il MAC originale viene conservato.
+Non togliere corrente: lascia alimentata la camera per almeno 15 minuti.
+
+PRIMA CONFIGURAZIONE OFFLINE
+Puoi predisporre SSID e PWD nel config.txt o lasciarli vuoti. Senza rete
+salvata la R44 crea QC5-xxxxxx, dove xxxx deriva dal MAC della singola
+camera. Collegati restando sulla rete senza Internet. La pagina HTTP
+mostra le reti; se non si apre automaticamente usa:
+  http://192.168.168.1/setup
+Dopo la connessione, l'indirizzo viene assegnato dal router:
+  WebUI: http://IP_CAMERA/
+  RTSP: rtsp://IP_CAMERA:8554/live
+  SSH: ssh root@IP_CAMERA
+Root è senza password, come configurato per la rete locale. Ogni camera
+genera la propria chiave SSH: nessuna identità viene copiata dalla prima.
+Wi-Fi e chiave SSH persistono in flash; la SD è opzionale per il normale
+funzionamento, necessaria per registrazioni locali e recupero SD.
+Parla nel browser richiede HTTPS mediante il proprio proxy locale.
+NTP_SERVER="auto" usa il server locale del router ed è modificabile.
+
+RIPRISTINO E RIUTILIZZO
+Segui RIPRISTINO.txt nel backup o usa ripristina_sd.py --elenca e
+--prepara-ripristino. Il comando toglie l'ingresso dell'installatore prima
+di attivare il recupero, evitando che il firmware appena ripristinato
+inizi subito un'altra installazione. Non serve un Linux funzionante:
+il recupero usa U-Boot. Richiede comunque un bootloader integro.
+Ripristina KERNEL/ROOT/SYSTEM, cancellando anche le aree native Wi-Fi/SSH;
+conserva BOOT e le impostazioni di recupero, WWW e PARAM.
+Dopo il ripristino rimuovi la SD prima della successiva accensione oppure
+usa ripristina_sd.py --sd PERCORSO_SD --disattiva.
+
+Per riutilizzare la SD su una gemella esegui prepara_sd.py di nuovo oppure
+ripristina_sd.py --sd PERCORSO_SD --nuova-camera. I vecchi controlli della
+radice vengono archiviati, i backup non vengono cancellati. Non sostituire
+original-1.bin, original-2.bin, capsule o chiavi con quelli di un'altra unità.
+Copia qc5-backups fuori dalla SD: contiene dati privati delle camere.
+
+DIAGNOSI SENZA CHAT
+  python3 ripristina_sd.py --sd PERCORSO_SD --stato
+Fase 8 ed esito positivo: U/1 o U/2 installata, R/1 o R/2 ripristinata;
+C/3 è solo un controllo. Un errore non equivale a completamento.
+I log sono qc5-installer/ingresso.log, avvio.log e, nel backup dell'unità,
+prepare.log e bootstrap.log. Se il profilo non è supportato, non forzare
+controlli né usare il backup della prima camera.
+Non dedurre il successo soltanto da voce o lampeggi dei LED.
+Il recupero non ripara un U-Boot danneggiato e non è una seconda flash A/B.
