@@ -1,7 +1,7 @@
 {
-  "release": "QC5-R44-SD-ORIGINALI-RC2",
+  "release": "QC5-R45-SD-RC2",
   "files": {
-    "prepara_sd.py": "94b2b2076197e3f5204097529c4d416459b5375c58ab4b2ecd8e04c61a3c034c",
+    "prepara_sd.py": "a08925dddee267fb4afdae5525a86e5621a9902456c2dfc7ea94e96306d928cd",
     "build_preparer.py": "88398b4f96de914715573ca385f4e657c3018f687e26b81524bae271a0e20a2d",
     "boot-policy.generated.h": "86fd73b801cb5022f39ebb74ad05d18f81b879b212efffc7cae6e8b06311e34d",
     "factory-profile.generated.h": "8c3a841bda46d98ebda38983285e4b7a6e8d124cc104b6f8d8969891a296b519",
@@ -15,15 +15,16 @@
     "ripristina_sd.py": "c59f94eb2dbede5222cf27e7e148332741fb177546a99a708479d0c13a319f99",
     "env-sector.c": "bf12ad753a9b049d5d326e3ee11243b285dcfbfe6da856a260b1a36f741b8962",
     "env-helper.generated.h": "bf7a9744cb5fb0b7ad569f7ab6c47290d3af6c637afe12e9b7eef33f469878b9",
-    "release.generated.h": "1e12076efa141c0d1392c1b811ae4a3a823a6e137025ca93734f59c16349d3e1",
+    "release.generated.h": "52bb0e48b71020cf1ea7874f57a40b05990e6ecba0303469ebb56405265bbfdb",
     "full-recovery.h": "77a345876a18f11ef5004f83ded3059c25a9586f452971a5f67bc7f647b9a059",
-    "boot-policy.h": "d042f9d2a2f249b87568f689cea0fb8d0e1f58d1909ab6d27b765bae475cf15b"
+    "boot-policy.h": "d042f9d2a2f249b87568f689cea0fb8d0e1f58d1909ab6d27b765bae475cf15b",
+    "aggiorna_qc5.py": "d69372cd225053525614831dde435dc3170c70904933f08191f6e715126341d0"
   },
   "production_preparer_compile_definition": "QC5_PREPARE_ONLY",
   "production_read_write_MTD_open_absent": true,
-  "native_image_sha256": "27ad668d31bf024c1a0416b9d1597a3ae0a09f8467ee81159926ecc678386f87",
+  "native_image_sha256": "142f9600b91e121c5e18f7fe5ac6a562b191ce04a720f83c6fd6f25288c0deb6",
   "binary_payload_and_factory_dumps_published": false,
   "per_unit_data_published": false,
   "manifest_scope": "public source directory; binary release assets documented separately",
-  "common_native_image_release": "r44-sd-originali-rc2"
+  "common_native_image_release": "r45-sd-rc2"
 }

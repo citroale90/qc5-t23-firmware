@@ -105,7 +105,7 @@ static struct msca_record msca_initial(void)
     m[M_MAGIC] = QC5_NV12_MAGIC; m[M_VERSION] = QC5_NV12_PAYLOAD_VERSION; m[M_FORMAT] = QC5_NV12_FOURCC;
     m[M_TARGET] = QC5_NV12_TARGET; m[M_Y_BYTES] = 921600; m[M_UV_BYTES] = 460800; m[M_STRIDE] = 1280;
     m[M_FRAME_BYTES] = 1382400; m[M_DESC_BYTES] = 24; m[M_PLAN_HASH] = QC5_MSCA_PLAN_HASH;
-    m[M_BYPASS] = QC5_NV12_BYPASS; m[M_GAIN] = QC5_NV12_INITIAL_GAIN; m[M_EXPOSURE] = 720;
+    m[M_BYPASS] = QC5_NV12_BYPASS; m[M_GAIN] = QC5_NV12_INITIAL_GAIN; m[M_EXPOSURE] = QC5_AE_INITIAL_EXPOSURE_LINES;
 #ifdef QC5_NV12_AE
     m[M_AE_INITIAL_GAIN] = QC5_NV12_INITIAL_GAIN;
 #endif
@@ -732,7 +732,7 @@ static int msca_capture(volatile uint8_t *ram, struct qc5_preview *record, struc
 #else
     struct msca_state state = {0};
 #ifdef QC5_NV12_AE
-    struct qc5_ae_controller ae={.selected={720,QC5_NV12_INITIAL_GAIN},.target=QC5_AE_TARGET};
+    struct qc5_ae_controller ae={.selected={QC5_AE_INITIAL_EXPOSURE_LINES,QC5_NV12_INITIAL_GAIN},.target=QC5_AE_TARGET};
 #endif
     uint32_t *m=data->meta;int ok=msca_capture_start(ram,record,data,&state);
     for (unsigned int n = 1; ok && n <= QC5_NV12_POLLS; ++n) {

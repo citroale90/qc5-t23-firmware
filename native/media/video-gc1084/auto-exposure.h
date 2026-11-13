@@ -1,6 +1,7 @@
 #ifndef QC5_AUTO_EXPOSURE_H
 #define QC5_AUTO_EXPOSURE_H
 #include <stdint.h>
+#include "gc1084-timing.h"
 #ifdef QC5_IMAGE_CONTINUOUS
 #include "image-continuous.h"
 #endif
@@ -12,15 +13,15 @@ struct qc5_ae_setting { unsigned int lines, gain; };
 static int qc5_ae_next_target(struct qc5_ae_setting current, unsigned int mean,
                        unsigned int target,struct qc5_ae_setting *next)
 {
-    if (!next || current.lines < 4 || current.lines > 896 || current.gain > 24 || mean > 255||target<32||target>224)
+    if (!next || current.lines < 4 || current.lines > QC5_AE_MAX_EXPOSURE_LINES || current.gain > 24 || mean > 255||target<32||target>224)
         return -1;
     *next = current;
     if (mean >= target-12 && mean <= target+12) return 0;
     if (mean < target-12) {
-        if (current.lines < 896) {
+        if (current.lines < QC5_AE_MAX_EXPOSURE_LINES) {
             unsigned int value = current.lines * target / (mean ? mean : 1u);
             if (value > current.lines*2u) value = current.lines*2u;
-            if (value > 896) value = 896;
+            if (value > QC5_AE_MAX_EXPOSURE_LINES) value = QC5_AE_MAX_EXPOSURE_LINES;
             if (value <= current.lines) value = current.lines+1u;
             next->lines = value;
         } else if (current.gain < 24) ++next->gain;
@@ -72,7 +73,7 @@ static int qc5_ae_tick(struct qc5_ae_controller *ae, unsigned int mean,
 #ifndef QC5_IMAGE_CONTINUOUS
         ae->samples>=120 ||
 #endif
-        ae->selected.lines<4 || ae->selected.lines>896 || ae->selected.gain>24 ||
+        ae->selected.lines<4 || ae->selected.lines>QC5_AE_MAX_EXPOSURE_LINES || ae->selected.gain>24 ||
         (ae->pending && (!ae->due_us || ae->due_us<250000))) return 0;
 #ifdef QC5_IMAGE_CONTINUOUS
     ae->samples=qc5_image_inc(ae->samples);

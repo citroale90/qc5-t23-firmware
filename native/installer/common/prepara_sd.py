@@ -24,7 +24,7 @@ def main():
  if not path(sd,'config.txt').exists():write(sd,'config.txt',read(source,'qc5-installer/config.txt.example'))
  write(sd,'qc5-installer/AZIONE.txt',b'INSTALLA\n')
  write(sd,lib['TRIGGER'],b'');lib['sync']()
- print('SD R44 PRONTA. Backup e config.txt preesistenti conservati. Espelli normalmente la SD; inseriscila nella gemella originale spenta; alimenta con Reset per circa 3 secondi e attendi almeno 15 minuti.')
+ print('SD R45 RC2 PRONTA. Backup e config.txt preesistenti conservati. Espelli normalmente la SD; inseriscila nella gemella originale spenta; alimenta con Reset per circa 3 secondi e attendi almeno 15 minuti.')
 if __name__=='__main__':
  try:main()
  except (ValueError,OSError,KeyError,json.JSONDecodeError) as e:raise SystemExit('Preparazione non completata: '+str(e))

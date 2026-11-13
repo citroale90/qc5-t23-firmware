@@ -61,7 +61,7 @@ static int service_frame_invariants(volatile uint8_t *ram,struct qc5_preview *r,
 static int encoder_service_capture(volatile uint8_t *ram,struct qc5_preview *record,struct msca_record *data)
 {
  struct msca_state state={0};
- struct qc5_ae_controller ae={.selected={720,QC5_NV12_INITIAL_GAIN},.target=QC5_AE_TARGET};
+ struct qc5_ae_controller ae={.selected={QC5_AE_INITIAL_EXPOSURE_LINES,QC5_NV12_INITIAL_GAIN},.target=QC5_AE_TARGET};
  uint32_t *m=data->meta;struct qc5_service_capture *p=&service_capture;
  /* A process owns exactly one pipeline. Starting it again would conceal a
   * failed stop or reset the encoder's reference ownership. */

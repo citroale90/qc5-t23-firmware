@@ -1,14 +1,17 @@
 {
-  "release": "QC5-7.3.1-R44-RC1",
+  "release": "QC5-7.3.1-R45-RC2",
   "files": {
     "ssh/key-core.h": {
-      "sha256": "b164250d50b248de493c84b53a333723544d8c7138c488e86b3141c42e20647b",
+      "sha256": "07995a17e338c41ffbad4bef4f510f5e194abc5dc742f267abc9b2de6a7f11be",
       "source_sha256": "b164250d50b248de493c84b53a333723544d8c7138c488e86b3141c42e20647b",
       "origin": "work/kernel-port-latest/build/linux73/native-ssh-flash-r43/key-core.h",
       "SPDX": [
         "GPL-3.0-only"
       ],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "post_R44_R45_fix": true,
+      "deployed_release": "QC5-7.3.1-R45-RC2",
+      "candidate_only": false
     },
     "ssh/key-helper.c": {
       "sha256": "082c63f43521a809fe7bb2a0083832ffae8bc1a4af92cd03e9969b37f7158e3a",
@@ -23,11 +26,14 @@
       "deployed_release": "QC5-7.3.1-R44-RC1"
     },
     "ssh/test-key.c": {
-      "sha256": "4b72d31c9f2c68ab3d96bbc14b0647a72cb90cfd680a3fce289c6fdfb1ee7904",
+      "sha256": "fc89a967416e77afe2904f99ab8bffb45e94b49c38d2deab04bf947b6c1ca5db",
       "source_sha256": "894629bbd5c92a07a8970b81a9be80b222c2d86f8ae2d386b4fe5e11e8bf67b5",
       "origin": "work/kernel-port-latest/build/linux73/native-ssh-flash-r43/test-key.c",
       "SPDX": [],
-      "adapted_for_public_tree": true
+      "adapted_for_public_tree": true,
+      "post_R44_R45_fix": true,
+      "deployed_release": "QC5-7.3.1-R45-RC2",
+      "candidate_only": false
     },
     "ssh/ssh-start.sh": {
       "sha256": "b1ce463fee3a355ccff2b4a29913927a780f66c3548d68b14c63d5df8d577eca",
@@ -1299,11 +1305,14 @@
       "adapted_for_public_tree": false
     },
     "media/video-gc1084/auto-exposure.h": {
-      "sha256": "10a6cb9603c54ec2001760ea5b035878450b247ca056b1035edbbf4b337ead3c",
+      "sha256": "2b083da5bed0e750bc0b0d3565833d1a5ec34b518ef54346ab83240892ebcb29",
       "source_sha256": "10a6cb9603c54ec2001760ea5b035878450b247ca056b1035edbbf4b337ead3c",
       "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/auto-exposure.h",
       "SPDX": [],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "post_R44_R45_fix": true,
+      "deployed_release": "QC5-7.3.1-R45-RC2",
+      "candidate_only": false
     },
     "media/video-gc1084/awb-algorithm.h": {
       "sha256": "741e5b2bd65c8d40a3b97e3fff00c7e44f902ed968ef0f4cd1ad6dda554b94ae",
@@ -1405,11 +1414,14 @@
       "adapted_for_public_tree": false
     },
     "media/video-gc1084/capture-frame.c": {
-      "sha256": "286402226febc210200a8b683bce4d4f1bb0c4d90c167a64193f7500e2cb9a6f",
+      "sha256": "40de70e17529f5959731a2588883476246d3e571d945ea9da52beba996011302",
       "source_sha256": "286402226febc210200a8b683bce4d4f1bb0c4d90c167a64193f7500e2cb9a6f",
       "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-frame.c",
       "SPDX": [],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "post_R44_R45_fix": true,
+      "deployed_release": "QC5-7.3.1-R45-RC2",
+      "candidate_only": false
     },
     "media/video-gc1084/capture-helix-av.c": {
       "sha256": "c20234200e1d1ffdf5a93a24cb6bf4778379e0eb6092134fdfd45a37623bc514",
@@ -1610,11 +1622,14 @@
       "adapted_for_public_tree": false
     },
     "media/video-gc1084/capture-msca.c": {
-      "sha256": "a2e00fd77700ff56c0d337bb4500d5849bdd9b4bb65011e846acdd85df370674",
+      "sha256": "c7da5d4190f94beca1b8adbfb53345796a214834393fc9784b78cd7419d7d6d3",
       "source_sha256": "a2e00fd77700ff56c0d337bb4500d5849bdd9b4bb65011e846acdd85df370674",
       "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-msca.c",
       "SPDX": [],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "post_R44_R45_fix": true,
+      "deployed_release": "QC5-7.3.1-R45-RC2",
+      "candidate_only": false
     },
     "media/video-gc1084/ccm-algorithm.h": {
       "sha256": "274c1377e0cb06831eaa2fdbade0a431d69b6a0767b719f52e537022a26375fe",
@@ -1678,11 +1693,14 @@
       "adapted_for_public_tree": false
     },
     "media/video-gc1084/gc1084-controls.h": {
-      "sha256": "acbc0bacfd35462bbd699938c1b3dbf43e492faa90de09a241ecc7386c40c57e",
+      "sha256": "1ea0c4de4994c3cfd9b45bcd9f971d8e72290244bd87251f2949672cda643b0a",
       "source_sha256": "acbc0bacfd35462bbd699938c1b3dbf43e492faa90de09a241ecc7386c40c57e",
       "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/gc1084-controls.h",
       "SPDX": [],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "post_R44_R45_fix": true,
+      "deployed_release": "QC5-7.3.1-R45-RC2",
+      "candidate_only": false
     },
     "media/video-gc1084/gc1084-probe.c": {
       "sha256": "5f05c7c941ac09758dfa81fcfc64580ea9cdc852c29321fa9db860ba0073fde7",
@@ -1890,13 +1908,16 @@
       "adapted_for_public_tree": false
     },
     "media/video-gc1084/mdns-layout.h": {
-      "sha256": "800615f6694b517c2b43abd78a65f4d7a6f9a772fa2c23faf6c4bfdd14685957",
+      "sha256": "3c69ab97e92a9f2d4052dc0d1f8069bbf0eee5bec529c53366b0a4d7a4441fef",
       "source_sha256": "800615f6694b517c2b43abd78a65f4d7a6f9a772fa2c23faf6c4bfdd14685957",
       "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/mdns-layout.h",
       "SPDX": [
         "GPL-2.0-or-later"
       ],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "post_R44_R45_fix": true,
+      "deployed_release": "QC5-7.3.1-R45-RC2",
+      "candidate_only": false
     },
     "media/video-gc1084/mdns-memory-map.h": {
       "sha256": "0d6d67e73a5942f07134dd956cdea1160b2fcdcac54e217b715fc473429a6f76",
@@ -2074,13 +2095,16 @@
       "adapted_for_public_tree": false
     },
     "media/video-runtime/native-service-loop.h": {
-      "sha256": "d99087194336213e90be522103a81b9257f9a16261aa58c60ff8c1992123497f",
+      "sha256": "5daedb7be4e5fe315dffeb13dc69b6d21d56d2cfacc1245248f54b35fed49945",
       "source_sha256": "d99087194336213e90be522103a81b9257f9a16261aa58c60ff8c1992123497f",
       "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-runtime/native-service-loop.h",
       "SPDX": [
         "GPL-3.0-only"
       ],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "post_R44_R45_fix": true,
+      "deployed_release": "QC5-7.3.1-R45-RC2",
+      "candidate_only": false
     },
     "media/video-runtime/native-service-note.h": {
       "sha256": "9873c648239053fea5a5658bd1b20cd68380d944c1a8eeb7eed637aff42f2a3e",
@@ -2246,11 +2270,14 @@
       "adapted_for_public_tree": false
     },
     "boot/build-flash-kernel.py": {
-      "sha256": "d213713a22758a48efb3a6f59691b6fa9d9eb6782c594ed12accaad48d017fa5",
+      "sha256": "998c98aec7772ff4f9a01c1bf290b50716994a22cf04201f534bddbb384950e0",
       "source_sha256": "d213713a22758a48efb3a6f59691b6fa9d9eb6782c594ed12accaad48d017fa5",
       "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/flash/build-flash-kernel.py",
       "SPDX": [],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "post_R44_R45_fix": true,
+      "deployed_release": "QC5-7.3.1-R45-RC2",
+      "candidate_only": false
     },
     "boot/cpu-guard.S": {
       "sha256": "558eb024e681c5ab0ab85a5fa0ecdd7cd4fc8882e1ac7007e8d92fa2f1ca3a49",
@@ -2403,6 +2430,28 @@
       "adapted_for_public_tree": false,
       "new_after_R43": true,
       "purpose": "per-unit SD package preparation; never a flash writer"
+    },
+    "media/video-gc1084/gc1084-timing.h": {
+      "sha256": "03f039fc9d31f74f4f505820b2550582b224cbabdb872768d8bb1e451b985492",
+      "source_sha256": "03f039fc9d31f74f4f505820b2550582b224cbabdb872768d8bb1e451b985492",
+      "origin": "R45 maintained source",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false,
+      "deployed_release": "QC5-7.3.1-R45-RC2",
+      "test_only": false
+    },
+    "media/video-gc1084/test-ae-shutter.c": {
+      "sha256": "269e14d052012bb0a5d8d9bd696dc437436acb7c09fce011a9881f48cdbeb030",
+      "source_sha256": "269e14d052012bb0a5d8d9bd696dc437436acb7c09fce011a9881f48cdbeb030",
+      "origin": "R45 maintained source",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false,
+      "deployed_release": "QC5-7.3.1-R45-RC2",
+      "test_only": true
     }
   },
   "excluded_generated_inputs": [

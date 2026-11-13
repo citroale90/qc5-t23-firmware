@@ -1,6 +1,7 @@
 #ifndef QC5_GC1084_CONTROLS_H
 #define QC5_GC1084_CONTROLS_H
 #include <stdint.h>
+#include "gc1084-timing.h"
 struct sensor_reg { uint16_t reg; uint8_t value; };
 #include "gc1084-gain.private.h"
 
@@ -8,7 +9,7 @@ struct sensor_reg { uint16_t reg; uint8_t value; };
  * Reject invalid values before creating any writes, unlike the OEM ioctl. */
 static int sensor_control_plan(unsigned int lines, unsigned int gain, struct sensor_reg writes[10])
 {
-    if (lines < 4 || lines > 896 || gain >= 25)
+    if (lines < 4 || lines > QC5_GC1084_MAX_EXPOSURE_LINES || gain >= 25)
         return 0;
     const uint32_t *row = gc1084_gain[gain];
     const struct sensor_reg plan[10] = {

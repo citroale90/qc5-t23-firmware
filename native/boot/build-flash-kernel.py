@@ -3,12 +3,40 @@ from pathlib import Path
 import hashlib,json,lzma,runpy,struct,subprocess,zlib
 HERE=Path(__file__).resolve().parent;I=HERE.parents[1];ROOT=I.parent;WS=ROOT.parents[3];BASE=I/'native-services';OUT=HERE/'kernel-build'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def validate_initramfs(archive):
+ raw=lzma.decompress(archive);at=0;names=set();init=None
+ while True:
+  if at+110>len(raw) or raw[at:at+6]!=b'070701':raise ValueError('initramfs must decode directly to complete newc CPIO')
+  try:fields=[int(raw[at+6+8*n:at+14+8*n],16) for n in range(13)]
+  except ValueError:raise ValueError('Invalid CPIO header') from None
+  size,length=fields[6],fields[11]
+  if not 1<=length<=4096 or at+110+length>len(raw):raise ValueError('Invalid CPIO filename length')
+  encoded=raw[at+110:at+110+length]
+  if not encoded.endswith(b'\0') or b'\0' in encoded[:-1]:raise ValueError('Invalid CPIO filename')
+  name=encoded[:-1].decode('ascii');at=(at+110+length+3)&~3
+  if at+size>len(raw):raise ValueError('Truncated CPIO body')
+  body=raw[at:at+size];at=(at+size+3)&~3
+  if name=='TRAILER!!!':
+   if size or any(raw[at:]):raise ValueError('Invalid CPIO trailer')
+   break
+  if name in names or name.startswith('/') or '..' in name.split('/'):raise ValueError('Unsafe or duplicate CPIO filename')
+  names.add(name)
+  if name=='init':
+   if fields[1]&0o170000!=0o100000 or not fields[1]&0o111 or fields[2:4]!=[0,0] or fields[4]!=1 or not body.startswith(b'\x7fELF'):
+    raise ValueError('Expected an executable root-owned ELF /init')
+   init=body
+ if init is None:raise ValueError('Missing /init')
+ return {'entries':len(names),'init_sha256':hashlib.sha256(init).hexdigest(),'single_XZ_to_newc':True}
 def main():
  OUT.mkdir(exist_ok=True);store=HERE/'root-store';s=json.loads((store/'build.json').read_text())
  for p,h in s['sources'].items():assert sha(Path(p))==h,p
  original=BASE/'candidate';b=json.loads((original/'build.json').read_text());raw=(original/b['filename']).read_bytes();assert sha(original/b['filename'])==b['sha256']
  data=bytearray(lzma.LZMADecompressor(format=lzma.FORMAT_ALONE).decompress(raw[64:]));load=struct.unpack_from('>I',raw,16)[0];assert load==0x80100000
- offset=int(b['initrd_start'],16)-load;archive=(store/'initrd.xz').read_bytes();assert len(archive)<b['initramfs_bytes'];data[offset:offset+b['initramfs_bytes']]=archive+bytes(b['initramfs_bytes']-len(archive))
+ offset=int(b['initrd_start'],16)-load;archive=(store/'initrd.xz').read_bytes();assert len(archive)<b['initramfs_bytes']
+ # The kernel unpacks one compression layer into CPIO. A nested XZ stream
+ # can pass the outer kernel decoder tests yet cannot supply /init.
+ validate_initramfs(archive)
+ data[offset:offset+b['initramfs_bytes']]=archive+bytes(b['initramfs_bytes']-len(archive))
  # The same stock-compatible shim, CP0 guard and early PHY code remain.
  # Change only the DTB's end of initrd; its public board profile is retained.
  dtb=OUT/'net-t23.dtb';dtb.write_bytes((original/'net-t23.dtb').read_bytes());subprocess.run(['fdtput','-t','x',str(dtb),'/chosen','linux,initrd-end',f'{((int(b["initrd_start"],16)&0x1fffffff)+len(archive)):x}'],check=True)

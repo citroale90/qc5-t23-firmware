@@ -14,7 +14,7 @@ typedef uint8_t u8;typedef uint32_t u32;typedef uint64_t u64;typedef size_t usiz
 struct qks_io{void *ctx;int(*read)(void*,unsigned,void*,size_t);int(*erase)(void*,unsigned);int(*write)(void*,unsigned,const void*,size_t);};
 static int qks_key(const u8 *k){static const u8 prefix[19]={0,0,0,11,'s','s','h','-','e','d','2','5','5','1','9',0,0,0,64};return k&&!memcmp(k,prefix,sizeof prefix);}
 static uint64_t qks_gen(const u8 *p){uint64_t n=0;for(unsigned i=0;i<8;i++)n|=(uint64_t)p[16+i]<<(8*i);return n;}
-static int qks_blank(const u8 *p){for(unsigned i=0;i<512;i++)if(p[i]!=255)return 0;return 1;}
+static int qks_blank(const u8 *p){u8 fill=p[0];if(fill!=0&&fill!=255)return 0;for(unsigned i=1;i<512;i++)if(p[i]!=fill)return 0;return 1;}
 static int qks_decode(const u8 *p,const u8 mac[6],u8 key[QKS_KEY]){
  memset(key,0,QKS_KEY);u8 sum[32];
  if(memcmp(p,"QC5SSH1\0",8)||p[8]!=1||p[9]||p[10]||p[11]||p[12]!=QKS_KEY||p[13]||p[14]||p[15]||!qks_gen(p)||memcmp(p+24,mac,6)||p[30]||p[31]||!qks_key(p+32))return 0;
