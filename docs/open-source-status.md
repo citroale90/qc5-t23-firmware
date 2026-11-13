@@ -23,6 +23,9 @@ and key-publication defects in candidate source, removes one unused duplicate,
 restores 11 explicitly GPL-covered x264 helpers and replaces the external
 Annex-B helper. These changes are not installed on the camera. Four unlicensed
 external descriptor/ROI files and sensor calibration provenance remain open.
+The [Wi-Fi reverse-engineering report](wifi-reverse-engineering.md) now maps
+the upload/calibration boundary and provides an offline-tested host-loader
+hardening candidate. The six executable/table dependencies remain separate.
 
 ## Verified driver-source milestone
 

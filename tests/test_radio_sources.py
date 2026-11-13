@@ -54,9 +54,9 @@ class RadioSources(unittest.TestCase):
     def save(self):
         (self.metadata / 'SOURCE-MANIFEST.json').write_text(json.dumps(self.manifest))
 
-    def run_prepare(self):
+    def run_prepare(self, *extra):
         with patch.object(sys, 'argv', ['prepare', '--archive', str(self.archive),
-                                       '--output', str(self.output)]):
+                                       '--output', str(self.output), *extra]):
             with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
                 self.program.main()
 
@@ -93,6 +93,30 @@ class RadioSources(unittest.TestCase):
         self.save()
         with self.assertRaises(ValueError):self.run_prepare()
         self.assertFalse((self.root / 'outside').exists())
+
+    def audit_fixture(self):
+        self.fixture()
+        directory = self.metadata/'hardening';directory.mkdir()
+        change = b'--- a/a.c\n+++ b/a.c\n@@ -1 +1 @@\n-int x = 2;\n+int x = 3;\n'
+        (directory/'bounded-patch-table.patch').write_bytes(change)
+        row = dict(self.manifest['files'][0], sha256=hashlib.sha256(b'int x = 3;\n').hexdigest())
+        record = {'base_patch_sha256':self.manifest['patch_sha256'],
+                  'patch_sha256':hashlib.sha256(change).hexdigest(), 'files':[row]}
+        (directory/'SOURCE-MANIFEST.json').write_text(json.dumps(record))
+
+    def test_optional_audit_overlay_is_verified_after_baseline(self):
+        self.audit_fixture();self.run_prepare('--audit-fixes')
+        self.assertEqual((self.output/'a.c').read_bytes(),b'int x = 3;\n')
+
+    def test_audit_overlay_is_not_implicitly_enabled(self):
+        self.audit_fixture();self.run_prepare()
+        self.assertEqual((self.output/'a.c').read_bytes(),b'int x = 2;\n')
+
+    def test_tampered_audit_overlay_is_refused(self):
+        self.audit_fixture()
+        (self.metadata/'hardening/bounded-patch-table.patch').write_bytes(b'tampered')
+        with self.assertRaises(ValueError):self.run_prepare('--audit-fixes')
+        self.assertEqual((self.output/'a.c').read_bytes(),b'int x = 2;\n')
 
 
 if __name__ == '__main__':

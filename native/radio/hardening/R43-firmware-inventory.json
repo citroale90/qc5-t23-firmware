@@ -1,0 +1,67 @@
+{
+  "camera_accessed": false,
+  "radio_code_executed": false,
+  "binary_payloads_included": false,
+  "files": [
+    {
+      "name": "fmacfw_patch_8800dc_u02.bin",
+      "bytes": 31596,
+      "sha256": "a2c7f0a5d80d26abe9572acd40249cc73f589e664ec559eacdd4526077abc735",
+      "load_address": "0x180000",
+      "loaded_end_exclusive": "0x187b6c"
+    },
+    {
+      "name": "fmacfw_calib_8800dc_u02.bin",
+      "bytes": 40284,
+      "sha256": "718779ec5d2ca5cc341dfa36c1d6b62fc78bba83b9743acda24463823c70e145",
+      "load_address": "0x130000",
+      "loaded_end_exclusive": "0x139d5c",
+      "driver_start_address": "0x130009",
+      "thumb_instruction_address": "0x130008"
+    },
+    {
+      "name": "fmacfw_patch_tbl_8800dc_u02.bin",
+      "bytes": 1008,
+      "sha256": "d28112c404a6c5207a773702f28e7d8cb282eb7d6c6b4124e2065335e38c530d",
+      "metadata_address": "0x187c00",
+      "description": "mi May 30 2025 16:35:24 - g2ae0a01",
+      "pairs": 110,
+      "target_64KiB_windows": [
+        "0x110000",
+        "0x180000",
+        "0x40030000",
+        "0x40100000"
+      ]
+    },
+    {
+      "name": "fmacfw_patch_8800dc_h_u02.bin",
+      "bytes": 30664,
+      "sha256": "f388dcb419a0f677c777a1eaad798156eabdfbb72c512a4d993df0dbc4f351d1",
+      "load_address": "0x180000",
+      "loaded_end_exclusive": "0x1877c8"
+    },
+    {
+      "name": "fmacfw_calib_8800dc_h_u02.bin",
+      "bytes": 33428,
+      "sha256": "12bdcdd48e41b33bfd74834bffa326b4469bea82e7134de079392fbc2508acc7",
+      "load_address": "0x130000",
+      "loaded_end_exclusive": "0x138294",
+      "driver_start_address": "0x130009",
+      "thumb_instruction_address": "0x130008"
+    },
+    {
+      "name": "fmacfw_patch_tbl_8800dc_h_u02.bin",
+      "bytes": 856,
+      "sha256": "0469686691b72fa8296ff7abd1669ba978bdc0f115137fd392aa00a2717ff887",
+      "metadata_address": "0x187c00",
+      "description": "di Jul 12 2025 16:51:02 - gfa6cef2",
+      "pairs": 91,
+      "target_64KiB_windows": [
+        "0x110000",
+        "0x180000",
+        "0x40030000",
+        "0x40100000"
+      ]
+    }
+  ]
+}

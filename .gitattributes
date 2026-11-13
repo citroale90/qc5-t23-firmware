@@ -1,6 +1,7 @@
 # Preserve exact imported patch context and frozen source hashes.
 native/kernel/reference-patches/*.patch -whitespace
 native/radio/*.patch -whitespace
+native/radio/hardening/*.patch -whitespace
 native/media/audio-t23/codec-capture.generated.h -whitespace
 native/media/video-gc1084/awb-math.inc -whitespace
 native/media/video-gc1084/capture-frame.c -whitespace

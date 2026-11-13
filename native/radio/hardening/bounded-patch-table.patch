@@ -1,0 +1,94 @@
+--- a/aic8800_fdrv/aicwf_compat_8800dc.c
++++ b/aic8800_fdrv/aicwf_compat_8800dc.c
+@@ -1954,63 +1954,38 @@
+ rf_misc_ram_lite_t dpd_res;
+ #endif
+ 
++/* SPDX-License-Identifier: GPL-2.0-only
++ * Candidate replacement for the R43 Linux loader, not radio firmware code.
++ * Preserve the 128-byte metadata upload and ordered address/value protocol.
++ */
+ int aicwf_patch_table_load(struct rwnx_hw *rwnx_hw, char *filename)
+ {
+-    int err = 0;
+-    unsigned int i = 0, size;
+-   	u32 *dst = NULL;
+-	u8 *describle;
+-	u32 fmacfw_patch_tbl_8800dc_u02_describe_size = 124;
+-	u32 fmacfw_patch_tbl_8800dc_u02_describe_base;//read from patch_tbl
+-
+-    /* Copy the file on the Embedded side */
+-    AICWFDBG(LOGINFO, "### Upload %s \n", filename);
++    u32 *dst = NULL;
++    int size, err;
++    unsigned int i;
+ 
+     size = rwnx_request_firmware_common(rwnx_hw, &dst, filename);
+-    if (!dst) {
+-       AICWFDBG(LOGERROR, "No such file or directory\n");
+-       return -1;
+-    }
+-    if (size <= 0) {
+-            AICWFDBG(LOGERROR, "wrong size of firmware file\n");
+-            dst = NULL;
+-            err = -1;
+-    }
+-
+-	AICWFDBG(LOGINFO, "tbl size = %d \n",size);
+-
+-	fmacfw_patch_tbl_8800dc_u02_describe_base = dst[0];
+-	AICWFDBG(LOGINFO, "FMACFW_PATCH_TBL_8800DC_U02_DESCRIBE_BASE = %x \n",fmacfw_patch_tbl_8800dc_u02_describe_base);
+-
+-	if (!err && (i < size)) {
+-		err = rwnx_send_dbg_mem_block_write_req(rwnx_hw, fmacfw_patch_tbl_8800dc_u02_describe_base, fmacfw_patch_tbl_8800dc_u02_describe_size + 4, dst);
+-		if(err){
+-			printk("write describe information fail \n");
+-		}
+-
+-		describle = kzalloc(fmacfw_patch_tbl_8800dc_u02_describe_size, GFP_KERNEL);
+-		memcpy(describle, &dst[1], fmacfw_patch_tbl_8800dc_u02_describe_size);
+-		AICWFDBG(LOGINFO, "%s", describle);
+-		kfree(describle);
+-		describle = NULL;
+-	}
+-
+-    if (!err && (i < size)) {
+-        for (i =(128/4); i < (size/4); i +=2) {
+-            AICWFDBG(LOGERROR, "patch_tbl:  %x  %x\n", dst[i], dst[i+1]);
+-            err = rwnx_send_dbg_mem_write_req(rwnx_hw, dst[i], dst[i+1]);
+-        }
+-        if (err) {
+-            AICWFDBG(LOGERROR, "bin upload fail: %x, err:%d\r\n", dst[i], err);
+-        }
+-    }
+-
+-    if (dst) {
+-        rwnx_release_firmware_common(&dst);
+-    }
+-
+-   return err;
+-
++    if (!dst)
++        return size < 0 ? size : -ENOENT;
++    if (size < 128 || (size - 128) % 8) {
++        err = -EINVAL;
++        goto out;
++    }
++
++    err = rwnx_send_dbg_mem_block_write_req(rwnx_hw, dst[0], 128, dst);
++    if (err)
++        goto out;
++    /* Bounded logging: metadata is not guaranteed to have a final NUL. */
++    AICWFDBG(LOGINFO, "%.*s", 124, (char *)&dst[1]);
++
++    for (i = 32; i < (unsigned int)size / 4; i += 2) {
++        err = rwnx_send_dbg_mem_write_req(rwnx_hw, dst[i], dst[i + 1]);
++        if (err)
++            goto out;
++    }
++out:
++    rwnx_release_firmware_common(&dst);
++    return err;
+ }
+ 
+ //adap test

@@ -25,6 +25,8 @@ def main():
     parser.add_argument('--output', type=Path, default=ROOT / 'build/native-drivers')
     parser.add_argument('--component', action='append', choices=COMPONENTS)
     parser.add_argument('--radio-source', type=Path)
+    parser.add_argument('--radio-audit-fixes', action='store_true',
+                        help='Verify/build the optional post-R43 radio overlay instead of the R43 baseline')
     args = parser.parse_args()
     tree, build, output = (p.resolve() for p in
                            (args.kernel_tree, args.kernel_build, args.output))
@@ -32,6 +34,8 @@ def main():
         parser.error('A prepared kernel source/build tree is required')
     if 'radio' in (args.component or ()) and not args.radio_source:
         parser.error('Radio builds require --radio-source prepared by prepare_aic_source.py')
+    if args.radio_audit_fixes and 'radio' not in (args.component or ()):
+        parser.error('--radio-audit-fixes requires --component radio')
     if output.exists():
         parser.error('Use a fresh output directory; existing files are preserved')
     if output.is_relative_to(tree) or output.is_relative_to(build):
@@ -47,7 +51,9 @@ def main():
         destination = output / component
         destination.mkdir()
         if component == 'radio':
-            record = json.loads((ROOT / 'native/radio/SOURCE-MANIFEST.json').read_text())
+            lock = ('native/radio/hardening/SOURCE-MANIFEST.json'
+                    if args.radio_audit_fixes else 'native/radio/SOURCE-MANIFEST.json')
+            record = json.loads((ROOT / lock).read_text())
             source = args.radio_source.resolve()
             rows = record['files']
             wanted = record['modules']
@@ -93,6 +99,8 @@ def main():
               'kernel_config_sha256':digest(build / '.config'),
               'module_install_or_load_attempted':False,'camera_accessed':False,
               'binary_firmware_files_copied':False}
+    if args.radio_audit_fixes:
+        report.update(radio_audit_candidate=True, hardware_tested=False)
     (output / 'build.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))
 

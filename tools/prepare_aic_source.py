@@ -13,6 +13,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--archive', type=Path, required=True)
     parser.add_argument('--output', type=Path, default=ROOT / 'build/aic-source')
+    parser.add_argument('--audit-fixes', action='store_true',
+                        help='Apply the offline-tested, not hardware-qualified post-R43 loader overlay')
     args = parser.parse_args()
     manifest = json.loads((ROOT / 'native/radio/SOURCE-MANIFEST.json').read_text())
     patch = ROOT / 'native/radio/qc5-r43-aic8800.patch'
@@ -55,7 +57,22 @@ def main():
         path = output / row['path']
         if path.is_symlink() or sha(path.read_bytes()) != row['sha256']:
             raise ValueError('Source reconstruction failed: '+row['path'])
-    print('Verified '+str(len(manifest['files']))+' R43 driver source files; '
+    if args.audit_fixes:
+        folder = ROOT / 'native/radio/hardening'
+        candidate = json.loads((folder / 'SOURCE-MANIFEST.json').read_text())
+        overlay = folder / 'bounded-patch-table.patch'
+        if candidate['base_patch_sha256'] != manifest['patch_sha256'] or sha(overlay.read_bytes()) != candidate['patch_sha256']:
+            raise ValueError('Audit overlay does not match this R43 source baseline')
+        if {r['path'] for r in candidate['files']} != {r['path'] for r in manifest['files']}:
+            raise ValueError('Audit overlay must retain the same source path set')
+        subprocess.run(['patch','-p1','-t','-F0','-i',str(overlay)],
+                       cwd=output, check=True, capture_output=True, timeout=60)
+        for row in candidate['files']:
+            path = output / row['path']
+            if path.is_symlink() or sha(path.read_bytes()) != row['sha256']:
+                raise ValueError('Audit source reconstruction failed: '+row['path'])
+    label = 'post-R43 audit candidate' if args.audit_fixes else 'R43'
+    print('Verified '+str(len(manifest['files']))+' '+label+' driver source files; '
           'no radio firmware, flash write, camera access or module load.')
 
 

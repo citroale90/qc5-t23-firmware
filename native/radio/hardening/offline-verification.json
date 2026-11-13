@@ -1,0 +1,71 @@
+{
+  "baseline_reproductions": [
+    {
+      "length": 0,
+      "failed": true,
+      "returncode": -6
+    },
+    {
+      "length": 4,
+      "failed": true,
+      "returncode": -6
+    },
+    {
+      "length": 127,
+      "failed": true,
+      "returncode": -6
+    },
+    {
+      "length": 132,
+      "failed": true,
+      "returncode": -6
+    },
+    {
+      "length": 140,
+      "failed": true,
+      "returncode": -6
+    }
+  ],
+  "candidate_test": "514 file lengths; exact metadata/order; load/header/pair errors and cleanup verified\n",
+  "sanitizers": [
+    "address",
+    "undefined"
+  ],
+  "camera_accessed": false,
+  "flash_written": false,
+  "mips_execution": "514 file lengths; exact metadata/order; load/header/pair errors and cleanup verified\n",
+  "kernel_build": {
+    "compiled": true,
+    "architecture": "mips",
+    "components": [
+      {
+        "component": "radio",
+        "compiled": true,
+        "modules": [
+          {
+            "module": "aic8800_fdrv.ko",
+            "sha256": "4b0a8516255f712636b1f251ba3d8e6b0f66195a9450d0779e4e70fbbccea7f8",
+            "matches_deployed_bytes": false
+          },
+          {
+            "module": "aic_load_fw.ko",
+            "sha256": "eb5d23e92b703c4d6452c851c06a53d4356abca8d9a39ef942aa7e5d63365da1",
+            "matches_deployed_bytes": true
+          }
+        ]
+      }
+    ],
+    "kernel_config_sha256": "e8aa29529ba6e259d4cd73b306a8731e6da478e0321e4287bff9719853ba77da",
+    "module_install_or_load_attempted": false,
+    "camera_accessed": false,
+    "binary_firmware_files_copied": false,
+    "radio_audit_candidate": true,
+    "hardware_tested": false
+  },
+  "complete_host_suite": {
+    "tests": 121,
+    "passed": 120,
+    "skipped": 1,
+    "failed": 0
+  }
+}

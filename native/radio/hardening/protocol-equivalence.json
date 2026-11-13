@@ -1,0 +1,10 @@
+{
+  "both_real_R43_tables_have_identical_transport": true,
+  "protocol_trace_sha256": {
+    "fmacfw_patch_tbl_8800dc_h_u02.bin": "4985b3398763446ad174dca82d5609c32ef664c7721554d3ed0bde139a42e586",
+    "fmacfw_patch_tbl_8800dc_u02.bin": "06157417dfa6c9086b6704cdae02f00bd88f99c03c043c6b18a16d158412d7ce"
+  },
+  "source_baseline": "R43 byte-matching driver source",
+  "camera_accessed": false,
+  "hardware_tested": false
+}

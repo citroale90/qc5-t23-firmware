@@ -54,3 +54,9 @@ See [open-source status](../../docs/open-source-status.md). Qwen reviews
 049–052 assisted the comparisons sequentially; actual source reconstruction
 and matching compiled hashes establish this result. No hardware change was
 needed to restore the Linux driver's source provenance.
+
+The subsequent [Wi-Fi reverse-engineering audit](../../docs/wifi-reverse-engineering.md)
+documents the actual USB transport, executable calibration entry points and
+an optional bounds/error-handling correction for the host patch-table loader.
+Its separate candidate source lock and compile receipt do not replace the
+byte-identical R43 baseline above. It has not been loaded on the camera.
