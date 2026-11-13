@@ -54,9 +54,9 @@
       "adapted_for_public_tree": false
     },
     "modules/qc5-sfc-runtime.c": {
-      "sha256": "53ee1c6428e62b3af7acfb2f318d57376d4c0ae2199ec00d023afd7a347621ba",
-      "source_sha256": "53ee1c6428e62b3af7acfb2f318d57376d4c0ae2199ec00d023afd7a347621ba",
-      "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r41/qc5-sfc-runtime.c",
+      "sha256": "38b793f37b390a3c7b971ca05156f4b5ccb225d0364ed769eb32c5ad7b725320",
+      "source_sha256": "38b793f37b390a3c7b971ca05156f4b5ccb225d0364ed769eb32c5ad7b725320",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d9-mdns-status/modules-build/sfc/qc5-sfc-runtime.c",
       "SPDX": [
         "GPL-2.0-only"
       ],
@@ -2220,6 +2220,31 @@
       "source_sha256": "c58dcde1875abba79de650a1e5471fb0c2ecf64739e7c50adc6656ebd54cb1db",
       "origin": "work/kernel-port-latest/build/linux73/wifi-net/0006-aic8800dc-final-api-fixes.patch",
       "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "modules/sfc-clock.h": {
+      "sha256": "631109396fb36f52136776a44390204a5e226ea8e4e67f0d947ad936994bcac1",
+      "source_sha256": "631109396fb36f52136776a44390204a5e226ea8e4e67f0d947ad936994bcac1",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d9-mdns-status/modules-build/sfc/sfc-clock.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "boot/build-flash-kernel.py": {
+      "sha256": "d213713a22758a48efb3a6f59691b6fa9d9eb6782c594ed12accaad48d017fa5",
+      "source_sha256": "d213713a22758a48efb3a6f59691b6fa9d9eb6782c594ed12accaad48d017fa5",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/flash/build-flash-kernel.py",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "boot/cpu-guard.S": {
+      "sha256": "558eb024e681c5ab0ab85a5fa0ecdd7cd4fc8882e1ac7007e8d92fa2f1ca3a49",
+      "source_sha256": "558eb024e681c5ab0ab85a5fa0ecdd7cd4fc8882e1ac7007e8d92fa2f1ca3a49",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/flash/cpu-guard/guard.S",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
       "adapted_for_public_tree": false
     }
   },

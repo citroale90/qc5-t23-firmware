@@ -1,0 +1,224 @@
+{
+  "kernel": "7.3.1-qc5-sd-tiny",
+  "components": [
+    {
+      "component": "ptz",
+      "module": "qc5-peripheral.ko",
+      "deployed_binary_sha256": "4f44d0c297f5a5bc2892d4a6695ad1cc906741e43c5b71d7d48a2004cf5d7969",
+      "files": [
+        {
+          "path": "board-qc5.h",
+          "sha256": "6713740e9f1215b2e072fc2a6e2e00270a834c3e94c2b8f233617ec21bf8a23f",
+          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/board-qc5.h",
+          "license": "GPL-2.0-only",
+          "source_sha256": "6713740e9f1215b2e072fc2a6e2e00270a834c3e94c2b8f233617ec21bf8a23f",
+          "include_paths_adapted": false
+        },
+        {
+          "path": "i2c2-bus.h",
+          "sha256": "afd59d564e9af1576912d527825f296d0e7c596b104c1e21aa89e83a78781a1f",
+          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/i2c2-bus.h",
+          "license": "GPL-2.0-only",
+          "source_sha256": "afd59d564e9af1576912d527825f296d0e7c596b104c1e21aa89e83a78781a1f",
+          "include_paths_adapted": false
+        },
+        {
+          "path": "motor-direction.h",
+          "sha256": "769b67a75972b66257458f3bf19b5ecdc08c50356b0cec9c6fda048dda5df2f1",
+          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/motor-direction.h",
+          "license": "GPL-2.0-only",
+          "source_sha256": "769b67a75972b66257458f3bf19b5ecdc08c50356b0cec9c6fda048dda5df2f1",
+          "include_paths_adapted": false
+        },
+        {
+          "path": "motor-id-plan.h",
+          "sha256": "3aa15b645417578f65b39b49ee90d5e5f5ba91c9e57f67e22b97bdc55b0b318a",
+          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/motor-id-plan.h",
+          "license": "GPL-2.0-only",
+          "source_sha256": "3aa15b645417578f65b39b49ee90d5e5f5ba91c9e57f67e22b97bdc55b0b318a",
+          "include_paths_adapted": false
+        },
+        {
+          "path": "motor-sequence.h",
+          "sha256": "d4976c946fa60bab3d1a3c198e5aadb57ce6e474ea5caf27f4b291fe811e08a8",
+          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/motor-sequence.h",
+          "license": "GPL-2.0-only",
+          "source_sha256": "d4976c946fa60bab3d1a3c198e5aadb57ce6e474ea5caf27f4b291fe811e08a8",
+          "include_paths_adapted": false
+        },
+        {
+          "path": "move-progress.h",
+          "sha256": "9a129d3ad08f60348a354799bd6021d16a822621261f76f9b502c2e0732e6d36",
+          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/move-progress.h",
+          "license": "GPL-2.0-only",
+          "source_sha256": "9a129d3ad08f60348a354799bd6021d16a822621261f76f9b502c2e0732e6d36",
+          "include_paths_adapted": false
+        },
+        {
+          "path": "peripheral-abi.h",
+          "sha256": "b800dea9830b97204efc50360c37ccd49dda77534558eb49185859c365b50422",
+          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/peripheral-abi.h",
+          "license": "GPL-2.0-only",
+          "source_sha256": "b800dea9830b97204efc50360c37ccd49dda77534558eb49185859c365b50422",
+          "include_paths_adapted": false
+        },
+        {
+          "path": "ptz-counter.h",
+          "sha256": "a31e3cd8666ba172ce4f067a1b42afaea97a17177c535de63a9cdb50a72f2565",
+          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/ptz-counter.h",
+          "license": "GPL-2.0-only",
+          "source_sha256": "a31e3cd8666ba172ce4f067a1b42afaea97a17177c535de63a9cdb50a72f2565",
+          "include_paths_adapted": false
+        },
+        {
+          "path": "ptz-manual-plan.h",
+          "sha256": "762a5c5809a86d269c920205f1b23a5b82a89ba8c512839d7213a165975f554e",
+          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/ptz-manual-plan.h",
+          "license": "GPL-2.0-or-later",
+          "source_sha256": "762a5c5809a86d269c920205f1b23a5b82a89ba8c512839d7213a165975f554e",
+          "include_paths_adapted": false
+        },
+        {
+          "path": "qc5-peripheral.c",
+          "sha256": "42291483f7b5b58e3c64cc432dff40442233f99dd449d60b407254f511188107",
+          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/qc5-peripheral.c",
+          "license": "GPL-2.0-only",
+          "source_sha256": "42291483f7b5b58e3c64cc432dff40442233f99dd449d60b407254f511188107",
+          "include_paths_adapted": false
+        },
+        {
+          "path": "speaker-abi.h",
+          "sha256": "00ebb2c3562e0e578adaeb7d0a18090dbf8e35eaa640469dc098d616abb5f52c",
+          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/speaker-abi.h",
+          "license": "GPL-2.0-only",
+          "source_sha256": "00ebb2c3562e0e578adaeb7d0a18090dbf8e35eaa640469dc098d616abb5f52c",
+          "include_paths_adapted": false
+        },
+        {
+          "path": "speaker-gate.h",
+          "sha256": "3498dd0e9a303b406fd31c39cfe18d27e24d8e50bcabd22f4e22aa8c1e571467",
+          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/speaker-gate.h",
+          "license": "GPL-2.0-only",
+          "source_sha256": "3498dd0e9a303b406fd31c39cfe18d27e24d8e50bcabd22f4e22aa8c1e571467",
+          "include_paths_adapted": false
+        }
+      ],
+      "external_binary_firmware_dependency": false,
+      "hardware_modified": false
+    },
+    {
+      "component": "illumination",
+      "module": "qc5-illumination.ko",
+      "deployed_binary_sha256": "5338582d81665506e5b67491b4bf779bdfb93c04fd48b01f499dcb0b0c68aa3b",
+      "files": [
+        {
+          "path": "board-qc5.h",
+          "sha256": "6713740e9f1215b2e072fc2a6e2e00270a834c3e94c2b8f233617ec21bf8a23f",
+          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-features/native-actuators/illumination-build/board-qc5.h",
+          "license": "GPL-2.0-only",
+          "source_sha256": "6713740e9f1215b2e072fc2a6e2e00270a834c3e94c2b8f233617ec21bf8a23f",
+          "include_paths_adapted": false
+        },
+        {
+          "path": "illumination-core.h",
+          "sha256": "c1b07997840ef2202de7eefc4447276cc16323fb3f32e999866383e07ac2bb48",
+          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-features/native-actuators/illumination-build/illumination-core.h",
+          "license": "GPL-2.0-only",
+          "source_sha256": "c1b07997840ef2202de7eefc4447276cc16323fb3f32e999866383e07ac2bb48",
+          "include_paths_adapted": false
+        },
+        {
+          "path": "qc5-illumination.c",
+          "sha256": "9782fd9013c5ca7c7ba61d346c3ef7f479c44821a924489aad6a78a0f053db1f",
+          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-features/native-actuators/illumination-build/qc5-illumination.c",
+          "license": "GPL-2.0-only",
+          "source_sha256": "9782fd9013c5ca7c7ba61d346c3ef7f479c44821a924489aad6a78a0f053db1f",
+          "include_paths_adapted": false
+        }
+      ],
+      "external_binary_firmware_dependency": false,
+      "hardware_modified": false
+    },
+    {
+      "component": "sd",
+      "module": "qc5-mmc-recording.ko",
+      "deployed_binary_sha256": "290e61c7ae7c2d9a81352827e9d1ae34cd134754c8048d5ddf90bf744765ad40",
+      "files": [
+        {
+          "path": "msc-ro-pio.h",
+          "sha256": "109f03fd0ff3492062cf3757e24bb57a31ee190937731f3854a52673bec57ff5",
+          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-features/sd-host/msc-ro-pio.h",
+          "license": "GPL-2.0-only",
+          "source_sha256": "109f03fd0ff3492062cf3757e24bb57a31ee190937731f3854a52673bec57ff5",
+          "include_paths_adapted": false
+        },
+        {
+          "path": "msc-write-pio.h",
+          "sha256": "6b5e5b257052a50ca5321b84dc6fd11806cc7483ff0b22b524720b5ecd179be9",
+          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-features/sd-host/msc-write-pio.h",
+          "license": "GPL-2.0-only",
+          "source_sha256": "6b5e5b257052a50ca5321b84dc6fd11806cc7483ff0b22b524720b5ecd179be9",
+          "include_paths_adapted": false
+        },
+        {
+          "path": "qc5-mmc-recording.c",
+          "sha256": "58e6f0fd4faa0757b1d952a23b4c1100ddb58bde597aaed4e2b97339e99924e1",
+          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-features/sd-host/qc5-mmc-recording.c",
+          "license": "GPL-2.0-only",
+          "source_sha256": "58e6f0fd4faa0757b1d952a23b4c1100ddb58bde597aaed4e2b97339e99924e1",
+          "include_paths_adapted": false
+        },
+        {
+          "path": "sd-volume.h",
+          "sha256": "b336812970be3c82588ec403a1b9415d08cbb0d6790b98e95e0a4d08ff181314",
+          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-features/sd-host/sd-volume.h",
+          "license": "GPL-2.0-only",
+          "source_sha256": "b336812970be3c82588ec403a1b9415d08cbb0d6790b98e95e0a4d08ff181314",
+          "include_paths_adapted": false
+        }
+      ],
+      "external_binary_firmware_dependency": false,
+      "hardware_modified": false
+    },
+    {
+      "component": "msc-clock",
+      "module": "qc5-msc-clock-ro.ko",
+      "deployed_binary_sha256": "130becce0742d8bdb8a2e6de88e1f05a02f68bf689373d0876ad9210cd8b4b1e",
+      "files": [
+        {
+          "path": "msc-clock-plan.h",
+          "sha256": "e6064d89c6779f21d2144db6af83f37793017a6b3f677bdfc4d83363fe6fce67",
+          "origin": "work/kernel-port-latest/build/linux73/sd-vfs/msc-clock-plan.h",
+          "license": "GPL-2.0-or-later",
+          "source_sha256": "298f1de1f089e9d04bb30bd7ce242eb2b548a4600844cfe95096f918e81a1442",
+          "include_paths_adapted": true
+        },
+        {
+          "path": "qc5-msc-clock-ro.c",
+          "sha256": "099156b4d4428d853ad2c27e76b1403f1e19a24742904dc2ce6bb6a9564297a9",
+          "origin": "work/kernel-port-latest/build/linux73/sd-vfs/qc5-msc-clock-ro.c",
+          "license": "GPL-2.0-or-later",
+          "source_sha256": "099156b4d4428d853ad2c27e76b1403f1e19a24742904dc2ce6bb6a9564297a9",
+          "include_paths_adapted": false
+        },
+        {
+          "path": "sfc-clock.h",
+          "sha256": "631109396fb36f52136776a44390204a5e226ea8e4e67f0d947ad936994bcac1",
+          "origin": "work/kernel-port-latest/build/linux73/sd-vfs/../storage-ro/sfc-clock.h",
+          "license": "GPL-2.0-or-later",
+          "source_sha256": "631109396fb36f52136776a44390204a5e226ea8e4e67f0d947ad936994bcac1",
+          "include_paths_adapted": false
+        }
+      ],
+      "external_binary_firmware_dependency": false,
+      "hardware_modified": false
+    }
+  ],
+  "compiled_from_public_tree_pending": false,
+  "camera_accessed": false,
+  "flash_modules": {
+    "qc5-sfc-runtime.ko": "a0eed7dba85769cf510946224166d8f23d9e77fb7fa4bc55be699e5b93cb47e9",
+    "qc5-ssh-key.ko": "f09fcfe90f8b88ac4cc1a273923d8f175ad72ce61a902b656de38afd6f5794ac",
+    "qc5-wifi-config.ko": "2baeca91cf88d47ad7abc46062a6ba5e0d96b292b1b5af4cde6905476032ae4c"
+  }
+}

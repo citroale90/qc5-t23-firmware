@@ -1,0 +1,17 @@
+{
+  "base": "linux-7.3.1.tar.xz",
+  "base_url": "https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.3.1.tar.xz",
+  "base_sha256": "fa595aad93734f829c963c2a90ef7c3673224fd7fdae7b49406e397cde2de231",
+  "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "changed_files": [],
+  "omitted": [],
+  "changed_symlinks": [],
+  "camera_accessed": false,
+  "source_tree_modified": false,
+  "source_matches_verified_upstream_archive": true,
+  "config_sha256": "e8aa29529ba6e259d4cd73b306a8731e6da478e0321e4287bff9719853ba77da",
+  "matching_vmlinux_sha256": "89b1acb9d5ce67a771292143f89c92bc1c1f08b4202427ee20a055dd7a6df589",
+  "matching_build_directory_source_link_verified": true,
+  "boot_adaptations_live_outside_upstream_kernel_tree": true,
+  "full_flash_image_reproducible_from_public_tree": false
+}

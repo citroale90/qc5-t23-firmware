@@ -34,6 +34,12 @@ source; the **complete device firmware is not yet entirely open source**.
 In particular, the radio still loads binary firmware, and this update retains
 the camera's original bootloader.
 
+Seven native GPL drivers have now been rebuilt byte-identical to deployed
+R43, with standalone [driver build instructions](native/drivers/README.md).
+The [migration contract](docs/migration-from-r43.md) preserves the current
+camera's Wi-Fi, SSH identity and settings when the remaining work is ready;
+publishing source does not trigger an update of the installed camera.
+
 ## Repository layout
 
 - `src/` contains the gateway, media and control code, Wi-Fi helpers, recording tools, and application verifier.

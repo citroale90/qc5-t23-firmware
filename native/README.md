@@ -11,12 +11,13 @@ restarted or modified while publishing these sources.
 | `ssh/` | MAC-bound Ed25519 host-key records, Linux helper, startup and interrupted-write tests |
 | `wifi/` | Flash-backed Wi-Fi profiles, network-controller recovery, original MAC handling |
 | `modules/` | Bounded SFC runtime, Wi-Fi and SSH flash views; original shared SFC mutex |
+| `drivers/` | Standalone GPL PTZ/speaker, illumination, SD and clock sources, Kbuild helper and seven-module rebuild proof |
 | `common/` | Frozen headers and policy sources used by the native frontend |
 | `boot/` | Production startup, read-only runtime binding, decompressor sources |
 | `installer/` | Bounded SD update/recovery implementation, preserving native configuration sectors |
 | `media/` | Source snapshot used for native video/audio, half-duplex talk and recording |
 | `web/` | Actual rendered R43 WebUI assets, distinct from legacy `web/` |
-| `kernel/reference-patches/` | Initial kernel/radio port patches; not a complete kernel source release |
+| `kernel/` | Verified upstream baseline, actual kernel configuration, board DT and older reference patches |
 
 [`SOURCE-MANIFEST.json`](SOURCE-MANIFEST.json) records origin-relative
 paths, source/export hashes, license markers and omitted inputs. Absolute
@@ -74,8 +75,9 @@ with an arbitrary upstream kernel. Do not load them on a different layout.
 ## Build and recovery limits
 
 This is **not a turnkey native firmware build or generic factory installer**.
-The full ported kernel tree, complete portable build integration and some
-generated hardware inputs are not yet included. Private generated sensor
+The kernel baseline and configuration are now identified and published;
+complete portable flash-image build integration and some generated hardware
+inputs are not yet included. Generated sensor
 profiles and producer nonces were deliberately omitted; external reference
 dependencies require their own licensing review. The manifest lists these
 gaps instead of replacing them with invented data.

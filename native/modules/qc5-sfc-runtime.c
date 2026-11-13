@@ -44,12 +44,6 @@
 #define SFC_TIMEOUT_US		20000
 #define SFC_RDID		0x9f
 #define SFC_READ		0x03
-#define SFC_WRITE_DIR BIT(13)
-#define SFC_TX_REQ BIT(3)
-#define CONFIG_BASE 0x4f0000u
-#define CONFIG_SIZE 0x2000u
-static bool config_writes;
-module_param(config_writes,bool,0400);
 
 /* These read-only diagnostics survive a failed platform probe. */
 static unsigned int diag_stage, diag_jedec, diag_sr, diag_cdr;
@@ -65,7 +59,6 @@ struct qc5_sfc {
 	void __iomem *cpm;
 	struct mutex lock;
 	struct mtd_info mtd;
-    struct mtd_info config;
 };
 
 static void qc5_sfc_stop(struct qc5_sfc *sfc)
@@ -85,14 +78,12 @@ static int qc5_sfc_receive(struct qc5_sfc *sfc, u32 command, u32 address,
 
 	/* A read-only controller contract, including all internal call sites. */
 	if (!buffer || !len || len > SZ_4K ||
-	    (command != SFC_RDID && command != 5 && command != (SFC_READ | (3U << SFC_ADDR_WIDTH_SHIFT))) ||
+	    (command != SFC_RDID && command != (SFC_READ | (3U << SFC_ADDR_WIDTH_SHIFT))) ||
 	    (command == SFC_RDID && (address || len != 3)) ||
-	    (command == 5 && (address || len != 1)) ||
-	    (command != SFC_RDID && command != 5 && (address >= SZ_8M || len > SZ_8M - address)))
+	    (command != SFC_RDID && (address >= SZ_8M || len > SZ_8M - address)))
 		return -EINVAL;
 
 	qc5_sfc_stop(sfc);
-	writel(readl(base+SFC_GLB)&~SFC_WRITE_DIR,base+SFC_GLB);
 	writel(address, base + SFC_DEV_ADDR);
 	writel(0, base + SFC_DEV_ADDR_PLUS);
 	writel(len, base + SFC_TRAN_LEN);
@@ -159,78 +150,6 @@ static int qc5_sfc_read(struct mtd_info *mtd, loff_t from, size_t len,
 	return ret;
 }
 
-
-/* Only two dedicated configuration sectors can ever be erased/programmed.
- * All read/modify operations share the SquashFS reader's controller mutex.
- * SPI commands and PIO ordering follow the original T23 SFC driver.
- */
-static bool qc5_config_range(loff_t at,size_t len)
-{return config_writes && at>=CONFIG_BASE && len && at<CONFIG_BASE+CONFIG_SIZE && len<=CONFIG_BASE+CONFIG_SIZE-at;}
-static int qc5_sfc_send(struct qc5_sfc *sfc,u32 command,u32 at,const u8 *data,size_t len)
-{
- void __iomem *b=sfc->base;u32 status;int ret;
- if(!config_writes || (command!=6 && command!=4 && command!=0x20 && command!=2) ||
-    ((command==6||command==4)&&(at||len||data)) ||
-    (command==0x20&&(!qc5_config_range(at,4096)||(at&4095)||len||data)) ||
-    (command==2&&(!qc5_config_range(at,len)||!data||len>16||(at&255)+len>256)))return -EPERM;
- qc5_sfc_stop(sfc);writel(readl(b+SFC_GLB)|SFC_WRITE_DIR,b+SFC_GLB);
- writel(at,b+SFC_DEV_ADDR);writel(0,b+SFC_DEV_ADDR_PLUS);writel(len,b+SFC_TRAN_LEN);
- writel(command|SFC_COMMAND_EN|((command==2||command==0x20)?3u<<SFC_ADDR_WIDTH_SHIFT:0)|(len?SFC_DATA_EN:0),b+SFC_TRAN_CONF);
- writel(SFC_START,b+SFC_TRIG);
- if(len){
-  ret=readl_poll_timeout(b+SFC_SR,status,status&(SFC_TX_REQ|SFC_ERRORS),1,SFC_TIMEOUT_US);
-  if(ret || (status&SFC_ERRORS)){if(!ret)ret=-EIO;goto out;}
-  writel(SFC_TX_REQ,b+SFC_SCR);
-  while(len){u32 word=0xffffffff;size_t n=min_t(size_t,len,4);memcpy(&word,data,n);writel(le32_to_cpu((__force __le32)word),b+SFC_DR);data+=n;len-=n;}
- }
- ret=readl_poll_timeout(b+SFC_SR,status,status&(SFC_END|SFC_ERRORS),1,SFC_TIMEOUT_US);
- if(!ret&&(status&SFC_ERRORS))ret=-EIO;
- out:qc5_sfc_stop(sfc);writel(readl(b+SFC_GLB)&~SFC_WRITE_DIR,b+SFC_GLB);return ret;
-}
-static int qc5_ready(struct qc5_sfc *sfc)
-{
- u8 sr;for(unsigned n=0;n<3000;n++){int rc=qc5_sfc_receive(sfc,5,0,&sr,1);if(rc)return rc;if(!(sr&1))return 0;usleep_range(1000,1500);}return -ETIMEDOUT;
-}
-static int qc5_write_enable(struct qc5_sfc *sfc)
-{
- u8 sr;int ret=qc5_ready(sfc);if(ret)return ret;
- ret=qc5_sfc_send(sfc,6,0,NULL,0);if(ret)return ret;
- ret=qc5_sfc_receive(sfc,5,0,&sr,1);return ret?ret:(sr&3)==2?0:-EROFS;
-}
-static int qc5_sfc_write(struct mtd_info *mtd,loff_t at,size_t len,size_t *retlen,const u_char *data)
-{
- struct qc5_sfc *sfc=container_of(mtd,struct qc5_sfc,mtd);int ret=0;*retlen=0;
- if(!qc5_config_range(at,len))return -EPERM;
- mutex_lock(&sfc->lock);
- while(len){size_t n=min_t(size_t,len,16);n=min_t(size_t,n,256-(at&255));
-  ret=qc5_write_enable(sfc);if(ret)break;
-  ret=qc5_sfc_send(sfc,2,at,data,n);if(ret)break;
-  ret=qc5_ready(sfc);if(ret)break;
-  at+=n;data+=n;len-=n;*retlen+=n;
- }
- if(!ret)ret=qc5_sfc_send(sfc,4,0,NULL,0);
- mutex_unlock(&sfc->lock);return ret;
-}
-static int qc5_sfc_erase(struct mtd_info *mtd,struct erase_info *info)
-{
- struct qc5_sfc *sfc=container_of(mtd,struct qc5_sfc,mtd);int ret=0;
- if(!qc5_config_range(info->addr,info->len)||(info->addr&4095)||(info->len&4095))return -EPERM;
- mutex_lock(&sfc->lock);
- for(u64 at=info->addr;at<info->addr+info->len;at+=4096){
-  ret=qc5_write_enable(sfc);if(ret)break;
-  ret=qc5_sfc_send(sfc,0x20,at,NULL,0);if(ret)break;
-  ret=qc5_ready(sfc);if(ret)break;
- }
- if(!ret)ret=qc5_sfc_send(sfc,4,0,NULL,0);
- mutex_unlock(&sfc->lock);return ret;
-}
-
-static int config_read(struct mtd_info *m,loff_t at,size_t n,size_t *done,u_char *data)
-{struct qc5_sfc*s=m->priv;if(at<0||at>CONFIG_SIZE||n>CONFIG_SIZE-at)return -EINVAL;return qc5_sfc_read(&s->mtd,CONFIG_BASE+at,n,done,data);}
-static int config_write(struct mtd_info *m,loff_t at,size_t n,size_t *done,const u_char *data)
-{struct qc5_sfc*s=m->priv;if(at<0||at>CONFIG_SIZE||n>CONFIG_SIZE-at)return -EINVAL;return qc5_sfc_write(&s->mtd,CONFIG_BASE+at,n,done,data);}
-static int config_erase(struct mtd_info *m,struct erase_info *info)
-{struct qc5_sfc*s=m->priv;struct erase_info e=*info;if(e.addr>CONFIG_SIZE||e.len>CONFIG_SIZE-e.addr)return -EINVAL;e.addr+=CONFIG_BASE;return qc5_sfc_erase(&s->mtd,&e);}
 static int qc5_sfc_prepare_clock(struct qc5_sfc *sfc)
 {
     u32 cdr,gate,busy,planned;
@@ -250,7 +169,6 @@ static int qc5_sfc_prepare_clock(struct qc5_sfc *sfc)
 static const struct mtd_partition qc5_readonly_parts[] = {
     {.name="qc5-native-runtime",.offset=0x4f8000,.size=0x298000,.mask_flags=MTD_WRITEABLE},
     {.name="qc5-factory-param",.offset=0x7c0000,.size=0x40000,.mask_flags=MTD_WRITEABLE},
-    {.name="qc5-full-backup",.offset=0,.size=SZ_8M,.mask_flags=MTD_WRITEABLE},
 };
 static int qc5_sfc_probe(struct platform_device *pdev)
 {
@@ -303,7 +221,7 @@ static int qc5_sfc_probe(struct platform_device *pdev)
 
 	sfc->mtd.name = "qc5-nor-ro";
 	sfc->mtd.type = MTD_NORFLASH;
-	sfc->mtd.flags = MTD_NO_ERASE; /* Existing read-only geometry is preserved. */
+	sfc->mtd.flags = MTD_NO_ERASE; /* no MTD_WRITEABLE, no erase/program callbacks */
 	sfc->mtd.size = SZ_8M;
 	sfc->mtd.erasesize = SZ_32K;
 	sfc->mtd.writesize = 1;
@@ -311,23 +229,12 @@ static int qc5_sfc_probe(struct platform_device *pdev)
 	sfc->mtd.owner = THIS_MODULE;
 	sfc->mtd.dev.parent = dev;
 	sfc->mtd._read = qc5_sfc_read;
-
 	platform_set_drvdata(pdev, sfc);
 	dev_info(dev, "read-only PIO NOR, JEDEC %*phN, 8 MiB QC5 layout\n",
 		 (int)sizeof(jedec), jedec);
 	ret=mtd_device_register(&sfc->mtd, qc5_readonly_parts, ARRAY_SIZE(qc5_readonly_parts));
-	if(!ret){
-      struct mtd_info *m=&sfc->config;
-      m->name="qc5-wifi-config";m->type=MTD_NORFLASH;
-      m->flags=config_writes?MTD_CAP_NORFLASH:MTD_NO_ERASE;
-      m->size=CONFIG_SIZE;m->erasesize=SZ_4K;m->writesize=1;m->writebufsize=1;
-      m->owner=THIS_MODULE;m->dev.parent=dev;m->priv=sfc;m->_read=config_read;
-      if(config_writes){m->_write=config_write;m->_erase=config_erase;}
-      ret=mtd_device_register(m,NULL,0);
-      if(ret)mtd_device_unregister(&sfc->mtd);
-    }
-    diag_error=ret;
-    if(!ret)diag_stage=5;
+	diag_error=ret;
+	if(!ret)diag_stage=5;
 	return ret;
 }
 
@@ -342,7 +249,6 @@ static void qc5_sfc_remove(struct platform_device *pdev)
 #ifdef QC5_SFC_LINUX44
 	return mtd_device_unregister(&sfc->mtd);
 #else
-	mtd_device_unregister(&sfc->config);
 	mtd_device_unregister(&sfc->mtd);
 #endif
 }
@@ -368,5 +274,5 @@ static struct platform_driver qc5_sfc_driver = {
 };
 module_platform_driver(qc5_sfc_driver);
 
-MODULE_DESCRIPTION("T23 QC5 runtime RO; optional writes strictly confined to Wi-Fi banks");
+MODULE_DESCRIPTION("Read-only T23 QC5 SPI NOR diagnostic; no erase/program support");
 MODULE_LICENSE("GPL");

@@ -51,6 +51,21 @@ class NativePersistence(unittest.TestCase):
                 self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(),
                                  record['sha256'])
 
+    def test_standalone_driver_sources_match_byte_identical_rebuild_receipt(self):
+        manifest = json.loads((NATIVE / 'drivers/SOURCE-MANIFEST.json').read_text())
+        proof = json.loads((NATIVE / 'drivers/R43-compile-verification.json').read_text())
+        self.assertTrue(proof['all_seven_identical_to_deployed'])
+        self.assertFalse(proof['module_install_or_load_attempted'])
+        modules = [m for c in proof['components'] for m in c['modules']]
+        self.assertEqual(len(modules), 7)
+        self.assertTrue(all(m['matches_deployed_bytes'] for m in modules))
+        for component in manifest['components']:
+            for row in component['files']:
+                path = NATIVE / 'drivers' / component['component'] / row['path']
+                self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), row['sha256'])
+        self.assertEqual(hashlib.sha256((NATIVE / 'kernel/qc5-7.3.1.config').read_bytes()).hexdigest(),
+                         proof['kernel_config_sha256'])
+
 
 
 if __name__ == '__main__':

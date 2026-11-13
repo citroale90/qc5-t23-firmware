@@ -1,0 +1,162 @@
+/dts-v1/;
+
+/memreserve/	0x0000000001400000 0x0000000000010000;
+/ {
+	compatible = "ingenic,t23";
+	model = "VeePai QC5 T23DL sensor diagnostic";
+	#address-cells = <0x01>;
+	#size-cells = <0x01>;
+
+	mmc@13450000 {
+		ingenic,allow-recording-writes;
+		ingenic,allow-diagnostic-writes;
+		non-removable;
+		status = "okay";
+		bus-width = <0x01>;
+		max-frequency = <0x16e3600>;
+		clock-names = "mmc";
+		clocks = <0x70>;
+		reg = <0x13450000 0x1000>;
+		compatible = "ingenic,t23-mmc-recording-pio";
+	};
+
+	sd-fixed-clock {
+		phandle = <0x70>;
+		#clock-cells = <0x00>;
+		compatible = "ingenic,t23-msc-inherited-clock";
+	};
+
+	sfc@13440000 {
+		status = "okay";
+		reg = <0x13440000 0x2000>;
+		compatible = "ingenic,t23-sfc-qc5-ro";
+	};
+
+	aliases {
+		serial1 = "/serial@10031000";
+	};
+
+	chosen {
+		linux,initrd-end = <0x767d38>;
+		linux,initrd-start = "", "v ";
+		stdout-path = "serial1:115200n8";
+		bootargs = "console=ttyS1,115200n8 earlycon loglevel=8 rdinit=/init nowait slab_merge";
+	};
+
+	memory@0 {
+		device_type = "memory";
+		reg = <0x00 0x1280000 0x1d00000 0x300000>;
+	};
+
+	cpus {
+		#address-cells = <0x01>;
+		#size-cells = <0x00>;
+
+		cpu@0 {
+			device_type = "cpu";
+			compatible = "ingenic,xburst";
+			reg = <0x00>;
+			clocks = <0x01>;
+		};
+	};
+
+	cpu-clock {
+		compatible = "fixed-clock";
+		#clock-cells = <0x00>;
+		clock-frequency = <0x23c34600>;
+		phandle = <0x01>;
+	};
+
+	uart-clock {
+		compatible = "fixed-clock";
+		#clock-cells = <0x00>;
+		clock-frequency = <0x16e3600>;
+		phandle = <0x05>;
+	};
+
+	ost-clock {
+		compatible = "fixed-clock";
+		#clock-cells = <0x00>;
+		clock-output-names = "ext";
+		clock-frequency = <0x16e3600>;
+		phandle = <0x03>;
+	};
+
+	interrupt-controller {
+		compatible = "mti,cpu-interrupt-controller";
+		interrupt-controller;
+		#address-cells = <0x00>;
+		#interrupt-cells = <0x01>;
+		phandle = <0x02>;
+	};
+
+	interrupt-controller@10001000 {
+		compatible = "ingenic,jz4780-intc";
+		reg = <0x10001000 0x50>;
+		interrupt-controller;
+		#address-cells = <0x00>;
+		#interrupt-cells = <0x01>;
+		interrupt-parent = <0x02>;
+		interrupts = <0x02>;
+		phandle = <0x04>;
+	};
+
+	timer@12000000 {
+		compatible = "ingenic,t23-ost", "ingenic,x1000-ost";
+		reg = <0x12000000 0x3c>;
+		#clock-cells = <0x01>;
+		clocks = <0x03>;
+		clock-names = "ost";
+		interrupt-parent = <0x02>;
+		interrupts = <0x04>;
+	};
+
+	serial@10031000 {
+		compatible = "ingenic,x1000-uart";
+		reg = <0x10031000 0x1000>;
+		reg-shift = <0x02>;
+		reg-io-width = <0x04>;
+		interrupt-parent = <0x04>;
+		interrupts = <0x32>;
+		clocks = <0x05 0x05>;
+		clock-names = "module", "baud";
+	};
+
+	usb-test-clock {
+		compatible = "fixed-clock";
+		#clock-cells = <0x00>;
+		clock-frequency = <0x2dc6c00>;
+		clock-output-names = "t23-otg";
+		phandle = <0x06>;
+	};
+
+	usb@13500000 {
+		compatible = "snps,dwc2";
+		reg = <0x13500000 0x40000>;
+		interrupt-parent = <0x04>;
+		interrupts = <0x15>;
+		clocks = <0x06>;
+		clock-names = "otg";
+		dr_mode = "host";
+	};
+
+	reserved-memory {
+		#address-cells = <0x01>;
+		#size-cells = <0x01>;
+		ranges;
+
+		qc5-mdns@1280000 {
+			no-map;
+			reg = <0x1280000 0x180000>;
+		};
+
+		qc5-capture@1400000 {
+			no-map;
+			reg = <0x1400000 0x900000>;
+		};
+
+		trial-entry@880000 {
+			reg = <0x880000 0x10000>;
+		};
+	};
+};
