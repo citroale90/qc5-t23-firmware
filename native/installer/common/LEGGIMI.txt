@@ -1,4 +1,4 @@
-QC5 R44 RC1 — INSTALLATORE SD COMUNE PER UNITÀ ANCORA ORIGINALI
+QC5 R44 RC2 — INSTALLATORE SD COMUNE PER UNITÀ ANCORA ORIGINALI
 
 COSA FA
 Installa la stessa immagine Linux 7.3.1 R44 verificata sulla camera di
@@ -10,7 +10,7 @@ Python 3.9+ serve per gli strumenti del computer, non sulla camera.
 COMPATIBILITÀ CONTROLLATA
 QC5_YA_CODE_V82, T23DL, GC1084, AIC8800DC USB, NOR 8 MiB.
 Sono ammessi soltanto il bootloader, il kernel originale 3.10.14 pike e
-le immagini ROOT/SYSTEM del profilo verificato. Varianti di firmware,
+il layout valido di ROOT/SYSTEM, senza vincolare la loro versione. Varianti hardware,
 layout o dati nelle aree riservate sconosciuti vengono rifiutati prima
 dell'aggiornamento. Non è un firmware universale per tutte le T23.
 L'installazione a freddo di questa nuova confezione su una gemella ancora
@@ -88,3 +88,15 @@ prepare.log e bootstrap.log. Se il profilo non è supportato, non forzare
 controlli né usare il backup della prima camera.
 Non dedurre il successo soltanto da voce o lampeggi dei LED.
 Il recupero non ripara un U-Boot danneggiato e non è una seconda flash A/B.
+
+CORREZIONE RC2 — VERSIONE DEL SOFTWARE ORIGINALE
+L'installatore non richiede che ROOT e SYSTEM abbiano la stessa impronta
+della camera di riferimento: sono software da sostituire, non l'identità
+dell'hardware. Restano richiesti T23DL/GC1084/AIC8800DC USB, NOR 8 MiB,
+la disposizione supportata delle partizioni e il trasporto di recupero
+U-Boot/kernel compatibile. Una scocca simile o il solo T23 non bastano.
+I backup sono sempre quelli della singola camera e vengono verificati due volte.
+Lo spazio inutilizzato e l'ENV di fabbrica possono essere vuoti a zero o FF;
+dati occupati, ENV popolato con CRC errato e capsule di altre unità restano rifiutati.
+In caso di arresto, leggere qc5-installer/avvio.log e il prepare.log
+nel backup unit-*: RC2 registra il codice di uscita e il punto del rifiuto.

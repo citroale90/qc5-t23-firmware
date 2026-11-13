@@ -1,9 +1,10 @@
 {
   "passed": true,
   "public_builder_recreates_shipped_preparer_and_ENV_module_byte_identically": true,
-  "preparer_sha256": "38756d15238488394b0fd594d774d82a61ede87d1f9787d219a5ec9670ada74d",
+  "preparer_sha256": "4f2239eac8be53002ea1e16f5c7e84715d9d751b5d36e94a465f711d16f6a9a8",
   "ENV_helper_sha256": "ca84ea48c44918e78ab346c899b549371ff961ba54f1dc5fc3985c7f14e89bb3",
   "factory_MAC_guard_included": true,
+  "ROOT_SYSTEM_build_hash_gate_removed": true,
   "camera_accessed": false,
   "SD_accessed": false
 }

@@ -1,6 +1,6 @@
 {
   "passed_offline": true,
-  "generic_C_cases": 25,
+  "generic_C_cases": 30,
   "ENV_MIPS_instruction_cases": 20,
   "real_shell_flow_cases": 4,
   "recovery_CLI_cases": 9,
@@ -15,5 +15,12 @@
   "Qwen_review": "064; only verified findings accepted; strict kernel/entry checks retained; no backup pruning",
   "factory_MAC_decoded_before_flash": true,
   "second_simulated_unit_has_distinct_valid_MAC": true,
-  "invalid_factory_PARAM_rejected": true
+  "invalid_factory_PARAM_rejected": true,
+  "ROOT_SYSTEM_software_build_hash_gate_removed": true,
+  "empty_factory_padding_and_ENV_encodings": [
+    "00",
+    "FF"
+  ],
+  "third_unit_fixture_from_independent_original_backup": true,
+  "physical_RC2_cold_installation_still_pending": true
 }

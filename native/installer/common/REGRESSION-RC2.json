@@ -1,0 +1,159 @@
+{
+  "passed": true,
+  "generic_C_cases": 30,
+  "third_unit_independent_original_backup": true,
+  "camera_accessed_by_tests": false,
+  "flash_written_by_tests": false,
+  "results": [
+    {
+      "case": "prepare",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "check",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "apply",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "prepare",
+      "unit": "unit-b",
+      "returncode": 0
+    },
+    {
+      "case": "check",
+      "unit": "unit-b",
+      "returncode": 0
+    },
+    {
+      "case": "apply",
+      "unit": "unit-b",
+      "returncode": 0
+    },
+    {
+      "case": "prepare",
+      "unit": "unit-c",
+      "returncode": 0
+    },
+    {
+      "case": "check",
+      "unit": "unit-c",
+      "returncode": 0
+    },
+    {
+      "case": "apply",
+      "unit": "unit-c",
+      "returncode": 0
+    },
+    {
+      "case": "bad-package",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "protected-head",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "geometry",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "kernel",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "erase-fault",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "program-fault",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "readback-fault",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "prepare-unsupported",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "prepare-bad-filesystem",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "prepare-different-factory-software",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "prepare-reserved",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "prepare-missing-param",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "prepare-no-space",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "prepare-mixed-factory-pair",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "prepare-invalid-env",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "prepare-factory-env",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "prepare-tf-watchdog",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "bad-watchdog",
+      "unit": "unit-a",
+      "returncode": 0
+    },
+    {
+      "case": "cross-unit",
+      "unit": "unit-b",
+      "returncode": 0
+    },
+    {
+      "case": "other-live-unit",
+      "unit": "unit-b",
+      "returncode": 0
+    },
+    {
+      "case": "wrong-snapshot",
+      "unit": "unit-a",
+      "returncode": 0
+    }
+  ]
+}
