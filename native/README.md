@@ -1,8 +1,12 @@
 # Native QC5 Linux 7.3.1 — R43 RC1
 
-This is a source export of the deployed native line, separate from the
+This tree starts from a source export of the deployed native line, separate from the
 legacy application builder at the repository root. The camera was not
 restarted or modified while publishing these sources.
+
+The working tree also includes **post-R43 audit corrections**, not yet deployed
+or hardware-qualified. Original source hashes and R43 receipts are retained;
+see the [audit](../docs/source-audit-2026-11-13.md) for the precise differences.
 
 ## Contents
 
@@ -58,9 +62,9 @@ From the repository root, with Python 3.9+ and a compiler with ASan/UBSan:
 python3 -m unittest discover -s tests -p test_native_persistence.py -v
 ```
 
-These tests use synthetic memory arrays only. They check 513 SSH partial
+These tests use synthetic memory arrays and temporary local files. They check 513 SSH partial
 record-write boundaries, replica repair, unchanged identity over 1000 saves,
-512 Wi-Fi partial-write boundaries, and exported-source hashes. They cannot
+512 Wi-Fi partial-write boundaries, interrupted key publication, and exported-source hashes. They cannot
 arm an update, contact the camera, or write flash.
 
 On Linux, the userspace SSH helper can be compiled against Linux MTD headers:
@@ -79,8 +83,10 @@ This is **not a turnkey native firmware build or generic factory installer**.
 The kernel baseline and configuration are now identified and published;
 complete portable flash-image build integration and some generated hardware
 inputs are not yet included. Generated sensor
-profiles and producer nonces were deliberately omitted; external reference
-dependencies require their own licensing review. The manifest lists these
+profiles were deliberately omitted; a public recipe generates a fresh private
+producer nonce. Eleven explicitly GPL-covered x264 helpers are included;
+four remaining external descriptor/ROI files require a license grant or
+replacement. The manifest lists these
 gaps instead of replacing them with invented data.
 
 No ready-to-flash capsule is published. The validated update/recovery pair

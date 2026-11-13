@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-13",
+  "camera_accessed": false,
+  "flash_written": false,
+  "camera_release_unchanged": "QC5-7.3.1-R43-RC1",
+  "host_suite": {
+    "tests": 113,
+    "passed": 112,
+    "skipped": 1,
+    "failed": 0
+  },
+  "mips": {
+    "cross_compile": "mipsel-linux-musl mips32",
+    "helper_compiled": true,
+    "tests_executed_under_qemu_mipsel": [
+      "test-key-file",
+      "test-annexb"
+    ],
+    "output": "stale_temp=1 symlink_target_preserved=1 interrupted_short_writes=1 atomic_failure=1 mode_0600=1\nAnnex-B: 625 vectors, 3125 seams, roundtrip, bounds and aliases verified\n",
+    "camera_accessed": false
+  },
+  "annexb": {
+    "cases": 832,
+    "all_outputs_identical": true,
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "camera_accessed": false,
+    "fields": [
+      "plan",
+      "descriptor_words",
+      "slice_header",
+      "Annex-B_payload"
+    ],
+    "checks": [
+      {
+        "name": "baseline",
+        "cases": 832,
+        "output_sha256": "47adea3dd6b2ed72eba2879013ead7a24a2f640cb4d41bb4acd8beeb7ddb3846"
+      },
+      {
+        "name": "candidate",
+        "cases": 832,
+        "output_sha256": "47adea3dd6b2ed72eba2879013ead7a24a2f640cb4d41bb4acd8beeb7ddb3846"
+      }
+    ],
+    "external_descriptor_and_roi_still_required": true
+  },
+  "fully_open_firmware": false
+}

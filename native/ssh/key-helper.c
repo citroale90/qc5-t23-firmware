@@ -11,6 +11,7 @@
 #include <sys/file.h>
 #include <mtd/mtd-user.h>
 #include "key-core.h"
+#include "key-file.h"
 #ifndef QKS_OUTPUT
 #define QKS_OUTPUT "/run/qc5-ssh/hostkey"
 #endif
@@ -42,9 +43,7 @@ int main(int argc,char**argv){
   if(good&&!qks_store(&io,mac,key)){u8 check[QKS_KEY];if(qks_load(&io,mac,check,&gen,&mask)==1&&mask==3&&!memcmp(check,key,QKS_KEY))rc=0;memset(check,0,sizeof check);}
  }else{
   int found=qks_load(&io,mac,key,&gen,&mask);if(!found){rc=2;goto done;}if(found!=1)goto done;
-  const char*temp=QKS_OUTPUT ".flash-next";int k=open(temp,O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC|O_NOFOLLOW,0600);if(k<0)goto done;
-  int good=write(k,key,sizeof key)==sizeof key&&!fsync(k);if(close(k))good=0;
-  if(good&&!rename(temp,QKS_OUTPUT))rc=0;else unlink(temp);
+  if(!qks_publish_key(QKS_OUTPUT,key))rc=0;
  }
 done:memset(key,0,sizeof key);close(fd);close(lock);if(!rc)fprintf(stderr,"QC5_SSH_IDENTITY %s=flash verified=1\n",store?"saved":"loaded");return rc;
 }

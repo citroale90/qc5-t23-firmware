@@ -18,6 +18,12 @@ different properties.
 | Original U-Boot | Original bootloader retained; upstream U-Boot being open source does not provide the exact camera build's corresponding source |
 | External reference code without a license declaration | Omitted from this export pending a per-file grant/provenance review |
 
+The [post-R43 source audit](source-audit-2026-11-13.md) fixes verified SSH startup
+and key-publication defects in candidate source, removes one unused duplicate,
+restores 11 explicitly GPL-covered x264 helpers and replaces the external
+Annex-B helper. These changes are not installed on the camera. Four unlicensed
+external descriptor/ROI files and sensor calibration provenance remain open.
+
 ## Verified driver-source milestone
 
 Seven GPL modules have now been rebuilt from the exported public tree with

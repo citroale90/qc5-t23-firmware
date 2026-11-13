@@ -11,13 +11,15 @@
       "adapted_for_public_tree": false
     },
     "ssh/key-helper.c": {
-      "sha256": "d9c96121daddb01111e9d5920e46bf07c71659894ef19ce7fbac951900263969",
+      "sha256": "082c63f43521a809fe7bb2a0083832ffae8bc1a4af92cd03e9969b37f7158e3a",
       "source_sha256": "d9c96121daddb01111e9d5920e46bf07c71659894ef19ce7fbac951900263969",
       "origin": "work/kernel-port-latest/build/linux73/native-ssh-flash-r43/key-helper.c",
       "SPDX": [
         "GPL-3.0-only"
       ],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "post_R43_audit_fix": true,
+      "deployed": false
     },
     "ssh/test-key.c": {
       "sha256": "4b72d31c9f2c68ab3d96bbc14b0647a72cb90cfd680a3fce289c6fdfb1ee7904",
@@ -27,13 +29,15 @@
       "adapted_for_public_tree": true
     },
     "ssh/ssh-start.sh": {
-      "sha256": "1d0e2a5325417e3d484d6defa22abacd159dcfa4c881a5710f763cde44bd194e",
+      "sha256": "b1ce463fee3a355ccff2b4a29913927a780f66c3548d68b14c63d5df8d577eca",
       "source_sha256": "1d0e2a5325417e3d484d6defa22abacd159dcfa4c881a5710f763cde44bd194e",
       "origin": "work/kernel-port-latest/build/linux73/native-ssh-flash-r43/ssh-start",
       "SPDX": [
         "GPL-3.0-only"
       ],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "post_R43_audit_fix": true,
+      "deployed": false
     },
     "modules/qc5-ssh-key.c": {
       "sha256": "5291ddf24cc9a6eee7f864cbdb79ad0dd0949ebb8fa674e2e0129ac218f6f38f",
@@ -1734,13 +1738,15 @@
       "adapted_for_public_tree": false
     },
     "media/video-gc1084/helix-plan.c": {
-      "sha256": "749830ff39254c96adc0407171d5cedf98c85b1b5de6d61fd64b35a408f0155c",
+      "sha256": "b00dee37850b0ad5f8e2895964eef741451a98d4073f4ced12a6e0c33f1b3452",
       "source_sha256": "749830ff39254c96adc0407171d5cedf98c85b1b5de6d61fd64b35a408f0155c",
       "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/helix-plan.c",
       "SPDX": [
         "GPL-2.0-or-later"
       ],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "post_R43_audit_fix": true,
+      "deployed": false
     },
     "media/video-gc1084/helix-plan.h": {
       "sha256": "b46e835f229294d4bd25077c274f6d997891590976d102fb30145cade2620d1e",
@@ -2246,13 +2252,145 @@
         "GPL-3.0-only"
       ],
       "adapted_for_public_tree": false
+    },
+    "ssh/key-file.h": {
+      "sha256": "7c3fda8656fd2ebc09ff809d4691b27ed9ce7c5b4c9ac6d5f46e698825093df7",
+      "origin": "QC5 post-R43 source audit",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "deployed": false
+    },
+    "ssh/test-key-file.c": {
+      "sha256": "c9f5f2786914e70bf73b1ae58e1c829dd1425b41934b72a944c191e0d5846a16",
+      "origin": "QC5 post-R43 source audit",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "deployed": false
+    },
+    "media/video-gc1084/annexb-native.h": {
+      "sha256": "9953bed605ca378dc37babc56608a9b2aafc365399f8df473192398ee4b898c9",
+      "origin": "QC5 post-R43 source audit",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "deployed": false
+    },
+    "media/video-gc1084/test-annexb.c": {
+      "sha256": "95deda6d3df7fa21f90211ee76bb3754922fb4ec4ae70aa8e73c5aca42cb9c43",
+      "origin": "QC5 post-R43 source audit",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "deployed": false
+    },
+    "media/openimp/src/t30/h264enc/bitstream.h": {
+      "sha256": "9fe1da4c5e96a6a29814f4f37aa59d7c95642350a649d964b0da5e7beb1aaf78",
+      "source_sha256": "9fe1da4c5e96a6a29814f4f37aa59d7c95642350a649d964b0da5e7beb1aaf78",
+      "origin": "OpenIMP 493aa97445fabcf78717a8c1b00a3bb280073577/src/t30/h264enc/bitstream.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/openimp/src/t30/h264enc/cabac.c": {
+      "sha256": "b1888c1e382903d5f86182a799504db909bff0f6f2e7bfc6fa0d038cf06596e8",
+      "source_sha256": "b1888c1e382903d5f86182a799504db909bff0f6f2e7bfc6fa0d038cf06596e8",
+      "origin": "OpenIMP 493aa97445fabcf78717a8c1b00a3bb280073577/src/t30/h264enc/cabac.c",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/openimp/src/t30/h264enc/cabac.h": {
+      "sha256": "7f92a502ada83dbeb7b6206bd946ef1fd645b715de244400d34d8278312b05af",
+      "source_sha256": "7f92a502ada83dbeb7b6206bd946ef1fd645b715de244400d34d8278312b05af",
+      "origin": "OpenIMP 493aa97445fabcf78717a8c1b00a3bb280073577/src/t30/h264enc/cabac.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/openimp/src/t30/h264enc/common.c": {
+      "sha256": "8d3ff6dc6c97f599f14ef093fc5c429b66170414ce5d72225736f7361a54c933",
+      "source_sha256": "8d3ff6dc6c97f599f14ef093fc5c429b66170414ce5d72225736f7361a54c933",
+      "origin": "OpenIMP 493aa97445fabcf78717a8c1b00a3bb280073577/src/t30/h264enc/common.c",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/openimp/src/t30/h264enc/common.h": {
+      "sha256": "24f1a57645e78080b73a8037bc73f02ec258bb58a0f050878f5fde75e262dc41",
+      "source_sha256": "24f1a57645e78080b73a8037bc73f02ec258bb58a0f050878f5fde75e262dc41",
+      "origin": "OpenIMP 493aa97445fabcf78717a8c1b00a3bb280073577/src/t30/h264enc/common.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/openimp/src/t30/h264enc/nal.h": {
+      "sha256": "a2dd61be83a2ede64dd1e7f8e50ed53fa39430f821f032e9d1b2f91ce62538f5",
+      "source_sha256": "a2dd61be83a2ede64dd1e7f8e50ed53fa39430f821f032e9d1b2f91ce62538f5",
+      "origin": "OpenIMP 493aa97445fabcf78717a8c1b00a3bb280073577/src/t30/h264enc/nal.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/openimp/src/t30/h264enc/osdep.h": {
+      "sha256": "1be34f8a32b1d733f63eaed4094f06a82df493f545c7909dd3ccd3b401884919",
+      "source_sha256": "1be34f8a32b1d733f63eaed4094f06a82df493f545c7909dd3ccd3b401884919",
+      "origin": "OpenIMP 493aa97445fabcf78717a8c1b00a3bb280073577/src/t30/h264enc/osdep.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/openimp/src/t30/h264enc/set.c": {
+      "sha256": "5da470460709edef3c7997a562cc4c19be76d42fbc95fd311caf71c2dfc6a1da",
+      "source_sha256": "5da470460709edef3c7997a562cc4c19be76d42fbc95fd311caf71c2dfc6a1da",
+      "origin": "OpenIMP 493aa97445fabcf78717a8c1b00a3bb280073577/src/t30/h264enc/set.c",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/openimp/src/t30/h264enc/set.h": {
+      "sha256": "b7008d83ae7ba217ea522982f359fb20c93814a6b7386f560147ca64de354fba",
+      "source_sha256": "b7008d83ae7ba217ea522982f359fb20c93814a6b7386f560147ca64de354fba",
+      "origin": "OpenIMP 493aa97445fabcf78717a8c1b00a3bb280073577/src/t30/h264enc/set.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/openimp/src/t30/h264enc/slice.c": {
+      "sha256": "1d18a37f835d25c4d68ff5e654f277c28bb4bf8fb70709c23a712f232782db32",
+      "source_sha256": "1d18a37f835d25c4d68ff5e654f277c28bb4bf8fb70709c23a712f232782db32",
+      "origin": "OpenIMP 493aa97445fabcf78717a8c1b00a3bb280073577/src/t30/h264enc/slice.c",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/openimp/src/t30/h264enc/slice.h": {
+      "sha256": "ba900df4861624a5d1cc8794bd1be6d2eaf2f15913a354ee4ae55e8561f861de",
+      "source_sha256": "ba900df4861624a5d1cc8794bd1be6d2eaf2f15913a354ee4ae55e8561f861de",
+      "origin": "OpenIMP 493aa97445fabcf78717a8c1b00a3bb280073577/src/t30/h264enc/slice.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
     }
   },
   "excluded_generated_inputs": [
     {
       "component": "media",
       "path": "work/kernel-port-latest/build/linux73/native-integrated/producer/nonce.private.h",
-      "reason": "private generated input; not published"
+      "reason": "Private per-build nonce; public generator provided, generate one fresh value shared by producer/child builds",
+      "public_regeneration_tool": "tools/generate_native_nonce.py"
     },
     {
       "component": "media",
@@ -2341,70 +2479,13 @@
     },
     {
       "component": "media",
-      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/bitstream.h",
-      "reason": "external reference dependency; per-file redistribution review pending"
-    },
-    {
-      "component": "media",
-      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/cabac.c",
-      "reason": "external reference dependency; per-file redistribution review pending"
-    },
-    {
-      "component": "media",
-      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/cabac.h",
-      "reason": "external reference dependency; per-file redistribution review pending"
-    },
-    {
-      "component": "media",
-      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/common.c",
-      "reason": "external reference dependency; per-file redistribution review pending"
-    },
-    {
-      "component": "media",
-      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/common.h",
-      "reason": "external reference dependency; per-file redistribution review pending"
-    },
-    {
-      "component": "media",
-      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/nal.h",
-      "reason": "external reference dependency; per-file redistribution review pending"
-    },
-    {
-      "component": "media",
-      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/osdep.h",
-      "reason": "external reference dependency; per-file redistribution review pending"
-    },
-    {
-      "component": "media",
-      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/set.c",
-      "reason": "external reference dependency; per-file redistribution review pending"
-    },
-    {
-      "component": "media",
-      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/set.h",
-      "reason": "external reference dependency; per-file redistribution review pending"
-    },
-    {
-      "component": "media",
-      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/slice.c",
-      "reason": "external reference dependency; per-file redistribution review pending"
-    },
-    {
-      "component": "media",
-      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/slice.h",
-      "reason": "external reference dependency; per-file redistribution review pending"
-    },
-    {
-      "component": "media",
       "path": "work/kernel-port-latest/reference/openimp/src/t30/helix_roi.h",
-      "reason": "external reference dependency; per-file redistribution review pending"
-    },
-    {
-      "component": "media",
-      "path": "work/kernel-port-latest/reference/openimp/src/t30/t30_annexb.h",
       "reason": "external reference dependency; per-file redistribution review pending"
     }
   ],
   "firmware_blobs_and_flash_dumps_included": false,
-  "turnkey_native_build": false
+  "turnkey_native_build": false,
+  "source_baseline_release": "QC5-7.3.1-R43-RC1",
+  "working_tree_contains_post_R43_audit_fixes": true,
+  "hardware_validation_applies_to": "R43 baseline only; post-R43 audit changes have offline validation only"
 }

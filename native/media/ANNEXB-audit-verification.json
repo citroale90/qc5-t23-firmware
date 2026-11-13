@@ -1,0 +1,30 @@
+{
+  "cases": 832,
+  "all_outputs_identical": true,
+  "sanitizers": [
+    "address",
+    "undefined"
+  ],
+  "camera_accessed": false,
+  "fields": [
+    "plan",
+    "descriptor_words",
+    "slice_header",
+    "Annex-B_payload"
+  ],
+  "checks": [
+    {
+      "name": "baseline",
+      "cases": 832,
+      "output_sha256": "47adea3dd6b2ed72eba2879013ead7a24a2f640cb4d41bb4acd8beeb7ddb3846"
+    },
+    {
+      "name": "candidate",
+      "cases": 832,
+      "output_sha256": "47adea3dd6b2ed72eba2879013ead7a24a2f640cb4d41bb4acd8beeb7ddb3846"
+    }
+  ],
+  "external_descriptor_and_roi_still_required": true,
+  "candidate_source_sha256": "b00dee37850b0ad5f8e2895964eef741451a98d4073f4ced12a6e0c33f1b3452",
+  "annexb_source_sha256": "9953bed605ca378dc37babc56608a9b2aafc365399f8df473192398ee4b898c9"
+}

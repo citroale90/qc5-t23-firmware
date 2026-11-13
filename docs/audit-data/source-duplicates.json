@@ -1,0 +1,127 @@
+{
+  "removed_unused_copy": "native/boot/bind-readonly-runtime.c",
+  "canonical": "native/boot/bind-native.c",
+  "remaining_exact_duplicate_groups": [
+    {
+      "sha256": "4b7a6d154db49871f85e7b68598c0b3eec582196ae62efb6b0b4f77c32ff8f0b",
+      "paths": [
+        "common/config_read.h",
+        "media/frontend/config_read.h"
+      ],
+      "status": "Retained: frozen build inputs or independent component headers; not extra allocations on camera"
+    },
+    {
+      "sha256": "5d4280aef2e1dd5dee65ac763023322a3c23c162ac0f109111cb4536ee7c1738",
+      "paths": [
+        "common/qc5_mp4.h",
+        "media/frontend/qc5_mp4.h"
+      ],
+      "status": "Retained: frozen build inputs or independent component headers; not extra allocations on camera"
+    },
+    {
+      "sha256": "cc560e71aa92721bbbce6dee0e65aa5bd449f628315dd55e466a68624d58b199",
+      "paths": [
+        "common/qc5_record_policy_state.h",
+        "media/frontend/qc5_record_policy_state.h"
+      ],
+      "status": "Retained: frozen build inputs or independent component headers; not extra allocations on camera"
+    },
+    {
+      "sha256": "8b6f62f61f7bf54d815405f86dd944352ef770ff329e841f21d43f7c0640adf7",
+      "paths": [
+        "common/qc5_sd.h",
+        "media/frontend/qc5_sd.h"
+      ],
+      "status": "Retained: frozen build inputs or independent component headers; not extra allocations on camera"
+    },
+    {
+      "sha256": "ca7b28c90ee449640066742548232de7adbdfd8e9116c9010ffed49d4fe5ed25",
+      "paths": [
+        "common/qc5_sha256.h",
+        "installer/qc5_sha256.h"
+      ],
+      "status": "Retained: frozen build inputs or independent component headers; not extra allocations on camera"
+    },
+    {
+      "sha256": "05a83225f9bb3558f33f50d7011d5c90ad06fa5a62576552b599505c30880332",
+      "paths": [
+        "common/qc5_websocket.h",
+        "media/frontend/qc5_websocket.h"
+      ],
+      "status": "Retained: frozen build inputs or independent component headers; not extra allocations on camera"
+    },
+    {
+      "sha256": "d9526164304d12ed083538a6ec443bdaf5ddcbcd60221b8848abadf571eb351f",
+      "paths": [
+        "common/qc5_wifi_profile.h",
+        "media/frontend/qc5_wifi_profile.h"
+      ],
+      "status": "Retained: frozen build inputs or independent component headers; not extra allocations on camera"
+    },
+    {
+      "sha256": "64f58d85fbf37c5a5c67cec26a62ccc236d9932853ff49b0a2f7d948a925a33f",
+      "paths": [
+        "common/qc5_wifi_store.h",
+        "media/frontend/qc5_wifi_store.h"
+      ],
+      "status": "Retained: frozen build inputs or independent component headers; not extra allocations on camera"
+    },
+    {
+      "sha256": "3bbb2780dbaa3ccf72d28226bcdb2703c1cec0c29904775a166b7d37defe4192",
+      "paths": [
+        "common/config-lock.h",
+        "media/native-integrated/native-services/config-lock.h"
+      ],
+      "status": "Retained: frozen build inputs or independent component headers; not extra allocations on camera"
+    },
+    {
+      "sha256": "7cfba46bfcbeea136a445070164a4e9f97bb80028d07894c565132aa61b75cb0",
+      "paths": [
+        "wifi/network-files.h",
+        "media/network-native/network-files.h"
+      ],
+      "status": "Retained: frozen build inputs or independent component headers; not extra allocations on camera"
+    },
+    {
+      "sha256": "83a089657a55f449f9e17a3b8917f6dc6137cb593c06e363645d7fb4b6059411",
+      "paths": [
+        "wifi/heartbeat.h",
+        "media/native-integrated/native-continuous/heartbeat.h"
+      ],
+      "status": "Retained: frozen build inputs or independent component headers; not extra allocations on camera"
+    },
+    {
+      "sha256": "16fbbe039d30a37fd9611b555fc7f6ee0e81bd606a449530aa074e9a2b3d6b88",
+      "paths": [
+        "media/native-integrated/native-completion-r4/bridge.h",
+        "media/native-integrated/native-rtsp-capture/bridge.h"
+      ],
+      "status": "Retained: frozen build inputs or independent component headers; not extra allocations on camera"
+    },
+    {
+      "sha256": "e647b6d330648314714c31d68d7bf0e5273d585a4d673c6704ab28bd9536b712",
+      "paths": [
+        "media/native-integrated/native-completion-r4/rtp-native.h",
+        "media/native-integrated/native-rtsp-capture/rtp-native.h"
+      ],
+      "status": "Retained: frozen build inputs or independent component headers; not extra allocations on camera"
+    },
+    {
+      "sha256": "1b53e058c45f247d3bc1c1002471593b564e8bc74d5f1e47191029d1776a6f7b",
+      "paths": [
+        "media/native-integrated/native-completion-r4/server-info.h",
+        "media/native-integrated/native-rtsp-capture/server-info.h"
+      ],
+      "status": "Retained: frozen build inputs or independent component headers; not extra allocations on camera"
+    },
+    {
+      "sha256": "088bf64e3a1faba423b6d225f0795a7e66e2e3835c9ad03542c62990a90c3401",
+      "paths": [
+        "media/native-integrated/native-completion-r4/socket-native.h",
+        "media/native-integrated/native-rtsp-capture/socket-native.h"
+      ],
+      "status": "Retained: frozen build inputs or independent component headers; not extra allocations on camera"
+    }
+  ],
+  "total_exported_source_entries": 283
+}

@@ -30,6 +30,14 @@ class NativePersistence(unittest.TestCase):
         self.assertIn('same_identity_no_writes_1000boots=1', result)
         self.assertIn('repair_and_513_partial_write_boundaries=1', result)
 
+    def test_ssh_publication_recovers_from_interrupted_helper(self):
+        result = self.compile_and_run('ssh', 'test-key-file.c')
+        self.assertIn('stale_temp=1', result)
+        self.assertIn('symlink_target_preserved=1', result)
+        self.assertIn('interrupted_short_writes=1', result)
+        self.assertIn('atomic_failure=1', result)
+        self.assertIn('mode_0600=1', result)
+
     def test_wifi_profile_survives_every_partial_record_write(self):
         result = self.compile_and_run('wifi', 'test-banks.c')
         self.assertIn('512 byte-boundary power cuts', result)

@@ -1,0 +1,44 @@
+{
+  "project": "OpenIMP x264-derived H.264 helpers",
+  "upstream": "https://github.com/opensensor/openimp",
+  "revision": "493aa97445fabcf78717a8c1b00a3bb280073577",
+  "license": "GPL-2.0-or-later",
+  "license_basis": "Upstream NOTICE explicitly grants GPL-2.0-or-later for src/t30/h264enc/. Original per-file notices retained.",
+  "camera_binary_changed": false,
+  "files": {
+    "src/t30/h264enc/bitstream.h": {
+      "sha256": "9fe1da4c5e96a6a29814f4f37aa59d7c95642350a649d964b0da5e7beb1aaf78"
+    },
+    "src/t30/h264enc/cabac.c": {
+      "sha256": "b1888c1e382903d5f86182a799504db909bff0f6f2e7bfc6fa0d038cf06596e8"
+    },
+    "src/t30/h264enc/cabac.h": {
+      "sha256": "7f92a502ada83dbeb7b6206bd946ef1fd645b715de244400d34d8278312b05af"
+    },
+    "src/t30/h264enc/common.c": {
+      "sha256": "8d3ff6dc6c97f599f14ef093fc5c429b66170414ce5d72225736f7361a54c933"
+    },
+    "src/t30/h264enc/common.h": {
+      "sha256": "24f1a57645e78080b73a8037bc73f02ec258bb58a0f050878f5fde75e262dc41"
+    },
+    "src/t30/h264enc/nal.h": {
+      "sha256": "a2dd61be83a2ede64dd1e7f8e50ed53fa39430f821f032e9d1b2f91ce62538f5"
+    },
+    "src/t30/h264enc/osdep.h": {
+      "sha256": "1be34f8a32b1d733f63eaed4094f06a82df493f545c7909dd3ccd3b401884919"
+    },
+    "src/t30/h264enc/set.c": {
+      "sha256": "5da470460709edef3c7997a562cc4c19be76d42fbc95fd311caf71c2dfc6a1da"
+    },
+    "src/t30/h264enc/set.h": {
+      "sha256": "b7008d83ae7ba217ea522982f359fb20c93814a6b7386f560147ca64de354fba"
+    },
+    "src/t30/h264enc/slice.c": {
+      "sha256": "1d18a37f835d25c4d68ff5e654f277c28bb4bf8fb70709c23a712f232782db32"
+    },
+    "src/t30/h264enc/slice.h": {
+      "sha256": "ba900df4861624a5d1cc8794bd1be6d2eaf2f15913a354ee4ae55e8561f861de"
+    }
+  },
+  "notice_sha256": "89ec599d85e09547d9e698c9b8c81456c77e9db21743c06ec0c91262754633e9"
+}

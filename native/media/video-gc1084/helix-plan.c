@@ -7,7 +7,7 @@
 #include "helix-plan.h"
 #include "t21/t21_h264_descriptor.h"
 #include "t30/h264enc/common.h"
-#include "t30/t30_annexb.h"
+#include "annexb-native.h"
 static const uint8_t native_pps[]={
     0,0,0,1,0x68,0xee,0x3c,0xe1,0,0x42,0x42,0,0x84,0x84,4,0x4c,
     0x52,0x1b,0x93,0xc5,0x7c,0x9f,0x93,0xf9,0x3f,0x27,0xc9,0xe6,0xe4,0xc9,0x24,0x2c,
@@ -62,10 +62,10 @@ int qc5_helix_build_picture(struct qc5_helix_plan *out,const struct qc5_helix_pi
     if(picture->idr){
         bs_init(&bits,syntax,sizeof(syntax));h264e_sps_write(&bits,&sps);
         unsigned int n=(unsigned int)bs_pos(&bits)/8u;if(n>sizeof(syntax))return 0;
-        T30AnnexBWriter writer;
-        if(t30_annexb_begin(&writer,p.parameters,sizeof(p.parameters),NAL_SPS,NAL_PRIORITY_HIGHEST)||
-            t30_annexb_append(&writer,syntax,n))return 0;
-        p.parameter_bytes=(unsigned int)(writer.output-p.parameters);
+        struct qna_writer writer;
+        if(!qna_begin(&writer,p.parameters,sizeof(p.parameters),NAL_SPS,NAL_PRIORITY_HIGHEST)||
+            !qna_append(&writer,syntax,n))return 0;
+        p.parameter_bytes=(unsigned int)writer.used;
         if(p.parameter_bytes+sizeof(native_pps)>sizeof(p.parameters))return 0;
         memcpy(p.parameters+p.parameter_bytes,native_pps,sizeof(native_pps));p.parameter_bytes+=sizeof(native_pps);
     }
@@ -103,8 +103,8 @@ int qc5_helix_annexb(const struct qc5_helix_plan *p,const uint8_t *slice,
     if(!p||!slice||!cabac||!out||!bytes||bytes>QC5_HELIX_MAX_CABAC||
         !p->slice_bytes||p->slice_bytes>256||p->parameter_bytes>256||
         cap<p->parameter_bytes)return 0;
-    memcpy(out,p->parameters,p->parameter_bytes);T30AnnexBWriter w;
-    if(t30_annexb_begin(&w,out+p->parameter_bytes,cap-p->parameter_bytes,p->picture.idr?NAL_SLICE_IDR:NAL_SLICE,p->picture.idr?NAL_PRIORITY_HIGHEST:NAL_PRIORITY_HIGH)||
-        t30_annexb_append(&w,slice,p->slice_bytes)||t30_annexb_append(&w,cabac,bytes))return 0;
-    return (int)(w.output-out);
+    memcpy(out,p->parameters,p->parameter_bytes);struct qna_writer w;
+    if(!qna_begin(&w,out+p->parameter_bytes,cap-p->parameter_bytes,p->picture.idr?NAL_SLICE_IDR:NAL_SLICE,p->picture.idr?NAL_PRIORITY_HIGHEST:NAL_PRIORITY_HIGH)||
+        !qna_append(&w,slice,p->slice_bytes)||!qna_append(&w,cabac,bytes))return 0;
+    return (int)(p->parameter_bytes+w.used);
 }
