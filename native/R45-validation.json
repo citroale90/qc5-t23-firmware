@@ -1,0 +1,63 @@
+{
+  "release": "QC5-7.3.1-R45-RC2",
+  "native_image_sha256": "142f9600b91e121c5e18f7fe5ac6a562b191ce04a720f83c6fd6f25288c0deb6",
+  "runtime_sha256": "ba9343cde9cb05ffbcfd4e28c70b148bc7f527c85483ef2101ba2fde5b523559",
+  "media_sha256": "a76a0f95b8effb9a146761bef0d6c75bff14a7360954a835878cbb64b7c2f05a",
+  "SSH_helper_sha256": "48aa75bcebbc070deaf07180d9b33d75c61c6ddc4f0bcd332a3a1e2595a010d2",
+  "initramfs_single_XZ_newc_and_init_verified": true,
+  "flash_installations_on_existing_QC5_units": 2,
+  "both_WiFi_without_QR_root_SSH": true,
+  "first_existing_SSH_identity_preserved": true,
+  "second_own_SSH_identity_two_flash_records": true,
+  "RTSP_video_audio_decoded_on_both": true,
+  "second_unit_WebUI_long": {
+    "seconds": 320.004,
+    "decoded_frames": 8000,
+    "decoder_errors": 0,
+    "reconnects": 0,
+    "same_boot": true
+  },
+  "reference_media_only_RAM_test": {
+    "seconds": 320.009,
+    "decoded_frames": 8000,
+    "human_voice_clean": true,
+    "human_four_PTZ_directions": true,
+    "automatic_return_R44": true
+  },
+  "post_flash_Parla_transport_second": true,
+  "post_flash_human_voice_confirmation": "pending",
+  "PTZ_first_uncalibrated_up_counter_mismatch": true,
+  "subsequent_vertical_rechecks_exact256": true,
+  "PTZ_driver_unchanged_from_R44": true,
+  "factory_cold_first_R45_installation_physically_qualified": false,
+  "offline": {
+    "generic_installer_cases": 30,
+    "stream_core_checks": 41,
+    "U_Boot_models": 7,
+    "PC_tools_cases": 20
+  },
+  "camera_identifiers_credentials_and_backups_published": false,
+  "post_flash_Parla_transport_first": true,
+  "both_flash_WiFi_records_valid_without_revealing_credentials": true,
+  "final_health": [
+    {
+      "role": "first",
+      "same_boot": true,
+      "OOM_kills": 0,
+      "mem_available_kb": 3968,
+      "WebUI_HTTP200": true,
+      "video": true,
+      "OEM_services_absent": true
+    },
+    {
+      "role": "second",
+      "same_boot": true,
+      "OOM_kills": 0,
+      "mem_available_kb": 3932,
+      "WebUI_HTTP200": true,
+      "video": true,
+      "OEM_services_absent": true
+    }
+  ],
+  "video_and_audio_after_intercom_on_both": true
+}

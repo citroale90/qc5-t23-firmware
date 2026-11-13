@@ -1,11 +1,11 @@
 # VeePai QC5 T23 firmware tools
 
-Local firmware development for the **QC5_YA_CODE_V82** camera with Ingenic T23DL, GC1084, AIC8800DC USB Wi-Fi, and 8 MiB NOR flash. The current deployed native release is **QC5 Linux 7.3.1 R44 RC1** (2026-11-13).
+Local firmware development for the **QC5_YA_CODE_V82** camera with Ingenic T23DL, GC1084, AIC8800DC USB Wi-Fi, and 8 MiB NOR flash. The current deployed native release is **QC5 Linux 7.3.1 R45 RC2** (2026-11-13).
 
 The native sources and validation record are in [`native/`](native/README.md).
 The top-level application builder and `src/`, `web/`, `firmware/` still
 describe the earlier **R4g5b-i18n1 / Linux 3.10** line. Its installer is not
-an installer for native R44. Native source export is not yet a standalone,
+an installer for native R44/R45. Native source export is not yet a standalone,
 reproducible firmware distribution; required generated inputs and third-party
 source/licensing gaps are documented explicitly.
 
@@ -13,7 +13,17 @@ The camera serves an Italian/English WebUI, a local H.264 player with audio and 
 
 [Italiano](docs/README.it.md) · [Build and install](docs/build.md) · [Credits and licensing](NOTICE.md)
 
-## R44 status
+## R45 RC2 update
+
+The low-light video profile reduces persistent trails while preserving image
+size and encoder settings. This release fixes first SSH-key generation on
+zero-filled factory padding and validates the production boot archive. Wi-Fi
+and existing SSH identities remain in flash. The experimental hostname feature
+is not part of this release.
+
+[Changes and qualification](docs/R45-release.md) · [SD installer and recovery ZIP](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r45-sd-rc2)
+
+## R44 foundation
 
 - The audited open-source Wi-Fi Linux loader and SSH startup/key helper are installed. The kernel, media, WebUI and six radio firmware files are unchanged.
 - All 16 loaded Linux modules have identified source: nine camera/radio-specific modules and seven standard kernel modules. See the [driver inventory](native/drivers/R44-driver-catalog.json).
@@ -47,13 +57,13 @@ source publication does not distribute another camera's backup or identity.
 
 ## Factory twin-camera SD installer
 
-A separate common R44 SD kit now automates two verified full backups and
+The common R45 RC2 SD kit automates two verified full backups and
 per-unit update/recovery capsules on compatible factory QC5 cameras. It
 retains each unit's own loader and manifest, and includes offline PC tools
 for card preparation, reuse and recovery without an AI or server.
 The shared R44 runtime is qualified; the new kit's first cold installation
 on an untouched twin remains physically unqualified.
-Download the [common SD ZIP and instructions](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r44-sd-originali-rc2).
+Download the [common SD ZIP and instructions](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r45-sd-rc2).
 See [source and verification](native/installer/common/README.md).
 The common image is separate from the existing per-unit migration package.
 

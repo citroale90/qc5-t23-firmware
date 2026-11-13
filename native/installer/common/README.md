@@ -1,7 +1,7 @@
-# R44 common SD installer for factory QC5 cameras
+# R45 RC2 common SD installer for factory QC5 cameras
 
 The common kit creates each unit's own two verified 8 MiB backups and paired
-update/factory-return capsules before changing flash. The native R44 payload is
+update/factory-return capsules before changing flash. The native R45 RC2 payload is
 shared; no reference camera's PARAM, MAC, Wi-Fi profile or SSH key is copied.
 Each backup retains its matching loader, manifest and local restore instructions.
 
@@ -10,7 +10,7 @@ Supported factory profile: QC5_YA_CODE_V82, T23DL, GC1084, AIC8800DC USB,
 software-version hashes do not determine hardware eligibility. Both original
 software builds already backed up on this hardware are covered by regression
 tests; no reference unit firmware partition is copied as a substitute backup.
-The original PARAM MAC must pass the same decoder used by R44 before install.
+The original PARAM MAC must pass the same decoder used by R45 RC2 before install.
 Unknown boot/recovery transports, wrong geometry, occupied reserved-bank data
 and cross-unit capsules are refused. Uniform zero-filled or FF-filled unused
 padding is accepted only outside the original SquashFS extent. A uniformly
@@ -25,7 +25,7 @@ KERNEL/ROOT/SYSTEM transaction. Recovery still requires intact U-Boot.
 
 ## Operator workflow
 
-Download the [R44 SD kit](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r44-sd-originali-rc2) and use its [quick guide](AVVIO-RAPIDO.txt): extract it,
+Download the [R45 RC2 SD kit](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r44-sd-originali-rc2) and use its [quick guide](AVVIO-RAPIDO.txt): extract it,
 run `python3 prepara_sd.py --sd /mounted/card`, optionally edit root `config.txt`,
 then insert it into the powered-off original camera. Power on holding Reset
 for about three seconds and leave power applied for at least fifteen minutes.
@@ -48,7 +48,7 @@ See the complete [Italian instructions](LEGGIMI.txt) and [recovery guide](RIPRIS
 
 [Validation](VALIDATION.json) distinguishes 30 generic C fault/identity cases,
 20 MIPS ENV-helper instruction cases, four shell flows, nine recovery-CLI cases,
-13 exact PC-copy/reuse cases and seven whole U-Boot model cases. The shared R44
+13 exact PC-copy/reuse cases and seven whole U-Boot model cases. The shared R45 RC2
 runtime and U-Boot installer are already qualified on the reference camera.
 **The new common kit's first cold installation on an untouched twin remains
 physically unqualified.** The source/host/model checks do not imply that test.
@@ -87,3 +87,5 @@ RC2 adds the preparer exit code to `qc5-installer/avvio.log` and the precise
 refusal stage to `qc5-backups/unit-*/prepare.log`. Read these before repeating
 Reset; a white LED alone is not evidence of a completed installation.
 The common RC2 cold installation itself still requires its physical test.
+
+Existing native QC5 units use the packaged aggiorna_qc5.py and power on without Reset. Factory units use prepara_sd.py and the Reset entry. Per-unit backups and identities must never be exchanged. See the R45 release notes.

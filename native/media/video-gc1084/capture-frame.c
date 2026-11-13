@@ -747,7 +747,7 @@ static int sensor_apply_controls(unsigned int gain, struct qc5_preview *record)
     struct sensor_reg plan[10];
     uint8_t actual[7] = {0};
     active_readback = 0;
-    if (!sensor_control_plan(720, gain, plan) || sensor_apb_rate < 1000000 || sensor_apb_rate > 200000000)
+    if (!sensor_control_plan(QC5_AE_INITIAL_EXPOSURE_LINES, gain, plan) || sensor_apb_rate < 1000000 || sensor_apb_rate > 200000000)
         return core_refuse(record, 0x3ffff, gain);
     /* Caller has confirmed stopped VIC/MDMA/core writers. Do not retune MCLK. */
     uint32_t old_gate = reg_read(CPM, CLKGR);
@@ -930,7 +930,7 @@ static int vic_capture(volatile uint16_t *pixels, struct qc5_preview *record, in
                              (vic[VIC_DMA_CONTROL / 4] == 0 ? 2u : 0u) |
                              (vic[VIC_DMA_ENABLE / 4] == 0 ? 4u : 0u) |
                              (vic[0] == 0 ? 8u : 0u);
-        sequence.configured_exposure_lines = 720;
+        sequence.configured_exposure_lines = QC5_AE_INITIAL_EXPOSURE_LINES;
         sequence.configured_frame_lines = 900;
         sequence.gain_index = active_gain;
         if (!sequence_complete(sequence.control_at_end, sequence.dma_events))

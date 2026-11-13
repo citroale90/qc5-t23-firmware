@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: GPL-2.0-or-later
- * Offline-verified prospective MDNS reservation. NOT wired into live capture.
- * The device tree must exclude this span from Linux before any real DMA use.
+ * Native-calibrated MDNS layout used by the temporal capture adapter.
+ * The adapter requires a verified no-map DT reservation and checks every
+ * destination before enabling hardware access to this span.
  */
 #ifndef QC5_MDNS_LAYOUT_H
 #define QC5_MDNS_LAYOUT_H

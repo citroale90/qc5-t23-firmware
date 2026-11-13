@@ -1,10 +1,13 @@
 {
   "passed": true,
   "public_builder_recreates_shipped_preparer_and_ENV_module_byte_identically": true,
-  "preparer_sha256": "4f2239eac8be53002ea1e16f5c7e84715d9d751b5d36e94a465f711d16f6a9a8",
+  "preparer_sha256": "40df2759aab26c4dafc12e9c03e800671b66c66f5973d499d1b3d3bbadc08bf1",
   "ENV_helper_sha256": "ca84ea48c44918e78ab346c899b549371ff961ba54f1dc5fc3985c7f14e89bb3",
   "factory_MAC_guard_included": true,
   "ROOT_SYSTEM_build_hash_gate_removed": true,
   "camera_accessed": false,
-  "SD_accessed": false
+  "SD_accessed": false,
+  "release": "QC5-R45-SD-RC2",
+  "preparer_recompiled_from_public_identical_inputs": true,
+  "ENV_module_unchanged_from_verified_R44": true
 }
