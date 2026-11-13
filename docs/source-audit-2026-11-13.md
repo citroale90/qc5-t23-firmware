@@ -73,3 +73,10 @@ release by merely translating those binaries/tables into C arrays.
 
 Future migration retains the separate flash Wi-Fi/SSH areas as described in
 [migration-from-r43.md](migration-from-r43.md); no migration was run here.
+
+## Subsequent R44 deployment
+
+The historical review above was source-only. The SSH corrections were later
+qualified and installed in R44, with separate [hardware evidence](../native/R44-validation.json).
+The independent media/Annex-B candidate remains undeployed. Radio-internal
+firmware replacement is outside the driver-only migration scope.

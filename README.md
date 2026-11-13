@@ -1,11 +1,11 @@
 # VeePai QC5 T23 firmware tools
 
-Local firmware development for the **QC5_YA_CODE_V82** camera with Ingenic T23DL, GC1084, AIC8800DC USB Wi-Fi, and 8 MiB NOR flash. The current deployed native release is **QC5 Linux 7.3.1 R43 RC1** (2026-11-13).
+Local firmware development for the **QC5_YA_CODE_V82** camera with Ingenic T23DL, GC1084, AIC8800DC USB Wi-Fi, and 8 MiB NOR flash. The current deployed native release is **QC5 Linux 7.3.1 R44 RC1** (2026-11-13).
 
 The native sources and validation record are in [`native/`](native/README.md).
 The top-level application builder and `src/`, `web/`, `firmware/` still
 describe the earlier **R4g5b-i18n1 / Linux 3.10** line. Its installer is not
-an installer for native R43. Native source export is not yet a standalone,
+an installer for native R44. Native source export is not yet a standalone,
 reproducible firmware distribution; required generated inputs and third-party
 source/licensing gaps are documented explicitly.
 
@@ -13,7 +13,10 @@ The camera serves an Italian/English WebUI, a local H.264 player with audio and 
 
 [Italiano](docs/README.it.md) · [Build and install](docs/build.md) · [Credits and licensing](NOTICE.md)
 
-## R43 status
+## R44 status
+
+- The audited open-source Wi-Fi Linux loader and SSH startup/key helper are installed. The kernel, media, WebUI and six radio firmware files are unchanged.
+- All 16 loaded Linux modules have identified source: nine camera/radio-specific modules and seven standard kernel modules. See the [driver inventory](native/drivers/R44-driver-catalog.json).
 
 - Wi-Fi credentials persist in flash; startup does not require a QR or SD card.
 - The original SSH host identity persists in two separate flash records. Normal
@@ -28,7 +31,7 @@ The camera serves an Italian/English WebUI, a local H.264 player with audio and 
   firmware capsules, keys, credentials, dumps and recovery images are private
   and are not GitHub release assets.
 
-See [native validation](native/R43-validation.json) and
+See [native validation](native/R44-validation.json) and
 [remaining open-source work](docs/open-source-status.md). The WebUI is open
 source; the **complete device firmware is not yet entirely open source**.
 In particular, the radio still loads binary firmware, and this update retains
@@ -38,9 +41,9 @@ All nine specific Linux modules (seven native modules plus two AIC radio
 modules) have now been rebuilt byte-identical to deployed R43, with
 [driver build instructions](native/drivers/README.md) and
 [pinned radio source reconstruction](native/radio/README.md).
-The [migration contract](docs/migration-from-r43.md) preserves the current
-camera's Wi-Fi, SSH identity and settings when the remaining work is ready;
-publishing source does not trigger an update of the installed camera.
+The [R43-to-R44 migration](docs/migration-from-r43.md) preserves Wi-Fi, SSH
+identity and settings. The per-unit install/recovery kit remains private;
+source publication does not distribute another camera's backup or identity.
 
 ## Repository layout
 

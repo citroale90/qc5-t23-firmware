@@ -121,3 +121,10 @@ equivalence. Replacing the loader or storing the existing ARM payload as C
 arrays does not close this gap. Do not disable DPD, change RF power, or skip
 calibration based only on a decompiler guess. The host-loader correction is
 useful independently of that longer firmware implementation effort.
+
+## Subsequent R44 deployment
+
+The source-only audit above is historical. The audited Linux driver was later
+qualified and installed in R44; see [R44 validation](../native/R44-validation.json).
+The six internal-radio firmware files remain unchanged. Their replacement is
+outside the driver-only update scope.

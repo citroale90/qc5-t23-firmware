@@ -1,65 +1,64 @@
-# Planned migration from the installed R43
+# R43 to R44 driver and SSH update
 
-This is the migration contract for a future fully open-source driver
-release. It is not an installer, and that release is not ready while the
-radio firmware and corresponding-source gaps remain unresolved. The
-currently working camera stays on R43 during this source work.
+R44 retains the working Linux 7.3.1 kernel, WebUI, media program and the six
+firmware files executed inside the Wi-Fi chip. The update applies the audited
+Linux Wi-Fi loader and SSH startup/key-publication corrections. Radio firmware
+reverse engineering is outside this migration's scope.
 
-The nine specific Linux modules now reconstructed from public source are
-already the modules installed in R43. Publishing their source does not
-require reinstalling identical binaries. Migration becomes necessary when
-the remaining components are replaced or executable/data formats change.
+The nine camera/radio-specific Linux drivers already had public matching R43
+sources. R44 is a small corrective update, not a replacement of all nine binaries.
+See the [complete 16-module inventory](../native/drivers/R44-driver-catalog.json).
 
-## Preserve the current installation's data
+## Data preserved
 
-- Preserve BOOT/U-Boot, its environment, WWW, and PARAM/original MAC.
-- Preserve the entire reserved NOR block `0x4f0000..0x4f8000`. The existing
-  Wi-Fi format occupies `0x4f0000..0x4f2000`; the current SSH identity
-  occupies `0x4f2000..0x4f4000`.
-- Keep the SSH host key and Wi-Fi record formats compatible; read them
-  before generating defaults. Never distribute a shared SSH identity.
-- Retain `config.txt`, NTP/router settings and other supported SD settings,
-  recordings and remote-storage configuration. Credentials stay private.
-- Preserve operation without an SD card for boot, Wi-Fi and SSH. Local
-  recordings and SD-based restore still require a card.
+- BOOT/U-Boot, environment, WWW, PARAM and the original MAC.
+- The entire **32 KiB** reserved NOR block `0x4f0000..0x4f8000`.
+- Wi-Fi banks at `0x4f0000..0x4f2000` and SSH identity banks at
+  `0x4f2000..0x4f4000`, with unchanged formats and per-camera MAC binding.
+- SD configuration, recordings, NTP and remote-storage settings.
+- Operation without SD for system startup, Wi-Fi and SSH.
 
-## Keep two distinct return paths
+The corrected SSH startup reads an existing valid flash identity first.
+An I/O failure does not generate or import a different identity. Unbound SD
+keys are not automatically imported; swapping SD cards cannot clone host keys.
 
-1. A per-camera backup and matched native **R43** forward capsule/loader
-   pair for returning to the currently working native installation.
-2. The separate, unchanged **factory** recovery capsule and original
-   full-flash backup for that camera.
+## Backup and return paths
 
-Do not rename a native R43 backup to `QC5FULL.BIN`. The stock recovery
-validator checks the original kernel fingerprint. Native R43 return uses
-its own matched loader and update payload. Mixing loaders, payloads or
-backups from different releases/units must fail before erasing anything.
+Keep both paths with the installation kit:
 
-The camera has a single 8 MiB NOR image, not an A/B layout. Existing SD
-recovery depends on intact U-Boot; it cannot repair a damaged bootloader.
-No bootloader/environment/partition change is needed for this migration
-contract. A later layout change requires a separately verified migration.
+1. A current native R43 backup and its **matched R43 update capsule/loader**.
+   A native return preserves the Wi-Fi/SSH reserved block.
+2. The separate original full-flash backup and factory recovery capsule for
+   the same camera. A factory return clears the native Wi-Fi/SSH block.
 
-## Gates before an installation package is offered
+Do not rename the R43 backup to `QC5FULL.BIN`: that validator requires the
+original kernel fingerprint. Do not mix another camera's PARAM, identities,
+backup capsule or a loader pinned to another payload.
 
-1. Export the complete corresponding source, generated hardware input
-   provenance, per-file licenses and reproducible build instructions.
-   Firmware-in-radio blobs must be reported separately from Linux drivers.
-2. Rebuild and test the new driver implementation; do not substitute a
-   license label for source completeness or hardware equivalence.
-3. Validate backup, update/return pair, bounds, readback and reserved-sector
-   preservation offline, including interruption handling.
-4. Boot the complete candidate in RAM before a flash update. Verify Wi-Fi
-   without QR, unchanged MAC/SSH identity, WebUI, RTSP video/audio, Parla,
-   PTZ in four directions, white/IR lights and automatic day/night.
-5. Verify hotspot association, automatic HTTP setup, return to saved Wi-Fi,
-   resumed video, reconnection after a lost network, motion stop and SD/
-   remote recording behavior. Check memory during simultaneous operation.
-6. Verify normal reboot and power-cycle persistence, plus return to R43
-   with the correct SD package. Then assemble an unarmed installation kit
-   from the target camera's own backups.
+This remains a single 8 MiB NOR device, not A/B firmware. SD recovery requires
+working U-Boot and cannot repair a damaged bootloader. R44 changes neither
+U-Boot nor its environment/partition layout.
 
-A factory restore clears the native Wi-Fi/SSH areas and is different from
-a native upgrade preserving them. After factory restore, remove the SD or
-disable its native loader before the next boot. Preserve these instructions
-with the recovery package; do not rely on an AI session for recovery.
+## Qualification and installation
+
+The release procedure checks exact source/build hashes, capsule bounds,
+readback and protected areas. Model cases cover installation, factory return,
+normal native handoff and rejected corrupt RAM images. A full RAM boot must
+then verify the new Wi-Fi driver, unchanged MAC/host key, Wi-Fi from flash,
+WebUI and decoded RTSP video/audio before flash activation.
+
+After installation, verify the runtime partition, update journal and unchanged
+configuration banks, then perform a normal reboot and repeat Wi-Fi/SSH/WebUI
+and video/audio checks. Existing unchanged PTZ, illumination and media source
+rebuild proofs remain separately documented; a new physical observation is
+not implied by an automated protocol result.
+
+The private per-unit kit contains the update and original recovery pair,
+checksums and a local SD preparation helper. It is not a generic installer for
+factory cameras. A different unit requires its own verified original backup
+and matching capsule. Private capsules and radio binaries are not distributed
+through the public source repository.
+
+After a factory return, remove the SD or disable its native loader before
+another boot. After a native update, the consumed one-shot marker must be zero.
+Follow the kit's instructions without depending on an AI session.

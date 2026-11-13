@@ -1,5 +1,5 @@
 {
-  "release": "QC5-7.3.1-R43-RC1",
+  "release": "QC5-7.3.1-R44-RC1",
   "files": {
     "ssh/key-core.h": {
       "sha256": "b164250d50b248de493c84b53a333723544d8c7138c488e86b3141c42e20647b",
@@ -19,7 +19,8 @@
       ],
       "adapted_for_public_tree": false,
       "post_R43_audit_fix": true,
-      "deployed": false
+      "deployed": true,
+      "deployed_release": "QC5-7.3.1-R44-RC1"
     },
     "ssh/test-key.c": {
       "sha256": "4b72d31c9f2c68ab3d96bbc14b0647a72cb90cfd680a3fce289c6fdfb1ee7904",
@@ -37,7 +38,8 @@
       ],
       "adapted_for_public_tree": false,
       "post_R43_audit_fix": true,
-      "deployed": false
+      "deployed": true,
+      "deployed_release": "QC5-7.3.1-R44-RC1"
     },
     "modules/qc5-ssh-key.c": {
       "sha256": "5291ddf24cc9a6eee7f864cbdb79ad0dd0949ebb8fa674e2e0129ac218f6f38f",
@@ -563,11 +565,14 @@
       "adapted_for_public_tree": false
     },
     "installer/release.generated.h": {
-      "sha256": "80b6bd92719df7057cc410b70ff257f3fb990050e85cfeab1ff1c5b22ffb113f",
+      "sha256": "1e12076efa141c0d1392c1b811ae4a3a823a6e137025ca93734f59c16349d3e1",
       "source_sha256": "80b6bd92719df7057cc410b70ff257f3fb990050e85cfeab1ff1c5b22ffb113f",
       "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/installer/release.generated.h",
       "SPDX": [],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "post_R43_generated_update": true,
+      "deployed": true,
+      "deployed_release": "QC5-7.3.1-R44-RC1"
     },
     "installer/full-recovery.h": {
       "sha256": "77a345876a18f11ef5004f83ded3059c25a9586f452971a5f67bc7f647b9a059",
@@ -663,11 +668,14 @@
       "adapted_for_public_tree": false
     },
     "boot/runtime.generated.h": {
-      "sha256": "9f47990983c875f8de5793127c79c549ab08ada8e6f5021f4e8d97af27f3bf97",
+      "sha256": "91468b9fcb82631c31ed6cb9b344f9605439fd6a22c252a0773c4ee125ae1b2b",
       "source_sha256": "9f47990983c875f8de5793127c79c549ab08ada8e6f5021f4e8d97af27f3bf97",
       "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/flash/root-store/runtime.generated.h",
       "SPDX": [],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "post_R43_generated_update": true,
+      "deployed": true,
+      "deployed_release": "QC5-7.3.1-R44-RC1"
     },
     "media/frontend/config_read.h": {
       "sha256": "4b7a6d154db49871f85e7b68598c0b3eec582196ae62efb6b0b4f77c32ff8f0b",
@@ -2259,7 +2267,8 @@
       "SPDX": [
         "GPL-3.0-only"
       ],
-      "deployed": false
+      "deployed": true,
+      "deployed_release": "QC5-7.3.1-R44-RC1"
     },
     "ssh/test-key-file.c": {
       "sha256": "c9f5f2786914e70bf73b1ae58e1c829dd1425b41934b72a944c191e0d5846a16",
@@ -2383,6 +2392,17 @@
         "GPL-2.0-or-later"
       ],
       "adapted_for_public_tree": false
+    },
+    "installer/manage-sd.py": {
+      "sha256": "5644ef1fc975d18de08cc668fc28aede3f1e6430e69e25368074be494f62dfe0",
+      "source_sha256": "5644ef1fc975d18de08cc668fc28aede3f1e6430e69e25368074be494f62dfe0",
+      "origin": "work/kernel-port-latest/build/linux73/native-driver-update-r44/gestisci_sd.py",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false,
+      "new_after_R43": true,
+      "purpose": "per-unit SD package preparation; never a flash writer"
     }
   },
   "excluded_generated_inputs": [
@@ -2487,5 +2507,6 @@
   "turnkey_native_build": false,
   "source_baseline_release": "QC5-7.3.1-R43-RC1",
   "working_tree_contains_post_R43_audit_fixes": true,
-  "hardware_validation_applies_to": "R43 baseline only; post-R43 audit changes have offline validation only"
+  "hardware_validation_applies_to": "Original R43 baseline plus R44 SSH/radio corrections; see per-file flags and R44-validation.json",
+  "deployed_release": "QC5-7.3.1-R44-RC1"
 }

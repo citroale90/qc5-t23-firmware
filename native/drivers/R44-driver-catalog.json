@@ -1,0 +1,149 @@
+{
+  "release": "QC5-7.3.1-R44-RC1",
+  "all_16_loaded_Linux_module_sources_available": true,
+  "specific_modules": 9,
+  "upstream_modules": 7,
+  "hardware_qualification_pending": false,
+  "kernel_config": "native/kernel/qc5-7.3.1.config",
+  "modules": [
+    {
+      "file": "qc5-peripheral.ko",
+      "source": "native/drivers/ptz",
+      "sha256": "4f44d0c297f5a5bc2892d4a6695ad1cc906741e43c5b71d7d48a2004cf5d7969",
+      "source_kind": "camera_or_radio_specific",
+      "rebuild_verified": true,
+      "proof": "native/drivers/R43-all-driver-verification.json"
+    },
+    {
+      "file": "qc5-illumination.ko",
+      "source": "native/drivers/illumination",
+      "sha256": "5338582d81665506e5b67491b4bf779bdfb93c04fd48b01f499dcb0b0c68aa3b",
+      "source_kind": "camera_or_radio_specific",
+      "rebuild_verified": true,
+      "proof": "native/drivers/R43-all-driver-verification.json"
+    },
+    {
+      "file": "qc5-mmc-recording.ko",
+      "source": "native/drivers/sd",
+      "sha256": "290e61c7ae7c2d9a81352827e9d1ae34cd134754c8048d5ddf90bf744765ad40",
+      "source_kind": "camera_or_radio_specific",
+      "rebuild_verified": true,
+      "proof": "native/drivers/R43-all-driver-verification.json"
+    },
+    {
+      "file": "qc5-msc-clock-ro.ko",
+      "source": "native/drivers/msc-clock",
+      "sha256": "130becce0742d8bdb8a2e6de88e1f05a02f68bf689373d0876ad9210cd8b4b1e",
+      "source_kind": "camera_or_radio_specific",
+      "rebuild_verified": true,
+      "proof": "native/drivers/R43-all-driver-verification.json"
+    },
+    {
+      "file": "qc5-sfc-runtime.ko",
+      "source": "native/modules/qc5-sfc-runtime.c",
+      "sha256": "da5773efcb5c744f63929318deae784765a6547c4b2ca8269cd64a5bae6956dc",
+      "source_kind": "camera_or_radio_specific",
+      "rebuild_verified": true,
+      "proof": "native/drivers/R43-all-driver-verification.json"
+    },
+    {
+      "file": "qc5-wifi-config.ko",
+      "source": "native/modules/qc5-wifi-config.c",
+      "sha256": "2baeca91cf88d47ad7abc46062a6ba5e0d96b292b1b5af4cde6905476032ae4c",
+      "source_kind": "camera_or_radio_specific",
+      "rebuild_verified": true,
+      "proof": "native/drivers/R43-all-driver-verification.json"
+    },
+    {
+      "file": "qc5-ssh-key.ko",
+      "source": "native/modules/qc5-ssh-key.c",
+      "sha256": "f09fcfe90f8b88ac4cc1a273923d8f175ad72ce61a902b656de38afd6f5794ac",
+      "source_kind": "camera_or_radio_specific",
+      "rebuild_verified": true,
+      "proof": "native/drivers/R43-all-driver-verification.json"
+    },
+    {
+      "file": "aic_load_fw.ko",
+      "source": "native/radio/SOURCE-MANIFEST.json",
+      "sha256": "eb5d23e92b703c4d6452c851c06a53d4356abca8d9a39ef942aa7e5d63365da1",
+      "source_kind": "camera_or_radio_specific",
+      "rebuild_verified": true,
+      "proof": "native/drivers/R43-all-driver-verification.json"
+    },
+    {
+      "file": "aic8800_fdrv.ko",
+      "source": "native/radio/hardening/SOURCE-MANIFEST.json",
+      "sha256": "4b0a8516255f712636b1f251ba3d8e6b0f66195a9450d0779e4e70fbbccea7f8",
+      "source_kind": "camera_or_radio_specific",
+      "rebuild_verified": true,
+      "proof": "native/radio/hardening/offline-verification.json"
+    },
+    {
+      "file": "mmc_core.ko",
+      "source_in_linux_7_3_1": "drivers/mmc/core",
+      "sha256": "60abbec72f7298b6e342a4ac1be3ffd521d9254d65a38303eebf6379ab5ce17c",
+      "source_kind": "upstream_kernel",
+      "proof": "native/kernel/R43-source-verification.json",
+      "separate_R44_rebuild_claimed": false
+    },
+    {
+      "file": "mmc_block.ko",
+      "source_in_linux_7_3_1": "drivers/mmc/core/block.c",
+      "sha256": "509e1b1d51153e4e4632e6c869e536c8513cdbfa21021a41d95c533e4e247c3c",
+      "source_kind": "upstream_kernel",
+      "proof": "native/kernel/R43-source-verification.json",
+      "separate_R44_rebuild_claimed": false
+    },
+    {
+      "file": "fat.ko",
+      "source_in_linux_7_3_1": "fs/fat",
+      "sha256": "c20809d97f57dbcedfc6f5d99ace3ee0e0c37022b8a89461921904f0cab6d4ca",
+      "source_kind": "upstream_kernel",
+      "proof": "native/kernel/R43-source-verification.json",
+      "separate_R44_rebuild_claimed": false
+    },
+    {
+      "file": "vfat.ko",
+      "source_in_linux_7_3_1": "fs/fat/namei_vfat.c",
+      "sha256": "39b00cde72bf0be0f7543bd4a9a5dec2d3c33ec2cca96b3243b0aa73d75c2165",
+      "source_kind": "upstream_kernel",
+      "proof": "native/kernel/R43-source-verification.json",
+      "separate_R44_rebuild_claimed": false
+    },
+    {
+      "file": "nls_utf8.ko",
+      "source_in_linux_7_3_1": "fs/nls/nls_utf8.c",
+      "sha256": "0ddebece341ec82095bf3f2b137bed618a70591eca4e192c8c5e76ab78dc8f91",
+      "source_kind": "upstream_kernel",
+      "proof": "native/kernel/R43-source-verification.json",
+      "separate_R44_rebuild_claimed": false
+    },
+    {
+      "file": "nls_cp437.ko",
+      "source_in_linux_7_3_1": "fs/nls/nls_cp437.c",
+      "sha256": "a59ca809c2c0cd9d42a704a5dbe2a704aebf7b5869c450b944e22d8eb80e6899",
+      "source_kind": "upstream_kernel",
+      "proof": "native/kernel/R43-source-verification.json",
+      "separate_R44_rebuild_claimed": false
+    },
+    {
+      "file": "nls_iso8859-1.ko",
+      "source_in_linux_7_3_1": "fs/nls/nls_iso8859-1.c",
+      "sha256": "0154da7cc0ee398ad39b69d8fdc3e6305604b67684648a35682ca2797fb40a04",
+      "source_kind": "upstream_kernel",
+      "proof": "native/kernel/R43-source-verification.json",
+      "separate_R44_rebuild_claimed": false
+    }
+  ],
+  "unchanged_radio_firmware_files": {
+    "fmacfw_patch_tbl_8800dc_h_u02.bin": "0469686691b72fa8296ff7abd1669ba978bdc0f115137fd392aa00a2717ff887",
+    "fmacfw_patch_tbl_8800dc_u02.bin": "d28112c404a6c5207a773702f28e7d8cb282eb7d6c6b4124e2065335e38c530d",
+    "fmacfw_calib_8800dc_h_u02.bin": "12bdcdd48e41b33bfd74834bffa326b4469bea82e7134de079392fbc2508acc7",
+    "fmacfw_patch_8800dc_u02.bin": "a2c7f0a5d80d26abe9572acd40249cc73f589e664ec559eacdd4526077abc735",
+    "fmacfw_calib_8800dc_u02.bin": "718779ec5d2ca5cc341dfa36c1d6b62fc78bba83b9743acda24463823c70e145",
+    "fmacfw_patch_8800dc_h_u02.bin": "f388dcb419a0f677c777a1eaad798156eabdfbb72c512a4d993df0dbc4f351d1"
+  },
+  "internal_radio_firmware_source_claimed": false,
+  "whole_device_firmware_open_source_claimed": false,
+  "deployment_receipt": "native/R44-validation.json"
+}

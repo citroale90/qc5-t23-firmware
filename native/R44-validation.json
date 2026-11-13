@@ -1,0 +1,64 @@
+{
+  "release": "QC5-7.3.1-R44-RC1",
+  "installed_and_verified": true,
+  "kernel": "7.3.1-qc5-sd-tiny",
+  "kernel_profile_unchanged": true,
+  "changed_runtime_files": [
+    "bin/qc5-ssh-key",
+    "bin/qc5-ssh-start",
+    "modules/aic8800_fdrv.ko"
+  ],
+  "radio_driver_sha256": "4b0a8516255f712636b1f251ba3d8e6b0f66195a9450d0779e4e70fbbccea7f8",
+  "SSH_helper_sha256": "010b3106d4573d38762fead7dd32bae04cb342255e33fe4d35da20e321518527",
+  "firmware_image_sha256": "27ad668d31bf024c1a0416b9d1597a3ae0a09f8467ee81159926ecc678386f87",
+  "same_original_MAC": true,
+  "WiFi_from_flash_without_QR": true,
+  "same_SSH_identity_from_flash": true,
+  "WiFi_and_SSH_records_unchanged": true,
+  "SD_optional_RAM_boot_verified": true,
+  "WebUI_HTTP80": true,
+  "RTSP_before_normal_reboot": {
+    "video_decoded": true,
+    "decoded_frames": 272,
+    "audio_frames": 174,
+    "geometry": [
+      [
+        1280,
+        720
+      ]
+    ]
+  },
+  "RTSP_after_normal_reboot": {
+    "video_decoded": true,
+    "decoded_frames": 297,
+    "audio_frames": 191,
+    "geometry": [
+      [
+        1280,
+        720
+      ]
+    ]
+  },
+  "silent_Parla_protocol_and_half_duplex_gate": true,
+  "physical_Parla_voice_retest_claimed": false,
+  "normal_reboot_without_QR": true,
+  "observed_OOM_kills": 0,
+  "PARAM_unchanged": true,
+  "BOOT_ENV_WWW_not_written": true,
+  "runtime_readback_and_install_journal_verified": true,
+  "six_radio_firmware_files_byte_identical": true,
+  "media_and_WebUI_byte_identical_to_R43": true,
+  "Linux_modules_with_identified_source": 16,
+  "new_install_restore_and_RAM_fallback_model_cases_passed": true,
+  "previous_native_and_factory_return_pairs_ready": true,
+  "factory_restore_executed_on_camera": false,
+  "private_capsule_published": false,
+  "Qwen_sequential_review": "063",
+  "post_export_source_tests": {
+    "native": 9,
+    "radio": 13,
+    "SSH_startup": 8,
+    "failed": 0
+  },
+  "SD_helper_cases_passed": 7
+}

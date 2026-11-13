@@ -1,12 +1,14 @@
-# Native QC5 Linux 7.3.1 — R43 RC1
+# Native QC5 Linux 7.3.1 — R44 RC1
 
-This tree starts from a source export of the deployed native line, separate from the
-legacy application builder at the repository root. The camera was not
-restarted or modified while publishing these sources.
+This tree retains the R43 source baseline and matching rebuild receipts.
+R44 deploys the audited SSH key/startup fixes and the open-source AIC Linux
+loader correction. Kernel, WebUI, media and the six internal-radio firmware
+files remain unchanged. See [R44 hardware validation](R44-validation.json)
+and the [complete Linux-module inventory](drivers/R44-driver-catalog.json).
 
-The working tree also includes **post-R43 audit corrections**, not yet deployed
-or hardware-qualified. Original source hashes and R43 receipts are retained;
-see the [audit](../docs/source-audit-2026-11-13.md) for the precise differences.
+The separate Annex-B/media audit candidate remains **undeployed**. Original
+R43 source hashes and historical receipts are preserved; current per-file
+hashes and deployment flags are in the source manifest.
 
 ## Contents
 

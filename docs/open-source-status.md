@@ -1,59 +1,56 @@
-# Open-source status — R43, 2026-11-13
+# Open-source driver status — R44, 2026-11-13
 
-The WebUI is already open source. The complete device firmware cannot yet
-be described as entirely open source or reproducibly buildable from this
-repository alone. A public source archive, an open-source license grant,
-complete corresponding source and the absence of binary firmware are
-different properties.
+The release objective is **open-source Linux drivers**. The binary firmware
+executed inside the AIC8800DC Wi-Fi chip is a separate component and remains
+unchanged. Its source is not a prerequisite for publishing or rebuilding the
+Linux driver. The whole device firmware is not claimed to be entirely open source.
 
-| Component | Evidence and remaining work |
+## Linux driver inventory
+
+All **16 loaded Linux modules** have identified source:
+
+- Nine camera/radio-specific modules: seven QC5 peripheral, illumination,
+  storage and NOR/configuration modules, plus the two AIC Linux modules.
+  The public source rebuilds match R43 byte for byte. R44 applies the
+  separately published bounds/error-handling fix to `aic8800_fdrv.ko`.
+- Seven standard Linux modules: MMC core/block, FAT/VFAT and three NLS
+  modules. Their source is in the verified Linux 7.3.1 baseline with the
+  published matching kernel configuration. No separate R44 rebuild of
+  those unchanged seven modules is claimed.
+
+See the [R44 inventory](../native/drivers/R44-driver-catalog.json),
+[R43 matching rebuild proof](../native/drivers/R43-all-driver-verification.json),
+[driver build instructions](../native/drivers/README.md),
+[radio source reconstruction](../native/radio/README.md) and
+[verified kernel baseline](../native/kernel/README.md).
+The inventory distinguishes source availability, compiled equivalence and
+hardware qualification; those are different claims.
+
+## R44 changes
+
+Only three runtime files change: the SSH key helper, SSH startup script and
+`aic8800_fdrv.ko`. The kernel, media program, image quality and WebUI remain
+identical to R43. The radio's six firmware files are byte-identical.
+The [migration instructions](migration-from-r43.md) describe preserved
+Wi-Fi/SSH data and distinct native/factory return paths.
+
+The [source audit](source-audit-2026-11-13.md) also contains an Annex-B
+replacement and restored GPL x264 source helpers. That media candidate is
+**not deployed by R44**: the previously qualified media binary is retained.
+The [radio audit](wifi-reverse-engineering.md) documents the Linux host
+loader correction, its source lock, length/error tests and protocol comparison.
+
+## Components outside the Linux driver claim
+
+| Component | Status |
 | --- | --- |
-| WebUI and local controls | Public project source, retained credits; native rendered assets exported alongside the legacy UI |
-| SSH/Wi-Fi flash persistence | Source and synthetic interrupted-write tests published; per-file GPL declarations retained |
-| Native startup and SD installer | Sources published; per-camera capsules and original backups remain private |
-| Peripheral, audio, sensor, ISP and encoder work | Native source snapshot exported; generated hardware inputs and complete driver/build provenance still need review |
-| Linux kernel 7.3.1 baseline | Actual source verified identical to the official archive; matching configuration and kernel hash published. Boot wrappers and complete firmware build integration are separate layers |
-| AIC8800 Linux drivers | Both exact module sources reconstructed from a pinned upstream archive plus QC5 patch; public tool rebuilds match deployed R43. Radio firmware is separate |
-| Firmware inside AIC8800DC | Binary dependency remains; source/licensing and a replacement strategy must be investigated |
-| Original U-Boot | Original bootloader retained; upstream U-Boot being open source does not provide the exact camera build's corresponding source |
-| External reference code without a license declaration | Omitted from this export pending a per-file grant/provenance review |
+| WebUI | Project source and retained attribution are public |
+| AIC8800DC internal firmware | Six unchanged binary dependencies, outside this driver migration |
+| Original U-Boot | Retained; exact manufacturer corresponding source is not established |
+| Media userspace/reference inputs | Source snapshot is public; four external descriptor/ROI files and generated calibration provenance remain separate release gaps |
+| Complete native image build | Laboratory builds are pinned; a portable turnkey public assembler is not yet supplied |
 
-The [post-R43 source audit](source-audit-2026-11-13.md) fixes verified SSH startup
-and key-publication defects in candidate source, removes one unused duplicate,
-restores 11 explicitly GPL-covered x264 helpers and replaces the external
-Annex-B helper. These changes are not installed on the camera. Four unlicensed
-external descriptor/ROI files and sensor calibration provenance remain open.
-The [Wi-Fi reverse-engineering report](wifi-reverse-engineering.md) now maps
-the upload/calibration boundary and provides an offline-tested host-loader
-hardening candidate. The six executable/table dependencies remain separate.
-
-## Verified driver-source milestone
-
-Seven GPL modules have now been rebuilt from the exported public tree with
-the matching MIPS kernel configuration. Every resulting stripped module
-matches its deployed R43 binary exactly: PTZ/speaker, white/IR lights,
-SD host, SD clock, read-only NOR runtime, Wi-Fi flash view and SSH flash view.
-See [driver sources and build instructions](../native/drivers/README.md).
-The camera was not modified to perform this verification.
-
-The two radio modules have subsequently passed the same test through the
-public archive/patch reconstruction and build tools: **nine specific Linux
-modules now have matching source rebuilds**. The [combined receipt](../native/drivers/R43-all-driver-verification.json)
-and [radio instructions](../native/radio/README.md) record this. No binary
-radio firmware was included in the reconstructed driver source tree.
-
-Generated sensor register tables are hardware/build inputs; a `.private.h`
-filename alone is not evidence of a secret or proprietary algorithm. Their
-origin and licensing still need tracing before they can close a source
-release. Actual passwords, keys and producer nonces remain private.
-
-The future [migration from installed R43](migration-from-r43.md) preserves
-existing Wi-Fi/SSH records and SD settings, and keeps distinct R43 and stock
-return paths. It is not currently an instruction to flash a new candidate.
-
-## Binary radio dependencies
-
-The deployed read-only runtime contains these radio firmware images:
+The unchanged radio dependencies are:
 
 - `fmacfw_calib_8800dc_h_u02.bin`
 - `fmacfw_calib_8800dc_u02.bin`
@@ -62,27 +59,10 @@ The deployed read-only runtime contains these radio firmware images:
 - `fmacfw_patch_tbl_8800dc_h_u02.bin`
 - `fmacfw_patch_tbl_8800dc_u02.bin`
 
-They execute in the radio, not as the Linux kernel driver. Recompiling the
-driver or removing the vendor cloud application does not remove these
-dependencies. These files and the stock flash image are not distributed in
-this repository. Their use does not itself imply a cloud connection.
+They execute inside the radio, not as Linux drivers. Their presence does not
+itself imply cloud communication. No radio binary, original flash dump,
+password, private key or per-unit installation capsule is published here.
 
-## Next driver work
-
-1. Map every loaded module and hardware interface to its actual source,
-   build configuration and license. Distinguish missing source exports from
-   components that still require a new implementation.
-2. Export the exact matching source for the already native drivers and
-   document generated hardware tables without device secrets.
-3. Review remaining third-party dependencies and obtain or replace missing
-   license grants. Preserve all existing attribution and per-file licenses.
-4. Audit the radio firmware boundary. Search for published corresponding
-   firmware source before considering a replacement; do not claim a closed
-   binary is open source because its loader is GPL.
-5. Make the native build reproducible before publishing general binary
-   releases. Continue to keep original backups and unique identities private.
-
-Qwen can assist with source comparison and reverse-engineering evidence,
-one request at a time. Its conclusions require source/compile/hardware
-verification; a model-generated implementation is not proof of hardware
-equivalence or a substitute for the upstream license.
+Qwen assists source comparisons sequentially. Its output is checked against
+actual source, compiled hashes and hardware results; it is not evidence of
+successful execution or an upstream license grant.

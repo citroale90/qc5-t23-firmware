@@ -59,4 +59,11 @@ The subsequent [Wi-Fi reverse-engineering audit](../../docs/wifi-reverse-enginee
 documents the actual USB transport, executable calibration entry points and
 an optional bounds/error-handling correction for the host patch-table loader.
 Its separate candidate source lock and compile receipt do not replace the
-byte-identical R43 baseline above. It has not been loaded on the camera.
+byte-identical R43 baseline above. That source-audit receipt predates installation. The corrected driver is now
+qualified and installed in R44; see [R44 validation](../R44-validation.json).
+Its SHA-256 is `4b0a8516255f712636b1f251ba3d8e6b0f66195a9450d0779e4e70fbbccea7f8`.
+The six radio firmware files remain unchanged.
+
+For the R44 source profile, add `--audit-fixes` to `prepare_aic_source.py`
+and `--radio-audit-fixes` to `build_native_drivers.py`. The original R43
+byte-match receipts above remain historical and are not overwritten.
