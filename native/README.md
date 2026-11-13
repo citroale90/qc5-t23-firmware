@@ -1,0 +1,92 @@
+# Native QC5 Linux 7.3.1 — R43 RC1
+
+This is a source export of the deployed native line, separate from the
+legacy application builder at the repository root. The camera was not
+restarted or modified while publishing these sources.
+
+## Contents
+
+| Folder | Component |
+| --- | --- |
+| `ssh/` | MAC-bound Ed25519 host-key records, Linux helper, startup and interrupted-write tests |
+| `wifi/` | Flash-backed Wi-Fi profiles, network-controller recovery, original MAC handling |
+| `modules/` | Bounded SFC runtime, Wi-Fi and SSH flash views; original shared SFC mutex |
+| `common/` | Frozen headers and policy sources used by the native frontend |
+| `boot/` | Production startup, read-only runtime binding, decompressor sources |
+| `installer/` | Bounded SD update/recovery implementation, preserving native configuration sectors |
+| `media/` | Source snapshot used for native video/audio, half-duplex talk and recording |
+| `web/` | Actual rendered R43 WebUI assets, distinct from legacy `web/` |
+| `kernel/reference-patches/` | Initial kernel/radio port patches; not a complete kernel source release |
+
+[`SOURCE-MANIFEST.json`](SOURCE-MANIFEST.json) records origin-relative
+paths, source/export hashes, license markers and omitted inputs. Absolute
+development includes and the native network includes are made
+relative in the exported tree. Synthetic tests use a locally administered
+example MAC rather than the test camera's identity.
+
+[`R43-validation.json`](R43-validation.json) is a sanitised hardware receipt.
+It contains no device serial, MAC, address, SSH fingerprint or credentials.
+The media program is the same qualified implementation as R42; the R43
+change is SSH identity persistence.
+
+## Flash identity layout
+
+| Physical NOR range | Purpose |
+| --- | --- |
+| `0x4f0000..0x4f2000` | Two alternating 4 KiB Wi-Fi profile banks |
+| `0x4f2000..0x4f4000` | Two 4 KiB SSH host-key banks |
+| `0x4f0000..0x4f8000` | Entire block preserved/normalised by native upgrades |
+
+SSH uses an 83-byte canonical Dropbear Ed25519 key in SHA-256 checked,
+MAC-bound records. Existing flash identity takes precedence over removable
+SD state. A valid single replica is repaired on startup; two valid replicas
+are not erased or programmed again. Conflicting valid identities are refused
+by the store. No universal or device-specific private key is embedded here.
+
+Wi-Fi retains its separate atomic profile format. Root SSH remains enabled
+without a password, as configured for the local deployment. The browser's
+HTTPS/microphone permission is handled through a local reverse proxy, not
+an on-camera TLS server.
+
+## Offline tests
+
+From the repository root, with Python 3.9+ and a compiler with ASan/UBSan:
+
+```sh
+python3 -m unittest discover -s tests -p test_native_persistence.py -v
+```
+
+These tests use synthetic memory arrays only. They check 513 SSH partial
+record-write boundaries, replica repair, unchanged identity over 1000 saves,
+512 Wi-Fi partial-write boundaries, and exported-source hashes. They cannot
+arm an update, contact the camera, or write flash.
+
+On Linux, the userspace SSH helper can be compiled against Linux MTD headers:
+
+```sh
+cc -Os -I native/common native/ssh/key-helper.c -o qc5-ssh-key
+```
+
+The kernel modules require the exact ported kernel tree/configuration and
+matching SFC driver layout. `MODULE_LICENSE` does not make them compatible
+with an arbitrary upstream kernel. Do not load them on a different layout.
+
+## Build and recovery limits
+
+This is **not a turnkey native firmware build or generic factory installer**.
+The full ported kernel tree, complete portable build integration and some
+generated hardware inputs are not yet included. Private generated sensor
+profiles and producer nonces were deliberately omitted; external reference
+dependencies require their own licensing review. The manifest lists these
+gaps instead of replacing them with invented data.
+
+No ready-to-flash capsule is published. The validated update/recovery pair
+is specific to its owner's camera and depends on matching original backup
+fingerprints. A package for another unit must be prepared from that unit's
+own verified backups. Do not copy another unit's PARAM, keys or identities.
+
+The SD recovery loader requires working U-Boot. It is not ROM recovery from
+a damaged bootloader. A factory restore replaces KERNEL/ROOT/SYSTEM and
+clears the native Wi-Fi/SSH areas; it does not preserve them like a native
+upgrade. After factory restore, disable the SD loader or remove the card
+before the next boot. No recovery operation was triggered for publication.

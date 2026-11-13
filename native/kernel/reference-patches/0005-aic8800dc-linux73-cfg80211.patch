@@ -1,0 +1,433 @@
+--- a/drivers/aic8800/aic8800_fdrv/rwnx_main.c
++++ b/drivers/aic8800/aic8800_fdrv/rwnx_main.c
+@@ -4443,7 +4443,11 @@
+                 #if LINUX_VERSION_CODE < KERNEL_VERSION(4, 0, 0)
+                 sinfo.filled |= STATION_INFO_ASSOC_REQ_IES;
+                 #endif
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
++		        cfg80211_new_sta(&rwnx_vif->wdev, sta->mac_addr, &sinfo, GFP_KERNEL);
++#else
+ 		        cfg80211_new_sta(rwnx_vif->ndev, sta->mac_addr, &sinfo, GFP_KERNEL);
++#endif
+             }
+ #ifdef CONFIG_RWNX_BFMER
+             if (rwnx_hw->mod_params->bfmer)
+@@ -4548,7 +4552,11 @@
+ 				}
+ 			}
+             		if (rwnx_vif->wdev.iftype == NL80211_IFTYPE_AP || rwnx_vif->wdev.iftype == NL80211_IFTYPE_P2P_GO) {
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
++                		cfg80211_del_sta(&rwnx_vif->wdev, cur->mac_addr, GFP_KERNEL);
++#else
+                 		cfg80211_del_sta(rwnx_vif->ndev, cur->mac_addr, GFP_KERNEL);
++#endif
+             		}
+ 
+ #ifdef AICWF_RX_REORDER
+@@ -4719,6 +4727,7 @@
+ }
+ 
+ 
++#if LINUX_VERSION_CODE < KERNEL_VERSION(7, 3, 0)
+ static void apm_probe_sta_work_process(struct work_struct *work)
+ {
+        struct apm_probe_sta *probe_sta = container_of(work, struct apm_probe_sta, apmprobestaWork);
+@@ -4753,6 +4762,8 @@
+ #endif
+        rwnx_vif->sta_probe.probe_id ++;
+ }
++
++#endif
+ 
+ /**
+  * @change_station: Modify a given station. Note that flags changes are not much
+@@ -4937,12 +4948,15 @@
+ 
+     RWNX_DBG(RWNX_FN_ENTRY_STR);
+ 
++#if LINUX_VERSION_CODE < KERNEL_VERSION(7, 3, 0)
+     INIT_WORK(&rwnx_vif->sta_probe.apmprobestaWork, apm_probe_sta_work_process);
+     rwnx_vif->sta_probe.apmprobesta_wq = create_singlethread_workqueue("apmprobe_wq");
+     if (!rwnx_vif->sta_probe.apmprobesta_wq) {
+ 	    txrx_err("insufficient memory to create apmprobe_wq.\n");
+ 	    return -ENOBUFS;
+     }
++#endif
++
+     if (rwnx_vif->wdev.iftype == NL80211_IFTYPE_P2P_GO)
+ 	    rwnx_hw->is_p2p_connected = 1;
+     /* Forward the information to the LMAC */
+@@ -5116,8 +5130,11 @@
+     rwnx_del_bcn(&rwnx_vif->ap.bcn);
+     rwnx_del_csa(rwnx_vif);
+ 
++#if LINUX_VERSION_CODE < KERNEL_VERSION(7, 3, 0)
+     flush_workqueue(rwnx_vif->sta_probe.apmprobesta_wq);
+     destroy_workqueue(rwnx_vif->sta_probe.apmprobesta_wq);
++
++#endif
+ 
+     netdev_info(dev, "AP Stopped");
+ 
+@@ -5204,6 +5221,7 @@
+     return 0;
+ }
+ 
++#if LINUX_VERSION_CODE < KERNEL_VERSION(7, 3, 0)
+ /**
+  * @probe_client: probe an associated client, must return a cookie that it
+  *	later passes to cfg80211_probe_status().
+@@ -5239,6 +5257,8 @@
+ 
+     return 0;
+ }
++
++#endif
+ 
+ /**
+  * @mgmt_frame_register: Notify driver that a management frame type was
+@@ -5494,6 +5514,11 @@
+ 
+     /* Initialize the RoC information element */
+     roc_elem->wdev = wdev;
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
++    roc_elem->cookie = *cookie;
++#else
++    roc_elem->cookie = rwnx_hw->roc_cookie_cnt;
++#endif
+     roc_elem->chan = chan;
+     roc_elem->duration = duration;
+     roc_elem->mgmt_roc = false;
+@@ -5510,7 +5535,9 @@
+     if (error == 0) {
+ 
+         /* Set the cookie value */
+-        *cookie = (u64)(rwnx_hw->roc_cookie_cnt);
++#if LINUX_VERSION_CODE < KERNEL_VERSION(7, 3, 0)
++        *cookie = roc_elem->cookie;
++#endif
+         if(roc_cfm.status) {
+             // failed to roc
+             rwnx_hw->roc_elem = NULL;
+@@ -5799,7 +5826,7 @@
+             return -EINVAL;
+         }
+     } else {
+-        u64 cookie;
++        u64 cookie = 0;
+         int error;
+ 
+ 		AICWFDBG(LOGINFO, "mgmt rx remain on chan\n");
+@@ -6980,6 +7007,103 @@
+     return 0;
+ }
+ 
++
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
++/* cfg80211 now owns these cookies and supplies a wireless_dev to station ops. */
++static int rwnx_add_key_wdev(struct wiphy *wiphy, struct wireless_dev *wdev,
++                            int link_id, u8 index, bool pairwise,
++                            const u8 *mac, struct key_params *params)
++{
++    if (!wdev->netdev)
++        return -EOPNOTSUPP;
++    return rwnx_cfg80211_add_key(wiphy, wdev->netdev, link_id, index,
++                                 pairwise, mac, params);
++}
++
++static int rwnx_get_key_wdev(struct wiphy *wiphy, struct wireless_dev *wdev,
++                            int link_id, u8 index, bool pairwise, const u8 *mac,
++                            void *cookie, void (*callback)(void *, struct key_params *))
++{
++    if (!wdev->netdev)
++        return -EOPNOTSUPP;
++    return rwnx_cfg80211_get_key(wiphy, wdev->netdev, link_id, index,
++                                 pairwise, mac, cookie, callback);
++}
++
++static int rwnx_del_key_wdev(struct wiphy *wiphy, struct wireless_dev *wdev,
++                            int link_id, u8 index, bool pairwise, const u8 *mac)
++{
++    if (!wdev->netdev)
++        return -EOPNOTSUPP;
++    return rwnx_cfg80211_del_key(wiphy, wdev->netdev, link_id, index,
++                                 pairwise, mac);
++}
++
++static int rwnx_set_default_mgmt_key_wdev(struct wiphy *wiphy,
++                                         struct wireless_dev *wdev,
++                                         int link_id, u8 index)
++{
++    if (!wdev->netdev)
++        return -EOPNOTSUPP;
++    return rwnx_cfg80211_set_default_mgmt_key(wiphy, wdev->netdev, link_id, index);
++}
++
++static int rwnx_add_station_wdev(struct wiphy *wiphy, struct wireless_dev *wdev,
++                                const u8 *mac, struct station_parameters *params)
++{
++    if (!wdev->netdev)
++        return -EOPNOTSUPP;
++    return rwnx_cfg80211_add_station(wiphy, wdev->netdev, mac, params);
++}
++
++static int rwnx_del_station_wdev(struct wiphy *wiphy, struct wireless_dev *wdev,
++                                struct station_del_parameters *params)
++{
++    if (!wdev->netdev)
++        return -EOPNOTSUPP;
++    return rwnx_cfg80211_del_station_compat(wiphy, wdev->netdev, params);
++}
++
++static int rwnx_change_station_wdev(struct wiphy *wiphy, struct wireless_dev *wdev,
++                                   const u8 *mac, struct station_parameters *params)
++{
++    if (!wdev->netdev)
++        return -EOPNOTSUPP;
++    return rwnx_cfg80211_change_station(wiphy, wdev->netdev, mac, params);
++}
++
++static int rwnx_get_station_wdev(struct wiphy *wiphy, struct wireless_dev *wdev,
++                                const u8 *mac, struct station_info *info)
++{
++    if (!wdev->netdev)
++        return -EOPNOTSUPP;
++    return rwnx_cfg80211_get_station(wiphy, wdev->netdev, mac, info);
++}
++
++static int rwnx_dump_station_wdev(struct wiphy *wiphy, struct wireless_dev *wdev,
++                                 int index, u8 *mac, struct station_info *info)
++{
++    if (!wdev->netdev)
++        return -EOPNOTSUPP;
++    return rwnx_cfg80211_dump_station(wiphy, wdev->netdev, index, mac, info);
++}
++
++static int rwnx_mgmt_tx_cookie(struct wiphy *wiphy, struct wireless_dev *wdev,
++                               struct cfg80211_mgmt_tx_params *params, u64 cookie)
++{
++    return rwnx_cfg80211_mgmt_tx(wiphy, wdev, params, &cookie);
++}
++
++static int rwnx_roc_cookie(struct wiphy *wiphy, struct wireless_dev *wdev,
++                            struct ieee80211_channel *channel, unsigned int duration,
++                            u64 cookie, const u8 *rx_addr)
++{
++    if (rx_addr && !ether_addr_equal(rx_addr, wdev_address(wdev)))
++        return -EOPNOTSUPP;
++    return rwnx_cfg80211_remain_on_channel(wiphy, wdev, channel, duration, &cookie);
++}
++#endif
++
+ static struct cfg80211_ops rwnx_cfg80211_ops = {
+     .add_virtual_intf = rwnx_cfg80211_add_iface,
+     .del_virtual_intf = rwnx_cfg80211_del_iface,
+@@ -6989,28 +7113,71 @@
+     .scan = rwnx_cfg80211_scan,
+     .connect = rwnx_cfg80211_connect,
+     .disconnect = rwnx_cfg80211_disconnect,
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
++    .add_key = rwnx_add_key_wdev,
++#else
+     .add_key = rwnx_cfg80211_add_key,
++#endif
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
++    .get_key = rwnx_get_key_wdev,
++#else
+     .get_key = rwnx_cfg80211_get_key,
++#endif
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
++    .del_key = rwnx_del_key_wdev,
++#else
+     .del_key = rwnx_cfg80211_del_key,
++#endif
+     .set_default_key = rwnx_cfg80211_set_default_key,
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
++    .set_default_mgmt_key = rwnx_set_default_mgmt_key_wdev,
++#else
+     .set_default_mgmt_key = rwnx_cfg80211_set_default_mgmt_key,
++#endif
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
++    .add_station = rwnx_add_station_wdev,
++#else
+     .add_station = rwnx_cfg80211_add_station,
++#endif
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
++    .del_station = rwnx_del_station_wdev,
++#else
+     .del_station = rwnx_cfg80211_del_station_compat,
++#endif
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
++    .change_station = rwnx_change_station_wdev,
++#else
+     .change_station = rwnx_cfg80211_change_station,
++#endif
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
++    .mgmt_tx = rwnx_mgmt_tx_cookie,
++#else
+     .mgmt_tx = rwnx_cfg80211_mgmt_tx,
++#endif
+     .start_ap = rwnx_cfg80211_start_ap,
+     .change_beacon = rwnx_cfg80211_change_beacon,
+     .stop_ap = rwnx_cfg80211_stop_ap,
+     .set_monitor_channel = rwnx_cfg80211_set_monitor_channel,
++#if LINUX_VERSION_CODE < KERNEL_VERSION(7, 3, 0)
+     .probe_client = rwnx_cfg80211_probe_client,
++#endif
++
+ //    .mgmt_frame_register = rwnx_cfg80211_mgmt_frame_register,
+     .set_wiphy_params = rwnx_cfg80211_set_wiphy_params,
+     .set_txq_params = rwnx_cfg80211_set_txq_params,
+     .set_tx_power = rwnx_cfg80211_set_tx_power,
+ //    .get_tx_power = rwnx_cfg80211_get_tx_power,
+     .set_power_mgmt = rwnx_cfg80211_set_power_mgmt,
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
++    .get_station = rwnx_get_station_wdev,
++#else
+     .get_station = rwnx_cfg80211_get_station,
++#endif
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
++    .remain_on_channel = rwnx_roc_cookie,
++#else
+     .remain_on_channel = rwnx_cfg80211_remain_on_channel,
++#endif
+     .cancel_remain_on_channel = rwnx_cfg80211_cancel_remain_on_channel,
+     .dump_survey = rwnx_cfg80211_dump_survey,
+     .get_channel = rwnx_cfg80211_get_channel,
+@@ -7093,8 +7260,13 @@
+     if (!rwnx_mod_params.mesh)
+         return;
+ 
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
++    rwnx_cfg80211_ops.get_station = rwnx_get_station_wdev;
++    rwnx_cfg80211_ops.dump_station = rwnx_dump_station_wdev;
++#else
+     rwnx_cfg80211_ops.get_station = rwnx_cfg80211_get_station;
+     rwnx_cfg80211_ops.dump_station = rwnx_cfg80211_dump_station;
++#endif
+     rwnx_cfg80211_ops.add_mpath = rwnx_cfg80211_add_mpath;
+     rwnx_cfg80211_ops.del_mpath = rwnx_cfg80211_del_mpath;
+     rwnx_cfg80211_ops.change_mpath = rwnx_cfg80211_change_mpath;
+--- a/drivers/aic8800/aic8800_fdrv/rwnx_tx.c
++++ b/drivers/aic8800/aic8800_fdrv/rwnx_tx.c
+@@ -1687,7 +1687,9 @@
+         return -ENOMEM;
+     }
+ 
++#if LINUX_VERSION_CODE < KERNEL_VERSION(7, 3, 0)
+     *cookie = (unsigned long)skb;
++#endif
+ 
+     /*
+      * Move skb->data pointer in order to reserve room for rwnx_txhdr
+@@ -1753,6 +1755,7 @@
+     txhdr->sw_hdr = sw_txhdr;
+ 
+     sw_txhdr->txq = txq;
++    sw_txhdr->mgmt_cookie = *cookie;
+     sw_txhdr->frame_len = frame_len;
+     sw_txhdr->rwnx_sta = sta;
+     sw_txhdr->rwnx_vif = vif;
+@@ -2223,7 +2226,7 @@
+ #endif
+         /* Confirm transmission to CFG80211 */
+         cfg80211_mgmt_tx_status(&sw_txhdr->rwnx_vif->wdev,
+-                                (unsigned long)skb,
++                                sw_txhdr->mgmt_cookie,
+                                 (skb->data + sw_txhdr->headroom),
+                                 sw_txhdr->frame_len,
+                                 rwnx_txst.acknowledged,
+--- a/drivers/aic8800/aic8800_fdrv/rwnx_tx.h
++++ b/drivers/aic8800/aic8800_fdrv/rwnx_tx.h
+@@ -118,6 +118,7 @@
+  * @desc Buffer description that will be copied in shared mem for FW
+  */
+ struct rwnx_sw_txhdr {
++    u64 mgmt_cookie;
+     struct rwnx_sta *rwnx_sta;
+     struct rwnx_vif *rwnx_vif;
+     struct rwnx_txq *txq;
+--- a/drivers/aic8800/aic8800_fdrv/rwnx_defs.h
++++ b/drivers/aic8800/aic8800_fdrv/rwnx_defs.h
+@@ -562,6 +562,7 @@
+ 
+ /* Structure that will contains all RoC information received from cfg80211 */
+ struct rwnx_roc_elem {
++    u64 cookie;
+     struct wireless_dev *wdev;
+     struct ieee80211_channel *chan;
+     unsigned int duration;
+--- a/drivers/aic8800/aic8800_fdrv/rwnx_msg_rx.c
++++ b/drivers/aic8800/aic8800_fdrv/rwnx_msg_rx.c
+@@ -122,13 +122,13 @@
+         if (!roc_elem->mgmt_roc) {
+             /* Inform the host that we have switch on the indicated off-channel */
+ #if LINUX_VERSION_CODE < KERNEL_VERSION(3, 6, 0)
+-	    cfg80211_ready_on_channel(roc_elem->wdev->netdev, (u64)(rwnx_hw->roc_cookie_cnt),
++	    cfg80211_ready_on_channel(roc_elem->wdev->netdev, roc_elem->cookie,
+                                       roc_elem->chan, NL80211_CHAN_HT20, roc_elem->duration, GFP_ATOMIC);
+ #elif LINUX_VERSION_CODE < KERNEL_VERSION(3, 8, 0)
+-	    cfg80211_ready_on_channel(roc_elem->wdev, (u64)(rwnx_hw->roc_cookie_cnt),
++	    cfg80211_ready_on_channel(roc_elem->wdev, roc_elem->cookie,
+                                       roc_elem->chan, NL80211_CHAN_HT20, roc_elem->duration, GFP_ATOMIC);
+ #else
+-            cfg80211_ready_on_channel(roc_elem->wdev, (u64)(rwnx_hw->roc_cookie_cnt),
++            cfg80211_ready_on_channel(roc_elem->wdev, roc_elem->cookie,
+                                       roc_elem->chan, roc_elem->duration, GFP_ATOMIC);
+ #endif
+         }
+@@ -241,13 +241,13 @@
+         /* Inform the host that off-channel period has expired */
+ 
+ #if LINUX_VERSION_CODE < KERNEL_VERSION(3, 6, 0)
+-	cfg80211_remain_on_channel_expired(roc_elem->wdev->netdev, (u64)(rwnx_hw->roc_cookie_cnt),
++	cfg80211_remain_on_channel_expired(roc_elem->wdev->netdev, roc_elem->cookie,
+                                            roc_elem->chan, NL80211_CHAN_HT20, GFP_ATOMIC);
+ #elif LINUX_VERSION_CODE < KERNEL_VERSION(3, 8, 0)
+-	cfg80211_remain_on_channel_expired(roc_elem->wdev, (u64)(rwnx_hw->roc_cookie_cnt),
++	cfg80211_remain_on_channel_expired(roc_elem->wdev, roc_elem->cookie,
+                                            roc_elem->chan, NL80211_CHAN_HT20, GFP_ATOMIC);
+ #else
+-        cfg80211_remain_on_channel_expired(roc_elem->wdev, (u64)(rwnx_hw->roc_cookie_cnt),
++        cfg80211_remain_on_channel_expired(roc_elem->wdev, roc_elem->cookie,
+                                            roc_elem->chan, GFP_ATOMIC);
+ #endif
+     }
+--- a/drivers/aic8800/aic8800_fdrv/rwnx_msg_tx.c
++++ b/drivers/aic8800/aic8800_fdrv/rwnx_msg_tx.c
+@@ -3651,7 +3651,11 @@
+         return -ENOMEM;
+ 
+     /* Set parameters for the MM_DBG_TRIGGER_REQ message */
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
++    strscpy_pad(req->error, msg, sizeof(req->error));
++#else
+     strncpy(req->error, msg, sizeof(req->error));
++#endif
+ 
+     /* Send the MM_DBG_TRIGGER_REQ message to LMAC FW */
+     return rwnx_send_msg(rwnx_hw, req, 0, -1, NULL);
+--- a/drivers/aic8800/aic8800_fdrv/rwnx_tdls.c
++++ b/drivers/aic8800/aic8800_fdrv/rwnx_tdls.c
+@@ -115,12 +115,21 @@
+ 
+     switch (action_code) {
+     case WLAN_PUB_ACTION_TDLS_DISCOVER_RES:
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
++        skb_put(skb, 2 + sizeof(mgmt->u.action.tdls_discover_resp));
++        mgmt->u.action.category = WLAN_CATEGORY_PUBLIC;
++        mgmt->u.action.action_code = WLAN_PUB_ACTION_TDLS_DISCOVER_RES;
++        mgmt->u.action.tdls_discover_resp.dialog_token = dialog_token;
++        mgmt->u.action.tdls_discover_resp.capability =
++            cpu_to_le16(rwnx_get_tdls_sta_capab(rwnx_vif, status_code));
++#else
+         skb_put(skb, 1 + sizeof(mgmt->u.action.u.tdls_discover_resp));
+         mgmt->u.action.category = WLAN_CATEGORY_PUBLIC;
+         mgmt->u.action.u.tdls_discover_resp.action_code = WLAN_PUB_ACTION_TDLS_DISCOVER_RES;
+         mgmt->u.action.u.tdls_discover_resp.dialog_token = dialog_token;
+         mgmt->u.action.u.tdls_discover_resp.capability =
+             cpu_to_le16(rwnx_get_tdls_sta_capab(rwnx_vif, status_code));
++#endif
+         break;
+     default:
+         return -EINVAL;

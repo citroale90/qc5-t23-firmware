@@ -1,0 +1,2385 @@
+{
+  "release": "QC5-7.3.1-R43-RC1",
+  "files": {
+    "ssh/key-core.h": {
+      "sha256": "b164250d50b248de493c84b53a333723544d8c7138c488e86b3141c42e20647b",
+      "source_sha256": "b164250d50b248de493c84b53a333723544d8c7138c488e86b3141c42e20647b",
+      "origin": "work/kernel-port-latest/build/linux73/native-ssh-flash-r43/key-core.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "ssh/key-helper.c": {
+      "sha256": "d9c96121daddb01111e9d5920e46bf07c71659894ef19ce7fbac951900263969",
+      "source_sha256": "d9c96121daddb01111e9d5920e46bf07c71659894ef19ce7fbac951900263969",
+      "origin": "work/kernel-port-latest/build/linux73/native-ssh-flash-r43/key-helper.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "ssh/test-key.c": {
+      "sha256": "4b72d31c9f2c68ab3d96bbc14b0647a72cb90cfd680a3fce289c6fdfb1ee7904",
+      "source_sha256": "894629bbd5c92a07a8970b81a9be80b222c2d86f8ae2d386b4fe5e11e8bf67b5",
+      "origin": "work/kernel-port-latest/build/linux73/native-ssh-flash-r43/test-key.c",
+      "SPDX": [],
+      "adapted_for_public_tree": true
+    },
+    "ssh/ssh-start.sh": {
+      "sha256": "1d0e2a5325417e3d484d6defa22abacd159dcfa4c881a5710f763cde44bd194e",
+      "source_sha256": "1d0e2a5325417e3d484d6defa22abacd159dcfa4c881a5710f763cde44bd194e",
+      "origin": "work/kernel-port-latest/build/linux73/native-ssh-flash-r43/ssh-start",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "modules/qc5-ssh-key.c": {
+      "sha256": "5291ddf24cc9a6eee7f864cbdb79ad0dd0949ebb8fa674e2e0129ac218f6f38f",
+      "source_sha256": "5291ddf24cc9a6eee7f864cbdb79ad0dd0949ebb8fa674e2e0129ac218f6f38f",
+      "origin": "work/kernel-port-latest/build/linux73/native-ssh-flash-r43/module/qc5-ssh-key.c",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "modules/qc5-wifi-config.c": {
+      "sha256": "c94b2d9d960cc85bbb98fe1f6f276413001afde0852d8d79b83920846d559769",
+      "source_sha256": "c94b2d9d960cc85bbb98fe1f6f276413001afde0852d8d79b83920846d559769",
+      "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r41/sidecar/qc5-wifi-config.c",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "modules/qc5-sfc-runtime.c": {
+      "sha256": "53ee1c6428e62b3af7acfb2f318d57376d4c0ae2199ec00d023afd7a347621ba",
+      "source_sha256": "53ee1c6428e62b3af7acfb2f318d57376d4c0ae2199ec00d023afd7a347621ba",
+      "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r41/qc5-sfc-runtime.c",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "common/config_parser.h": {
+      "sha256": "7368a22eadf3bbf718159897093912d4a8e5be8f8e196ddad3c649214e076590",
+      "source_sha256": "7368a22eadf3bbf718159897093912d4a8e5be8f8e196ddad3c649214e076590",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/config_parser.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/config_read.h": {
+      "sha256": "4b7a6d154db49871f85e7b68598c0b3eec582196ae62efb6b0b4f77c32ff8f0b",
+      "source_sha256": "4b7a6d154db49871f85e7b68598c0b3eec582196ae62efb6b0b4f77c32ff8f0b",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/config_read.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/pppp_table.h": {
+      "sha256": "04711659f0fa77cf1eeca2051086fac5b144d050e8def0d5228f355f5566a760",
+      "source_sha256": "04711659f0fa77cf1eeca2051086fac5b144d050e8def0d5228f355f5566a760",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/pppp_table.h",
+      "SPDX": [
+        "Apache-2.0"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_captive.h": {
+      "sha256": "07cfa2796f565af07b08c6879e717a530f0e9014734dedc2315db7cf08ca356f",
+      "source_sha256": "07cfa2796f565af07b08c6879e717a530f0e9014734dedc2315db7cf08ca356f",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_captive.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_child.h": {
+      "sha256": "fb38e6f095848d2cbc4f104e21d455295c9fb6e789156e53f1581252d916c16e",
+      "source_sha256": "fb38e6f095848d2cbc4f104e21d455295c9fb6e789156e53f1581252d916c16e",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_child.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_listen.h": {
+      "sha256": "d6e9cf531130bfe12acd0a87d5a0d8eaf2a4b180d5d415603ef116dc90f51254",
+      "source_sha256": "d6e9cf531130bfe12acd0a87d5a0d8eaf2a4b180d5d415603ef116dc90f51254",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_listen.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_media.h": {
+      "sha256": "cf7f89715bae5c85d1223061ee34f7b63296ed30a28479849b5274837db100da",
+      "source_sha256": "cf7f89715bae5c85d1223061ee34f7b63296ed30a28479849b5274837db100da",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_media.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_media_talk.h": {
+      "sha256": "fd6ec4427ea72d9dec8dff420db5687f59d19a7bd8570c4a50b772667546aa02",
+      "source_sha256": "fd6ec4427ea72d9dec8dff420db5687f59d19a7bd8570c4a50b772667546aa02",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_media_talk.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_memory.h": {
+      "sha256": "f40613e37741f34da39f519c82d01c8b9e46fc5f891cd1d8380f8615a80a3c97",
+      "source_sha256": "f40613e37741f34da39f519c82d01c8b9e46fc5f891cd1d8380f8615a80a3c97",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_memory.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_motion.h": {
+      "sha256": "bbf235dc879219a2f843e724fe0283b0847d7619523f21571b1553527b89e361",
+      "source_sha256": "bbf235dc879219a2f843e724fe0283b0847d7619523f21571b1553527b89e361",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_motion.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_motion_ipc.h": {
+      "sha256": "1ec99953e0df80276f5943369d5439d9d91009ad6d9d899fe58de87029124e34",
+      "source_sha256": "1ec99953e0df80276f5943369d5439d9d91009ad6d9d899fe58de87029124e34",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_motion_ipc.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_mp4.h": {
+      "sha256": "5d4280aef2e1dd5dee65ac763023322a3c23c162ac0f109111cb4536ee7c1738",
+      "source_sha256": "5d4280aef2e1dd5dee65ac763023322a3c23c162ac0f109111cb4536ee7c1738",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_mp4.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_native_guard.h": {
+      "sha256": "67a320a443b69cb7a0ea798528a0ab28d046eeadfe3c8bdd00bfd88516e1d2d6",
+      "source_sha256": "67a320a443b69cb7a0ea798528a0ab28d046eeadfe3c8bdd00bfd88516e1d2d6",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_native_guard.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_network_policy.h": {
+      "sha256": "ea50b8cc7036caf1735458f0b7c7d4ab0e74a86d5f5e7efc506b5b47e5407552",
+      "source_sha256": "ea50b8cc7036caf1735458f0b7c7d4ab0e74a86d5f5e7efc506b5b47e5407552",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_network_policy.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_provision.h": {
+      "sha256": "cc49170074e7b2a65b1454fbb297ec6e3710e65aafab0e40e20c38c65e791492",
+      "source_sha256": "cc49170074e7b2a65b1454fbb297ec6e3710e65aafab0e40e20c38c65e791492",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_provision.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_record.h": {
+      "sha256": "4e0202d7fdaa1e80336316a1a88a151a758626996c9efa71a96823b07ee2d97d",
+      "source_sha256": "4e0202d7fdaa1e80336316a1a88a151a758626996c9efa71a96823b07ee2d97d",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_record.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_record_config.h": {
+      "sha256": "8ba8be4b54157d0476959e57471a8424c31494d3cd6434938a51150b8a745c7c",
+      "source_sha256": "8ba8be4b54157d0476959e57471a8424c31494d3cd6434938a51150b8a745c7c",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_record_config.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_record_files.h": {
+      "sha256": "5b3f16c3dfa42e1689dff414e52a56e3b451dfd952cac0c4a5f9ea7d6c2df6d8",
+      "source_sha256": "5b3f16c3dfa42e1689dff414e52a56e3b451dfd952cac0c4a5f9ea7d6c2df6d8",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_record_files.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_record_native_words.h": {
+      "sha256": "bc64fd77cc3465f33c4e3b4a6aed44681b30941c3e8dc111ddef37dea4ae1857",
+      "source_sha256": "bc64fd77cc3465f33c4e3b4a6aed44681b30941c3e8dc111ddef37dea4ae1857",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_record_native_words.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_record_policy.h": {
+      "sha256": "fd5eb949d90490ce16a2855b3ef648ed0498e1f778ebd92168478daf1c2abdde",
+      "source_sha256": "fd5eb949d90490ce16a2855b3ef648ed0498e1f778ebd92168478daf1c2abdde",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_record_policy.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_record_policy_state.h": {
+      "sha256": "cc560e71aa92721bbbce6dee0e65aa5bd449f628315dd55e466a68624d58b199",
+      "source_sha256": "cc560e71aa92721bbbce6dee0e65aa5bd449f628315dd55e466a68624d58b199",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_record_policy_state.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_rtsp.h": {
+      "sha256": "10e42bbb0188b98077184034878089e47f6854c2c1908454f2187da409f38af5",
+      "source_sha256": "10e42bbb0188b98077184034878089e47f6854c2c1908454f2187da409f38af5",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_rtsp.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_sd.h": {
+      "sha256": "8b6f62f61f7bf54d815405f86dd944352ef770ff329e841f21d43f7c0640adf7",
+      "source_sha256": "8b6f62f61f7bf54d815405f86dd944352ef770ff329e841f21d43f7c0640adf7",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_sd.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_sha256.h": {
+      "sha256": "ca7b28c90ee449640066742548232de7adbdfd8e9116c9010ffed49d4fe5ed25",
+      "source_sha256": "ca7b28c90ee449640066742548232de7adbdfd8e9116c9010ffed49d4fe5ed25",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_sha256.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_station.h": {
+      "sha256": "649038cf76f892416f52cdc47a691b41b78a23b7761724892ff86301e423439c",
+      "source_sha256": "649038cf76f892416f52cdc47a691b41b78a23b7761724892ff86301e423439c",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_station.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_stream_close.h": {
+      "sha256": "ce2d6c5a934251652e469e3df031eef9fe1688d5877183f2847ab2c208690fc6",
+      "source_sha256": "ce2d6c5a934251652e469e3df031eef9fe1688d5877183f2847ab2c208690fc6",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_stream_close.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_talk.h": {
+      "sha256": "a7d7ec7d0d5e0353b350e0cc1aa7c4ba66738710add3407bab46784d53805847",
+      "source_sha256": "a7d7ec7d0d5e0353b350e0cc1aa7c4ba66738710add3407bab46784d53805847",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_talk.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_update_profile.h": {
+      "sha256": "74ca802dd89e061af09de707360f9ee62f76c646a3543ecd82ef72002e6571c2",
+      "source_sha256": "74ca802dd89e061af09de707360f9ee62f76c646a3543ecd82ef72002e6571c2",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_update_profile.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_version.h": {
+      "sha256": "302724329372f3c60d4b3b148df4f0e45da07ee1247cb515b499853c17006632",
+      "source_sha256": "302724329372f3c60d4b3b148df4f0e45da07ee1247cb515b499853c17006632",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_version.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_video_clock.h": {
+      "sha256": "4f01115ccfc104d94aaa46c44f622b2843c69de1baea860915648bf85b7ba4b2",
+      "source_sha256": "4f01115ccfc104d94aaa46c44f622b2843c69de1baea860915648bf85b7ba4b2",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_video_clock.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_websocket.h": {
+      "sha256": "05a83225f9bb3558f33f50d7011d5c90ad06fa5a62576552b599505c30880332",
+      "source_sha256": "05a83225f9bb3558f33f50d7011d5c90ad06fa5a62576552b599505c30880332",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_websocket.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_wifi_portal_native.h": {
+      "sha256": "a88d1ffeb02a7a908e8317214d09dcde03fb49b87ef0738f34fbc9327a65de01",
+      "source_sha256": "a88d1ffeb02a7a908e8317214d09dcde03fb49b87ef0738f34fbc9327a65de01",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_wifi_portal_native.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_wifi_profile.h": {
+      "sha256": "d9526164304d12ed083538a6ec443bdaf5ddcbcd60221b8848abadf571eb351f",
+      "source_sha256": "d9526164304d12ed083538a6ec443bdaf5ddcbcd60221b8848abadf571eb351f",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_wifi_profile.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_wifi_store.h": {
+      "sha256": "64f58d85fbf37c5a5c67cec26a62ccc236d9932853ff49b0a2f7d948a925a33f",
+      "source_sha256": "64f58d85fbf37c5a5c67cec26a62ccc236d9932853ff49b0a2f7d948a925a33f",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_wifi_store.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_wifi_supplicant.h": {
+      "sha256": "2333e6a3e0415cad11e0a19a9e162ebf804aa22270d42f72e818c5290e6aa754",
+      "source_sha256": "2333e6a3e0415cad11e0a19a9e162ebf804aa22270d42f72e818c5290e6aa754",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_wifi_supplicant.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_network_policy.c": {
+      "sha256": "48982e786d79875247a6961e8de23e25fd952991adfe51c1d721974ee53a9445",
+      "source_sha256": "48982e786d79875247a6961e8de23e25fd952991adfe51c1d721974ee53a9445",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_network_policy.c",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/qc5_wifi_store.c": {
+      "sha256": "08ab8530abeb74dd21f6b6a61846ed5296538fbe0ad24b6b1ec45d5337568c81",
+      "source_sha256": "b0275fc6e42101166e36baffbf3594ee08caf8a0cd54ef39f46ba0a94a31bd79",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_wifi_store.c",
+      "SPDX": [],
+      "adapted_for_public_tree": true
+    },
+    "common/config-lock.h": {
+      "sha256": "3bbb2780dbaa3ccf72d28226bcdb2703c1cec0c29904775a166b7d37defe4192",
+      "source_sha256": "3bbb2780dbaa3ccf72d28226bcdb2703c1cec0c29904775a166b7d37defe4192",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/config-lock.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "wifi/wifi-flash-core.h": {
+      "sha256": "5a268d7098a4a77b850b2e0aeed05128d48a3db21fa851ada21a9aaa5c953213",
+      "source_sha256": "5a268d7098a4a77b850b2e0aeed05128d48a3db21fa851ada21a9aaa5c953213",
+      "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r41/wifi-flash-core.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "wifi/wifi-flash-linux.h": {
+      "sha256": "2ea49eeba1726e909d309e496a199a5f69f0ebac8541046277f8f9eed3857c45",
+      "source_sha256": "2ea49eeba1726e909d309e496a199a5f69f0ebac8541046277f8f9eed3857c45",
+      "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r41/wifi-flash-linux.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "wifi/wifi-transaction.h": {
+      "sha256": "8ecec99ab2708cac7fdfeff12dabced35e98f1cb8c277dcd25ca05e03e67b8fa",
+      "source_sha256": "8ecec99ab2708cac7fdfeff12dabced35e98f1cb8c277dcd25ca05e03e67b8fa",
+      "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r41/wifi-transaction.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "wifi/network-files.h": {
+      "sha256": "7cfba46bfcbeea136a445070164a4e9f97bb80028d07894c565132aa61b75cb0",
+      "source_sha256": "7cfba46bfcbeea136a445070164a4e9f97bb80028d07894c565132aa61b75cb0",
+      "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r41/network-files.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "wifi/scan-results.h": {
+      "sha256": "1bb405a410f11cf76625958e2dd3ce9d2dce7e6557727fd4d90268357b1e988e",
+      "source_sha256": "1bb405a410f11cf76625958e2dd3ce9d2dce7e6557727fd4d90268357b1e988e",
+      "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r41/scan-results.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "wifi/wpa-mode.h": {
+      "sha256": "aa7e2de29eace453d90a3103c81710f65be13cf53028bd4c87157c7eaca36f37",
+      "source_sha256": "aa7e2de29eace453d90a3103c81710f65be13cf53028bd4c87157c7eaca36f37",
+      "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r41/wpa-mode.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "wifi/factory-mac.c": {
+      "sha256": "f32cd571215ed12e2c2def3645047d7a58cc0e84cc3ccc1eafc5bc0f12c3ab75",
+      "source_sha256": "f32cd571215ed12e2c2def3645047d7a58cc0e84cc3ccc1eafc5bc0f12c3ab75",
+      "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r41/factory-mac.c",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "wifi/factory-mac.h": {
+      "sha256": "2cd814289738e5e6bb9b58353a2b8204b0e47df658bfb2e5bf02cfb058d6189e",
+      "source_sha256": "2cd814289738e5e6bb9b58353a2b8204b0e47df658bfb2e5bf02cfb058d6189e",
+      "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r41/factory-mac.h",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "wifi/test-banks.c": {
+      "sha256": "f99600e3e4f0322aa43bb0916da4461fa91db6d3dc8510891b4d465a99595096",
+      "source_sha256": "325cd02d69163900b99133049ad8ba5f80cecd60b7eda809f7a756bbd53bd2f4",
+      "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r41/test-banks.c",
+      "SPDX": [],
+      "adapted_for_public_tree": true
+    },
+    "wifi/test-migration.c": {
+      "sha256": "fa344d20da3d79db9b08ce719484ba95d3801bd9a215751eec455541dfd9ecfa",
+      "source_sha256": "fa344d20da3d79db9b08ce719484ba95d3801bd9a215751eec455541dfd9ecfa",
+      "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r41/test-migration.c",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "wifi/owned-wifi-reset.h": {
+      "sha256": "3ee360943edea9bf07755ee47eaa9dea946620e9bca28cf6866b8f534af85567",
+      "source_sha256": "3ee360943edea9bf07755ee47eaa9dea946620e9bca28cf6866b8f534af85567",
+      "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r42/owned-wifi-reset.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "wifi/child-process.h": {
+      "sha256": "cb4d855ffcb027548cf85ed0d01523194072b48269fb73364ae3e6e74407b732",
+      "source_sha256": "cb4d855ffcb027548cf85ed0d01523194072b48269fb73364ae3e6e74407b732",
+      "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r42/child-process.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "wifi/test-owned-reset.c": {
+      "sha256": "761d6d4f7582f0992e314c1fb96689e52f94c048872912065eab5e52fe565e0f",
+      "source_sha256": "761d6d4f7582f0992e314c1fb96689e52f94c048872912065eab5e52fe565e0f",
+      "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r42/test-owned-reset.c",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "wifi/network-runtime.c": {
+      "sha256": "7316f5c014ec3d5bc9e16a4eca74dea666fc4be271e108ae150e8d6c2db86d36",
+      "source_sha256": "2bbf2776ffcd1f02b0613f0798f15f6e161f8399ce60da790a1fb50b02d32c5a",
+      "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r42/network-runtime.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": true
+    },
+    "wifi/network-stack.c": {
+      "sha256": "75ca7fe8d70148236edb36bfc2435f67d0dc546a7c65d1df1dd9fee33685d3dc",
+      "source_sha256": "3e697676083074c7494cf24b0bdd4af54358eb3c9ade1d5dfbce0a08fb41a2fe",
+      "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r42/network-stack.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": true
+    },
+    "wifi/heartbeat.h": {
+      "sha256": "83a089657a55f449f9e17a3b8917f6dc6137cb593c06e363645d7fb4b6059411",
+      "source_sha256": "83a089657a55f449f9e17a3b8917f6dc6137cb593c06e363645d7fb4b6059411",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-continuous/heartbeat.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "wifi/ap-ram-probe.h": {
+      "sha256": "89ff49c3b6b3a238b815d6b7fe615f284334d3faa7561c014eba41446fb1a3f2",
+      "source_sha256": "89ff49c3b6b3a238b815d6b7fe615f284334d3faa7561c014eba41446fb1a3f2",
+      "origin": "work/kernel-port-latest/build/linux73/network-native/ap-ram-probe.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "installer/recovery-freestanding.c": {
+      "sha256": "ee64c1a836db36f269353a725e6c2aa3171af16f56305d9947eee7487f3b3f60",
+      "source_sha256": "ee64c1a836db36f269353a725e6c2aa3171af16f56305d9947eee7487f3b3f60",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/installer/recovery-freestanding.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "installer/stream-core.c": {
+      "sha256": "9410c9fa76d5c0a94afdf28088ee154dc062f4c17a8ed272189798553bc6e0c1",
+      "source_sha256": "9410c9fa76d5c0a94afdf28088ee154dc062f4c17a8ed272189798553bc6e0c1",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/installer/stream-core.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "installer/uboot-call.S": {
+      "sha256": "4c135e4af6b5bef684940b6eabcd4b6ba8b820a23d4cfa4db7d542e8dcb20b3a",
+      "source_sha256": "4c135e4af6b5bef684940b6eabcd4b6ba8b820a23d4cfa4db7d542e8dcb20b3a",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/installer/uboot-call.S",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "installer/recovery-sd-entry.S": {
+      "sha256": "c818fea68c71cce5e59748451b5f154a02192bab1d18ffe179b13bfd9e1a7498",
+      "source_sha256": "c818fea68c71cce5e59748451b5f154a02192bab1d18ffe179b13bfd9e1a7498",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/installer/recovery-sd-entry.S",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "installer/uboot-call.h": {
+      "sha256": "7585a0c756243555bf2f4d1c3b77e1d31b86bd9ac15056fb96610c6458e329f1",
+      "source_sha256": "7585a0c756243555bf2f4d1c3b77e1d31b86bd9ac15056fb96610c6458e329f1",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/installer/uboot-call.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "installer/qc5_sha256.h": {
+      "sha256": "ca7b28c90ee449640066742548232de7adbdfd8e9116c9010ffed49d4fe5ed25",
+      "source_sha256": "ca7b28c90ee449640066742548232de7adbdfd8e9116c9010ffed49d4fe5ed25",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/installer/qc5_sha256.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "installer/stream-entry.c": {
+      "sha256": "234a32ca7de1bd79ece51a8260f8052503c5e4f9ec26524235d3f1f8e852a882",
+      "source_sha256": "234a32ca7de1bd79ece51a8260f8052503c5e4f9ec26524235d3f1f8e852a882",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/installer/stream-entry.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "installer/stream-core.h": {
+      "sha256": "bbb272f56b99475ac4efebbb4f4072c6e2424cb5a1fc396f921f63cea7437290",
+      "source_sha256": "bbb272f56b99475ac4efebbb4f4072c6e2424cb5a1fc396f921f63cea7437290",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/installer/stream-core.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "installer/fat-slot.h": {
+      "sha256": "3b76d567ad04713688e80984a8c3f23965a34c6233ba01f84020f374a1105a5f",
+      "source_sha256": "3b76d567ad04713688e80984a8c3f23965a34c6233ba01f84020f374a1105a5f",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/installer/fat-slot.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "installer/release.generated.h": {
+      "sha256": "80b6bd92719df7057cc410b70ff257f3fb990050e85cfeab1ff1c5b22ffb113f",
+      "source_sha256": "80b6bd92719df7057cc410b70ff257f3fb990050e85cfeab1ff1c5b22ffb113f",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/installer/release.generated.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "installer/full-recovery.h": {
+      "sha256": "77a345876a18f11ef5004f83ded3059c25a9586f452971a5f67bc7f647b9a059",
+      "source_sha256": "77a345876a18f11ef5004f83ded3059c25a9586f452971a5f67bc7f647b9a059",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/installer/full-recovery.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "installer/test-stream.c": {
+      "sha256": "ef7b0a9dcec27a39cb0bcc21235be190c4f99abee5ab188a8cc61e429b0c5b44",
+      "source_sha256": "ef7b0a9dcec27a39cb0bcc21235be190c4f99abee5ab188a8cc61e429b0c5b44",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/installer/test-stream.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "boot/init-runtime.sh": {
+      "sha256": "96cf5988cc8da70ddae096771b3895907e8275439f00593cb8014bddda193dc5",
+      "source_sha256": "96cf5988cc8da70ddae096771b3895907e8275439f00593cb8014bddda193dc5",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/flash/init-runtime.sh",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "boot/flash-init.c": {
+      "sha256": "a723c1ea9d6eca5d66386a0d19639f9c0c9b8bc5d853340e69fc8aa73def9d07",
+      "source_sha256": "a723c1ea9d6eca5d66386a0d19639f9c0c9b8bc5d853340e69fc8aa73def9d07",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/flash/flash-init.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "boot/decoder-entry.S": {
+      "sha256": "1c4401761ff8fc022a1b49e04f4ef7cbfdd05be7ef140bc4a6da3e8bfb828419",
+      "source_sha256": "1c4401761ff8fc022a1b49e04f4ef7cbfdd05be7ef140bc4a6da3e8bfb828419",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/flash/decoder-entry.S",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "boot/decoder-start.c": {
+      "sha256": "ccf86e373f2c1aa416b6ec9d3420c6e29d9cfb0bf6d6f098f366e40a935039c0",
+      "source_sha256": "ccf86e373f2c1aa416b6ec9d3420c6e29d9cfb0bf6d6f098f366e40a935039c0",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/flash/decoder-start.c",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "boot/decoder.c": {
+      "sha256": "4ea73705b6d995ef55258c1462844a6da2540bf56949c79db38c449fa543c3c7",
+      "source_sha256": "4ea73705b6d995ef55258c1462844a6da2540bf56949c79db38c449fa543c3c7",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/flash/decoder.c",
+      "SPDX": [
+        "LGPL-2.1-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "boot/test-decoder.c": {
+      "sha256": "6c9d8f112a585f909251e07c39d1c1885cb64d9e559deb06cd7c47dab71b39d4",
+      "source_sha256": "6c9d8f112a585f909251e07c39d1c1885cb64d9e559deb06cd7c47dab71b39d4",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/flash/test-decoder.c",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "common/fat-space.h": {
+      "sha256": "fac1dc705d55158536871ac1635cdf5bfac2454a4fb213f47ae13319da9c9489",
+      "source_sha256": "fac1dc705d55158536871ac1635cdf5bfac2454a4fb213f47ae13319da9c9489",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/fat-space.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "boot/bind-native.c": {
+      "sha256": "4fb608aface19d8cbbfd136414faa76cfb713f366626c1b57dccc720ae1f0642",
+      "source_sha256": "4fb608aface19d8cbbfd136414faa76cfb713f366626c1b57dccc720ae1f0642",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/root-filesystem/bind-readonly-runtime.c",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "boot/readonly-links.generated.h": {
+      "sha256": "a9a1235ca832d2e606e0a303b37d30b53149bd2ed7c325f2868d441b81404867",
+      "source_sha256": "a9a1235ca832d2e606e0a303b37d30b53149bd2ed7c325f2868d441b81404867",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/flash/root-store/readonly-links.generated.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "boot/runtime.generated.h": {
+      "sha256": "9f47990983c875f8de5793127c79c549ab08ada8e6f5021f4e8d97af27f3bf97",
+      "source_sha256": "9f47990983c875f8de5793127c79c549ab08ada8e6f5021f4e8d97af27f3bf97",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/flash/root-store/runtime.generated.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/frontend/config_read.h": {
+      "sha256": "4b7a6d154db49871f85e7b68598c0b3eec582196ae62efb6b0b4f77c32ff8f0b",
+      "source_sha256": "4b7a6d154db49871f85e7b68598c0b3eec582196ae62efb6b0b4f77c32ff8f0b",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/qc5-t23-firmware/src/config_read.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/frontend/qc5_mp4.c": {
+      "sha256": "dbeed0dd7d55b83dbd765b6371c1e06fac89b46631b9d29e7b1360615f3147fc",
+      "source_sha256": "dbeed0dd7d55b83dbd765b6371c1e06fac89b46631b9d29e7b1360615f3147fc",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/qc5-t23-firmware/src/qc5_mp4.c",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/frontend/qc5_mp4.h": {
+      "sha256": "5d4280aef2e1dd5dee65ac763023322a3c23c162ac0f109111cb4536ee7c1738",
+      "source_sha256": "5d4280aef2e1dd5dee65ac763023322a3c23c162ac0f109111cb4536ee7c1738",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/qc5-t23-firmware/src/qc5_mp4.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/frontend/qc5_record_policy_state.h": {
+      "sha256": "cc560e71aa92721bbbce6dee0e65aa5bd449f628315dd55e466a68624d58b199",
+      "source_sha256": "cc560e71aa92721bbbce6dee0e65aa5bd449f628315dd55e466a68624d58b199",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/qc5-t23-firmware/src/qc5_record_policy_state.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/frontend/qc5_sd.h": {
+      "sha256": "8b6f62f61f7bf54d815405f86dd944352ef770ff329e841f21d43f7c0640adf7",
+      "source_sha256": "8b6f62f61f7bf54d815405f86dd944352ef770ff329e841f21d43f7c0640adf7",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/qc5-t23-firmware/src/qc5_sd.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/frontend/qc5_websocket.h": {
+      "sha256": "05a83225f9bb3558f33f50d7011d5c90ad06fa5a62576552b599505c30880332",
+      "source_sha256": "05a83225f9bb3558f33f50d7011d5c90ad06fa5a62576552b599505c30880332",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/qc5-t23-firmware/src/qc5_websocket.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/frontend/qc5_wifi_profile.h": {
+      "sha256": "d9526164304d12ed083538a6ec443bdaf5ddcbcd60221b8848abadf571eb351f",
+      "source_sha256": "d9526164304d12ed083538a6ec443bdaf5ddcbcd60221b8848abadf571eb351f",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/qc5-t23-firmware/src/qc5_wifi_profile.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/frontend/qc5_wifi_store.h": {
+      "sha256": "64f58d85fbf37c5a5c67cec26a62ccc236d9932853ff49b0a2f7d948a925a33f",
+      "source_sha256": "64f58d85fbf37c5a5c67cec26a62ccc236d9932853ff49b0a2f7d948a925a33f",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/qc5-t23-firmware/src/qc5_wifi_store.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-continuous/stream-alaw.h": {
+      "sha256": "c930ecbf639a9975b1c98863ca6dadec2c28814fa1c220c780a76ff2d36a4d42",
+      "source_sha256": "c930ecbf639a9975b1c98863ca6dadec2c28814fa1c220c780a76ff2d36a4d42",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-continuous/stream-alaw.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-continuous/stream-child.h": {
+      "sha256": "003d0028984ad37280e4566710157b870e120bd78bccf74d70afb53b75128553",
+      "source_sha256": "003d0028984ad37280e4566710157b870e120bd78bccf74d70afb53b75128553",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-continuous/stream-child.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-continuous/stream-descriptors.h": {
+      "sha256": "5e3a367d2dd4499bf13a639b62f4ccb4c12172d550954e97df87e5dc0fb10cae",
+      "source_sha256": "5e3a367d2dd4499bf13a639b62f4ccb4c12172d550954e97df87e5dc0fb10cae",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-continuous/stream-descriptors.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-continuous/stream-hardware.generated.h": {
+      "sha256": "b2f88869fc6858d448555fe0eb12ff486ec5116b0620e2fbbab4ad66ed3e865c",
+      "source_sha256": "b2f88869fc6858d448555fe0eb12ff486ec5116b0620e2fbbab4ad66ed3e865c",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-continuous/stream-hardware.generated.h",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-continuous/stream-ipc.h": {
+      "sha256": "462153caba665773cce7501b0ecb7f6af3d5c3def68a3d87e2fe93d3151242e0",
+      "source_sha256": "462153caba665773cce7501b0ecb7f6af3d5c3def68a3d87e2fe93d3151242e0",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-continuous/stream-ipc.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-continuous/stream-ownership.h": {
+      "sha256": "2ce320c15e6d13beb6edc90b37dea3725d542da7378388809f67c64e2c020c65",
+      "source_sha256": "2ce320c15e6d13beb6edc90b37dea3725d542da7378388809f67c64e2c020c65",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-continuous/stream-ownership.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-continuous/stream-process.h": {
+      "sha256": "3bd2ddb45feaf9eeb22869c1c6e6c480e6cbd4c2fe757c73d24b478b15f9d2da",
+      "source_sha256": "3bd2ddb45feaf9eeb22869c1c6e6c480e6cbd4c2fe757c73d24b478b15f9d2da",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-continuous/stream-process.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-continuous/stream-receiver.h": {
+      "sha256": "036b426c6635d5e69fd0c98cdf5335dba5c10a208a876c6d7025f1f00aca39a2",
+      "source_sha256": "036b426c6635d5e69fd0c98cdf5335dba5c10a208a876c6d7025f1f00aca39a2",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-continuous/stream-receiver.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-continuous/stream-result.h": {
+      "sha256": "ee6f262ba76666dc6be9ea4ed79fec09f6e08243f3972cb6ec6cda61e13de321",
+      "source_sha256": "ee6f262ba76666dc6be9ea4ed79fec09f6e08243f3972cb6ec6cda61e13de321",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-continuous/stream-result.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-continuous/stream-start.generated.h": {
+      "sha256": "9b6512b31703457468e8c1035a38eaf5ef7ab696a2557b890cc0ed8e935996e0",
+      "source_sha256": "9b6512b31703457468e8c1035a38eaf5ef7ab696a2557b890cc0ed8e935996e0",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-continuous/stream-start.generated.h",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-continuous/stream-status.h": {
+      "sha256": "10e140038f5b433ae24f8598b48f94ae118747326ade872b82239f815716a5ee",
+      "source_sha256": "10e140038f5b433ae24f8598b48f94ae118747326ade872b82239f815716a5ee",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-continuous/stream-status.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-duplex/aic-duplex-plan.h": {
+      "sha256": "4ebe3e278195732449dd742d3c4d17b732340086d6378bf07e46cdb9ab5afb3a",
+      "source_sha256": "4ebe3e278195732449dd742d3c4d17b732340086d6378bf07e46cdb9ab5afb3a",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-duplex/aic-duplex-plan.h",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-duplex/capture-audio-duplex.generated.c": {
+      "sha256": "0348ed94dd32b1a76d67c59893eaaf35bf36c98e402f836ffcee0556ff6729fc",
+      "source_sha256": "0348ed94dd32b1a76d67c59893eaaf35bf36c98e402f836ffcee0556ff6729fc",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-duplex/capture-audio-duplex.generated.c",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-duplex/codec-async-steps.generated.h": {
+      "sha256": "d45e71b013dcc59286a0798f35ed98edf07213b4cc63a1f229c183313f4edfc1",
+      "source_sha256": "d45e71b013dcc59286a0798f35ed98edf07213b4cc63a1f229c183313f4edfc1",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-duplex/codec-async-steps.generated.h",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-duplex/codec-async.h": {
+      "sha256": "e0e164c1b86d297fa783ed859bb207cb992b12cf7f0013a1aab32c9bf9e8b7e5",
+      "source_sha256": "e0e164c1b86d297fa783ed859bb207cb992b12cf7f0013a1aab32c9bf9e8b7e5",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-duplex/codec-async.h",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-duplex/duplex-capture.generated.h": {
+      "sha256": "2746947887392ba5f99cef97cdc78332ba503a1af66144c134db446eb60b545d",
+      "source_sha256": "2746947887392ba5f99cef97cdc78332ba503a1af66144c134db446eb60b545d",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-duplex/duplex-capture.generated.h",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-duplex/duplex-control.h": {
+      "sha256": "b78297adba37fdb288fafda6b9b29b5f2f3e44cc814084018342c53f9896bc47",
+      "source_sha256": "b78297adba37fdb288fafda6b9b29b5f2f3e44cc814084018342c53f9896bc47",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-duplex/duplex-control.h",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-duplex/duplex-layout.h": {
+      "sha256": "d9e36f73e888c996adae8f42bf5d8d5085ff4af49c66a28aad042e9aa9222d5e",
+      "source_sha256": "d9e36f73e888c996adae8f42bf5d8d5085ff4af49c66a28aad042e9aa9222d5e",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-duplex/duplex-layout.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-duplex/duplex-sidecar.h": {
+      "sha256": "5bc825ebb7dd9bf71857f16116d8ae411c426b87c6c7c7dbc26e7b0c2289a287",
+      "source_sha256": "5bc825ebb7dd9bf71857f16116d8ae411c426b87c6c7c7dbc26e7b0c2289a287",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-duplex/duplex-sidecar.h",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-duplex/sample-clock.h": {
+      "sha256": "8a7a0a32f96c05460f58ba02200aff4cb8ff07ad9deb0cd2e18d25c5b0f9059c",
+      "source_sha256": "8a7a0a32f96c05460f58ba02200aff4cb8ff07ad9deb0cd2e18d25c5b0f9059c",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-duplex/sample-clock.h",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-duplex/talk-alaw.h": {
+      "sha256": "0980f715c92b45df588e72535a5ae6cdc48552bc2925122dfec723aa7c8274b5",
+      "source_sha256": "0980f715c92b45df588e72535a5ae6cdc48552bc2925122dfec723aa7c8274b5",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-duplex/talk-alaw.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-duplex/talk-batch.h": {
+      "sha256": "e8f20da5b31c4537d117de6bd5619ab5f286e74727301b76c6150d1dc52db83a",
+      "source_sha256": "e8f20da5b31c4537d117de6bd5619ab5f286e74727301b76c6150d1dc52db83a",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-duplex/talk-batch.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-duplex/talk-ipc.h": {
+      "sha256": "7f0ea515aa016d8d76c8933eb26919b4ee63a4c090dac527999de80ab2a082e8",
+      "source_sha256": "7f0ea515aa016d8d76c8933eb26919b4ee63a4c090dac527999de80ab2a082e8",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-duplex/talk-ipc.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-duplex/talk-parent.h": {
+      "sha256": "96229f22e172e5dbc98f12c4fcaa080109f97f2e73f530308aa6de8cd10afe05",
+      "source_sha256": "96229f22e172e5dbc98f12c4fcaa080109f97f2e73f530308aa6de8cd10afe05",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-duplex/talk-parent.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-duplex/talk-queue.h": {
+      "sha256": "d22a7af39d0ada66f4ef8d049f8ab097f766c974db062696819b373f00ed677b",
+      "source_sha256": "d22a7af39d0ada66f4ef8d049f8ab097f766c974db062696819b373f00ed677b",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-duplex/talk-queue.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-duplex/talk-requests.h": {
+      "sha256": "8b3aad53862d05c66ca5a105a3afc204a97b477eb507031dcad8438572b5deb9",
+      "source_sha256": "8b3aad53862d05c66ca5a105a3afc204a97b477eb507031dcad8438572b5deb9",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-duplex/talk-requests.h",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-duplex/talk-wire.h": {
+      "sha256": "0cde2c865e75a4fd1aeca8ef45a6d5c2acdc09ccacbdd93573349ee9424b0929",
+      "source_sha256": "0cde2c865e75a4fd1aeca8ef45a6d5c2acdc09ccacbdd93573349ee9424b0929",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-duplex/talk-wire.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-duplex/tx-engine.h": {
+      "sha256": "da974cb1d614d9b0287d1f43d5f065e1d644887184925b7e702e9be2b43c06aa",
+      "source_sha256": "da974cb1d614d9b0287d1f43d5f065e1d644887184925b7e702e9be2b43c06aa",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-duplex/tx-engine.h",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-t23/audio-layout.h": {
+      "sha256": "a00786bff88d37a46979abb22e348bf9aff5f457f126204b6ead536a1a6feda0",
+      "source_sha256": "a00786bff88d37a46979abb22e348bf9aff5f457f126204b6ead536a1a6feda0",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-t23/audio-layout.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-t23/audio-plan.h": {
+      "sha256": "f73a574bcfa70e1dc7d002993cc8772641b70d63c3d36d111073d273906b3986",
+      "source_sha256": "f73a574bcfa70e1dc7d002993cc8772641b70d63c3d36d111073d273906b3986",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-t23/audio-plan.h",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/audio-t23/codec-capture.generated.h": {
+      "sha256": "e72656640c58cda5e850942567bb52338f696ca0f91adfba9db1fe88e6cff991",
+      "source_sha256": "e72656640c58cda5e850942567bb52338f696ca0f91adfba9db1fe88e6cff991",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/audio-t23/codec-capture.generated.h",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/client-handoff.h": {
+      "sha256": "e2669f741a1fa53374c7a27757cf9c51a9095a5fa94a0f7b2420418c37d88891",
+      "source_sha256": "e2669f741a1fa53374c7a27757cf9c51a9095a5fa94a0f7b2420418c37d88891",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/client-handoff.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/media-handoff.h": {
+      "sha256": "97a39215abddb620cdff00471bf5fc7b013b910a2e60ef6108bc416e60d8ac22",
+      "source_sha256": "97a39215abddb620cdff00471bf5fc7b013b910a2e60ef6108bc416e60d8ac22",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/media-handoff.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/media-status.h": {
+      "sha256": "36c0ae7b13fce64768bddb9918319c78da442a91184e2ce64452b7d8c4b59ea0",
+      "source_sha256": "36c0ae7b13fce64768bddb9918319c78da442a91184e2ce64452b7d8c4b59ea0",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/media-status.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-completion-r4/bridge.h": {
+      "sha256": "16fbbe039d30a37fd9611b555fc7f6ee0e81bd606a449530aa074e9a2b3d6b88",
+      "source_sha256": "16fbbe039d30a37fd9611b555fc7f6ee0e81bd606a449530aa074e9a2b3d6b88",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-completion-r4/bridge.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-completion-r4/qr-capture.h": {
+      "sha256": "885004f4447bf166ad222905f6c614110055e0dbdee99db1db87eea7a7c9ef40",
+      "source_sha256": "885004f4447bf166ad222905f6c614110055e0dbdee99db1db87eea7a7c9ef40",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-completion-r4/qr-capture.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-completion-r4/qr-frame.h": {
+      "sha256": "b595ce5eb484215a418e3f4f30c4590569b4bc013dbeb91474804271856fbc70",
+      "source_sha256": "b595ce5eb484215a418e3f4f30c4590569b4bc013dbeb91474804271856fbc70",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-completion-r4/qr-frame.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-completion-r4/rtp-native.h": {
+      "sha256": "e647b6d330648314714c31d68d7bf0e5273d585a4d673c6704ab28bd9536b712",
+      "source_sha256": "e647b6d330648314714c31d68d7bf0e5273d585a4d673c6704ab28bd9536b712",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-completion-r4/rtp-native.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-completion-r4/server-info.h": {
+      "sha256": "1b53e058c45f247d3bc1c1002471593b564e8bc74d5f1e47191029d1776a6f7b",
+      "source_sha256": "1b53e058c45f247d3bc1c1002471593b564e8bc74d5f1e47191029d1776a6f7b",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-completion-r4/server-info.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-completion-r4/socket-native.h": {
+      "sha256": "088bf64e3a1faba423b6d225f0795a7e66e2e3835c9ad03542c62990a90c3401",
+      "source_sha256": "088bf64e3a1faba423b6d225f0795a7e66e2e3835c9ad03542c62990a90c3401",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-completion-r4/socket-native.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-continuous/daynight-controller.h": {
+      "sha256": "4a89f17cdb55dfc69342f2ddf3c8f58622313ac942565510bc7b849f8c577009",
+      "source_sha256": "4a89f17cdb55dfc69342f2ddf3c8f58622313ac942565510bc7b849f8c577009",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-continuous/daynight-controller.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-continuous/daynight-frontend.h": {
+      "sha256": "c4d2f8f69110e32f349ee2e1710de37bdb728f277c7ab409f35498231085e043",
+      "source_sha256": "c4d2f8f69110e32f349ee2e1710de37bdb728f277c7ab409f35498231085e043",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-continuous/daynight-frontend.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-continuous/health-policy.h": {
+      "sha256": "2a357f86ae60a2b6ed4258598298ece3863a6829ed6b556971695a4975ee779d",
+      "source_sha256": "2a357f86ae60a2b6ed4258598298ece3863a6829ed6b556971695a4975ee779d",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-continuous/health-policy.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-continuous/heartbeat.h": {
+      "sha256": "83a089657a55f449f9e17a3b8917f6dc6137cb593c06e363645d7fb4b6059411",
+      "source_sha256": "83a089657a55f449f9e17a3b8917f6dc6137cb593c06e363645d7fb4b6059411",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-continuous/heartbeat.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-continuous/image-mode.h": {
+      "sha256": "451ab6e24dfe190abd182c00915524780d93e53f745c52bd12baae669bdac341",
+      "source_sha256": "451ab6e24dfe190abd182c00915524780d93e53f745c52bd12baae669bdac341",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-continuous/image-mode.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-features/feature-abi.h": {
+      "sha256": "63e4394aa6c0d8b2c6ddc05e082febcf134d4a691bc01eea0df8e6350065c83b",
+      "source_sha256": "63e4394aa6c0d8b2c6ddc05e082febcf134d4a691bc01eea0df8e6350065c83b",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-features/feature-abi.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-features/feature-owner.h": {
+      "sha256": "7a90387e036118327452efcfdf5ef946c60d1b44152cb9f3b5d36e93aff78da8",
+      "source_sha256": "7a90387e036118327452efcfdf5ef946c60d1b44152cb9f3b5d36e93aff78da8",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-features/feature-owner.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-features/mkv-native.h": {
+      "sha256": "de5986b129041af18d884c0116d1f7cc2320e083bd45d349825797edf2eaa289",
+      "source_sha256": "de5986b129041af18d884c0116d1f7cc2320e083bd45d349825797edf2eaa289",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-features/mkv-native.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-features/motion-local.h": {
+      "sha256": "e8a4b5220bf5db5def91279ef2109d41fbef6e9065b4cbcd398233f91d69a272",
+      "source_sha256": "e8a4b5220bf5db5def91279ef2109d41fbef6e9065b4cbcd398233f91d69a272",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-features/motion-local.h",
+      "SPDX": [
+        "GPL-2.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-features/qc5-record-sink.c": {
+      "sha256": "e3ed43b3806bba336bef111d2f0d4d477ff2e5aaadf3592071357d4126c65b90",
+      "source_sha256": "e3ed43b3806bba336bef111d2f0d4d477ff2e5aaadf3592071357d4126c65b90",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-features/qc5-record-sink.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-features/record-channel.h": {
+      "sha256": "32d6b5f974e1ff9bd9baa2f7c94af664e7b4cccbdd6b553f6a1e60fa9067ea9b",
+      "source_sha256": "32d6b5f974e1ff9bd9baa2f7c94af664e7b4cccbdd6b553f6a1e60fa9067ea9b",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-features/record-channel.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-features/record-runtime.h": {
+      "sha256": "87b3de3e1bf022919be4655dbb2bdaaeef6ba1a666a29dedbfa16fa6afd0c76c",
+      "source_sha256": "87b3de3e1bf022919be4655dbb2bdaaeef6ba1a666a29dedbfa16fa6afd0c76c",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-features/record-runtime.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-rtsp-capture/bridge.h": {
+      "sha256": "16fbbe039d30a37fd9611b555fc7f6ee0e81bd606a449530aa074e9a2b3d6b88",
+      "source_sha256": "16fbbe039d30a37fd9611b555fc7f6ee0e81bd606a449530aa074e9a2b3d6b88",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-rtsp-capture/bridge.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-rtsp-capture/rtp-native.h": {
+      "sha256": "e647b6d330648314714c31d68d7bf0e5273d585a4d673c6704ab28bd9536b712",
+      "source_sha256": "e647b6d330648314714c31d68d7bf0e5273d585a4d673c6704ab28bd9536b712",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-rtsp-capture/rtp-native.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-rtsp-capture/server-info.h": {
+      "sha256": "1b53e058c45f247d3bc1c1002471593b564e8bc74d5f1e47191029d1776a6f7b",
+      "source_sha256": "1b53e058c45f247d3bc1c1002471593b564e8bc74d5f1e47191029d1776a6f7b",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-rtsp-capture/server-info.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-rtsp-capture/socket-native.h": {
+      "sha256": "088bf64e3a1faba423b6d225f0795a7e66e2e3835c9ad03542c62990a90c3401",
+      "source_sha256": "088bf64e3a1faba423b6d225f0795a7e66e2e3835c9ad03542c62990a90c3401",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-rtsp-capture/socket-native.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-services/config-lock.h": {
+      "sha256": "3bbb2780dbaa3ccf72d28226bcdb2703c1cec0c29904775a166b7d37defe4192",
+      "source_sha256": "3bbb2780dbaa3ccf72d28226bcdb2703c1cec0c29904775a166b7d37defe4192",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-services/config-lock.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-services/settings-http.h": {
+      "sha256": "c81a315c3cce78dea2fbcbf289318af51929098f27df08c75426549c7ee04607",
+      "source_sha256": "c81a315c3cce78dea2fbcbf289318af51929098f27df08c75426549c7ee04607",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-services/settings-http.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/native-services/settings.h": {
+      "sha256": "036ae4980ed6603c65ac4b9c7987c18c0ee46ab528b9f610564e154c9021dc55",
+      "source_sha256": "036ae4980ed6603c65ac4b9c7987c18c0ee46ab528b9f610564e154c9021dc55",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-services/settings.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/native-integrated/producer/adapter-input.c": {
+      "sha256": "6bd32ffbf4104a93d519cb395690c89107c3d3f7b5028de20002eb069ba4b968",
+      "source_sha256": "5704e8c955e13e0ca4b966e9700e508617a3f8f770f734eb1187c5205ebf4bea",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/producer/adapter-input.c",
+      "SPDX": [],
+      "adapted_for_public_tree": true
+    },
+    "media/network-native/network-files.h": {
+      "sha256": "7cfba46bfcbeea136a445070164a4e9f97bb80028d07894c565132aa61b75cb0",
+      "source_sha256": "7cfba46bfcbeea136a445070164a4e9f97bb80028d07894c565132aa61b75cb0",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/network-native/network-files.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/af-stats-capture.h": {
+      "sha256": "0308ef108989cc25aa2b7cd68ce82319e83fc98041e937c67f94b6c681f1633c",
+      "source_sha256": "0308ef108989cc25aa2b7cd68ce82319e83fc98041e937c67f94b6c681f1633c",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/af-stats-capture.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/af-stats.h": {
+      "sha256": "f4467b0c8fa0350e25e880c8b61a5b92b2ad4c298a466e57935cf85becbc661d",
+      "source_sha256": "f4467b0c8fa0350e25e880c8b61a5b92b2ad4c298a466e57935cf85becbc661d",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/af-stats.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/auto-exposure.h": {
+      "sha256": "10a6cb9603c54ec2001760ea5b035878450b247ca056b1035edbbf4b337ead3c",
+      "source_sha256": "10a6cb9603c54ec2001760ea5b035878450b247ca056b1035edbbf4b337ead3c",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/auto-exposure.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/awb-algorithm.h": {
+      "sha256": "741e5b2bd65c8d40a3b97e3fff00c7e44f902ed968ef0f4cd1ad6dda554b94ae",
+      "source_sha256": "741e5b2bd65c8d40a3b97e3fff00c7e44f902ed968ef0f4cd1ad6dda554b94ae",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/awb-algorithm.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/awb-capture.h": {
+      "sha256": "e277ad15061c44e8dbb34209aba1859a12545dca3e689a2e89560256ff474903",
+      "source_sha256": "e277ad15061c44e8dbb34209aba1859a12545dca3e689a2e89560256ff474903",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/awb-capture.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/awb-cluster.h": {
+      "sha256": "139aed8948fcf1be2d49ed22dcfd1049df635b541ceb192b5c0c11e7148ccea0",
+      "source_sha256": "139aed8948fcf1be2d49ed22dcfd1049df635b541ceb192b5c0c11e7148ccea0",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/awb-cluster.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/awb-math.inc": {
+      "sha256": "1e17fe1d017023e21754e74bdbe932ea2e563b14d59a95ea297642b2114ecb3a",
+      "source_sha256": "1e17fe1d017023e21754e74bdbe932ea2e563b14d59a95ea297642b2114ecb3a",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/awb-math.inc",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/awb-note.h": {
+      "sha256": "59de19a6c2da4f4bf2395d2665b100af71080df7a7064bd12b0f1ad3c5fd9f3a",
+      "source_sha256": "59de19a6c2da4f4bf2395d2665b100af71080df7a7064bd12b0f1ad3c5fd9f3a",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/awb-note.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/bcsh-capture.h": {
+      "sha256": "4b4e22c8668518d36e0d9b222326b6e11ab945f003a18ce7081de0143a073890",
+      "source_sha256": "4b4e22c8668518d36e0d9b222326b6e11ab945f003a18ce7081de0143a073890",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/bcsh-capture.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/bcsh-dynamic.h": {
+      "sha256": "50640e236df402bed0622085e50ab52beb14c93935dd7c21a64e6c5bae135560",
+      "source_sha256": "50640e236df402bed0622085e50ab52beb14c93935dd7c21a64e6c5bae135560",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/bcsh-dynamic.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/bcsh-ev.h": {
+      "sha256": "8b104b2c8a31dafbd631fd4870f16a7c6d5f25c63071f3b6effb777daa5c42c5",
+      "source_sha256": "8b104b2c8a31dafbd631fd4870f16a7c6d5f25c63071f3b6effb777daa5c42c5",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/bcsh-ev.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/bcsh-events.h": {
+      "sha256": "eb644f76caf51620153f4eef06ef8f3a42272589b3713597db8ee2668a1b8926",
+      "source_sha256": "eb644f76caf51620153f4eef06ef8f3a42272589b3713597db8ee2668a1b8926",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/bcsh-events.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/bcsh-live-plan.h": {
+      "sha256": "b8965d62d438faa75afe9450c3e8a0993d57ffdee618006a272e6e6cf178436f",
+      "source_sha256": "b8965d62d438faa75afe9450c3e8a0993d57ffdee618006a272e6e6cf178436f",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/bcsh-live-plan.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/bcsh-matrix.h": {
+      "sha256": "8e0af80d0f42f36f14a0a48176c51571667c36cb6d0aa6a7840a7099ecbcc2e5",
+      "source_sha256": "8e0af80d0f42f36f14a0a48176c51571667c36cb6d0aa6a7840a7099ecbcc2e5",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/bcsh-matrix.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-frame.c": {
+      "sha256": "286402226febc210200a8b683bce4d4f1bb0c4d90c167a64193f7500e2cb9a6f",
+      "source_sha256": "286402226febc210200a8b683bce4d4f1bb0c4d90c167a64193f7500e2cb9a6f",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-frame.c",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-av.c": {
+      "sha256": "c20234200e1d1ffdf5a93a24cb6bf4778379e0eb6092134fdfd45a37623bc514",
+      "source_sha256": "c20234200e1d1ffdf5a93a24cb6bf4778379e0eb6092134fdfd45a37623bc514",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-av.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-awb.c": {
+      "sha256": "035a4b43cca3d7b1a6f2aa8107496b00de7a40e3d3ef19eab12601e9bad0f0b8",
+      "source_sha256": "035a4b43cca3d7b1a6f2aa8107496b00de7a40e3d3ef19eab12601e9bad0f0b8",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-awb.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-live.c": {
+      "sha256": "7782aa5fe151d424277b373c360f58a9bce3683e1faed0790312f0ec5b471960",
+      "source_sha256": "90677906aa35c2de2e0932eff836b348fd9d5d176884b4d257d5e74a15035aed",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-live.c",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": true
+    },
+    "media/video-gc1084/capture-helix-memory.c": {
+      "sha256": "8dc9bfc40b92c5f4f0e8790d086a6d3fa1e9e2cf37ab3aa871ff04f488974ef2",
+      "source_sha256": "8dc9bfc40b92c5f4f0e8790d086a6d3fa1e9e2cf37ab3aa871ff04f488974ef2",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-memory.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-sd-adapt.c": {
+      "sha256": "35671dfd902835d9da5b117e26e983df81aa689cb03cd13f35583203137a0c5f",
+      "source_sha256": "35671dfd902835d9da5b117e26e983df81aa689cb03cd13f35583203137a0c5f",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-sd-adapt.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-sd-af.c": {
+      "sha256": "a491c2c1b3353cfd198b762a699f0ee3fd939e93627f56544b951cf5399e1117",
+      "source_sha256": "a491c2c1b3353cfd198b762a699f0ee3fd939e93627f56544b951cf5399e1117",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-sd-af.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-sd-audio-service.c": {
+      "sha256": "3a3bc0acfa36a81c4adceca862137d91a1248347b04b42bffb8babf9d56b4be3",
+      "source_sha256": "3a3bc0acfa36a81c4adceca862137d91a1248347b04b42bffb8babf9d56b4be3",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-sd-audio-service.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-sd-bcsh-dynamic.c": {
+      "sha256": "1e919d4bbb5ba8d7afcdf0730e809598e8045579fb815b21531db1fcfc3b6d7e",
+      "source_sha256": "1e919d4bbb5ba8d7afcdf0730e809598e8045579fb815b21531db1fcfc3b6d7e",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-sd-bcsh-dynamic.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-sd-bcsh.c": {
+      "sha256": "2ae4166c116f296515e4b70c0cc3a3dbc418642cc5c44797cdddceaaf1d52a96",
+      "source_sha256": "2ae4166c116f296515e4b70c0cc3a3dbc418642cc5c44797cdddceaaf1d52a96",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-sd-bcsh.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-sd-copy-service.c": {
+      "sha256": "6faec05d759a4d6bf326faec69e1f4c4273dca30bcba9296b0f191d2faaf1e1c",
+      "source_sha256": "6faec05d759a4d6bf326faec69e1f4c4273dca30bcba9296b0f191d2faaf1e1c",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-sd-copy-service.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-sd-duplex-guard-service.c": {
+      "sha256": "8e10ab9f8aaa6c22d4c43c028cf1e515948d62c424e433f00ba3020fa6ce32c2",
+      "source_sha256": "8e10ab9f8aaa6c22d4c43c028cf1e515948d62c424e433f00ba3020fa6ce32c2",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-sd-duplex-guard-service.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-sd-duplex-service.c": {
+      "sha256": "5209ec72db11d1997a8c89c97a765a779c0ebc4d2cf42954fe21ed99c7d5ae76",
+      "source_sha256": "5209ec72db11d1997a8c89c97a765a779c0ebc4d2cf42954fe21ed99c7d5ae76",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-sd-duplex-service.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-sd-mdns-audit.c": {
+      "sha256": "bed10d6ae61c366481018d1ece74c3f513302225a4ecc73163eaab026a32b798",
+      "source_sha256": "bed10d6ae61c366481018d1ece74c3f513302225a4ecc73163eaab026a32b798",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-sd-mdns-audit.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-sd-mdns-drain.c": {
+      "sha256": "52bf88472341d50a103b2bf3aa56774307d34b388e1328b6e9d36a6741567c4b",
+      "source_sha256": "52bf88472341d50a103b2bf3aa56774307d34b388e1328b6e9d36a6741567c4b",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-sd-mdns-drain.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-sd-mdns-frame.c": {
+      "sha256": "90f18c197f128ef8bee10fa8df2651b96f3eb892a446ff31ee7e3057f724e48c",
+      "source_sha256": "90f18c197f128ef8bee10fa8df2651b96f3eb892a446ff31ee7e3057f724e48c",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-sd-mdns-frame.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-sd-mdns-gate.c": {
+      "sha256": "f0fdba4c08b7cd1cb72e0be34d1b80b1c1ba56aee06d13c66c441acfb604e44c",
+      "source_sha256": "f0fdba4c08b7cd1cb72e0be34d1b80b1c1ba56aee06d13c66c441acfb604e44c",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-sd-mdns-gate.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-sd-mdns-latch.c": {
+      "sha256": "9c0ebfcfb5f4cd61ea4324cd5d36be6de7527a088a038d872c7bfe2f5cad0fb9",
+      "source_sha256": "9c0ebfcfb5f4cd61ea4324cd5d36be6de7527a088a038d872c7bfe2f5cad0fb9",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-sd-mdns-latch.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-sd-mdns-readback.c": {
+      "sha256": "432bce43945dad4076c2232944134137fefc73d2331b6e52738322feaf4f83ea",
+      "source_sha256": "432bce43945dad4076c2232944134137fefc73d2331b6e52738322feaf4f83ea",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-sd-mdns-readback.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-sd-mdns-sta.c": {
+      "sha256": "9f5c9367405b00108895a7e127d1401058fb93a302d551b99bf3d704f995f7db",
+      "source_sha256": "9f5c9367405b00108895a7e127d1401058fb93a302d551b99bf3d704f995f7db",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-sd-mdns-sta.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-sd-mdns.c": {
+      "sha256": "decbdcd89f00889f49b411ea45c466f06ab2cd48ac7c58b6cde2261f62623c61",
+      "source_sha256": "decbdcd89f00889f49b411ea45c466f06ab2cd48ac7c58b6cde2261f62623c61",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-sd-mdns.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-sd-runtime.c": {
+      "sha256": "0960bb5cdbe754246ac290fa254bd5996a2b9819235771a6a41993b0380fb96c",
+      "source_sha256": "0960bb5cdbe754246ac290fa254bd5996a2b9819235771a6a41993b0380fb96c",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-sd-runtime.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-helix-sd-service.c": {
+      "sha256": "9c6873143228db02dea20d18b2014555f398750ddb4ce231faf683bf1812a1fd",
+      "source_sha256": "9c6873143228db02dea20d18b2014555f398750ddb4ce231faf683bf1812a1fd",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-helix-sd-service.c",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/capture-msca.c": {
+      "sha256": "a2e00fd77700ff56c0d337bb4500d5849bdd9b4bb65011e846acdd85df370674",
+      "source_sha256": "a2e00fd77700ff56c0d337bb4500d5849bdd9b4bb65011e846acdd85df370674",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/capture-msca.c",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/ccm-algorithm.h": {
+      "sha256": "274c1377e0cb06831eaa2fdbade0a431d69b6a0767b719f52e537022a26375fe",
+      "source_sha256": "274c1377e0cb06831eaa2fdbade0a431d69b6a0767b719f52e537022a26375fe",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/ccm-algorithm.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/ccm-capture.h": {
+      "sha256": "76ce91ec4be589647c692f4efe3629c92a89110379102093563e65dbed4be511",
+      "source_sha256": "76ce91ec4be589647c692f4efe3629c92a89110379102093563e65dbed4be511",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/ccm-capture.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/ccm-note.h": {
+      "sha256": "c1c8da08d904af2b404a683f2863d66e27d90052c72a2bf37fb82ac0afb44745",
+      "source_sha256": "c1c8da08d904af2b404a683f2863d66e27d90052c72a2bf37fb82ac0afb44745",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/ccm-note.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/color-profile.h": {
+      "sha256": "37efb97ec75440228fce54384c46cc1a782e9ffb9455526b0ecab2a64ed69541",
+      "source_sha256": "37efb97ec75440228fce54384c46cc1a782e9ffb9455526b0ecab2a64ed69541",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/color-profile.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/detail-capture.h": {
+      "sha256": "19f09badcf16fe34ff7318a785be7e9ea4c3c1f2a6834c04590126ad13fa36bb",
+      "source_sha256": "19f09badcf16fe34ff7318a785be7e9ea4c3c1f2a6834c04590126ad13fa36bb",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/detail-capture.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/exposure-ev.h": {
+      "sha256": "3dc610f823251bb678a0cb198efff455dcc0d35d9825ea8774320480afe38aa4",
+      "source_sha256": "3dc610f823251bb678a0cb198efff455dcc0d35d9825ea8774320480afe38aa4",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/exposure-ev.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/filter-counts.h": {
+      "sha256": "6365ee3f28a6fcdecbaca94467745e4f25b687a180e319d8dd29d00bfc26c039",
+      "source_sha256": "6365ee3f28a6fcdecbaca94467745e4f25b687a180e319d8dd29d00bfc26c039",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/filter-counts.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/gc1084-controls.h": {
+      "sha256": "acbc0bacfd35462bbd699938c1b3dbf43e492faa90de09a241ecc7386c40c57e",
+      "source_sha256": "acbc0bacfd35462bbd699938c1b3dbf43e492faa90de09a241ecc7386c40c57e",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/gc1084-controls.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/gc1084-probe.c": {
+      "sha256": "5f05c7c941ac09758dfa81fcfc64580ea9cdc852c29321fa9db860ba0073fde7",
+      "source_sha256": "5f05c7c941ac09758dfa81fcfc64580ea9cdc852c29321fa9db860ba0073fde7",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/gc1084-probe.c",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/helix-cpu.S": {
+      "sha256": "8a8019685232cb11127e0420812e94186656dfcbd5a128a484117e92699bb1b2",
+      "source_sha256": "8a8019685232cb11127e0420812e94186656dfcbd5a128a484117e92699bb1b2",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/helix-cpu.S",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/helix-engine.h": {
+      "sha256": "e4ce8f9c24a0bcc739121c974a50a979e81c4c65a177bf680d75291fd34a935e",
+      "source_sha256": "e4ce8f9c24a0bcc739121c974a50a979e81c4c65a177bf680d75291fd34a935e",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/helix-engine.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/helix-guards.h": {
+      "sha256": "f3cbbbc099460fce91a9aee970aaab192470cd2da2224976efa2a3979b09af84",
+      "source_sha256": "f3cbbbc099460fce91a9aee970aaab192470cd2da2224976efa2a3979b09af84",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/helix-guards.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/helix-layout.h": {
+      "sha256": "1e81e6dfbb96a1cef035097e4bc7620231bcc22c27b5a1a24a7076e1e5ff5b7f",
+      "source_sha256": "1e81e6dfbb96a1cef035097e4bc7620231bcc22c27b5a1a24a7076e1e5ff5b7f",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/helix-layout.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/helix-live-net.h": {
+      "sha256": "ade36c891e562ca7b475ce584ff35d45ca2114551a473ee831d778f8b6c63e6a",
+      "source_sha256": "ade36c891e562ca7b475ce584ff35d45ca2114551a473ee831d778f8b6c63e6a",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/helix-live-net.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/helix-live-record.h": {
+      "sha256": "6dbce66e1cead20157c48a9cc20fd25c8cce490b978a367539d243d0ebc41183",
+      "source_sha256": "6dbce66e1cead20157c48a9cc20fd25c8cce490b978a367539d243d0ebc41183",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/helix-live-record.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/helix-plan.c": {
+      "sha256": "749830ff39254c96adc0407171d5cedf98c85b1b5de6d61fd64b35a408f0155c",
+      "source_sha256": "749830ff39254c96adc0407171d5cedf98c85b1b5de6d61fd64b35a408f0155c",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/helix-plan.c",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/helix-plan.h": {
+      "sha256": "b46e835f229294d4bd25077c274f6d997891590976d102fb30145cade2620d1e",
+      "source_sha256": "b46e835f229294d4bd25077c274f6d997891590976d102fb30145cade2620d1e",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/helix-plan.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/helix-record.h": {
+      "sha256": "9715e8302d00e2f0248670bc63326217d4c7f417943c0f3827993dfaf5b6ff67",
+      "source_sha256": "9715e8302d00e2f0248670bc63326217d4c7f417943c0f3827993dfaf5b6ff67",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/helix-record.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/helix-runtime.h": {
+      "sha256": "250565f3b4296d9464a1fda1d2b56a8eb7df617fdf2618df196a2017941eedbb",
+      "source_sha256": "250565f3b4296d9464a1fda1d2b56a8eb7df617fdf2618df196a2017941eedbb",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/helix-runtime.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/helix-sequence.h": {
+      "sha256": "ebb55813ece5ffa35c753c8baf59584da7b0e8f72c91fdaf76f1737bc25089fc",
+      "source_sha256": "ebb55813ece5ffa35c753c8baf59584da7b0e8f72c91fdaf76f1737bc25089fc",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/helix-sequence.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/image-colour-events.h": {
+      "sha256": "2e1c997d09921e37c392589662d90d97f935b9acfcf74cf5a1df8c23eb8ddcf7",
+      "source_sha256": "2e1c997d09921e37c392589662d90d97f935b9acfcf74cf5a1df8c23eb8ddcf7",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/image-colour-events.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/image-continuous.h": {
+      "sha256": "36e2432af80a1f1151a7f8f2ed05447e4472cae11f7508910bc4c1dba4d283b8",
+      "source_sha256": "36e2432af80a1f1151a7f8f2ed05447e4472cae11f7508910bc4c1dba4d283b8",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/image-continuous.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/isp-bcsh.h": {
+      "sha256": "48c02320aea2addc3d28f853078b4d4d57ed90b4bca0c9a892c072314b2d71ca",
+      "source_sha256": "48c02320aea2addc3d28f853078b4d4d57ed90b4bca0c9a892c072314b2d71ca",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/isp-bcsh.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/isp-detail-filters.h": {
+      "sha256": "04c1f7447ee81126a88152160efc4cbcc747e2df60ec97792b35f351545f7a3c",
+      "source_sha256": "04c1f7447ee81126a88152160efc4cbcc747e2df60ec97792b35f351545f7a3c",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/isp-detail-filters.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/isp-mdns-filter.h": {
+      "sha256": "c9a02b2cd663bce602b9b81e521da41528da201d2fa637176b9e80ddea54eeae",
+      "source_sha256": "c9a02b2cd663bce602b9b81e521da41528da201d2fa637176b9e80ddea54eeae",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/isp-mdns-filter.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/isp-spatial.h": {
+      "sha256": "812d77cedc78955d4b2a77d9e902da7f4c9ac6b83d57d502b98628e3ad928924",
+      "source_sha256": "812d77cedc78955d4b2a77d9e902da7f4c9ac6b83d57d502b98628e3ad928924",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/isp-spatial.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/live-net-beacon.h": {
+      "sha256": "28f1f6594381dcd76462717d2ab6969a94c67c722574593e4c0d7abf557af799",
+      "source_sha256": "28f1f6594381dcd76462717d2ab6969a94c67c722574593e4c0d7abf557af799",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/live-net-beacon.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/live-net-boot.h": {
+      "sha256": "0bf79aff8ebccd240a6a1c44e577806287ce07782aef4b029369bf9ab59aa7f9",
+      "source_sha256": "0bf79aff8ebccd240a6a1c44e577806287ce07782aef4b029369bf9ab59aa7f9",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/live-net-boot.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/mdns-counts.h": {
+      "sha256": "967523892871759ea8d5d3ff8df0fbd62ec801e8cb2b5882f00175628f4547d0",
+      "source_sha256": "967523892871759ea8d5d3ff8df0fbd62ec801e8cb2b5882f00175628f4547d0",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/mdns-counts.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/mdns-deferred.h": {
+      "sha256": "04b664e64ebddb0afc05cc19631e992f8624ead5e73fd75e9ff3ddb4ddc63054",
+      "source_sha256": "04b664e64ebddb0afc05cc19631e992f8624ead5e73fd75e9ff3ddb4ddc63054",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/mdns-deferred.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/mdns-drain.h": {
+      "sha256": "e3b5d526e0fb99bcb3b9fcd7356b038874ad750813aae66a31fe73edd31f8a6f",
+      "source_sha256": "e3b5d526e0fb99bcb3b9fcd7356b038874ad750813aae66a31fe73edd31f8a6f",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/mdns-drain.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/mdns-layout.h": {
+      "sha256": "800615f6694b517c2b43abd78a65f4d7a6f9a772fa2c23faf6c4bfdd14685957",
+      "source_sha256": "800615f6694b517c2b43abd78a65f4d7a6f9a772fa2c23faf6c4bfdd14685957",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/mdns-layout.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/mdns-memory-map.h": {
+      "sha256": "0d6d67e73a5942f07134dd956cdea1160b2fcdcac54e217b715fc473429a6f76",
+      "source_sha256": "0d6d67e73a5942f07134dd956cdea1160b2fcdcac54e217b715fc473429a6f76",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/mdns-memory-map.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/mdns-offsets.h": {
+      "sha256": "90476ef90c72809550a2a477d5a13e93a1e2c9deecb843a7f52d63ba2a563d6a",
+      "source_sha256": "90476ef90c72809550a2a477d5a13e93a1e2c9deecb843a7f52d63ba2a563d6a",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/mdns-offsets.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/mdns-reference.h": {
+      "sha256": "918d8f6a5a991e330f414b3f093b4f79b8fba273a178f303ff2c75c7f0803128",
+      "source_sha256": "918d8f6a5a991e330f414b3f093b4f79b8fba273a178f303ff2c75c7f0803128",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/mdns-reference.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/mdns-reservation.h": {
+      "sha256": "27cecd0ed601752c723b8c4dee6349f364699b573cff60cf26df6db3fcfd4fbe",
+      "source_sha256": "27cecd0ed601752c723b8c4dee6349f364699b573cff60cf26df6db3fcfd4fbe",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/mdns-reservation.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/mdns-strobe.h": {
+      "sha256": "0a7b1232110186b53b894b4bcd32405407fdad1eceecb61009e6ab4986a0ccd3",
+      "source_sha256": "0a7b1232110186b53b894b4bcd32405407fdad1eceecb61009e6ab4986a0ccd3",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/mdns-strobe.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/mdns-temporal-capture.h": {
+      "sha256": "a8f4b9f860ad10d83442afe765aada3966cba3a778136f2b89ac24c90a40159d",
+      "source_sha256": "a8f4b9f860ad10d83442afe765aada3966cba3a778136f2b89ac24c90a40159d",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/mdns-temporal-capture.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/mdns-view-note.h": {
+      "sha256": "37f46eb83afe00e32e7397d8025ee74f124d248ff5cef92b92bcc83ff753386c",
+      "source_sha256": "37f46eb83afe00e32e7397d8025ee74f124d248ff5cef92b92bcc83ff753386c",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/mdns-view-note.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/memory-proof.h": {
+      "sha256": "6c63604ca318206668c0c1e9c06dc7943c99a6a0911ea05f2ba7638c962124c3",
+      "source_sha256": "6c63604ca318206668c0c1e9c06dc7943c99a6a0911ea05f2ba7638c962124c3",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/memory-proof.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/msca-record.h": {
+      "sha256": "6e4e25bafeac431d96e03fd708ad9ec09918172531733100768d716bb228a9ed",
+      "source_sha256": "6e4e25bafeac431d96e03fd708ad9ec09918172531733100768d716bb228a9ed",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/msca-record.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/msca-state.h": {
+      "sha256": "0fb8b22e05e2597848c4bddd26fa871eb86e4a6ecebdf37e04077d21019f000e",
+      "source_sha256": "0fb8b22e05e2597848c4bddd26fa871eb86e4a6ecebdf37e04077d21019f000e",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/msca-state.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/nv12-audit.h": {
+      "sha256": "9880f8b2e275a7bf0f91b294f6c56a8f393163d09aa3edca6d5f449a327e8877",
+      "source_sha256": "9880f8b2e275a7bf0f91b294f6c56a8f393163d09aa3edca6d5f449a327e8877",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/nv12-audit.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/qc5-frame-layout.h": {
+      "sha256": "b992ae715d72b34f7703703fd92233074ed95bc7c82ec4e20f54b0d05a28c447",
+      "source_sha256": "b992ae715d72b34f7703703fd92233074ed95bc7c82ec4e20f54b0d05a28c447",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/qc5-frame-layout.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/qc5-nv12-layout.h": {
+      "sha256": "ba6e359d02854a2b89de19c853b29b2c85d54dbc5cc31cb1aa79f62ea836a248",
+      "source_sha256": "ba6e359d02854a2b89de19c853b29b2c85d54dbc5cc31cb1aa79f62ea836a248",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/qc5-nv12-layout.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/sensor-orientation.h": {
+      "sha256": "ae750d5feaeee31e8f19169bb35d6f087e63331551f6ca1583e8b1b0c6d1fbfb",
+      "source_sha256": "ae750d5feaeee31e8f19169bb35d6f087e63331551f6ca1583e8b1b0c6d1fbfb",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/sensor-orientation.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/spatial-capture.h": {
+      "sha256": "d76a6d2025e04523ad81a536b6a37c80ab524aa39b871121549d7176b808d7e6",
+      "source_sha256": "d76a6d2025e04523ad81a536b6a37c80ab524aa39b871121549d7176b808d7e6",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/spatial-capture.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/spatial-note.h": {
+      "sha256": "67e63104bd43b7cafbc4534ce7b591303b21ea3559a2cf88c6cb463dffc7051e",
+      "source_sha256": "67e63104bd43b7cafbc4534ce7b591303b21ea3559a2cf88c6cb463dffc7051e",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/spatial-note.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/wb-note.h": {
+      "sha256": "b9891035db065e4f3ffbb16240180e610bf60ce8646554b3731e9ad834aded30",
+      "source_sha256": "b9891035db065e4f3ffbb16240180e610bf60ce8646554b3731e9ad834aded30",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/wb-note.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/video-gc1084/white-balance.h": {
+      "sha256": "5b3ab2b69214b5c73275399500bc4fbfe6692eb4d8f591ad3475914f435a90cf",
+      "source_sha256": "5b3ab2b69214b5c73275399500bc4fbfe6692eb4d8f591ad3475914f435a90cf",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-gc1084/white-balance.h",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "media/video-runtime/native-bridge.h": {
+      "sha256": "72daf637105b4bcacaebf4b6caf4f635eba71bd873147f978a177b831071cfc9",
+      "source_sha256": "72daf637105b4bcacaebf4b6caf4f635eba71bd873147f978a177b831071cfc9",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-runtime/native-bridge.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-runtime/native-media.h": {
+      "sha256": "87c57ec03c1fc07dbc7d636ac6aeaf3921df9b4cc73bec450f44f39a7ca71492",
+      "source_sha256": "87c57ec03c1fc07dbc7d636ac6aeaf3921df9b4cc73bec450f44f39a7ca71492",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-runtime/native-media.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-runtime/native-service-audio.h": {
+      "sha256": "f6c56d78d067a3be5c3754fcb19c5cdacd1c686d96e29602e1a570ad9b3e1d71",
+      "source_sha256": "f6c56d78d067a3be5c3754fcb19c5cdacd1c686d96e29602e1a570ad9b3e1d71",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-runtime/native-service-audio.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-runtime/native-service-loop.h": {
+      "sha256": "d99087194336213e90be522103a81b9257f9a16261aa58c60ff8c1992123497f",
+      "source_sha256": "d99087194336213e90be522103a81b9257f9a16261aa58c60ff8c1992123497f",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-runtime/native-service-loop.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-runtime/native-service-note.h": {
+      "sha256": "9873c648239053fea5a5658bd1b20cd68380d944c1a8eeb7eed637aff42f2a3e",
+      "source_sha256": "9873c648239053fea5a5658bd1b20cd68380d944c1a8eeb7eed637aff42f2a3e",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-runtime/native-service-note.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-runtime/native-service-web.h": {
+      "sha256": "8b472252f840839fc6b00aa569ed2dc0449ebbb5ed3a4e356c24fa008f96e153",
+      "source_sha256": "8b472252f840839fc6b00aa569ed2dc0449ebbb5ed3a4e356c24fa008f96e153",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-runtime/native-service-web.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-runtime/native-websocket.h": {
+      "sha256": "29deee69d2d52879c6534909463ef1e1b9630f578cfa9682778751a4f6921be1",
+      "source_sha256": "29deee69d2d52879c6534909463ef1e1b9630f578cfa9682778751a4f6921be1",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-runtime/native-websocket.h",
+      "SPDX": [
+        "GPL-3.0-only"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-runtime/ownership.h": {
+      "sha256": "ecb94185d1d9541e150751759ecfe1e2b383d85f3efc77f7783a333116a7ff26",
+      "source_sha256": "ecb94185d1d9541e150751759ecfe1e2b383d85f3efc77f7783a333116a7ff26",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-runtime/ownership.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-runtime/producer-helix.h": {
+      "sha256": "0156a3c8bc21791298244a8055c69676d3f0dcdcb02aadc57eb6258d80e22653",
+      "source_sha256": "0156a3c8bc21791298244a8055c69676d3f0dcdcb02aadc57eb6258d80e22653",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-runtime/producer-helix.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-runtime/producer.h": {
+      "sha256": "4827155855be804265b4057345958d00b7801575526dc3528257696a329fbe14",
+      "source_sha256": "4827155855be804265b4057345958d00b7801575526dc3528257696a329fbe14",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-runtime/producer.h",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "media/video-runtime/test-feature-producer.c": {
+      "sha256": "3332fd9f940d2d731e2325a818e49546939b15ebd4b9115b3e64a71932e855da",
+      "source_sha256": "3332fd9f940d2d731e2325a818e49546939b15ebd4b9115b3e64a71932e855da",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/video-runtime/test-feature-producer.c",
+      "SPDX": [
+        "GPL-2.0-or-later"
+      ],
+      "adapted_for_public_tree": false
+    },
+    "web/index.html": {
+      "sha256": "7ad62393ed76a45f7b1781bdcabad306b7dd8dfb8c2861e989be881d323bc044",
+      "source_sha256": "7ad62393ed76a45f7b1781bdcabad306b7dd8dfb8c2861e989be881d323bc044",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/assets/index.html",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "web/listen.js": {
+      "sha256": "b4e12b31eb8be1ee27bcbcb3dd00079cc938109f83b11071aa4792d7431296f2",
+      "source_sha256": "b4e12b31eb8be1ee27bcbcb3dd00079cc938109f83b11071aa4792d7431296f2",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/assets/listen.js",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "web/record.js": {
+      "sha256": "b294ff3dd917a515ad9c7e0ed5817e67cae54efca85fa887d0be0b3aa6336a07",
+      "source_sha256": "b294ff3dd917a515ad9c7e0ed5817e67cae54efca85fa887d0be0b3aa6336a07",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/assets/record.js",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "web/setup.html": {
+      "sha256": "b293242c216fa22d4bc69d4674823204044fbd4b366a7ba4f9b0d78e6a9d3109",
+      "source_sha256": "b293242c216fa22d4bc69d4674823204044fbd4b366a7ba4f9b0d78e6a9d3109",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/assets/setup.html",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "web/setup.js": {
+      "sha256": "5f2b6083f9a85f7eac52b8a5a5e9a6c5dfcdb3c2ea8cb0f2ec96c8297523b765",
+      "source_sha256": "5f2b6083f9a85f7eac52b8a5a5e9a6c5dfcdb3c2ea8cb0f2ec96c8297523b765",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/assets/setup.js",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "web/talk-worklet.js": {
+      "sha256": "2a0d24697e5351de466ecf0dcfbc81bec25b6ecc2d0ff44ad4b8db57ab7c13e3",
+      "source_sha256": "2a0d24697e5351de466ecf0dcfbc81bec25b6ecc2d0ff44ad4b8db57ab7c13e3",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/assets/talk-worklet.js",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "web/talk.js": {
+      "sha256": "e936e59232c524c155e7e09bfc4a1f5aa351c5f28bdd5fa3c92adc14e7ffa726",
+      "source_sha256": "e936e59232c524c155e7e09bfc4a1f5aa351c5f28bdd5fa3c92adc14e7ffa726",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/assets/talk.js",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "kernel/reference-patches/0001-t23-sfc-qc5-xm25qh64c.patch": {
+      "sha256": "d8b1cae781b1eb089ea1cca153266827050d2f06484401ccce36441e02df75fc",
+      "source_sha256": "d8b1cae781b1eb089ea1cca153266827050d2f06484401ccce36441e02df75fc",
+      "origin": "work/kernel-port-latest/0001-t23-sfc-qc5-xm25qh64c.patch",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "kernel/reference-patches/0002-t23-sysost.patch": {
+      "sha256": "a98ca23ecf102d7c1271a27aed8ac4ed6fb6c1d4d37903e868eb3444dc1e421e",
+      "source_sha256": "a98ca23ecf102d7c1271a27aed8ac4ed6fb6c1d4d37903e868eb3444dc1e421e",
+      "origin": "work/kernel-port-latest/0002-t23-sysost.patch",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "kernel/reference-patches/0003-t23-ram-watchdog-stages.patch": {
+      "sha256": "9ef76f874b8200463f9d198be2ab8b62c0aef99187022676c5b4eb28e40f3d79",
+      "source_sha256": "9ef76f874b8200463f9d198be2ab8b62c0aef99187022676c5b4eb28e40f3d79",
+      "origin": "work/kernel-port-latest/0003-t23-ram-watchdog-stages.patch",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "kernel/reference-patches/0004-qemu-msc-busy-completion.patch": {
+      "sha256": "765b559702ad7b18acdcd6bd31cf63a0238b324a73a017a92c070bc4dc5bb84c",
+      "source_sha256": "765b559702ad7b18acdcd6bd31cf63a0238b324a73a017a92c070bc4dc5bb84c",
+      "origin": "work/kernel-port-latest/0004-qemu-msc-busy-completion.patch",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "kernel/reference-patches/0005-aic8800dc-linux73-cfg80211.patch": {
+      "sha256": "485b9bfbafe82c796ba16efa2911a585fc7e0b1f3525a6791140f8a161b4dfcc",
+      "source_sha256": "485b9bfbafe82c796ba16efa2911a585fc7e0b1f3525a6791140f8a161b4dfcc",
+      "origin": "work/kernel-port-latest/0005-aic8800dc-linux73-cfg80211.patch",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    },
+    "kernel/reference-patches/0006-aic8800dc-final-api-fixes.patch": {
+      "sha256": "c58dcde1875abba79de650a1e5471fb0c2ecf64739e7c50adc6656ebd54cb1db",
+      "source_sha256": "c58dcde1875abba79de650a1e5471fb0c2ecf64739e7c50adc6656ebd54cb1db",
+      "origin": "work/kernel-port-latest/build/linux73/wifi-net/0006-aic8800dc-final-api-fixes.patch",
+      "SPDX": [],
+      "adapted_for_public_tree": false
+    }
+  },
+  "excluded_generated_inputs": [
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/build/linux73/native-integrated/producer/nonce.private.h",
+      "reason": "private generated input; not published"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/build/linux73/video-gc1084/gc1084-awb-ev.private.h",
+      "reason": "private generated input; not published"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/build/linux73/video-gc1084/gc1084-awb-stats.private.h",
+      "reason": "private generated input; not published"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/build/linux73/video-gc1084/gc1084-awb.private.h",
+      "reason": "private generated input; not published"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/build/linux73/video-gc1084/gc1084-bcsh-dynamic.private.h",
+      "reason": "private generated input; not published"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/build/linux73/video-gc1084/gc1084-bcsh.private.h",
+      "reason": "private generated input; not published"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/build/linux73/video-gc1084/gc1084-ccm.private.h",
+      "reason": "private generated input; not published"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/build/linux73/video-gc1084/gc1084-color.private.h",
+      "reason": "private generated input; not published"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/build/linux73/video-gc1084/gc1084-detail.private.h",
+      "reason": "private generated input; not published"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/build/linux73/video-gc1084/gc1084-gain.private.h",
+      "reason": "private generated input; not published"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/build/linux73/video-gc1084/gc1084-mdns.private.h",
+      "reason": "private generated input; not published"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/build/linux73/video-gc1084/gc1084-mode.private.h",
+      "reason": "private generated input; not published"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/build/linux73/video-gc1084/gc1084-msca.private.h",
+      "reason": "private generated input; not published"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/build/linux73/video-gc1084/gc1084-spatial.private.h",
+      "reason": "private generated input; not published"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/build/linux73/video-gc1084/gc1084-wb.private.h",
+      "reason": "private generated input; not published"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/reference/openimp/src/avpu_roi.h",
+      "reason": "external reference dependency; per-file redistribution review pending"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/reference/openimp/src/t21/t21_h264_descriptor.c",
+      "reason": "external reference dependency; per-file redistribution review pending"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/reference/openimp/src/t21/t21_h264_descriptor.h",
+      "reason": "external reference dependency; per-file redistribution review pending"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/bitstream.h",
+      "reason": "external reference dependency; per-file redistribution review pending"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/cabac.c",
+      "reason": "external reference dependency; per-file redistribution review pending"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/cabac.h",
+      "reason": "external reference dependency; per-file redistribution review pending"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/common.c",
+      "reason": "external reference dependency; per-file redistribution review pending"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/common.h",
+      "reason": "external reference dependency; per-file redistribution review pending"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/nal.h",
+      "reason": "external reference dependency; per-file redistribution review pending"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/osdep.h",
+      "reason": "external reference dependency; per-file redistribution review pending"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/set.c",
+      "reason": "external reference dependency; per-file redistribution review pending"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/set.h",
+      "reason": "external reference dependency; per-file redistribution review pending"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/slice.c",
+      "reason": "external reference dependency; per-file redistribution review pending"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/reference/openimp/src/t30/h264enc/slice.h",
+      "reason": "external reference dependency; per-file redistribution review pending"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/reference/openimp/src/t30/helix_roi.h",
+      "reason": "external reference dependency; per-file redistribution review pending"
+    },
+    {
+      "component": "media",
+      "path": "work/kernel-port-latest/reference/openimp/src/t30/t30_annexb.h",
+      "reason": "external reference dependency; per-file redistribution review pending"
+    }
+  ],
+  "firmware_blobs_and_flash_dumps_included": false,
+  "turnkey_native_build": false
+}

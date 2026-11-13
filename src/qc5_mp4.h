@@ -19,6 +19,10 @@ int qc5_mp4_init(struct qc5_mp4 *,unsigned,unsigned,qc5_mp4_sink,void *);
  * -3: codec or clock changed: close the current MP4 and start a new one. */
 /* rate=0 selects video-only MP4; timed frames preserve the camera clock. */
 int qc5_mp4_video_timed(struct qc5_mp4 *,const uint8_t *,size_t,uint64_t,unsigned);
+/* Direct Helix access units use the existing 786944-byte reserved arena.
+ * Video-only: no transcoding, allocation, or change to the legacy512KiB API. */
+#define QC5_MP4_NATIVE_AU_MAX 786944u
+int qc5_mp4_video_native(struct qc5_mp4 *,const uint8_t *,size_t,uint64_t,unsigned);
 int qc5_mp4_video(struct qc5_mp4 *,const uint8_t *,size_t,uint64_t);
 int qc5_mp4_audio(struct qc5_mp4 *,const uint8_t *,size_t,uint64_t);
 #endif

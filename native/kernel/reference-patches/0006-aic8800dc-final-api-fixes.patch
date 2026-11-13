@@ -1,0 +1,60 @@
+--- a/drivers/aic8800/aic8800_fdrv/rwnx_main.c
++++ b/drivers/aic8800/aic8800_fdrv/rwnx_main.c
+@@ -7039,13 +7039,13 @@
+                                  pairwise, mac);
+ }
+ 
+-static int rwnx_set_default_key_wdev(struct wiphy *wiphy, struct wireless_dev *wdev,
+-                                    int link_id, u8 index, bool unicast, bool multicast)
++static int rwnx_set_default_mgmt_key_wdev(struct wiphy *wiphy,
++                                         struct wireless_dev *wdev,
++                                         int link_id, u8 index)
+ {
+     if (!wdev->netdev)
+         return -EOPNOTSUPP;
+-    return rwnx_cfg80211_set_default_key(wiphy, wdev->netdev, link_id,
+-                                         index, unicast, multicast);
++    return rwnx_cfg80211_set_default_mgmt_key(wiphy, wdev->netdev, link_id, index);
+ }
+ 
+ static int rwnx_add_station_wdev(struct wiphy *wiphy, struct wireless_dev *wdev,
+@@ -7128,12 +7128,12 @@
+ #else
+     .del_key = rwnx_cfg80211_del_key,
+ #endif
++    .set_default_key = rwnx_cfg80211_set_default_key,
+ #if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
+-    .set_default_key = rwnx_set_default_key_wdev,
++    .set_default_mgmt_key = rwnx_set_default_mgmt_key_wdev,
+ #else
+-    .set_default_key = rwnx_cfg80211_set_default_key,
+-#endif
+     .set_default_mgmt_key = rwnx_cfg80211_set_default_mgmt_key,
++#endif
+ #if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
+     .add_station = rwnx_add_station_wdev,
+ #else
+--- a/drivers/aic8800/aic8800_fdrv/rwnx_tdls.c
++++ b/drivers/aic8800/aic8800_fdrv/rwnx_tdls.c
+@@ -115,12 +115,21 @@
+ 
+     switch (action_code) {
+     case WLAN_PUB_ACTION_TDLS_DISCOVER_RES:
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0)
++        skb_put(skb, 2 + sizeof(mgmt->u.action.tdls_discover_resp));
++        mgmt->u.action.category = WLAN_CATEGORY_PUBLIC;
++        mgmt->u.action.action_code = WLAN_PUB_ACTION_TDLS_DISCOVER_RES;
++        mgmt->u.action.tdls_discover_resp.dialog_token = dialog_token;
++        mgmt->u.action.tdls_discover_resp.capability =
++            cpu_to_le16(rwnx_get_tdls_sta_capab(rwnx_vif, status_code));
++#else
+         skb_put(skb, 1 + sizeof(mgmt->u.action.u.tdls_discover_resp));
+         mgmt->u.action.category = WLAN_CATEGORY_PUBLIC;
+         mgmt->u.action.u.tdls_discover_resp.action_code = WLAN_PUB_ACTION_TDLS_DISCOVER_RES;
+         mgmt->u.action.u.tdls_discover_resp.dialog_token = dialog_token;
+         mgmt->u.action.u.tdls_discover_resp.capability =
+             cpu_to_le16(rwnx_get_tdls_sta_capab(rwnx_vif, status_code));
++#endif
+         break;
+     default:
+         return -EINVAL;

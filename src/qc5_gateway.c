@@ -555,6 +555,7 @@ static void http_client(int fd,int captive){
  if(!space||(strncmp(space," HTTP/1.0\r\n",11)&&strncmp(space," HTTP/1.1\r\n",11))){http_reply(fd,400,"text/plain","Richiesta non valida",20);return;}
  char *headers=strstr(space,"\r\n")+2;
  *space=0;char *q=strchr(url,'?');if(q)*q++=0;else q=(char*)"";
+ if(captive||(!strncmp(url,"/setup",6)&&provision_ready()&&provision_ap()))provision_portal_touch();
  if(post){
   char*body=strstr(headers,"\r\n\r\n");
   int recording=!strncmp(url,"/api/rec/",9)&&(!strcmp(url+9,"start")||!strcmp(url+9,"stop")||!strcmp(url+9,"stop-now")||!strcmp(url+9,"delete"));

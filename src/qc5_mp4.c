@@ -64,8 +64,8 @@ static int fragment(struct qc5_mp4*m,unsigned id,uint64_t stamp,unsigned size,in
  u32(&b,size+8);bytes(&b,"mdat",4);if(b.bad||b.depth)return -1;return m->sink(m->opaque,b.b,b.n)?-2:0;
 }
 int qc5_mp4_init(struct qc5_mp4*m,unsigned rate,unsigned fps,qc5_mp4_sink sink,void*opaque){if(!m||!sink||(rate!=0&&rate!=8000&&rate!=16000)||fps<1||fps>30)return -1;memset(m,0,sizeof(*m));m->rate=rate;m->fps=fps;m->sink=sink;m->opaque=opaque;return 0;}
-static int video_impl(struct qc5_mp4*m,const uint8_t*p,size_t n,uint64_t ms){
- if(!m||!p||!n||n>512*1024)return -1;
+static int video_impl(struct qc5_mp4*m,const uint8_t*p,size_t n,uint64_t ms,size_t limit){
+ if(!m||!p||!n||n>limit)return -1;
  size_t at=0,total=0;int key=0,vcl=0,refresh=0,r;struct nal x;
  while((r=next_nal(p,n,&at,&x))>0){unsigned type=x.p[0]&31;if(x.p[0]&128)return -1;
   if(type==7||type==8){uint8_t*dst=type==7?m->sps:m->pps;size_t*len=type==7?&m->sps_len:&m->pps_len;if(x.n>256||(type==7&&x.n<4))return -1;
@@ -90,8 +90,9 @@ static int video_impl(struct qc5_mp4*m,const uint8_t*p,size_t n,uint64_t ms){
  at=0;while(next_nal(p,n,&at,&x)>0){uint8_t length[4]={(uint8_t)(x.n>>24),(uint8_t)(x.n>>16),(uint8_t)(x.n>>8),(uint8_t)x.n};if(m->sink(m->opaque,length,4)||m->sink(m->opaque,x.p,x.n))return -2;}
  m->video_ms=ms;m->have_video=1;return 0;
 }
-int qc5_mp4_video_timed(struct qc5_mp4*m,const uint8_t*p,size_t n,uint64_t ms,unsigned duration_ms){if(!m||!duration_ms||duration_ms>2000)return -1;m->duration90=duration_ms*90;return video_impl(m,p,n,ms);}
-int qc5_mp4_video(struct qc5_mp4*m,const uint8_t*p,size_t n,uint64_t ms){if(!m||!m->fps)return -1;m->duration90=90000/m->fps;return video_impl(m,p,n,ms);}
+int qc5_mp4_video_timed(struct qc5_mp4*m,const uint8_t*p,size_t n,uint64_t ms,unsigned duration_ms){if(!m||!duration_ms||duration_ms>2000)return -1;m->duration90=duration_ms*90;return video_impl(m,p,n,ms,512*1024);}
+int qc5_mp4_video(struct qc5_mp4*m,const uint8_t*p,size_t n,uint64_t ms){if(!m||!m->fps)return -1;m->duration90=90000/m->fps;return video_impl(m,p,n,ms,512*1024);}
+int qc5_mp4_video_native(struct qc5_mp4*m,const uint8_t*p,size_t n,uint64_t ms,unsigned duration_ms){if(!m||m->rate||!duration_ms||duration_ms>2000)return -1;m->duration90=duration_ms*90;return video_impl(m,p,n,ms,QC5_MP4_NATIVE_AU_MAX);}
 int qc5_mp4_audio(struct qc5_mp4*m,const uint8_t*p,size_t n,uint64_t ms){
  if(!m||!m->rate||!p||n<7||p[0]!=255||(p[1]&0xf6)!=0xf0)return -1;
  unsigned size=((p[3]&3u)<<11)|(unsigned)p[4]<<3|p[5]>>5,head=(p[1]&1)?7:9;

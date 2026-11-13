@@ -1,0 +1,53 @@
+--- a/drivers/clocksource/ingenic-sysost.c
++++ b/drivers/clocksource/ingenic-sysost.c
+@@ -56,6 +56,8 @@
+ 
+ struct ingenic_soc_info {
+ 	unsigned int num_channels;
++	u8 initial_prescale;
++	bool ack_clockevent;
+ };
+ 
+ struct ingenic_ost_clk_info {
+@@ -265,6 +267,8 @@
+ 	struct ingenic_ost *ost = to_ingenic_ost(evt);
+ 
+ 	writel(OSTECR_OST1ENC, ost->base + OST_REG_OSTECR);
++	if (ost->soc_info->ack_clockevent)
++		writel((u32)~OSTFR_FFLAG, ost->base + OST_REG_OSTFR);
+ 
+ 	if (evt->event_handler)
+ 		evt->event_handler(evt);
+@@ -288,9 +292,11 @@
+ 	ost_clk->info = info;
+ 	ost_clk->ost = ost;
+ 
+-	/* Reset clock divider */
++	/* Set both channels to the initial divider for this SoC. */
+ 	val = readl(ost->base + info->ostccr_reg);
+ 	val &= ~(OSTCCR_PRESCALE1_MASK | OSTCCR_PRESCALE2_MASK);
++	val |= FIELD_PREP(OSTCCR_PRESCALE1_MASK, ost->soc_info->initial_prescale);
++	val |= FIELD_PREP(OSTCCR_PRESCALE2_MASK, ost->soc_info->initial_prescale);
+ 	writel(val, ost->base + info->ostccr_reg);
+ 
+ 	err = clk_hw_register(NULL, &ost_clk->hw);
+@@ -420,7 +426,14 @@
+ 	.num_channels = 2,
+ };
+ 
++static const struct ingenic_soc_info t23_soc_info = {
++	.num_channels = 2,
++	.initial_prescale = 2, /* EXTAL / 16, as in the T23 BSP */
++	.ack_clockevent = true,
++};
++
+ static const struct of_device_id __maybe_unused ingenic_ost_of_matches[] __initconst = {
++	{ .compatible = "ingenic,t23-ost", .data = &t23_soc_info },
+ 	{ .compatible = "ingenic,x1000-ost", .data = &x1000_soc_info },
+ 	{ /* sentinel */ }
+ };
+@@ -543,3 +556,4 @@
+ }
+ 
+ TIMER_OF_DECLARE(x1000_ost,  "ingenic,x1000-ost",  ingenic_ost_init);
++TIMER_OF_DECLARE(t23_ost, "ingenic,t23-ost", ingenic_ost_init);

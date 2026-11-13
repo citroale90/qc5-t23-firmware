@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>VeePai QC5 · Hack UI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root {
+  --bg:#0c0e13;--bg-card:#151820;--bg-hover:#1c2030;--border:#2a2e3a;
+  --text:#c8ccd4;--text-dim:#6b7280;--accent:#22d3ee;--accent-dim:#0e7490;
+  --green:#34d399;--red:#f87171;--amber:#fbbf24;
+  --fm:'Courier New',Courier,monospace;--fs:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+  --radius:8px;--glow:0 0 20px rgba(34,211,238,0.15);
+}
+:root.light {
+  --bg:#f0f2f5;--bg-card:#fff;--bg-hover:#e8eaef;--border:#d1d5db;
+  --text:#1f2937;--text-dim:#6b7280;--accent:#0891b2;--glow:0 4px 12px rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px}
+body{font-family:var(--fs);background:var(--bg);color:var(--text);min-height:100dvh;padding:12px;transition:background .3s,color .3s}
+.shell{max-width:720px;margin:0 auto}
+header{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border);margin-bottom:16px}
+header h1{font-family:var(--fm);font-size:1.15rem;font-weight:700;color:var(--accent);letter-spacing:-.02em}
+header h1 .dim{color:var(--text-dim);font-weight:400}
+.theme-btn{background:none;border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 10px;cursor:pointer;font-size:.85rem;transition:border-color .2s}
+.theme-btn:hover{border-color:var(--accent)}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;transition:box-shadow .2s}
+.card:focus-within{box-shadow:var(--glow)}
+.card-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;user-select:none;-webkit-user-select:none;transition:background .15s}
+.card-head:hover{background:var(--bg-hover)}
+.card-head h2{font-family:var(--fm);font-size:.9rem;font-weight:600;display:flex;align-items:center;gap:8px}
+.card-head .chv{transition:transform .25s;color:var(--text-dim);font-size:.75rem}
+.card.open .card-head .chv{transform:rotate(90deg)}
+.card-body{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s;padding:0 16px}
+.card.open .card-body{max-height:2000px;padding:0 16px 16px}
+.btn{font-family:var(--fm);font-size:.8rem;font-weight:600;letter-spacing:.02em;border:1px solid var(--border);background:var(--bg-hover);color:var(--text);padding:10px 14px;border-radius:6px;cursor:pointer;transition:all .15s;text-align:center;width:100%}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn:active{transform:scale(0.97)}
+#talk-button{transition:background .15s,color .15s,border-color .15s}
+#talk-button:active{transform:none}
+#talk-button[aria-pressed="true"]{background:rgba(248,113,113,.12);border-color:var(--red);color:var(--red)}
+.btn.on{border-color:var(--green);color:var(--green)}
+.btn.off{border-color:var(--red);color:var(--red)}
+.btn.on:hover{background:rgba(52,211,153,.1)}
+.btn.off:hover{background:rgba(248,113,113,.1)}
+.btn.accent{border-color:var(--accent);color:var(--accent)}
+.btn.accent:hover{background:rgba(34,211,238,.1)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.ptz-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-width:260px;margin:12px auto}
+.ptz-pad .btn{padding:16px 8px;font-size:1.3rem}
+.ptz-center{display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-weight:700;color:var(--accent);font-size:.7rem;letter-spacing:.1em}
+.preset-bar{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center}
+.preset-bar .btn{width:auto;padding:8px 14px}
+.preset-input{font-family:var(--fm);font-size:.8rem;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;flex:1;min-width:100px}
+.preset-input:focus{outline:none;border-color:var(--accent)}
+.info-grid{display:grid;grid-template-columns:auto 1fr;gap:1px;font-family:var(--fm);font-size:.8rem;border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.info-grid span{padding:10px 12px;background:var(--bg-card)}
+.info-grid span:nth-child(odd){color:var(--text-dim);background:var(--bg-hover);white-space:nowrap}
+#toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%) translateY(80px);font-family:var(--fm);font-size:.8rem;padding:10px 20px;border-radius:8px;background:var(--bg-card);border:1px solid var(--border);color:var(--text);opacity:0;transition:transform .3s,opacity .3s;z-index:100;max-width:90vw;text-align:center;pointer-events:none}
+#toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+#toast.ok{border-color:var(--green);color:var(--green)}
+#toast.err{border-color:var(--red);color:var(--red)}
+#toast.wait{border-color:var(--amber);color:var(--amber)}
+.rtsp-list{list-style:none;padding:0}
+.rtsp-list li{font-family:var(--fm);font-size:.78rem;padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px}
+.rtsp-list li:last-child{border-bottom:none}
+.rtsp-list .tag{font-size:.7rem;padding:2px 8px;border-radius:4px;background:var(--bg-hover);color:var(--text-dim);white-space:nowrap}
+.rtsp-list a{color:var(--accent);text-decoration:none;word-break:break-all}
+.sec-label{font-family:var(--fm);font-size:.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;margin:12px 0 8px}
+.live-frame{width:100%;aspect-ratio:16/9;border:1px solid var(--border);border-radius:6px;margin:10px 0}
+.live-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 10px;margin:10px 0;align-items:start}
+.live-actions>.btn{min-width:0;min-height:50px;height:100%;line-height:1.35;padding:10px 8px}
+.live-actions>.btn:active{transform:none}
+.live-action-help{min-width:0;min-height:4.2em;font-size:.75rem;line-height:1.4;color:var(--text-dim);overflow-wrap:anywhere}
+.live-action-help>a{display:block;margin-top:4px;color:var(--accent)}
+.live-action-help>a[hidden]{display:none}
+footer{text-align:center;font-size:.75rem;color:var(--text-dim);padding:20px 0 10px;font-family:var(--fm)}
+footer a{color:var(--accent);text-decoration:none}
+.ha-code{font-family:var(--fm);font-size:.75rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px;overflow-x:auto;white-space:pre;color:var(--text-dim);line-height:1.5;margin-top:8px}
+.rec-bar{display:flex;align-items:center;gap:8px;margin:8px 0}
+.rec-dot{width:12px;height:12px;border-radius:50%;background:var(--text-dim);display:inline-block;transition:background .3s}
+.rec-dot.active{background:var(--red);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.rec-time{font-family:var(--fm);font-size:.78rem;color:var(--text-dim)}
+.rec-list{margin-top:10px;max-height:200px;overflow-y:auto}
+.rec-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-family:var(--fm);font-size:.75rem;gap:8px}
+.rec-item:last-child{border-bottom:none}
+.rec-item .rec-info{flex:1;color:var(--text-dim)}
+.rec-item .rec-size{color:var(--text-dim);white-space:nowrap}
+.rec-item .btn{width:auto;padding:6px 10px;font-size:.7rem}
+.toggle-wrap{display:flex;align-items:center;gap:8px;margin-left:auto}
+.toggle-label{font-family:var(--fm);font-size:.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.06em}
+.toggle{position:relative;width:44px;height:24px;cursor:pointer;display:inline-block}
+.toggle input{opacity:0;width:0;height:0}
+.toggle .slider{position:absolute;top:0;left:0;right:0;bottom:0;background:var(--border);border-radius:12px;transition:.3s}
+.toggle .slider:before{content:"";position:absolute;width:18px;height:18px;left:3px;bottom:3px;background:var(--text-dim);border-radius:50%;transition:.3s}
+.toggle input:checked+.slider{background:var(--accent)}
+.toggle input:checked+.slider:before{transform:translateX(20px);background:#fff}
+.motion-info{font-family:var(--fm);font-size:.7rem;color:var(--text-dim)}
+.motion-info .val{color:var(--accent)}
+.motion-info .alert{color:var(--red)}
+a.btn{text-decoration:none}.rec-item{flex-wrap:wrap}.rec-item .rec-info{min-width:150px;overflow-wrap:anywhere}.rec-item a.btn{display:inline-flex;width:auto}.card-body{transition:padding .2s}.card.open .card-body{max-height:none}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<header>
+  <h1>veepai<span class="dim" id="camera-name">::VeePai QC5</span></h1>
+  <label id="qc5-language-control" style="margin-left:auto;margin-right:8px"></label>
+  <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="Cambia tema">&#127769;</button>
+</header>
+
+<div id="camera-status" style="padding:10px 0;font-size:.8rem;color:var(--text-dim)">Connessione alla camera…</div>
+<div id="command-status" role="status" aria-live="polite" style="font-size:.82rem;padding:8px 0;min-height:1.4em;color:var(--text-dim)">Pronto per i comandi locali</div>
+<!-- PTZ -->
+<div class="card open" id="card-ptz">
+  <div class="card-head" onclick="toggle('card-ptz')">
+    <h2>&#128377;&#65039; PTZ &amp; Live</h2><span class="chv">&#9654;</span>
+  </div>
+  <div class="card-body">
+    <iframe class="live-frame" id="live-frame" title="Video e audio locali" src="about:blank" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <div style="font-size:.75rem;color:var(--text-dim)">Audio e volume sono nel lettore. Tieni premuto Parla per usare l’altoparlante della camera.</div>
+    <div class="live-actions">
+      <button class="btn" id="reconnect-button" onclick="videoReload()" aria-describedby="video-status">↻ Riconnetti video</button>
+      <button class="btn" id="talk-button" type="button" disabled aria-pressed="false" aria-describedby="talk-status" style="touch-action:none;user-select:none">🎙 Tieni premuto per parlare</button>
+      <div class="live-action-help"><span id="video-status" role="status">Connessione al video…</span></div>
+      <div class="live-action-help"><span id="talk-status" role="status" aria-live="polite">Interfono in attesa della camera</span></div>
+    </div>
+    <label style="font-size:.8rem;display:flex;align-items:center;gap:8px;margin:8px 0"><input id="talk-processing" type="checkbox">Riduci eco e rumore</label>
+    <div class="rec-bar" style="display:none">
+      <span class="rec-dot" id="rec-dot"></span>
+      <button class="btn off" id="rec-btn" onclick="recToggle()" style="width:auto;padding:8px 16px">&#9679; REC</button>
+      <span class="rec-time" id="rec-time"></span>
+    </div>
+    <div class="ptz-pad">
+      <button class="btn" onclick="cmd('ptzlu')" title="Su-Sinistra">&#8598;</button>
+      <button class="btn" onclick="cmd('ptzu')"  title="Su">&#8593;</button>
+      <button class="btn" onclick="cmd('ptzru')" title="Su-Destra">&#8599;</button>
+      <button class="btn" onclick="cmd('ptzl')"  title="Sinistra">&#8592;</button>
+      <button class="ptz-center" id="ptz-stop" onclick="cmd('ptzstop')" title="Ferma movimento">STOP</button>
+      <button class="btn" onclick="cmd('ptzr')"  title="Destra">&#8594;</button>
+      <button class="btn" onclick="cmd('ptzld')" title="Giu-Sinistra">&#8601;</button>
+      <button class="btn" onclick="cmd('ptzd')"  title="Giu">&#8595;</button>
+      <button class="btn" onclick="cmd('ptzrd')" title="Giu-Destra">&#8600;</button>
+    </div>
+    <div class="sec-label">Preset</div>
+    <div class="preset-bar">
+      <button class="btn" id="ptz-calibrate" onclick="cmd('ptzhome')">Calibra</button>
+      <input class="preset-input" id="preset-name" placeholder="nome preset..." maxlength="20">
+      <button class="btn accent" onclick="presetSave()">&#128190; Salva</button>
+    </div>
+    <div class="preset-bar" id="preset-list"></div>
+    <p id="ptz-native-status" class="status-text"></p>
+  </div>
+</div>
+
+<!-- Registrazioni: servizio locale opzionale, come nelle Augentix -->
+<div class="card" id="card-rec" style="display:none">
+  <div class="card-head" onclick="toggle('card-rec')">
+    <h2>&#128308; Registrazioni</h2><span class="chv">&#9654;</span>
+  </div>
+  <div class="card-body">
+    <p id="record-status" style="font-size:.82rem;line-height:1.6">Lettura del registratore…</p>
+    <p style="font-size:.78rem;color:var(--text-dim);line-height:1.6;margin:10px 0">La registrazione avviene nella camera. La destinazione si imposta nel file <code>config.txt</code>.</p>
+    <button class="btn off" id="rec-stop-now" onclick="recStopNow()" hidden disabled>■ Ferma registrazione in corso</button>
+    <div class="sec-label">Rilevamento del movimento</div>
+    <button class="btn" id="motion-btn" onclick="motionToggle()" disabled>Attiva registrazione su movimento</button>
+    <p id="motion-status" role="status" style="font-size:.78rem;color:var(--text-dim);line-height:1.6;margin:8px 0 16px">Lettura del rilevatore locale…</p>
+    <div class="sec-label">File Registrati</div>
+    <button class="btn" onclick="recLoadList()">&#128260; Aggiorna lista</button>
+    <div id="rec-player" style="display:none;margin:12px 0">
+      <p id="rec-player-status" role="status" style="font-size:.78rem;margin-bottom:8px;color:var(--text-dim)"></p>
+      <video id="rec-video" controls style="width:100%;max-height:300px;background:#000;border-radius:6px"></video>
+      <button class="btn off" onclick="recPlayerClose()" style="margin-top:6px;width:auto;padding:6px 12px">&#10005; Chiudi</button>
+    </div>
+    <div class="rec-list" id="rec-list"></div>
+  </div>
+</div>
+
+<!-- IR / Day-Night -->
+<div class="card" id="card-ir">
+  <div class="card-head" onclick="toggle('card-ir')">
+    <h2>&#128262; IR &amp; Day/Night</h2><span class="chv">&#9654;</span>
+  </div>
+  <div class="card-body">
+    <div class="sec-label">White Light API</div>
+    <div class="g2">
+      <button class="btn on"  onclick="cmd('wlon')">WL ON</button>
+      <button class="btn off" onclick="cmd('wlof')">WL OFF</button>
+    </div>
+    <div class="sec-label">IR Control</div>
+    <div class="g2">
+      <button class="btn" onclick="cmd('ircutday')">&#9728; Day</button>
+      <button class="btn" onclick="cmd('ircutnig')">&#127769; Night</button>
+    </div>
+    <button class="btn" onclick="cmd('irauto')">Giorno/notte automatico</button>
+    <p class="status-text" id="daynight-status"></p>
+  </div>
+</div>
+
+<div class="card" id="card-wifi">
+  <div class="card-head" onclick="toggle('card-wifi')"><h2>&#128246; Wi-Fi</h2><span class="chv">&#9654;</span></div>
+  <div class="card-body"><p style="font-size:.82rem;color:var(--text-dim);line-height:1.6">Nome rete e password si impostano nel file <code>config.txt</code> sulla SD, nei campi <code>SSID</code> e <code>PWD</code>. Dopo aver salvato il file, premi «Applica configurazione SD». SSID vuoto mantiene la rete già memorizzata. La password non viene mostrata nella pagina.</p><a class="btn" href="/setup" data-qc5-locale-link style="display:block;text-decoration:none;margin:10px 0">Configura Wi-Fi dalla pagina web</a><button class="btn accent" onclick="cmd('wifi_apply')">Applica configurazione SD</button><p id="wifi-status" style="font-size:.8rem;margin-top:10px"></p></div>
+</div>
+<!-- Stream RTSP -->
+<div class="card" id="card-stream">
+  <div class="card-head" onclick="toggle('card-stream')">
+    <h2>&#128250; Stream RTSP</h2><span class="chv">&#9654;</span>
+  </div>
+  <div class="card-body">
+    <ul class="rtsp-list" id="rtsp-links"><li>Video locale disponibile nel lettore. Il flusso RTSP non è ancora attivo.</li></ul>
+  </div>
+</div>
+
+<!-- Home Assistant -->
+<div class="card" id="card-ha">
+  <div class="card-head" onclick="toggle('card-ha')">
+    <h2>&#127968; Home Assistant</h2><span class="chv">&#9654;</span>
+  </div>
+  <div class="card-body">
+    <p style="font-size:.82rem;color:var(--text-dim);margin-bottom:10px;">
+      Video e comandi locali: PTZ, luce bianca, IR Giorno/Notte e Automatico.
+      Salva il pacchetto nella cartella <code>packages</code> di Home Assistant. Abilita il caricamento dei pacchetti come indicato qui sotto, controlla la configurazione e riavvia Home Assistant.
+    </p>
+    <p style="font-size:.82rem;color:var(--text-dim);margin-bottom:10px;">Quando l’azione indicata nel pacchetto compare negli Strumenti per sviluppatori, incolla lo YAML della scheda in una scheda Manuale della dashboard.</p>
+    <p style="font-size:.82rem;margin-bottom:10px">Video per Generic Camera (TCP): <code id="ha-stream-url">In attesa della camera…</code></p>
+    <p style="font-size:.78rem;color:var(--text-dim);margin-bottom:10px">I pulsanti diventano entità di Home Assistant, utilizzabili anche nelle automazioni. Gli IR seguono la modalità Giorno/Notte.</p>
+    <div class="ha-code" id="ha-yaml"></div>
+    <div class="g2" style="margin-top:10px"><button class="btn" id="ha-copy" onclick="copyHA('ha')" disabled>Copia pacchetto YAML</button>
+    <button class="btn" id="ha-download" onclick="downloadHA('ha')" disabled>Scarica pacchetto YAML</button></div>
+    <details style="margin-top:10px">
+      <summary>YAML scheda dashboard</summary>
+      <div class="ha-code" id="ha-card-yaml"></div>
+    </details>
+    <div class="g2" style="margin-top:10px"><button class="btn accent" id="ha-card-copy" onclick="copyHA('ha-card')" disabled>Copia scheda YAML</button>
+    <button class="btn" id="ha-card-download" onclick="downloadHA('ha-card')" disabled>Scarica scheda YAML</button></div>
+  </div>
+</div>
+
+<!-- System Info -->
+<div class="card" id="card-sys">
+  <div class="card-head" onclick="toggle('card-sys')">
+    <h2>&#8505;&#65039; Sistema</h2><span class="chv">&#9654;</span>
+  </div>
+  <div class="card-body">
+    <div class="info-grid" id="sys-grid">
+      <span>IP</span><span>0.0.0.0</span>
+      <span>Hack</span><span>SD CARD / T23</span>
+      <span>Uptime</span><span>—</span>
+      <span>Data</span><span>—</span>
+    </div>
+    <button class="btn" style="margin-top:10px;" id="sys-refresh" onclick="refreshSys()">&#128260; Aggiorna</button>
+  </div>
+</div>
+
+<footer>
+  <a href="https://github.com/ant-thomas/zsgx1hacks" target="_blank">ZS-GX1 Hacks</a>
+  &middot; UI V4 di Alexandre / Jalecom &middot; adattamento VeePai QC5
+</footer>
+
+</div>
+
+<div id="toast"></div>
+
+
+<script>
+(function (catalogs) {
+  'use strict';
+
+  const languages = { it: 'Italiano' };
+  for (const [code, catalog] of Object.entries(catalogs)) languages[code] = catalog.name;
+  const supported = code => Object.prototype.hasOwnProperty.call(languages, code);
+  const validChoice = code => code === 'auto' || supported(code);
+  const key = 'qc5-language';
+  let stored;
+  try { stored = localStorage.getItem(key); } catch (_) {}
+  const requested = new URL(location.href).searchParams.get('lang');
+  const choice = validChoice(requested) ? requested : validChoice(stored) ? stored : 'auto';
+  const browserLanguage = (navigator.languages || [navigator.language])
+    .map(tag => (tag || '').toLowerCase().split('-')[0]).find(supported);
+  const language = choice === 'auto' ? browserLanguage || 'en' : choice;
+  const messages = catalogs[language] ? catalogs[language].strings : {};
+
+  function text(message, values) {
+    if (typeof message !== 'string') return message;
+    const translated = Object.prototype.hasOwnProperty.call(messages, message)
+      ? messages[message] : message;
+    return values ? translated.replace(/\{(\w+)\}/g, (match, name) =>
+      Object.prototype.hasOwnProperty.call(values, name) ? String(values[name]) : match)
+      : translated;
+  }
+
+  function url(path, preference = choice) {
+    const target = new URL(path, location.href);
+    target.searchParams.set('lang', preference);
+    return target.href;
+  }
+
+  window.qc5Text = text;
+  window.qc5Locale = { language, url };
+  document.documentElement.lang = language;
+  document.title = text(document.title);
+
+  // Initial markup contains only bundled labels. Runtime values such as SSIDs,
+  // file names and camera names are assigned separately and remain literal.
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+    if (node.parentElement.closest('script, style')) continue;
+    const value = node.nodeValue;
+    const trimmed = value.trim();
+    if (!trimmed) continue;
+    const label = trimmed.replace(/\s+/g, ' ');
+    const translated = text(label);
+    if (translated !== label) node.nodeValue = value.replace(trimmed, () => translated);
+  }
+  for (const el of document.querySelectorAll('[title], [aria-label], [placeholder]')) {
+    for (const attr of ['title', 'aria-label', 'placeholder']) {
+      if (el.hasAttribute(attr)) el.setAttribute(attr, text(el.getAttribute(attr)));
+    }
+  }
+  for (const link of document.querySelectorAll('[data-qc5-locale-link]')) link.href = url(link.href);
+
+  const control = document.getElementById('qc5-language-control');
+  if (!control) return;
+  const select = document.createElement('select');
+  select.setAttribute('aria-label', text('Lingua'));
+  for (const [value, name] of Object.entries({ auto: text('Automatico'), ...languages })) {
+    const option = new Option(name, value);
+    select.add(option);
+  }
+  select.value = choice;
+  select.addEventListener('change', () => {
+    try { localStorage.setItem(key, select.value); } catch (_) {}
+    location.replace(url(location.href, select.value));
+  });
+  control.append(select);
+})({"en":{"name":"English","strings":{"Volume Parla":"Talk volume","Lingua":"Language","Automatico":"Automatic","Cambia tema":"Toggle theme","Connessione alla camera…":"Connecting to the camera…","Pronto per i comandi locali":"Ready for local controls","Video e audio locali":"Local video and audio","Audio e volume sono nel lettore. Tieni premuto Parla per usare l’altoparlante della camera.":"Use the player to control audio and volume. Hold Talk to use the camera speaker.","↻ Riconnetti video":"↻ Reconnect video","🎙 Tieni premuto per parlare":"🎙 Hold to talk","Connessione al video…":"Connecting to live video…","Interfono in attesa della camera":"Intercom waiting for the camera","Riduci eco e rumore":"Reduce echo and noise","Su-Sinistra":"Up-left","Su-Destra":"Up-right","Su-sinistra":"Up-left","Su-destra":"Up-right","Su":"Up","Giù":"Down","Giu":"Down","Giu-Sinistra":"Down-left","Giu-Destra":"Down-right","Giù-sinistra":"Down-left","Giù-destra":"Down-right","Sinistra":"Left","Destra":"Right","Ferma movimento":"Stop movement","nome preset...":"Preset name…","💾 Salva":"💾 Save","🔴 Registrazioni":"🔴 Recordings","Lettura del registratore…":"Checking the recorder…","La registrazione avviene nella camera. La destinazione si imposta nel file":"The camera records locally. Set the destination in","■ Ferma registrazione in corso":"■ Stop current recording","Rilevamento del movimento":"Motion detection","Attiva registrazione su movimento":"Enable motion recording","Disattiva registrazione su movimento":"Disable motion recording","Lettura del rilevatore locale…":"Checking the local motion detector…","File Registrati":"Recorded files","🔄 Aggiorna lista":"🔄 Refresh list","✕ Chiudi":"✕ Close","Giorno/notte automatico":"Automatic day/night mode","Nome rete e password si impostano nel file":"Set the network name and password in","sulla SD, nei campi":"on the SD card, using","e":"and",". Dopo aver salvato il file, premi «Applica configurazione SD». SSID vuoto mantiene la rete già memorizzata. La password non viene mostrata nella pagina.":". Save the file and select “Apply SD configuration”. Leave SSID empty to keep the saved network. The page keeps the password hidden.","Configura Wi-Fi dalla pagina web":"Set up Wi-Fi in your browser","Applica configurazione SD":"Apply SD configuration","Video locale disponibile nel lettore. Il flusso RTSP non è ancora attivo.":"Local video is available in the player. The RTSP stream is not active yet.","Video e comandi locali: PTZ, luce bianca, IR Giorno/Notte e Automatico. Salva il pacchetto nella cartella":"Local video and controls for PTZ, white light, and day/night IR modes. Save the package in the","di Home Assistant. Abilita il caricamento dei pacchetti come indicato qui sotto, controlla la configurazione e riavvia Home Assistant.":"folder of Home Assistant. Enable packages as shown below, check the configuration, and restart Home Assistant.","Quando l’azione indicata nel pacchetto compare negli Strumenti per sviluppatori, incolla lo YAML della scheda in una scheda Manuale della dashboard.":"Once the action named in the package appears in Developer tools, paste the card YAML into a Manual dashboard card.","Video per Generic Camera (TCP):":"Video for Generic Camera (TCP):","In attesa della camera…":"Waiting for the camera…","In attesa della camera":"Waiting for the camera","I pulsanti diventano entità di Home Assistant, utilizzabili anche nelle automazioni. Gli IR seguono la modalità Giorno/Notte.":"The buttons become Home Assistant entities you can use in automations. IR follows the day/night mode.","Copia pacchetto YAML":"Copy package YAML","Scarica pacchetto YAML":"Download package YAML","YAML scheda dashboard":"Dashboard card YAML","Copia scheda YAML":"Copy card YAML","Scarica scheda YAML":"Download card YAML","Luce ON":"Light on","Luce OFF":"Light off","ℹ️ Sistema":"ℹ️ System","Data":"Date","🔄 Aggiorna":"🔄 Refresh","· UI V4 di Alexandre / Jalecom · adattamento VeePai QC5":"· UI V4 by Alexandre / Jalecom · VeePai QC5 adaptation","Salva preset":"Save preset","Richiama preset":"Recall preset","Elimina preset":"Delete preset","Luce accesa":"Light on","Luce spenta":"Light off","Giorno":"Day","Notte":"Night","Configurazione Wi-Fi":"Wi-Fi configuration","Attendi il completamento del comando in corso":"Wait for the current command to finish","PTZ non disponibile: controllo motori in corso":"PTZ unavailable while the camera checks the motors","in corso":"in progress","Completato":"Completed","Errore":"Error","errore":"error","Risposta non valida":"Invalid response","✗ Risposta non valida":"✗ Invalid response","Rete non raggiungibile":"Network unreachable","✗ Rete non raggiungibile":"✗ Network unreachable","La camera non risponde: riprova":"The camera did not respond. Try again.","✗ La camera non risponde: riprova":"✗ The camera did not respond. Try again.","Inserisci un nome":"Enter a name","Eliminare preset \"":"Delete preset \"","<span style=\"font-size:.78rem;color:var(--text-dim)\">Nessun preset</span>":"<span style=\"font-size:.78rem;color:var(--text-dim)\">No presets</span>","Sysinfo non disponibile":"System information unavailable","<span>Data</span><span>":"<span>Date</span><span>","✓ Info aggiornate":"✓ System information updated","✗ Errore sysinfo":"✗ Could not load system information","Camera non raggiungibile":"Camera unreachable","# Attendo il riconoscimento della camera.":"# Waiting for camera identification.","Su sinistra":"Up-left","Su destra":"Up-right","Giù sinistra":"Down-left","Giù destra":"Down-right","Luce bianca accendi":"Turn on white light","Luce bianca spegni":"Turn off white light","Giorno / IR disattivati":"Day / IR off","Notte / IR attivati":"Night / IR on","Giorno e notte automatici":"Automatic day/night mode","RTSP non ancora disponibile":"RTSP unavailable","indirizzo RTSP indicato dalla camera":"RTSP address shown by the camera"," - comando locale":" - local command","✓ YAML copiato":"✓ YAML copied","Seleziona e copia il testo YAML qui sopra":"Select and copy the YAML above","Video dal vivo sospeso durante la riproduzione":"Live video paused during playback","Ricollegamento video…":"Reconnecting video…","Camera collegata in rete locale":"Camera connected on the local network","Connessione alla camera in corso":"Connecting to the camera","Configurazione Wi-Fi originale":"Original Wi-Fi settings","Credenziali SD applicate al Wi-Fi":"Wi-Fi credentials applied from the SD card","Credenziali SD corrispondenti alla rete memorizzata":"SD credentials match the saved network","Controlla SSID e PWD nel file config.txt":"Check SSID and PWD in config.txt","Wi-Fi in avvio":"Starting Wi-Fi","Wi-Fi connesso":"Wi-Fi connected","Hotspot di configurazione attivo":"Setup hotspot active","Connessione Wi-Fi in corso":"Connecting to Wi-Fi","Wi-Fi disconnesso":"Wi-Fi disconnected","Configurazione in uso":"Configuration in use","Credenziali da salvare":"Credentials not saved","Connessione Wi-Fi non riuscita":"Wi-Fi connection failed","Configurazione non accettata":"Configuration not accepted","Configurazione SD letta":"SD configuration loaded","In attesa della connessione Wi-Fi":"Waiting for Wi-Fi connection","Configurazione iniziale locale completata":"Local setup complete","Configurazione esistente conservata":"Existing configuration kept","Completamento locale da verificare":"Check local setup status","Stato Wi-Fi da verificare":"Check Wi-Fi status","<body style=\"background:#0c0e13;color:#6b7280;font:14px sans-serif;display:grid;place-items:center;height:90vh;margin:0\">Video locale non configurato</body>":"<body style=\"background:#0c0e13;color:#6b7280;font:14px sans-serif;display:grid;place-items:center;height:90vh;margin:0\">Local video is not configured</body>","Video locale QC5":"QC5 local video","Video in diretta della camera":"Live camera video","Controlli del lettore":"Player controls","Attiva audio":"Enable audio","Disattiva audio":"Disable audio","Audio disattivato":"Audio disabled","Zoom digitale":"Digital zoom","Zoom digitale ":"Digital zoom ","Zoom digitale 1×; ripristina inquadratura":"Digital zoom 1×. Reset framing","; ripristina inquadratura":". Reset framing","Riduci zoom digitale":"Zoom out","Aumenta zoom digitale":"Zoom in","Ripristina inquadratura":"Reset framing","Schermo intero":"Fullscreen","Ascolta":"Listen","In attesa dell’audio della camera…":"Waiting for camera audio…","La camera non sta inviando audio":"The camera is not sending audio","Ascolto locale attivo":"Local audio enabled","Apertura audio locale…":"Connecting to local audio…","Ricollegamento audio…":"Reconnecting audio…","Audio sospeso mentre parli":"Audio paused while you talk","Il browser non ha attivato l’audio":"The browser could not start audio","Interfono disconnesso":"Intercom disconnected","Pacchetto audio non valido":"Invalid audio packet","Ripristino del lettore video…":"Resetting the video player…","Questo browser non supporta il video locale H.264":"This browser does not support local H.264 video","Ricollegamento del flusso video…":"Reconnecting the video stream…","Video dal vivo":"Live video","Stato del movimento non disponibile":"Motion status unavailable","Il controllo del movimento sarà disponibile con il firmware locale. Il programma originale della camera è ancora installato.":"Motion controls require the local camera firmware.","Piano personalizzato o rilevamento persone presente: impostazioni conservate.":"Existing schedule or person-detection settings kept.","Rilevamento nella camera e registrazione degli eventi abilitati.":"On-camera motion detection and event recording enabled.","Registrazione su movimento disabilitata.":"Motion recording disabled."," Il filmato termina dopo {seconds} secondi senza movimento.":" The clip ends after {seconds} seconds without motion."," Evento fermato manualmente: si riattiva dopo che la scena torna ferma.":" Event stopped manually. Detection resumes after the scene is still."," È attiva anche la registrazione continua: vengono conservate tutte le riprese.":" Continuous recording is also enabled. All footage is kept.","Esito non disponibile":"Result unavailable","Richiesta non riuscita: ricarica la pagina":"Request failed. Reload the page.","Stato non disponibile":"Status unavailable","■ Ferma registrazione continua":"■ Stop continuous recording","● Registra continuamente":"● Record continuously","Registrazione su movimento":"Motion recording","In registrazione":"Recording","In attesa del registratore":"Waiting for the recorder","Piano personalizzato conservato. ":"Existing schedule kept. ","Registrazione continua abilitata. ":"Continuous recording enabled. ","Registrazione su movimento in corso. ":"Motion recording in progress. ","Evento fermato: in attesa che la scena torni ferma. ":"Event stopped. Waiting for the scene to become still. ","Registrazione continua disabilitata. ":"Continuous recording disabled. ","SD: {free} MB liberi su {total} MB. ":"SD: {free} MB free of {total} MB. ","SD non pronta. ":"SD card not ready. ","Durata massima dei segmenti: {minutes} minuti. Destinazione: {destination}.":"Maximum segment length: {minutes} minutes. Destination: {destination}.","Trasferimenti aggiornati":"Transfers up to date","Invio del segmento al NAS":"Sending the segment to the NAS","Trasferimento non riuscito: nuovo tentativo automatico":"Transfer failed. Retrying automatically.","In attesa di memoria libera":"Waiting for available memory","In attesa della SD":"Waiting for the SD card","Ora della camera da impostare":"Set the camera clock","In attesa di un video completato":"Waiting for a finished recording","Avvio del trasferimento":"Starting the transfer","Trasferimento in attesa":"Transfer pending","Trasferimento remoto non attivo in questa revisione":"Remote transfer unavailable in this release",". I file restano sulla SD.":". Files are kept on the SD card.","Elenco non disponibile":"Recordings unavailable","Nessun video completato. Il segmento in corso comparirà alla chiusura.":"No completed recordings. The current segment will appear when it closes.","Riproduci":"Play","Scarica":"Download","Elimina":"Delete","Sono mostrati i 64 video completati più recenti.":"Showing the 64 most recent completed recordings.","Preparazione del lettore…":"Preparing the player…","Filmato oltre 32 MB: usa Scarica per aprirlo nel tuo lettore.":"This recording exceeds 32 MB. Download it to play it locally.","Il browser non legge questo formato: usa Scarica e aprilo in VLC.":"This browser cannot play the format. Download the file and open it in VLC.","Lettore non disponibile":"Player unavailable","Camera occupata: chiudi il filmato e riprova.":"Camera busy. Close playback and try again.","Filmato troppo grande: usa Scarica.":"This recording is too large. Download it to play it locally.","Caricamento del filmato: ":"Loading recording: ","Filmato non disponibile: chiudi il lettore e riprova.":"Recording unavailable. Close the player and try again.","Filmato caricato. Premi Play per riprodurlo.":"Recording loaded. Press Play to start.","Caricamento interrotto: chiudi il lettore e riprova.":"Loading stopped. Close the player and try again.","Eliminare {name} dalla SD?":"Delete {name} from the SD card?","/ configurazione locale":"/ local setup","Caricamento delle reti…":"Loading networks…","Collega la telecamera":"Connect the camera","al tuo Wi-Fi":"to your Wi-Fi","Configura il Wi-Fi · QC5":"Wi-Fi setup · QC5","Connetti al Wi-Fi":"Connect to Wi-Fi","Inserisci il nome e la password della rete di casa. La configurazione avviene direttamente sulla telecamera.":"Enter your home network name and password. Setup runs directly on the camera.","La rete non ha una password":"This network has no password","Le credenziali vengono conservate dopo una connessione riuscita. Se la rete non è disponibile, la telecamera torna in modalità hotspot.":"The camera saves credentials after a successful connection. It returns to hotspot mode if the network becomes unavailable.","Mostra":"Show","Nascondi":"Hide","Nome della rete":"Network name","Nome della rete nascosta":"Hidden network name","Password Wi-Fi":"Wi-Fi password","Puoi anche mostrare alla telecamera il tuo codice QR Wi-Fi.":"You can also show your Wi-Fi QR code to the camera.","Rete Wi-Fi":"Wi-Fi network","Verifica della telecamera…":"Checking the camera…","Seleziona la tua rete":"Choose your network","segnale forte":"strong signal","segnale medio":"fair signal","segnale debole":"weak signal","Rete nascosta o non presente…":"Hidden or unlisted network…","Inserisci il nome della rete":"Enter the network name","Pronta. Scegli la rete Wi-Fi da utilizzare.":"Ready. Choose the Wi-Fi network to use.","Wi-Fi salvato nella telecamera; la SD non è scrivibile.":"Wi-Fi saved on the camera. The SD card is read-only.","Wi-Fi salvato sulla SD. Il salvataggio interno della telecamera è ancora in attesa.":"Wi-Fi saved on the SD card. Saving to internal storage is pending.","Wi-Fi connesso, ma il salvataggio non è confermato. Controlla che la SD sia scrivibile.":"Wi-Fi connected. Check that the SD card is writable to save the settings.","La configurazione Wi-Fi non è attiva in questa modalità.":"Wi-Fi setup is unavailable in this mode.","Tentativo non avviato. Attendi qualche secondo e riprova.":"Connection attempt did not start. Wait a few seconds and try again.","Scegli la tua rete Wi-Fi e inserisci la password.":"Choose your Wi-Fi network and enter its password.","Pronta per la configurazione.":"Ready for setup.","Telecamera non raggiungibile. Verifica la rete Wi-Fi a cui sei collegato.":"Camera unreachable. Check which Wi-Fi network you are connected to.","Scegli una rete. La password deve contenere da 8 a 63 byte.":"Choose a network. The password must be 8 to 63 bytes long.","Avvio della connessione…":"Starting the connection…","Se l’hotspot scompare, torna sulla rete scelta. Altrimenti attendi e riprova.":"If the hotspot disappears, reconnect to the selected network. Otherwise wait and try again.","Per usare il microfono, apri l’indirizzo HTTPS configurato nel tuo reverse proxy.":"To use your microphone, open the HTTPS address configured in your reverse proxy.","Il browser non supporta la trasmissione audio richiesta.":"This browser does not support the required audio transmission.","Tieni premuto per parlare · massimo 30 secondi":"Hold to talk · up to 30 seconds","Avvio interfono non completato":"Could not start the intercom","Apertura microfono…":"Opening microphone…","Microfono disconnesso":"Microphone disconnected","Elaborazione audio non supportata dal browser":"This browser does not support audio processing","Attendi il collegamento del video prima di parlare":"Wait for live video to connect before talking","La camera non risponde all’interfono":"The camera did not respond to the intercom","Formato audio non compatibile":"Unsupported audio format","Connessione interfono non disponibile":"Intercom connection unavailable","Elaborazione audio interrotta":"Audio processing stopped","Rete lenta: trasmissione interrotta":"Slow network. Audio transmission stopped.","Stai parlando · rilascia per ascoltare":"Talking · release to listen","Limite di 30 secondi raggiunto":"30-second limit reached","Accesso al microfono non consentito":"Microphone access denied","Microfono non disponibile":"Microphone unavailable","Trasmissione annullata":"Transmission cancelled","Attivazione disponibile con il programma locale privo delle notifiche cloud":"Activation requires the local firmware with cloud notifications disabled","Azione non valida":"Invalid action","Comando mancante o non valido":"Missing or invalid command","Comando non ancora collegato al firmware locale":"Command unavailable in the local firmware","Comando non supportato":"Unsupported command","Configurazione troppo lunga":"Configuration is too long","Connessione in avvio. Se l'hotspot scompare, torna sulla rete Wi-Fi scelta. Con una password errata l'hotspot ritorna.":"Starting the connection. When the hotspot disappears, reconnect to the selected Wi-Fi network. If the password is wrong, the hotspot will return.","Controllo del registratore non pronto":"Recorder controls are not ready","File non valido":"Invalid file","Identita della camera non disponibile":"Camera identity unavailable","Il registratore sta usando il file":"The recorder is using this file","Impostazioni movimento non valide":"Invalid motion settings","Nome preset non valido":"Invalid preset name","Piano personalizzato o rilevamento persone presente: modifica annullata":"Existing schedule or person-detection settings found. Change cancelled.","Registratore nativo non raggiungibile":"Camera recorder unreachable","Registrazioni sulla SD non disponibili":"SD recordings unavailable","Rilevatore nativo non raggiungibile":"Camera motion detector unreachable","SD non leggibile":"Cannot read SD card","SD o cartella preset non disponibile":"SD card or preset folder unavailable","SSID o password non validi":"Invalid SSID or password","Stato SD non disponibile":"SD status unavailable","Stato movimento non leggibile":"Cannot read motion status","Video assente o ancora in scrittura":"Recording missing or still being written","Registrazione eliminata":"Recording deleted","File cambiato: riprova":"File changed. Try again.","Registrazione fermata; nuovi eventi dopo che la scena torna ferma":"Recording stopped. New events can start once the scene is still.","Registrazione continua abilitata":"Continuous recording enabled","Registrazione continua disabilitata":"Continuous recording disabled","Modifica non confermata: controlla SD e piano di registrazione":"Change not confirmed. Check the SD card and recording schedule.","Modifica non confermata: impostazioni precedenti ripristinate":"Change not confirmed. Previous settings restored.","Modifica incompleta: ricontrolla lo stato del movimento":"Incomplete change. Check motion status again.","Rilevamento e registrazione su movimento abilitati nella camera":"Motion detection and event recording enabled on the camera","Registrazione su movimento disabilitata":"Motion recording disabled","Movimento locale completato":"Movement complete","Comando o arresto non confermato":"Movement or stop command not confirmed","Luce aggiornata":"Light state updated","Stato luce non confermato":"Light state not confirmed","Modalita infrarossi aggiornata":"Infrared mode updated","Modalita non confermata":"Mode not confirmed","Credenziali SD gia presenti nella camera":"The camera already has these Wi-Fi credentials","Credenziali SD inviate al Wi-Fi":"SD credentials sent to the Wi-Fi driver","SSID vuoto: mantengo il Wi-Fi originale":"SSID is empty. Keeping the saved network.","Configurazione o collegamento locale non valido":"Invalid configuration or local connection","Preset non disponibile":"Preset unavailable","Eliminazione nativa non confermata":"Preset deletion not confirmed by the camera","Stato dopo eliminazione non confermato":"Camera status not confirmed after deletion","Persistenza eliminazione non confermata":"Could not confirm saved preset deletion","Il firmware mantiene ancora il preset":"The camera still has this preset","Preset eliminato":"Preset deleted","Errore scrittura preset":"Could not write the preset","Preset assente o di una versione precedente":"Preset missing or from an older version","Richiamo preset inviato":"Preset recall sent","Camera locale non disponibile":"Local camera unavailable","Elenco preset nativo non disponibile":"Camera preset list unavailable","Tutti i 16 preset sono occupati":"All 16 preset slots are in use","Creazione preset non disponibile":"Cannot create a preset","SD non scrivibile":"SD card is read-only","Salvataggio nativo non confermato":"Camera did not confirm saving the preset","Il firmware non ha confermato il preset":"Camera did not confirm the preset","Preset salvato sulla SD":"Preset saved to the SD card","# Abilita i pacchetti in configuration.yaml con queste righe:\n":"# Enable packages in configuration.yaml with these lines:\n","# Se homeassistant esiste già, aggiungi packages al blocco esistente.\n":"# If homeassistant already exists, add packages to the existing section.\n","# Controlla la configurazione e riavvia Home Assistant.\n":"# Check the configuration and restart Home Assistant.\n","# Negli Strumenti per sviluppatori > Azioni cerca: ":"# In Developer tools > Actions, find: ","# Prima carica il pacchetto dei comandi e verifica questa azione: ":"# First load the command package and verify this action: ","# Dashboard: incolla lo YAML della scheda in Aggiungi scheda > Manuale.\n":"# Dashboard: paste the card YAML in Add card > Manual.\n","# Video: aggiungi Generic Camera da Impostazioni > Dispositivi e servizi.\n":"# Video: add Generic Camera in Settings > Devices & services.\n","# Sorgente flusso: ":"# Stream source: ","\n# Trasporto RTSP: TCP. Immagine fissa: lascia vuoto.\n":"\n# RTSP transport: TCP. Leave the still image field empty.\n","# La funzione stream deve essere attiva (inclusa in default_config).\n":"# Enable the stream integration, which is included in default_config.\n","# IR segue il modo Giorno/Notte: non è un comando indipendente del LED IR.\n\n":"# IR follows the day/night mode.\n\n","\n        then:\n          - stop: \"Comando camera non valido\"\n            error: true\n":"\n        then:\n          - stop: \"Invalid camera command\"\n            error: true\n","      - if: \"{{ camera_response.status != 200 or camera_response.content is not mapping or not camera_response.content.get('ok', false) }}\"\n        then:\n          - stop: \"La camera non ha confermato il comando\"\n            error: true\n\n":"      - if: \"{{ camera_response.status != 200 or camera_response.content is not mapping or not camera_response.content.get('ok', false) }}\"\n        then:\n          - stop: \"The camera did not confirm the command\"\n            error: true\n\n","Wi-Fi salvato sulla SD.":"Wi-Fi saved on the SD card.","Connessione non riuscita. Controlla rete e password e riprova.":"Connection failed. Check the network and password, then try again.","Calibra":"Calibrate","Calibrazione avviata":"Calibration started","Calibrazione non avviata":"Calibration could not start","Calibrazione in corso":"Calibrating","Movimento in corso":"Moving","Posizione da ricalibrare":"Position needs recalibration","Posizione calibrata":"Position calibrated","Calibra prima di usare i preset":"Calibrate before using presets","Richiamo preset avviato":"Moving to preset","Calibra la posizione prima di richiamare il preset":"Calibrate the position before recalling a preset","Preset aggiornato sulla SD":"Preset updated on the SD card","Preset non salvato: controlla calibrazione e SD":"Preset not saved: check calibration and SD card","SD non pronta: preset non salvato":"SD card not ready: preset not saved","Movimento nativo avviato":"Native motion started","Movimento non avviato":"Motion could not start","Arresto nativo richiesto":"Native stop requested","Arresto non confermato":"Stop not confirmed","Comando filtro IR accettato":"IR filter command accepted","Comando filtro IR non confermato":"IR filter command not confirmed","Registrazione non riuscita: controlla la SD.":"Recording failed: check the SD card."}}});
+</script>
+<script src="talk.js"></script>
+<script>
+/* -- Theme -- */
+(function(){
+  var s=localStorage.getItem('theme');
+  if(s==='light')document.documentElement.classList.add('light');
+  ubtn();
+})();
+function toggleTheme(){
+  document.documentElement.classList.toggle('light');
+  localStorage.setItem('theme',document.documentElement.classList.contains('light')?'light':'dark');
+  ubtn();
+}
+function ubtn(){
+  var b=document.getElementById('themeBtn');
+  if(b)b.innerHTML=document.documentElement.classList.contains('light')?'&#9728;&#65039;':'&#127769;';
+}
+
+/* -- Card collapse -- */
+function toggle(id){
+ document.getElementById(id).classList.toggle('open');
+ if(id==='card-rec')loadRecordingPanel();
+}
+
+/* -- Toast -- */
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+var _tt=null;
+function toast(msg,cls,dur){
+  var el=document.getElementById('toast');
+  el.textContent=msg;
+  el.className='show '+(cls||'');
+  clearTimeout(_tt);
+  _tt=setTimeout(function(){el.className=''},dur||2500);
+}
+
+/* -- Command API -- */
+var motorAvailable=false,lastCommandId=0,commandPending=0;
+var commandNames={ptzhome:qc5Text("Calibra"),ptzl:qc5Text("Sinistra"),ptzr:qc5Text("Destra"),ptzu:qc5Text("Su"),ptzd:qc5Text("Giù"),ptzlu:qc5Text("Su-sinistra"),ptzru:qc5Text("Su-destra"),ptzld:qc5Text("Giù-sinistra"),ptzrd:qc5Text("Giù-destra"),ptzstop:'Stop',preset_save:qc5Text("Salva preset"),preset_go:qc5Text("Richiama preset"),preset_del:qc5Text("Elimina preset"),wlon:qc5Text("Luce accesa"),wlof:qc5Text("Luce spenta"),ircutday:qc5Text("Giorno"),ircutnig:qc5Text("Notte"),irauto:qc5Text("Giorno/notte automatico"),wifi_apply:qc5Text("Configurazione Wi-Fi")};
+function commandStatus(id,label,message,ok){
+ if(id!==lastCommandId)return;
+ var el=document.getElementById('command-status');
+ el.textContent=(ok===true?'✓ ':ok===false?'✗ ':'⏳ ')+label+': '+message;
+ el.style.color=ok===false?'var(--red)':ok===true?'var(--accent)':'var(--text-dim)';
+}
+function cmd(c,extra,done){
+  if(commandPending&&c!=='ptzstop'){toast(qc5Text("Attendi il completamento del comando in corso"));return;}
+  if(((c.indexOf('ptz')===0&&c!=='ptzstop')||c==='preset_save'||c==='preset_go')&&!motorAvailable){toast(qc5Text("PTZ non disponibile: controllo motori in corso"),'err');return;}
+  commandPending++;
+  var requestId=++lastCommandId,label=commandNames[c]||c;
+  commandStatus(requestId,label,qc5Text("in corso"),null);
+  if(['wlon','wlof','ircutday','ircutnig','irauto'].indexOf(c)>=0){var frame=document.getElementById('live-frame');if(frame.contentWindow)frame.contentWindow.postMessage({qc5VideoPauseMs:4000},location.origin);}
+  var url='cgi-bin/webui?command='+encodeURIComponent(c);
+  if(extra)url+='&'+extra;
+  toast('\u23F3 '+c+'\u2026','wait',8000);
+  var xhr=new XMLHttpRequest();
+  xhr.open('GET',url,true);
+  xhr.timeout=20000;
+  xhr.onload=function(){
+    try{
+      var d=JSON.parse(xhr.responseText);
+      if(d.ok===true||d.ok==='true'){
+        commandStatus(requestId,label,qc5Text(d.result)||qc5Text("Completato"),true);
+        toast('\u2713 '+(qc5Text(d.result)||c),'ok');
+        if(done)done(d);if(c==='wifi_apply')refreshSys(true);if(c.indexOf('ptz')===0||c==='preset_go')setTimeout(function(){refreshSys(true)},250);
+      }else{
+        commandStatus(requestId,label,qc5Text(d.result)||qc5Text("Errore"),false);
+        toast('\u2717 '+(qc5Text(d.result)||qc5Text("errore")),'err');
+      }
+    }catch(e){
+      commandStatus(requestId,label,qc5Text("Risposta non valida"),false);
+      toast(qc5Text("✗ Risposta non valida"),'err');
+    }
+  };
+  xhr.onerror=function(){commandStatus(requestId,label,qc5Text("Rete non raggiungibile"),false);toast(qc5Text("✗ Rete non raggiungibile"),'err')};
+  xhr.onloadend=function(){commandPending=Math.max(0,commandPending-1)};
+  xhr.ontimeout=function(){commandStatus(requestId,label,qc5Text("La camera non risponde: riprova"),false);toast(qc5Text("✗ La camera non risponde: riprova"),'err')};
+  xhr.send();
+}
+
+/* -- PTZ Presets -- */
+function presetSave(){
+  var n=document.getElementById('preset-name').value.trim().replace(/[^a-zA-Z0-9_-]/g,'');
+  if(!n){toast(qc5Text("Inserisci un nome"),'err');return}
+  cmd('preset_save','preset_name='+encodeURIComponent(n),loadPresets);
+  document.getElementById('preset-name').value='';
+}
+function presetGo(n){cmd('preset_go','preset_name='+encodeURIComponent(n))}
+function presetDel(n){
+  if(confirm(qc5Text("Eliminare preset \"")+n+'"?')){
+    cmd('preset_del','preset_name='+encodeURIComponent(n),loadPresets);
+  }
+}
+function loadPresets(){
+  var xhr=new XMLHttpRequest();
+  xhr.open('GET','cgi-bin/webui?command=preset_list',true);
+  xhr.onload=function(){
+    try{
+      var d=JSON.parse(xhr.responseText);
+      var el=document.getElementById('preset-list');
+      if(!d.presets||d.presets.length===0){
+        el.innerHTML=qc5Text("<span style=\"font-size:.78rem;color:var(--text-dim)\">Nessun preset</span>");
+        return;
+      }
+      var h='';
+      for(var i=0;i<d.presets.length;i++){
+        var p=d.presets[i];
+        h+='<button class="btn accent" onclick="presetGo(\''+p+'\')">'+p+'</button>';
+        h+='<button class="btn off" onclick="presetDel(\''+p+'\')" style="width:auto;padding:8px 10px">\u2715</button>';
+      }
+      el.innerHTML=h;
+    }catch(e){}
+  };
+  xhr.send();
+}
+loadPresets();
+
+/* -- System info refresh -- */
+var sysBusy=false;
+function refreshSys(quiet){
+  if(sysBusy)return;
+  sysBusy=true;
+  var button=document.getElementById('sys-refresh');if(button)button.disabled=true;
+  var xhr=new XMLHttpRequest();
+  xhr.open('GET','cgi-bin/webui?command=sysinfo',true);
+  xhr.timeout=15000;
+  xhr.onload=function(){
+    try{
+      var d=JSON.parse(xhr.responseText);
+      if(!d.ok)throw new Error(qc5Text("Sysinfo non disponibile"));
+      var g=document.getElementById('sys-grid');
+      if(d.ok){ applyCameraInfo(d); }
+      if(g&&d.ok){
+        var h='<span>IP</span><span>'+esc((d.ip||'?'))+'</span>';
+        h+='<span>Hack</span><span>'+esc((d.hack||'?'))+'</span>';
+        h+='<span>Uptime</span><span>'+esc((d.uptime||'?'))+'</span>';
+        h+=qc5Text("<span>Data</span><span>")+esc((d.date||new Date().toLocaleString(qc5Locale.language)))+'</span>';
+        if(d.mem_total_kb){
+          var available=typeof d.mem_available_kb==='number'?d.mem_available_kb:d.mem_free_kb;
+          var used=Math.round((d.mem_total_kb-available)/1024);
+          var total=Math.round(d.mem_total_kb/1024);
+          h+='<span>RAM</span><span>'+used+' / '+total+' MB</span>';
+        }
+        g.innerHTML=h;
+      }
+      if(!quiet)toast(qc5Text("✓ Info aggiornate"),'ok');
+    }catch(e){if(!quiet)toast(qc5Text("✗ Errore sysinfo"),'err')}
+  };
+  xhr.onerror=xhr.ontimeout=function(){if(!quiet)toast(qc5Text("Camera non raggiungibile"),'err')};
+  xhr.onloadend=function(){sysBusy=false;if(button)button.disabled=false};
+  xhr.send();
+}
+
+/* -- HA YAML generator -- */
+function renderHAYaml(id,info){
+ var prefix=String(id||'').toLowerCase().replace(/[^a-z0-9_]/g,'_');
+ if(!prefix){
+  document.getElementById('ha-stream-url').textContent=qc5Text("In attesa della camera");
+  ['ha','ha-card'].forEach(function(section){setHAExport(section,qc5Text("# Attendo il riconoscimento della camera."),'');});
+  return;
+ }
+ if(!/^[a-z]/.test(prefix))prefix='camera_'+prefix;
+ var camBase=location.origin,label=info&&info.CAM_NAME||'QC5',stream=info&&(info.RTSP_URL||info.rtsp_url||(info.rtsp&&info.rtsp.url))||'';
+ var groups=[
+  {columns:3,iconOnly:true,entries:[
+   ['su_sinistra',qc5Text("Su sinistra"),'ptzlu','mdi:arrow-top-left'],
+   ['su',qc5Text("Su"),'ptzu','mdi:arrow-up'],
+   ['su_destra',qc5Text("Su destra"),'ptzru','mdi:arrow-top-right'],
+   ['sinistra',qc5Text("Sinistra"),'ptzl','mdi:arrow-left'],
+   ['stop',qc5Text("Ferma movimento"),'ptzstop','mdi:stop'],
+   ['destra',qc5Text("Destra"),'ptzr','mdi:arrow-right'],
+   ['giu_sinistra',qc5Text("Giù sinistra"),'ptzld','mdi:arrow-bottom-left'],
+   ['giu',qc5Text("Giù"),'ptzd','mdi:arrow-down'],
+   ['giu_destra',qc5Text("Giù destra"),'ptzrd','mdi:arrow-bottom-right']
+  ]},
+  {columns:2,entries:[
+   ['luce_on',qc5Text("Luce bianca accendi"),'wlon','mdi:lightbulb-on',qc5Text("Luce ON")],
+   ['luce_off',qc5Text("Luce bianca spegni"),'wlof','mdi:lightbulb-off',qc5Text("Luce OFF")]
+  ]},
+  {columns:3,entries:[
+   ['giorno',qc5Text("Giorno / IR disattivati"),'ircutday','mdi:white-balance-sunny',qc5Text("Giorno")],
+   ['notte',qc5Text("Notte / IR attivati"),'ircutnig','mdi:weather-night',qc5Text("Notte")],
+   ['automatico',qc5Text("Giorno e notte automatici"),'irauto','mdi:theme-light-dark','Auto']
+  ]}
+ ];
+ var entries=groups.flatMap(function(group){return group.entries;});
+ var allowed=entries.map(function(e){return e[2]});
+ document.getElementById('ha-stream-url').textContent=stream||qc5Text("RTSP non ancora disponibile");
+ var y='# Home Assistant: '+prefix+'\n';
+ y+='# File: packages/'+prefix+'.yaml\n';
+ y+=qc5Text("# Abilita i pacchetti in configuration.yaml con queste righe:\n");
+ y+='# homeassistant:\n#   packages: !include_dir_named packages\n';
+ y+=qc5Text("# Se homeassistant esiste già, aggiungi packages al blocco esistente.\n");
+ y+=qc5Text("# Controlla la configurazione e riavvia Home Assistant.\n");
+ y+=qc5Text("# Negli Strumenti per sviluppatori > Azioni cerca: ")+'script.'+prefix+'_comando\n';
+ y+=qc5Text("# Dashboard: incolla lo YAML della scheda in Aggiungi scheda > Manuale.\n");
+ y+=qc5Text("# Video: aggiungi Generic Camera da Impostazioni > Dispositivi e servizi.\n");
+ y+=qc5Text("# Sorgente flusso: ")+(stream||qc5Text("indirizzo RTSP indicato dalla camera"))+qc5Text("\n# Trasporto RTSP: TCP. Immagine fissa: lascia vuoto.\n");
+ y+=qc5Text("# La funzione stream deve essere attiva (inclusa in default_config).\n");
+ y+=qc5Text("# IR segue il modo Giorno/Notte: non è un comando indipendente del LED IR.\n\n");
+ y+='rest_command:\n  '+prefix+'_comando:\n';
+ y+='    url: '+JSON.stringify(camBase+'/cgi-bin/webui?command={{ command }}')+'\n    method: GET\n    timeout: 20\n\n';
+ y+='script:\n  '+prefix+'_comando:\n    alias: '+JSON.stringify(label+qc5Text(" - comando locale"))+'\n    mode: queued\n    max: 5\n    sequence:\n';
+ y+='      - if: '+JSON.stringify('{{ command is not defined or command not in '+JSON.stringify(allowed)+' }}')+qc5Text("\n        then:\n          - stop: \"Comando camera non valido\"\n            error: true\n");
+ y+='      - action: rest_command.'+prefix+'_comando\n        data:\n          command: "{{ command }}"\n        response_variable: camera_response\n';
+ y+=qc5Text("      - if: \"{{ camera_response.status != 200 or camera_response.content is not mapping or not camera_response.content.get('ok', false) }}\"\n        then:\n          - stop: \"La camera non ha confermato il comando\"\n            error: true\n\n");
+ y+='template:\n  - button:\n';
+ entries.forEach(function(e){y+='      - name: '+JSON.stringify(label+' - '+e[1])+'\n        unique_id: '+prefix+'_'+e[0]+'\n        icon: '+e[3]+'\n        press:\n          - action: script.'+prefix+'_comando\n            data:\n              command: '+e[2]+'\n';});
+ setHAExport('ha',y,prefix+'.yaml');
+
+ var card=qc5Text("# Prima carica il pacchetto dei comandi e verifica questa azione: ")+'script.'+prefix+'_comando\n';
+ card+='type: horizontal-stack\ntitle: '+JSON.stringify(label)+'\ncards:\n';
+ function controlsGrid(group,indent){
+  card+=indent+'- type: grid\n'+indent+'  columns: '+group.columns+'\n'+indent+'  square: false\n'+indent+'  cards:\n';
+  group.entries.forEach(function(e){
+   var row=indent+'      ';
+   card+=indent+'    - type: button\n'+row+'name: '+JSON.stringify(e[4]||e[1])+'\n'+row+'icon: '+e[3]+'\n';
+   card+=row+'icon_height: 20px\n';
+   if(group.iconOnly)card+=row+'show_name: false\n';
+   card+=row+'tap_action:\n'+row+'  action: perform-action\n'+row+'  perform_action: script.'+prefix+'_comando\n';
+   card+=row+'  data:\n'+row+'    command: '+e[2]+'\n';
+  });
+ }
+ controlsGrid(groups[0],'  ');
+ card+='  - type: vertical-stack\n    cards:\n';
+ groups.slice(1).forEach(function(group){controlsGrid(group,'      ');});
+ setHAExport('ha-card',card,prefix+'_dashboard.yaml');
+}
+function setHAExport(section,text,filename){
+ document.getElementById(section+'-yaml').textContent=text;
+ var download=document.getElementById(section+'-download');
+ download.dataset.filename=filename;
+ download.disabled=document.getElementById(section+'-copy').disabled=!filename;
+}
+function downloadHA(section){
+ var button=document.getElementById(section+'-download'),name=button.dataset.filename;
+ if(!name)return;
+ var url=URL.createObjectURL(new Blob([document.getElementById(section+'-yaml').textContent],{type:'application/yaml;charset=utf-8'}));
+ var a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);
+ setTimeout(function(){URL.revokeObjectURL(url)},1000);
+}
+function copyHA(section){
+ var text=document.getElementById(section+'-yaml').textContent;
+ function fallback(){
+  var active=document.activeElement,ta=document.createElement('textarea');
+  ta.value=text;document.body.appendChild(ta);ta.select();var copied=false;
+  try{copied=document.execCommand('copy')}catch(error){}
+  document.body.removeChild(ta);if(active&&active.focus)active.focus();
+  toast(copied?qc5Text("✓ YAML copiato"):qc5Text("Seleziona e copia il testo YAML qui sopra"),copied?'ok':'err');
+ }
+ if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(text).then(function(){toast(qc5Text("✓ YAML copiato"),'ok')}).catch(fallback);
+ else fallback();
+}
+
+var CAM_ID="",REC_API="",nativeRecording=false,recBusy=false;
+
+function localUrl(s){try{var u=new URL(s,location.href);return /^https?:$/.test(u.protocol)?u.href:''}catch(e){return ''}}
+var initializedCamera=false,recordPanelLoaded=false,videoLastReload=0,recordPlaybackActive=false,livePlayerUrl='',intercomAvailable=false,liveTalkReady=false;
+function loadRecordingPanel(){
+ if(!nativeRecording||recordPanelLoaded||!document.getElementById('card-rec').classList.contains('open'))return;
+ recordPanelLoaded=true;recLoadList();motionCheckStatus();
+}
+window.qc5LiveIntercomReady=function(ready){
+ liveTalkReady=!!ready;
+ if(globalThis.qc5TalkController)globalThis.qc5TalkController.update(intercomAvailable&&liveTalkReady&&!recordPlaybackActive);
+};
+function videoPauseForRecording(){
+ recordPlaybackActive=true;
+ if(globalThis.qc5TalkController){globalThis.qc5TalkController.stop();globalThis.qc5TalkController.update(false);}
+ var frame=document.getElementById('live-frame');frame.removeAttribute('srcdoc');frame.src='about:blank';
+ document.getElementById('video-status').textContent=qc5Text("Video dal vivo sospeso durante la riproduzione");
+}
+function videoResumeAfterRecording(){
+ recordPlaybackActive=false;
+ var frame=document.getElementById('live-frame');if(livePlayerUrl)frame.src=livePlayerUrl;
+ if(globalThis.qc5TalkController)globalThis.qc5TalkController.update(intercomAvailable&&liveTalkReady);
+ document.getElementById('video-status').textContent=qc5Text("Ricollegamento video…");
+}
+function videoReload(){
+ if(recordPlaybackActive){recPlayerClose();return;}
+ var frame=document.getElementById('live-frame');
+ if(frame.src&&frame.src!=='about:blank'){frame.src=frame.src;videoLastReload=Date.now();document.getElementById('video-status').textContent=qc5Text("Ricollegamento video…");}
+}
+function applyCameraInfo(d){
+  intercomAvailable=!!(d.intercom&&d.intercom.available);
+  if(globalThis.qc5TalkController){globalThis.qc5TalkController.update(intercomAvailable&&liveTalkReady&&!recordPlaybackActive);}
+
+  document.getElementById('camera-name').textContent='::'+(d.CAM_NAME||'VeePai QC5');
+  CAM_ID=d.CAM_ID||''; REC_API=d.REC_API?localUrl(d.REC_API):'';
+  renderHAYaml(CAM_ID,d);
+  var ready=d.adapter&&d.adapter.bridge;
+  nativeRecording=!!(d.recording&&d.recording.available);
+  document.querySelector('.rec-bar').style.display=nativeRecording?'':'none';
+  document.getElementById('card-rec').style.display=nativeRecording?'':'none';
+  motorAvailable=!!(ready&&d.adapter.ptz_ready);
+  document.getElementById('camera-status').textContent=ready?qc5Text("Camera collegata in rete locale"):qc5Text("Connessione alla camera in corso");
+  document.querySelectorAll('#card-ptz .ptz-pad button,#card-ptz .preset-bar > button,#preset-name').forEach(function(el){el.disabled=!motorAvailable;});
+  var nativeCal=!!(d.adapter&&(d.adapter.calibration_supported||d.adapter.calibration_required)),presetReady=!!(d.adapter&&d.adapter.presets_ready),ptzBusy=!!(d.adapter&&d.adapter.ptz_busy);
+  var cal=document.getElementById('ptz-calibrate');cal.hidden=!nativeCal;cal.disabled=!motorAvailable||ptzBusy;
+  if(nativeCal){
+    document.getElementById('preset-name').disabled=!motorAvailable||!presetReady||ptzBusy;
+    document.querySelectorAll('#card-ptz .preset-bar > button:not(#ptz-calibrate)').forEach(function(el){el.disabled=!motorAvailable||!presetReady||ptzBusy;});
+    document.getElementById('ptz-native-status').textContent=qc5Text(ptzBusy?(presetReady?'Movimento in corso':'Calibrazione in corso'):d.adapter.ptz_error?'Posizione da ricalibrare':presetReady?'Posizione calibrata':'Calibra prima di usare i preset');
+    if(ptzBusy)setTimeout(function(){refreshSys(true)},1000);
+  }
+  if(d.adapter&&typeof d.adapter.daynight_mode==='number'){
+    var dn=document.getElementById('daynight-status');dn.textContent=qc5Text(d.adapter.daynight_error?'Controllo giorno/notte da verificare':d.adapter.ir_auto_ready?(d.adapter.night?'Notte / IR attivati':'Giorno / IR disattivati'):'Controllo giorno/notte in avvio');
+  }
+  var names={wifi_connesso:qc5Text("Wi-Fi connesso"),hotspot_attivo:qc5Text("Hotspot di configurazione attivo"),connessione_in_corso:qc5Text("Connessione Wi-Fi in corso"),wifi_disconnesso:qc5Text("Wi-Fi disconnesso"),config_originale:qc5Text("Configurazione Wi-Fi originale"),credenziali_applicate:qc5Text("Credenziali SD applicate al Wi-Fi"),credenziali_corrispondenti:qc5Text("Credenziali SD corrispondenti alla rete memorizzata"),config_non_valida:qc5Text("Controlla SSID e PWD nel file config.txt"),driver_in_avvio:qc5Text("Wi-Fi in avvio"),config_sd_letta:qc5Text("Configurazione SD letta")};
+  var w=d.adapter&&d.adapter.wifi;
+  var setup={configurazione_in_uso:qc5Text("Configurazione in uso"),salvataggio_da_verificare:qc5Text("Credenziali da salvare"),connessione_non_riuscita:qc5Text("Connessione Wi-Fi non riuscita"),richiesta_non_accettata:qc5Text("Configurazione non accettata"),attesa_wifi:qc5Text("In attesa della connessione Wi-Fi"),completata_locale:qc5Text("Configurazione iniziale locale completata"),configurazione_preservata:qc5Text("Configurazione esistente conservata"),esito_da_verificare:qc5Text("Completamento locale da verificare"),configurazione_non_leggibile:qc5Text("Completamento locale da verificare")};
+  document.getElementById('wifi-status').textContent=(names[w]||qc5Text("Stato Wi-Fi da verificare"))+(setup[d.adapter&&d.adapter.local_setup]?' · '+setup[d.adapter.local_setup]:'');
+  var frame=document.getElementById('live-frame');
+  if(ready&&d.adapter.video){livePlayerUrl=qc5Locale.url('/live.html');if(!recordPlaybackActive&&frame.src!==livePlayerUrl){frame.removeAttribute('srcdoc');frame.src=livePlayerUrl;}}
+  var links=document.getElementById('rtsp-links');links.replaceChildren();
+  if(/^rtsp:\/\//.test(d.RTSP_URL||'')){var li=document.createElement('li'),a=document.createElement('a');a.href=d.RTSP_URL;a.textContent=d.RTSP_URL;li.appendChild(a);links.appendChild(li);}
+  else{var li=document.createElement('li');li.textContent=qc5Text("Video locale disponibile nel lettore. Il flusso RTSP non è ancora attivo.");links.appendChild(li);}
+  if(!initializedCamera&&nativeRecording){initializedCamera=true;recCheckStatus();}
+  loadRecordingPanel();
+}
+document.getElementById('live-frame').srcdoc=qc5Text("<body style=\"background:#0c0e13;color:#6b7280;font:14px sans-serif;display:grid;place-items:center;height:90vh;margin:0\">Video locale non configurato</body>");
+refreshSys();
+setInterval(function(){if(!document.hidden)refreshSys(true)},30000);
+setInterval(function(){if(nativeRecording&&!document.hidden&&!recBusy)recCheckStatus()},10000);
+setInterval(function(){if(nativeRecording&&!document.hidden&&document.getElementById('card-rec').classList.contains('open'))motionCheckStatus()},30000);
+</script>
+<script src="record-playback.js"></script>
+<script src="record.js"></script>
+<script src="motion.js"></script>
+</body>
+</html>

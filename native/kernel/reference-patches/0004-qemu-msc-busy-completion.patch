@@ -1,0 +1,21 @@
+--- a/hw/sd/ingenic-msc.c
++++ b/hw/sd/ingenic-msc.c
+@@ -163,6 +163,12 @@ static void ingenic_msc_run_command(IngenicMscState *s)
+     } else {
+         s->data_total = 0;
+         s->data_pos = 0;
++        /*
++         * The SD bus completes commands synchronously. Signal the end of
++         * the busy period for R1b commands such as STOP_TRANSMISSION.
++         */
++        if ((cmdat & CMDAT_BUSY) && rsplen)
++            s->reg_iflg |= IFLG_PRG_DONE;
+     }
+ }
+ 
+--- a/include/hw/sd/ingenic-msc.h
++++ b/include/hw/sd/ingenic-msc.h
+@@ -20 +20,2 @@
+-#define INGENIC_MSC_BUFSIZE (128 * 1024)
++/* The QC5 U-Boot can read a contiguous RAM image in one multi-block command. */
++#define INGENIC_MSC_BUFSIZE (8 * 1024 * 1024)

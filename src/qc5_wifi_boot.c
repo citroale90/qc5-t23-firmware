@@ -109,6 +109,16 @@ static void remove_controller_marker(void){
  const char*run=runtime_path();char path[600];
  if(snprintf(path,sizeof(path),"%s/wifi-controller",run)<(int)sizeof(path))unlink(path);
 }
+static unsigned portal_recently_active(uint64_t now){
+ char path[600],text[32];
+ if(snprintf(path,sizeof(path),"%s/wifi-portal-active",runtime_path())>=(int)sizeof(path))return 0;
+ int n=read_path(path,text,sizeof(text));if(n<2||text[n-1]!='\n')return 0;
+ uint64_t when=0;for(int i=0;i<n-1;i++){
+  unsigned digit=(unsigned char)text[i]-'0';
+  if(digit>9||when>(UINT64_MAX-digit)/10)return 0;when=when*10+digit;
+ }
+ return when&&now>=when&&now-when<=15000;
+}
 static int committed_marker(const struct qc5_wifi_profile*p){
  /* Legacy tag filename identifies a confirmed association, not a durable
   * native commit: native_save queues its flash write asynchronously. Publish
@@ -222,8 +232,9 @@ static void *apply(void*unused){
   memset(&requested,0,sizeof(requested));
   struct qc5_net_observation o={0};o.now_ms=now;o.has_saved_credentials=(unsigned)have_target;o.credentials_submitted=(unsigned)submitted;
   o.station_online=have_target&&(unsigned)matches(&target);
-  /* Single interface: keep fallback AP until QR/form submits credentials.
-   * Never use cloud reachability or unverified client/scan counts to switch. */
+  o.ap_clients=portal_recently_active(now);
+  /* Visibility is unknown while the native AP owns the only interface.
+   * Retry saved credentials after an idle interval; never test the cloud. */
   unsigned actions=qc5_net_step(&policy,&o);
   if((actions&QC5_NET_TRY_STA)&&!already_joining&&have_target){
    char note[128];snprintf(note,sizeof(note),"QC5_WIFI_JOIN_STATE ready=%u mode=%u state=%u\n",(unsigned)NATIVE_READY,(unsigned)NATIVE_MODE,(unsigned)NATIVE_STATE);message(note);

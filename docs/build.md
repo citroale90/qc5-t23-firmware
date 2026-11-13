@@ -1,5 +1,11 @@
 # Local build and SD installation
 
+**This guide builds the legacy Linux 3.10 application release. It does not
+build or install native Linux 7.3.1 R43.** See [`native/README.md`](../native/README.md)
+for the native source export, its tests, required private inputs and current
+reproducibility limits. Never use a legacy application capsule as a native
+kernel/root update.
+
 ## Requirements
 
 Use Python 3.9 or later and an XZ-enabled `mksquashfs`. The validated image

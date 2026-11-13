@@ -1,0 +1,28 @@
+diff --git a/drivers/mtd/devices/spinor.h b/drivers/mtd/devices/spinor.h
+--- a/drivers/mtd/devices/spinor.h
++++ b/drivers/mtd/devices/spinor.h
+@@ -480,6 +480,24 @@
+ 			.bit_shift = 1,
+ 		},
+ 	},
++#ifdef CONFIG_SPI_STANDARD_MODE
++	/* QC5 T23DL bring-up: use the stock NOR geometry in single-SPI mode. */
++	{
++		.name = "XM25QH64C",
++		.id = 0x204017,
++		.quad_ops_mode = 0,
++		.addr_ops_mode = 0,
++		.tCHSH = 5,
++		.tSLCH = 5,
++		.tSHSL_RD = 20,
++		.tSHSL_WR = 20,
++		.chip_size = 8 * 1024 * 1024,
++		.page_size = 256,
++		.erase_size = 32 * 1024,
++		.addr_len = 3,
++		.chip_erase_cmd = SPINOR_OP_CHIP_ERASE,
++	},
++#endif
+ 	{
+ 		.name = "XM25QH64A",
+ 		.id = 0x207017,

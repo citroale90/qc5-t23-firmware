@@ -17,6 +17,9 @@ struct qc5_net_observation {
  uint64_t now_ms;
  unsigned has_saved_credentials,station_online,credentials_submitted,ap_clients;
  unsigned saved_network_visible,concurrent_ap_sta;
+ /* Zero means the adapter cannot scan while in AP mode, not proof that
+  * the saved network is absent. Retry it periodically when the portal is idle. */
+ unsigned network_visibility_known;
 };
 unsigned qc5_net_step(struct qc5_net_policy*,const struct qc5_net_observation*);
 #endif

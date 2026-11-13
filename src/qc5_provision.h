@@ -16,6 +16,9 @@ static int provision_marker(const char*name,char*out,size_t cap){
 }
 static int provision_ready(void){char b[32],safe[600];snprintf(safe,sizeof(safe),"%s/QC5-SAFE-MODE",sdroot);return provisioning&&access(safe,F_OK)&&provision_marker("wifi-controller",b,sizeof(b))==22&&!strcmp(b,"QC5_WIFI_CONTROLLER_1\n");}
 static int provision_station_matches(const struct qc5_wifi_profile*p){
+#ifdef QC5_NATIVE_PORTAL
+ return qc5_native_station_matches(p);
+#else
  if(!station_connected())return 0;
 #ifdef QC5_HOST_TEST
  const char*name=getenv("QC5_TEST_STATION_SSID");return name&&!strcmp(name,p->ssid);
@@ -24,9 +27,12 @@ static int provision_station_matches(const struct qc5_wifi_profile*p){
 #else
  return 0;
 #endif
+#endif
 }
 static int provision_ap(void){
-#ifdef QC5_HOST_TEST
+#ifdef QC5_NATIVE_PORTAL
+ return qc5_native_portal_ap();
+#elif defined(QC5_HOST_TEST)
  const char*value=getenv("QC5_TEST_AP_MODE");return value&&!strcmp(value,"1");
 #elif defined(__linux__)
  if(qc5_station_is_ap())return 1;
@@ -36,6 +42,16 @@ static int provision_ap(void){
 #else
  return 0;
 #endif
+}
+static void provision_portal_touch(void){
+ static long long last;long long now=now_ms();if(now<=0||(last&&now-last<5000))return;
+ char path[600],tmp[600],text[32];
+ if(snprintf(path,sizeof(path),"%s/wifi-portal-active",provision_run)>=(int)sizeof(path)||
+    snprintf(tmp,sizeof(tmp),"%s/.wifi-portal-active-new",provision_run)>=(int)sizeof(tmp))return;
+ int bytes=snprintf(text,sizeof(text),"%lld\n",now);if(bytes<=0||bytes>=(int)sizeof(text))return;
+ int fd=open(tmp,O_WRONLY|O_CREAT|O_TRUNC|O_NOFOLLOW|O_CLOEXEC,0600);if(fd<0)return;
+ int failed=write(fd,text,(size_t)bytes)!=bytes;if(close(fd))failed=1;
+ if(!failed&&!rename(tmp,path))last=now;else unlink(tmp);
 }
 static int provision_send(const struct qc5_wifi_profile*p){
  char data[256],nonce[17],name[64];int n=snprintf(data,sizeof(data),"SSID=\"%s\"\nPWD=\"%s\"\nWIFI_OPEN=%u\n",p->ssid,p->password,p->open),result=-1;
@@ -58,6 +74,15 @@ static void provision_tick(void){
   provision_state=provision_send(&provision_pending)?"richiesta_non_accettata":"connessione_in_corso";
   memset(&provision_pending,0,sizeof(provision_pending));provision_queued=0;
  }
+#ifdef QC5_NATIVE_PORTAL
+ char state[96];int bytes=provision_marker("wifi-native-state",state,sizeof(state));
+ static const char*const states[]={"attesa_configurazione","connessione_in_corso","wifi_salvato_sd",
+  "wifi_connesso_salvataggio_non_confermato","wifi_non_connesso","richiesta_non_accettata"};
+ if(bytes>0&&state[bytes-1]=='\n'){
+  state[bytes-1]=0;
+  for(unsigned i=0;i<sizeof(states)/sizeof(*states);i++)if(!strcmp(state,states[i]))provision_state=states[i];
+ }
+#else
  char waiting[600];snprintf(waiting,sizeof(waiting),"%s/wifi-request",provision_run);if(!access(waiting,F_OK))return;
  if(now<provision_next)return;provision_next=now+3000;
  char marker[32],*end;int n=provision_marker("wifi-committed",marker,sizeof(marker));
@@ -101,10 +126,19 @@ static void provision_tick(void){
   if(complete_local_setup()>0){provision_have_setup=1;provision_setup_tag=tag;}
  }
  memset(&p,0,sizeof(p));
+#endif
 }
 static void provision_status(int fd){
- char phase[32];if(!provision_queued&&provision_marker("wifi-phase",phase,sizeof(phase))==8&&!strcmp(phase,"hotspot\n"))provision_state="configurazione_hotspot";
+ char phase[32];if(!provision_queued&&provision_marker("wifi-phase",phase,sizeof(phase))==8&&!strcmp(phase,"hotspot\n")
+#ifdef QC5_NATIVE_PORTAL
+  &&!strcmp(provision_state,"attesa_configurazione")
+#endif
+ )provision_state="configurazione_hotspot";
+#ifdef QC5_NATIVE_PORTAL
+ char b[360];int n=snprintf(b,sizeof(b),"{\"enabled\":%s,\"hotspot\":%s,\"token\":\"%s\",\"state\":\"%s\",\"qr_available\":false}",provision_ready()?"true":"false",provision_ap()?"true":"false",provision_token,provision_state);
+#else
  char b[300];int n=snprintf(b,sizeof(b),"{\"enabled\":%s,\"hotspot\":%s,\"token\":\"%s\",\"state\":\"%s\"}",provision_ready()?"true":"false",provision_ap()?"true":"false",provision_token,provision_state);
+#endif
  http_reply(fd,200,"application/json",b,(size_t)n);
 }
 static void provision_networks(int fd){
@@ -152,7 +186,11 @@ static void provision_post(int fd,const char*headers,char*body,size_t available,
  if(!valid){result(fd,0,"SSID o password non validi");}
  else if(!provision_ready()){http_reply(fd,503,"text/plain","Configurazione Wi-Fi non attiva",30);}
  else if(strcmp(token,provision_token)){http_reply(fd,403,"text/plain","Riapri la pagina di configurazione",33);}
- else if(provision_queued){http_reply(fd,409,"text/plain","Tentativo gia in corso",22);}
+ else if(provision_queued
+#ifdef QC5_NATIVE_PORTAL
+  ||qc5_native_portal_busy()
+#endif
+ ){http_reply(fd,409,"text/plain","Tentativo gia in corso",22);}
  else{
   provision_pending=p;provision_queued=1;provision_submit_at=now_ms()+1000;provision_state="richiesta_ricevuta";
   result(fd,1,"Connessione in avvio. Se l'hotspot scompare, torna sulla rete Wi-Fi scelta. Con una password errata l'hotspot ritorna.");

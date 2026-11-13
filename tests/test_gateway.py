@@ -705,6 +705,22 @@ class Gateway(unittest.TestCase):
         until=time.monotonic()+5
         while 'PWD="new-password"' not in self.config.read_text() and time.monotonic()<until:time.sleep(.05)
 
+    def test_active_portal_publishes_private_monotonic_activity(self):
+        self.ap_mode='1';before=self.config.read_bytes();self.provision_start()
+        path=self.folder/'wifi-portal-active'
+        self.assertTrue(path.is_file());self.assertEqual(path.stat().st_mode&0o777,0o600)
+        self.assertLess(abs(int(path.read_text())-int(time.clock_gettime(time.CLOCK_MONOTONIC)*1000)),6000)
+        self.assertEqual(self.config.read_bytes(),before)
+
+    def test_station_requests_do_not_hold_hotspot_recovery(self):
+        self.provision_start();self.assertFalse((self.folder/'wifi-portal-active').exists())
+
+    def test_portal_activity_refuses_temporary_symlink(self):
+        self.ap_mode='1';before=self.config.read_bytes()
+        (self.folder/'.wifi-portal-active-new').symlink_to(self.config)
+        self.provision_start();self.assertEqual(self.config.read_bytes(),before)
+        self.assertFalse((self.folder/'wifi-portal-active').exists())
+
     def test_portal_associated_profile_is_saved_to_sd_before_native_commit(self):
         self.provision_start();old=self.config.read_bytes();self.provision_profile();self.station.write_text('1');self.wait_wifi_saved()
         self.assertIn('PWD="new-password"',self.config.read_text());self.assertEqual((self.folder/'.qc5-config.previous').read_bytes(),old)

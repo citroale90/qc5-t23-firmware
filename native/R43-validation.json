@@ -1,0 +1,32 @@
+{
+  "release": "QC5-7.3.1-R43-RC1",
+  "kernel": "7.3.1-qc5-sd-tiny",
+  "SSH_root": true,
+  "WebUI_HTTP80": true,
+  "SSH_identity_source": "flash",
+  "same_original_SSH_identity": true,
+  "two_key_copies_verified": true,
+  "key_banks_preserved": true,
+  "wifi_banks_preserved": true,
+  "Parla_protocol": true,
+  "half_duplex_mic_silence_verified": true,
+  "normal_production_boot": true,
+  "WiFi_from_flash_without_QR": true,
+  "SD_optional_proven_in_full_RAM_boot": true,
+  "PARAM_unchanged": true,
+  "journal_U8_CRC_and_payload_verified": true,
+  "normal_reboot_without_QR": true,
+  "SSH_identity_preserved_after_reboot": true,
+  "no_OOM": true,
+  "date": "2026-11-13",
+  "hardware": "QC5_YA_CODE_V82 / T23DL / GC1084 / AIC8800DC / 8 MiB NOR",
+  "geometry": [
+    1280,
+    720
+  ],
+  "physical_SD_removal_tested": false,
+  "SD_independence_test": "RAM boot with no SD drivers and no embedded private SSH key",
+  "media_binary_sha256": "04a3935a1d1cd83b8b5cadd3e5f3c626f4157d14e4d39890d93237ff23e918bf",
+  "kernel_vmlinux_sha256": "89b1acb9d5ce67a771292143f89c92bc1c1f08b4202427ee20a055dd7a6df589",
+  "redistributable_flash_image_in_repository": false
+}

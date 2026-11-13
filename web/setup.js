@@ -34,9 +34,12 @@
  async function state(){
   try{
    const data=await api('/setup/status');enabled=data.enabled===true;token=data.token||'';button.disabled=!enabled||busy;
+   const qr=$('#qc5-qr-option');if(qr&&typeof data.qr_available==='boolean')qr.hidden=!data.qr_available;
    if(data.state==='wifi_salvato_camera_e_sd'){if(!busy)say(qc5Text("Pronta. Scegli la rete Wi-Fi da utilizzare."));}
    else if(data.state==='wifi_salvato_in_camera_sd_non_disponibile')say(qc5Text("Wi-Fi salvato nella telecamera; la SD non è scrivibile."));
    else if(data.state==='wifi_salvato_sd_native_in_attesa')say(qc5Text("Wi-Fi salvato sulla SD. Il salvataggio interno della telecamera è ancora in attesa."));
+   else if(data.state==='wifi_salvato_sd'){finishBusy();say(qc5Text("Wi-Fi salvato sulla SD."));}
+   else if(data.state==='wifi_non_connesso'){finishBusy();say(qc5Text("Connessione non riuscita. Controlla rete e password e riprova."),true);}
    else if(data.state==='wifi_connesso_salvataggio_non_confermato')say(qc5Text("Wi-Fi connesso, ma il salvataggio non è confermato. Controlla che la SD sia scrivibile."),true);
    else if(!enabled)say(qc5Text("La configurazione Wi-Fi non è attiva in questa modalità."));
    else if(data.state==='richiesta_non_accettata'){finishBusy();say(qc5Text("Tentativo non avviato. Attendi qualche secondo e riprova."),true);}
@@ -61,4 +64,7 @@
   finishBusy();
  });
  loadNetworks();state();
+ // Keep recovery from taking the radio away while a person is entering
+ // credentials. A closed/hidden portal no longer delays saved-network retries.
+ setInterval(()=>{if(enabled&&!busy&&document.visibilityState==='visible')state();},10000);
 })();

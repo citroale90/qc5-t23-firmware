@@ -1,0 +1,21 @@
+--- a/arch/mips/generic/init.c
++++ b/arch/mips/generic/init.c
+@@ -19,6 +19,8 @@
+ #include <asm/prom.h>
+ #include <asm/smp-ops.h>
+ #include <asm/time.h>
++
++#include "qc5-watchdog-stages.h"
+ 
+ static __initconst const void *fdt;
+ static __initconst const struct mips_machine *mach;
+@@ -101,6 +103,9 @@
+ 
+ void __init plat_mem_setup(void)
+ {
++	if (qc5_watchdog_stage((volatile unsigned int *)0xb0002000,
++			       QC5_WDT_SHIM_TICKS, QC5_WDT_SETUP_TICKS))
++		pr_info("QC5_WDT_STAGE_SETUP_50S\n");
+ 	if (mach && mach->fixup_fdt)
+ 		fdt = mach->fixup_fdt(fdt, mach_match_data);
+ 

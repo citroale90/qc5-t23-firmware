@@ -17,6 +17,13 @@ __pycache__/
 *.qc5pkg
 *.zip
 *.log
+*.ko
+*.elf
+*.o
+*.a
+*.so
+*.so.*
+/native/build/
 config.txt
 APPROVE-INSTALL
 APPROVE-RESTORE
