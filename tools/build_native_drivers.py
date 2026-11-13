@@ -3,12 +3,13 @@ import argparse
 import hashlib
 import json
 import os
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import shutil
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-COMPONENTS = ('ptz', 'illumination', 'sd', 'msc-clock', 'flash')
+DEFAULT_COMPONENTS = ('ptz', 'illumination', 'sd', 'msc-clock', 'flash')
+COMPONENTS = DEFAULT_COMPONENTS + ('radio',)
 
 
 def digest(path):
@@ -23,11 +24,14 @@ def main():
     parser.add_argument('--arch', default='mips')
     parser.add_argument('--output', type=Path, default=ROOT / 'build/native-drivers')
     parser.add_argument('--component', action='append', choices=COMPONENTS)
+    parser.add_argument('--radio-source', type=Path)
     args = parser.parse_args()
     tree, build, output = (p.resolve() for p in
                            (args.kernel_tree, args.kernel_build, args.output))
     if not (tree / 'Makefile').is_file() or not (build / '.config').is_file():
         parser.error('A prepared kernel source/build tree is required')
+    if 'radio' in (args.component or ()) and not args.radio_source:
+        parser.error('Radio builds require --radio-source prepared by prepare_aic_source.py')
     if output.exists():
         parser.error('Use a fresh output directory; existing files are preserved')
     if output.is_relative_to(tree) or output.is_relative_to(build):
@@ -39,10 +43,15 @@ def main():
                KBUILD_BUILD_USER='qc5', KBUILD_BUILD_HOST='kernel-lab',
                KBUILD_BUILD_TIMESTAMP='2026-11-04 00:00:00 +0000')
     results = []
-    for component in args.component or COMPONENTS:
+    for component in args.component or DEFAULT_COMPONENTS:
         destination = output / component
         destination.mkdir()
-        if component == 'flash':
+        if component == 'radio':
+            record = json.loads((ROOT / 'native/radio/SOURCE-MANIFEST.json').read_text())
+            source = args.radio_source.resolve()
+            rows = record['files']
+            wanted = record['modules']
+        elif component == 'flash':
             source = ROOT / 'native/modules'
             rows = [{'path':Path(p).name,'sha256':r['sha256']}
                     for p,r in exports['files'].items() if p.startswith('modules/')]
@@ -53,18 +62,24 @@ def main():
             rows = record['files']
             wanted = {record['module']:record['deployed_binary_sha256']}
         for row in rows:
+            relative = PurePosixPath(row['path'])
+            if relative.is_absolute() or '..' in relative.parts or '\\' in row['path']:
+                raise ValueError('Invalid source manifest path')
             path = source / row['path']
             if path.is_symlink() or digest(path) != row['sha256']:
                 raise ValueError('Source changed: '+str(path))
-            shutil.copyfile(path, destination / row['path'])
+            target = destination / row['path']
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(path, target)
         shutil.copyfile(source / 'Makefile', destination / 'Makefile')
         command = ['make','-C',str(tree),'O='+str(build),'-j1',
-                   'M='+str(destination),'modules']
+                   'M='+str(destination),*(['CONFIG_USE_FW_REQUEST=y']
+                   if component == 'radio' else []),'modules']
         with (destination / 'build.log').open('wb') as log:
             subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT,
                            check=True, timeout=240)
         modules = []
-        for module in sorted(destination.glob('*.ko')):
+        for module in sorted(destination.rglob('*.ko')):
             subprocess.run([args.cross_compile+'strip','--strip-debug',str(module)],
                            check=True, timeout=30)
             h = digest(module)
@@ -77,7 +92,7 @@ def main():
     report = {'compiled':True,'architecture':args.arch,'components':results,
               'kernel_config_sha256':digest(build / '.config'),
               'module_install_or_load_attempted':False,'camera_accessed':False,
-              'binary_firmware_in_sources':False}
+              'binary_firmware_files_copied':False}
     (output / 'build.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))
 

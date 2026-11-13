@@ -13,7 +13,7 @@ different properties.
 | Native startup and SD installer | Sources published; per-camera capsules and original backups remain private |
 | Peripheral, audio, sensor, ISP and encoder work | Native source snapshot exported; generated hardware inputs and complete driver/build provenance still need review |
 | Linux kernel 7.3.1 baseline | Actual source verified identical to the official archive; matching configuration and kernel hash published. Boot wrappers and complete firmware build integration are separate layers |
-| AIC8800 Linux drivers | Kernel-side driver source and radio firmware must be audited separately; initial API port patches are included |
+| AIC8800 Linux drivers | Both exact module sources reconstructed from a pinned upstream archive plus QC5 patch; public tool rebuilds match deployed R43. Radio firmware is separate |
 | Firmware inside AIC8800DC | Binary dependency remains; source/licensing and a replacement strategy must be investigated |
 | Original U-Boot | Original bootloader retained; upstream U-Boot being open source does not provide the exact camera build's corresponding source |
 | External reference code without a license declaration | Omitted from this export pending a per-file grant/provenance review |
@@ -26,6 +26,12 @@ matches its deployed R43 binary exactly: PTZ/speaker, white/IR lights,
 SD host, SD clock, read-only NOR runtime, Wi-Fi flash view and SSH flash view.
 See [driver sources and build instructions](../native/drivers/README.md).
 The camera was not modified to perform this verification.
+
+The two radio modules have subsequently passed the same test through the
+public archive/patch reconstruction and build tools: **nine specific Linux
+modules now have matching source rebuilds**. The [combined receipt](../native/drivers/R43-all-driver-verification.json)
+and [radio instructions](../native/radio/README.md) record this. No binary
+radio firmware was included in the reconstructed driver source tree.
 
 Generated sensor register tables are hardware/build inputs; a `.private.h`
 filename alone is not evidence of a secret or proprietary algorithm. Their

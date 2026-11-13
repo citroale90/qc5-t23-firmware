@@ -1,0 +1,61 @@
+{
+  "all_nine_specific_modules_byte_identical": true,
+  "modules": [
+    {
+      "module": "qc5-peripheral.ko",
+      "sha256": "4f44d0c297f5a5bc2892d4a6695ad1cc906741e43c5b71d7d48a2004cf5d7969",
+      "matches_deployed_bytes": true
+    },
+    {
+      "module": "qc5-illumination.ko",
+      "sha256": "5338582d81665506e5b67491b4bf779bdfb93c04fd48b01f499dcb0b0c68aa3b",
+      "matches_deployed_bytes": true
+    },
+    {
+      "module": "qc5-mmc-recording.ko",
+      "sha256": "290e61c7ae7c2d9a81352827e9d1ae34cd134754c8048d5ddf90bf744765ad40",
+      "matches_deployed_bytes": true
+    },
+    {
+      "module": "qc5-msc-clock-ro.ko",
+      "sha256": "130becce0742d8bdb8a2e6de88e1f05a02f68bf689373d0876ad9210cd8b4b1e",
+      "matches_deployed_bytes": true
+    },
+    {
+      "module": "qc5-sfc-runtime.ko",
+      "sha256": "a0eed7dba85769cf510946224166d8f23d9e77fb7fa4bc55be699e5b93cb47e9",
+      "matches_deployed_bytes": true
+    },
+    {
+      "module": "qc5-ssh-key.ko",
+      "sha256": "f09fcfe90f8b88ac4cc1a273923d8f175ad72ce61a902b656de38afd6f5794ac",
+      "matches_deployed_bytes": true
+    },
+    {
+      "module": "qc5-wifi-config.ko",
+      "sha256": "2baeca91cf88d47ad7abc46062a6ba5e0d96b292b1b5af4cde6905476032ae4c",
+      "matches_deployed_bytes": true
+    },
+    {
+      "module": "aic8800_fdrv.ko",
+      "sha256": "830962f68677db9cb87e836845d0c0fe90423c01c84ec5bbd1bf001ee31c19e7",
+      "matches_deployed_bytes": true
+    },
+    {
+      "module": "aic_load_fw.ko",
+      "sha256": "eb5d23e92b703c4d6452c851c06a53d4356abca8d9a39ef942aa7e5d63365da1",
+      "matches_deployed_bytes": true
+    }
+  ],
+  "kernel_config_sha256": "e8aa29529ba6e259d4cd73b306a8731e6da478e0321e4287bff9719853ba77da",
+  "camera_accessed": false,
+  "flash_written": false,
+  "binary_radio_firmware_still_required": true,
+  "source_reconstruction_verified_121_radio_files": true,
+  "Qwen_sequential_reviews": [
+    "049",
+    "050",
+    "051",
+    "052"
+  ]
+}

@@ -4,6 +4,11 @@ The public source rebuild has produced **seven modules byte-identical to the
 modules in the qualified R43**. This is source publication and build
 verification; no module was installed or loaded on the camera for this work.
 
+The two AIC Linux modules now match as well, bringing the total to **nine
+specific modules**. See [radio source reconstruction](../radio/README.md)
+and [combined verification](R43-all-driver-verification.json). Standard
+MMC/FAT/NLS modules come from the verified upstream kernel source baseline.
+
 | Component | Module | Source license |
 | --- | --- | --- |
 | PTZ and speaker gate | `qc5-peripheral.ko` | GPL-2.0-only; compatible GPL-2.0-or-later companion header |
@@ -44,8 +49,10 @@ make a different kernel/SFC layout compatible: a successful build is not
 permission to load these drivers on arbitrary hardware.
 
 The source archive contains neither a private key nor radio firmware. The
-AIC8800 Linux driver and its embedded firmware remain separate audit items;
-the seven-module result does **not** claim the entire firmware is now open.
+AIC8800 Linux driver and its embedded firmware remain separate components.
+The driver's exact source is now reconstructed and verified; the embedded
+firmware source is still unresolved. These results do **not** claim the
+entire device firmware is now open.
 
 Qwen reviews 049 and 050 assisted the source/dependency classification,
 sequentially. Compilation, matching hashes and header inspection provide

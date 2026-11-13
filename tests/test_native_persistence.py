@@ -58,6 +58,13 @@ class NativePersistence(unittest.TestCase):
         self.assertFalse(proof['module_install_or_load_attempted'])
         modules = [m for c in proof['components'] for m in c['modules']]
         self.assertEqual(len(modules), 7)
+        combined = json.loads((NATIVE / 'drivers/R43-all-driver-verification.json').read_text())
+        self.assertEqual(len(combined['modules']), 9)
+        self.assertTrue(all(m['matches_deployed_bytes'] for m in combined['modules']))
+        radio = json.loads((NATIVE / 'radio/SOURCE-MANIFEST.json').read_text())
+        self.assertEqual(len(radio['files']), 121)
+        self.assertFalse(radio['radio_firmware_bin_files_included'])
+        self.assertEqual(hashlib.sha256((NATIVE / 'radio/qc5-r43-aic8800.patch').read_bytes()).hexdigest(), radio['patch_sha256'])
         self.assertTrue(all(m['matches_deployed_bytes'] for m in modules))
         for component in manifest['components']:
             for row in component['files']:

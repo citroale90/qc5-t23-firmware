@@ -5,6 +5,11 @@ release. It is not an installer, and that release is not ready while the
 radio firmware and corresponding-source gaps remain unresolved. The
 currently working camera stays on R43 during this source work.
 
+The nine specific Linux modules now reconstructed from public source are
+already the modules installed in R43. Publishing their source does not
+require reinstalling identical binaries. Migration becomes necessary when
+the remaining components are replaced or executable/data formats change.
+
 ## Preserve the current installation's data
 
 - Preserve BOOT/U-Boot, its environment, WWW, and PARAM/original MAC.

@@ -2,7 +2,7 @@
   "source_repository": "https://github.com/juerware/aic8800dc",
   "initial_source_commit": "a8bf40ea92082936d2e93b7657e3b9c1bd5697d5",
   "source_archive_sha256": "15260a6d109a2bf178b3d443e514c9a12299ea82424b83072b5864fb27b524b8",
-  "not_exactly_matched_to_current_module_yet": true,
+  "not_exactly_matched_to_current_module_yet": false,
   "binary_firmware": [
     {
       "name": "fmacfw_calib_8800dc_h_u02.bin",
@@ -36,7 +36,7 @@
     }
   ],
   "scope": "Linux driver and embedded-radio firmware are separate components",
-  "exact_deployed_radio_modules_reproduced": false,
+  "exact_deployed_radio_modules_reproduced": true,
   "firmware_source_in_repository": false,
   "compatible_open_radio_firmware_implemented": false,
   "model_reviews_are_not_hardware_verification": true,
@@ -48,5 +48,7 @@
   "reference_sources": [
     "https://github.com/juerware/aic8800dc",
     "https://github.com/gtxaspec/aic8800-wifi/blob/master/firmware_version.md"
-  ]
+  ],
+  "exact_source": "R34 source reconstructed from pinned upstream archive plus QC5 patch",
+  "source_reconstruction_manifest": "../radio/SOURCE-MANIFEST.json"
 }

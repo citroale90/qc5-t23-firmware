@@ -1,0 +1,27 @@
+{
+  "compiled": true,
+  "architecture": "mips",
+  "components": [
+    {
+      "component": "radio",
+      "compiled": true,
+      "modules": [
+        {
+          "module": "aic8800_fdrv.ko",
+          "sha256": "830962f68677db9cb87e836845d0c0fe90423c01c84ec5bbd1bf001ee31c19e7",
+          "matches_deployed_bytes": true
+        },
+        {
+          "module": "aic_load_fw.ko",
+          "sha256": "eb5d23e92b703c4d6452c851c06a53d4356abca8d9a39ef942aa7e5d63365da1",
+          "matches_deployed_bytes": true
+        }
+      ]
+    }
+  ],
+  "kernel_config_sha256": "e8aa29529ba6e259d4cd73b306a8731e6da478e0321e4287bff9719853ba77da",
+  "module_install_or_load_attempted": false,
+  "camera_accessed": false,
+  "binary_firmware_files_copied": false,
+  "embedded_radio_firmware_source_resolved": false
+}

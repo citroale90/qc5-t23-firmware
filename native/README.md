@@ -12,6 +12,7 @@ restarted or modified while publishing these sources.
 | `wifi/` | Flash-backed Wi-Fi profiles, network-controller recovery, original MAC handling |
 | `modules/` | Bounded SFC runtime, Wi-Fi and SSH flash views; original shared SFC mutex |
 | `drivers/` | Standalone GPL PTZ/speaker, illumination, SD and clock sources, Kbuild helper and seven-module rebuild proof |
+| `radio/` | Pinned upstream source + QC5 patch reconstructing the two AIC Linux modules, with matching rebuild proof |
 | `common/` | Frozen headers and policy sources used by the native frontend |
 | `boot/` | Production startup, read-only runtime binding, decompressor sources |
 | `installer/` | Bounded SD update/recovery implementation, preserving native configuration sectors |
