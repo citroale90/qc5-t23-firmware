@@ -1,15 +1,15 @@
 {
-  "release": "QC5-R44-SD-ORIGINALI-RC1",
+  "release": "QC5-R44-SD-ORIGINALI-RC2",
   "files": {
     "prepara_sd.py": "94b2b2076197e3f5204097529c4d416459b5375c58ab4b2ecd8e04c61a3c034c",
     "build_preparer.py": "88398b4f96de914715573ca385f4e657c3018f687e26b81524bae271a0e20a2d",
     "boot-policy.generated.h": "86fd73b801cb5022f39ebb74ad05d18f81b879b212efffc7cae6e8b06311e34d",
-    "factory-profile.generated.h": "dc0192411755c435d9ffa4239f2a6f34afeb614dc7cc84dd0a0b0aea3d3e2672",
+    "factory-profile.generated.h": "8c3a841bda46d98ebda38983285e4b7a6e8d124cc104b6f8d8969891a296b519",
     "factory-mac-check.h": "f233cb7269c8296bd83e0aedc319f5d9d610aa397ffb68fa3e25f486cebc1569",
     "qc5-run.in": "c9ed8c55341e071e2928401334d2e14fc51180976f30684c234bd6bc5830fb73",
-    "run.sh.in": "3d7d5f84f42298ecfc51bd24cf80bd7cd55d295c1158be8648bea8e076a2349c",
+    "run.sh.in": "e16af972c53db9fc22e965cb06267298c73a9e83bbd09536f56fe7b15ddf9ac2",
     "qc5_sha256.h": "ca7b28c90ee449640066742548232de7adbdfd8e9116c9010ffed49d4fe5ed25",
-    "flash-linux.c": "f9bc9b42001f8383b3739f61d6afa6ce0e156e394e92009988ffe8ea825ab12d",
+    "flash-linux.c": "240f8f151430148df42f3662aa880ada7db586b836dd85892c378b3329b44792",
     "full-recovery.c": "2f09396f6947bec2b787cb7efc5b4ec643917029b1ae43895bb10798462975bd",
     "watchdog-counter.h": "b45f207ddaaddd676725de34fe714d6bef283583258ba401285e6431f13a13a9",
     "ripristina_sd.py": "c59f94eb2dbede5222cf27e7e148332741fb177546a99a708479d0c13a319f99",
@@ -17,7 +17,7 @@
     "env-helper.generated.h": "bf7a9744cb5fb0b7ad569f7ab6c47290d3af6c637afe12e9b7eef33f469878b9",
     "release.generated.h": "1e12076efa141c0d1392c1b811ae4a3a823a6e137025ca93734f59c16349d3e1",
     "full-recovery.h": "77a345876a18f11ef5004f83ded3059c25a9586f452971a5f67bc7f647b9a059",
-    "boot-policy.h": "4bdff88db64b2c641eeebc3fa364a9d6e8e54fd09cb24460e1338595decff9cc"
+    "boot-policy.h": "d042f9d2a2f249b87568f689cea0fb8d0e1f58d1909ab6d27b765bae475cf15b"
   },
   "production_preparer_compile_definition": "QC5_PREPARE_ONLY",
   "production_read_write_MTD_open_absent": true,
@@ -25,5 +25,5 @@
   "binary_payload_and_factory_dumps_published": false,
   "per_unit_data_published": false,
   "manifest_scope": "public source directory; binary release assets documented separately",
-  "common_native_image_release": "r44-sd-originali-rc1"
+  "common_native_image_release": "r44-sd-originali-rc2"
 }

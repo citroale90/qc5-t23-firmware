@@ -1,3 +1,5 @@
+> Aggiornamento: usare [RC2](r44-sd-originali-rc2.md). RC1 può fermarsi prima della scrittura su gemelle con software originale diverso e padding a zero.
+
 # QC5 R44 RC1 — installatore SD per telecamere gemelle originali
 
 **Prerelease per il primo collaudo su una gemella ancora originale.**

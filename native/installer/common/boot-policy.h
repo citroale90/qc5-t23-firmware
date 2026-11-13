@@ -25,7 +25,11 @@ static const u8 *qenv_find(const u8 *record,const char *name)
 }
 static int qenv_propose(const u8 old[16384],u8 out[16384])
 {
- int blank=1;for(size_t i=0;i<16384;i++)if(old[i]!=255){blank=0;break;}
+ /* Factory U-Boot falls back to its compiled defaults for either uniform
+  * empty encoding. A populated record still requires a valid CRC. Preserve
+  * all bytes outside the first 4 KiB exactly, including zero-filled tails. */
+ int blank=old[0]==0||old[0]==255;
+ for(size_t i=1;blank&&i<16384;i++)if(old[i]!=old[0])blank=0;
  if(!blank&&qenv_crc(old+4,16380)!=((uint32_t)old[0]|(uint32_t)old[1]<<8|(uint32_t)old[2]<<16|(uint32_t)old[3]<<24))return 0;
  memcpy(out,old,16384);memset(out,0,4096);size_t at=0;
  if(blank){

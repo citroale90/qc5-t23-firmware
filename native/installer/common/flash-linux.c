@@ -107,6 +107,11 @@ static int snapshot_file(struct state *s,const char *directory,const char *name,
  for(u32 at=0;at<0x800000;at+=sizeof block){if(read_flash(s,at,sizeof block,block)||whole(fd,at,sizeof block,block,1)){okay=0;break;}add(&h,block,sizeof block);}
  finish(&h,digest);if(fsync(fd))okay=0;close(fd);return okay;
 }
+static int prepare_refused(struct state *s,int code,const char *stage)
+{
+ dprintf(s->log,"QC5_PREPARER_REFUSED stage=%s code=%d no_flash_writes=1\n",stage,code);
+ fsync(s->log);return code;
+}
 static int preparation_files(struct state *s,const char *directory,const u8 *a,const char *helper_name)
 {
  u8 env[16384],crc[4],journal[512]={0};
@@ -139,11 +144,12 @@ static int prepare(const char *payload_name,const char *base,const char *helper_
  snprintf(path,sizeof path,"%s/original-1.bin",directory);u8 *a=package(path,0x800000,&a_fd);snprintf(path,sizeof path,"%s/original-2.bin",directory);u8 *b=package(path,0x800000,&b_fd);
  if(a==MAP_FAILED||b==MAP_FAILED||memcmp(a,b,0x800000))return 77;
  hash(a,0x800000,digest);if(memcmp(digest,first,32))return 77;hash(b,0x800000,digest);if(memcmp(digest,second,32))return 77;
- if(!squashfs(a+0x198000,0x360000)||!squashfs(a+0x4f8000,0x298000))return 79;
- static const u8 root_profile[32]=QC5_FACTORY_ROOT_SHA,system_profile[32]=QC5_FACTORY_SYSTEM_SHA;
- hash(a+0x198000,0x360000,digest);if(memcmp(digest,root_profile,32))return 79;
- hash(a+0x4f8000,0x298000,digest);if(memcmp(digest,system_profile,32))return 79;
- for(u32 at=0x4f0000;at<0x4f4000;at++)if(a[at]!=255)return 79;
+ /* The board/boot transport is checked by qtu_verify below. ROOT/SYSTEM
+  * are replaced completely and may have any OEM build: inspect their layout,
+  * never use a whole-filesystem software-version hash as a hardware identity. */
+ if(!squashfs(a+0x198000,QC5_ROOT_BEFORE_CONFIG_BYTES)||!squashfs(a+0x4f8000,0x298000))return prepare_refused(&s,79,"factory_filesystem_layout");
+ if(!qc5_factory_unused_bank(a+0x4f0000,0x4000))return prepare_refused(&s,79,"populated_config_bank");
+ dprintf(s.log,"QC5_FACTORY_LAYOUT_ACCEPTED software_version_independent=1 config_padding=%02x\n",a[0x4f0000]);fsync(s.log);
  unsigned char mac[6];struct qcm_meta identity;
  int identity_rc=qcm_from_param(a+0x7c0000,0x40000,mac,&identity);
  if(identity_rc!=QCM_OK){dprintf(s.log,"QC5_FACTORY_MAC_REFUSED code=%d no_flash_writes=1\n",identity_rc);fsync(s.log);return 79;}

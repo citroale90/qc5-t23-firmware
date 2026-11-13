@@ -63,7 +63,13 @@ case "$spc" in 16|32|64|128) :;; *) fail FAT_CLUSTER_SIZE;;esac
 "$B" chmod 700 "$RAM/prepare"
 check "$RAM/prepare" @PREPARE_SHA@
 echo QC5_PREPARER_BEGIN
-U=$("$RAM/prepare" --prepare "$P/native.img" "$SD/qc5-backups" "$P/env-template.ko") || fail BACKUP_OR_PROFILE
+if U=$("$RAM/prepare" --prepare "$P/native.img" "$SD/qc5-backups" "$P/env-template.ko");then
+ :
+else
+ status=$?
+ echo "QC5_PREPARER_EXIT code=$status; see qc5-backups/unit-*/prepare.log" >&2
+ fail BACKUP_OR_PROFILE
+fi
 case "$U" in "$SD"/qc5-backups/unit-??????) :;; *) fail PREPARED_DIRECTORY;;esac
 [ -f "$U/READY" ] && [ ! -L "$U/READY" ] || fail PREPARED_STATUS
 exec >> "$U/bootstrap.log" 2>&1
