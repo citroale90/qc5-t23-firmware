@@ -58,3 +58,10 @@ Qwen reviews 049 and 050 assisted the source/dependency classification,
 sequentially. Compilation, matching hashes and header inspection provide
 the verification. Unsupported model assumptions about ROM internals or
 unseen header licensing are not treated as established facts.
+
+## R46 PTZ initialization
+
+The PTZ sources now include the R46 initialization correction. The R43/R44
+byte-identical rebuild receipts above remain historical; the R46 PTZ binary
+has a new hash. See [R46 validation](../R46-validation.json) and
+[release notes](../../docs/R46-release.md) for current qualification.

@@ -1,0 +1,117 @@
+{
+  "release": "QC5-7.3.1-R46-RC1",
+  "native_image_sha256": "dbf779e8a58ffee8545525c53b40a9d3bff5a7e8306a2270d3220baad993aab8",
+  "PTZ_module_sha256": "1b10361348838e6cf67a563c0dbe1e5cbe99920f6694e36c4761d294ed32fed8",
+  "runtime_delta_from_R45_RC2": [
+    "modules/qc5-peripheral.ko"
+  ],
+  "RAM_trial_passed": true,
+  "RAM_init_both_counters_zero": true,
+  "RAM_first_UP_exact256": true,
+  "RAM_four_jogs_exact256": true,
+  "RAM_automatic_return_to_R45_verified": true,
+  "WiFi_and_SSH_flash_records_unchanged": true,
+  "cold_power_first_jog_fix_physically_qualified": false,
+  "physical_factory_first_installation_qualified": false,
+  "flash_installations_verified": 2,
+  "PTZ_physical_motion_current_observation_not_requested": true,
+  "video_media_binary_unchanged": true,
+  "per_unit_data_published": false,
+  "offline": {
+    "initialization_transfer_fault_cases": 23,
+    "host_address_undefined_sanitizers_passed": true,
+    "original_init_register_delay_trace_verified": true,
+    "strict_short_and_overrun_faults_preserved": true,
+    "public_tests_passed": 22,
+    "PC_kit_test_cases": 12,
+    "stream_core_checks": 41,
+    "installer_U_Boot_models": [
+      "install",
+      "restore",
+      "bad-forward",
+      "zero-native"
+    ],
+    "RAM_U_Boot_models": [
+      "trial",
+      "bad-trial",
+      "zero-native"
+    ],
+    "public_test_suite": {
+      "run": 134,
+      "passed": 133,
+      "skipped": 1
+    }
+  },
+  "installed_from_flash_on_two_existing_native_QC5": true,
+  "post_flash_checks": [
+    {
+      "unit_label": "tested-unit-1",
+      "WiFi_without_QR": true,
+      "MAC_preserved": true,
+      "root_SSH": true,
+      "WebUI_HTTP200": true,
+      "SSH_identity_preserved": true,
+      "PARAM_WiFi_SSH_unchanged": true,
+      "flash_runtime_readback_verified": true,
+      "installer_transaction_U8_verified": true,
+      "first_UP_exact256": true,
+      "four_PTZ_exact256": true,
+      "init_both_counters_zero_logged": true,
+      "intercom_transport_open_send_close_passed": true,
+      "intercom_test_used_silence": true,
+      "physical_speaker_quality_not_observed": true,
+      "video_audio_after_intercom": {
+        "passed": true,
+        "decoded_frames": 278,
+        "audio_samples": 179000,
+        "geometry": [
+          [
+            1280,
+            720
+          ]
+        ],
+        "startup_seconds": 1.969278584,
+        "video_clock_rate_verified": true
+      },
+      "same_boot_through_checks": true,
+      "OOM_kills": 0
+    },
+    {
+      "unit_label": "tested-unit-2",
+      "WiFi_without_QR": true,
+      "MAC_preserved": true,
+      "root_SSH": true,
+      "WebUI_HTTP200": true,
+      "SSH_identity_preserved": true,
+      "PARAM_WiFi_SSH_unchanged": true,
+      "flash_runtime_readback_verified": true,
+      "installer_transaction_U8_verified": true,
+      "first_UP_exact256": true,
+      "four_PTZ_exact256": true,
+      "init_both_counters_zero_logged": true,
+      "intercom_transport_open_send_close_passed": true,
+      "intercom_test_used_silence": true,
+      "physical_speaker_quality_not_observed": true,
+      "video_audio_after_intercom": {
+        "passed": true,
+        "decoded_frames": 278,
+        "audio_samples": 179000,
+        "geometry": [
+          [
+            1280,
+            720
+          ]
+        ],
+        "startup_seconds": 2.367587167,
+        "video_clock_rate_verified": true
+      },
+      "same_boot_through_checks": true,
+      "OOM_kills": 0
+    }
+  ],
+  "release_asset": {
+    "filename": "QC5-R46-SD-RC1.zip",
+    "bytes": 5106927,
+    "sha256": "723131e41886e2e02af59b54b34ee68aabba2671b2037e19b8f7d6c3eb9fd680"
+  }
+}

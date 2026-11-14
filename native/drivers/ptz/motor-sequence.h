@@ -22,9 +22,18 @@ static int qmc_add(struct qmc_plan *p,unsigned reg,unsigned value,unsigned delay
 static int qmc_initial(struct qmc_plan *p)
 {
  if(!p)return 0;memset(p,0,sizeof *p);
- static const uint8_t init[][2]={{0x17,0},{0x16,0},{0x17,0x1f},{0x12,0xc4},{0x13,0x33},{0x14,0x0f},{0,0x10},{1,0},{9,0x10},{10,0},
-  {3,0},{12,0},{2,4},{11,4},{5,8},{14,8},{6,0x22},{15,0x22},{24,0},{25,0},{26,0},{27,0},{0x17,0xf}};
- for(unsigned n=0;n<sizeof init/sizeof *init;n++)if(!qmc_add(p,init[n][0],init[n][1],50))return 0;
+ /* ID0x53 init_gc6153 groups paired setup and all four counter clears.
+  * Do not insert a delay between their bytes. The bridge-off operation is
+  * our explicit safety addition, while motor power is still disabled. */
+ static const struct qmc_step init[]={
+  {0x17,0,50},{0x16,0,50},{0x17,0x1f,50},
+  {0x12,0xc4,50},{0x13,0x33,50},{0x14,0x0f,50},
+  {0,0x10,50},{1,0,50},{9,0x10,50},{10,0,50},
+  {3,0,0},{12,0,50},{2,4,0},{11,4,50},
+  {5,8,50},{14,8,50},{6,0x22,50},{15,0x22,50},
+  {24,0,0},{25,0,0},{26,0,0},{27,0,10},{0x17,0xf,50}};
+ for(unsigned n=0;n<sizeof init/sizeof *init;n++)
+  if(!qmc_add(p,init[n].reg,init[n].value,init[n].delay_us))return 0;
  return 1;
 }
 static int qmc_jog(struct qmc_plan *p,unsigned axis,unsigned direction,unsigned steps,unsigned maximum,unsigned speed)

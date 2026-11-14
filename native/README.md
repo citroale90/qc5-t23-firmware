@@ -112,3 +112,10 @@ matching loader/manifest with every backup. No reference unit's factory
 dump or SSH/Wi-Fi identity is included in the common kit. First cold
 installation of this new kit on an untouched twin is still physically
 unqualified; the runtime and shared U-Boot installer have separate proof.
+
+## R46 RC1
+
+The current native release updates PTZ initialization and preserves the R45
+imaging/audio/network runtime. See [R46 release notes](../docs/R46-release.md)
+and [flash/RAM validation](R46-validation.json). The common SD kit supports
+first installation, native updates and unit-specific recovery.
