@@ -4,7 +4,7 @@
     {
       "component": "ptz",
       "module": "qc5-peripheral.ko",
-      "deployed_binary_sha256": "4f44d0c297f5a5bc2892d4a6695ad1cc906741e43c5b71d7d48a2004cf5d7969",
+      "deployed_binary_sha256": "1b10361348838e6cf67a563c0dbe1e5cbe99920f6694e36c4761d294ed32fed8",
       "files": [
         {
           "path": "board-qc5.h",
@@ -40,11 +40,12 @@
         },
         {
           "path": "motor-sequence.h",
-          "sha256": "d4976c946fa60bab3d1a3c198e5aadb57ce6e474ea5caf27f4b291fe811e08a8",
-          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/motor-sequence.h",
+          "sha256": "26ebf9c7a438c12b0f559fce9be94f57a8355c71ee86ca7fad358214a05464ec",
+          "origin": "work/rea-nas/ptz-first-move-r46/ptz/motor-sequence.h",
           "license": "GPL-2.0-only",
-          "source_sha256": "d4976c946fa60bab3d1a3c198e5aadb57ce6e474ea5caf27f4b291fe811e08a8",
-          "include_paths_adapted": false
+          "source_sha256": "26ebf9c7a438c12b0f559fce9be94f57a8355c71ee86ca7fad358214a05464ec",
+          "include_paths_adapted": false,
+          "previous_source_sha256": "d4976c946fa60bab3d1a3c198e5aadb57ce6e474ea5caf27f4b291fe811e08a8"
         },
         {
           "path": "move-progress.h",
@@ -80,11 +81,12 @@
         },
         {
           "path": "qc5-peripheral.c",
-          "sha256": "42291483f7b5b58e3c64cc432dff40442233f99dd449d60b407254f511188107",
-          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/qc5-peripheral.c",
+          "sha256": "bb33e0e299d577a22a2f11977069f915b8231f365b33f11456f0c5e52157cf43",
+          "origin": "work/rea-nas/ptz-first-move-r46/ptz/qc5-peripheral.c",
           "license": "GPL-2.0-only",
-          "source_sha256": "42291483f7b5b58e3c64cc432dff40442233f99dd449d60b407254f511188107",
-          "include_paths_adapted": false
+          "source_sha256": "bb33e0e299d577a22a2f11977069f915b8231f365b33f11456f0c5e52157cf43",
+          "include_paths_adapted": false,
+          "previous_source_sha256": "42291483f7b5b58e3c64cc432dff40442233f99dd449d60b407254f511188107"
         },
         {
           "path": "speaker-abi.h",
@@ -104,7 +106,9 @@
         }
       ],
       "external_binary_firmware_dependency": false,
-      "hardware_modified": false
+      "hardware_modified": false,
+      "previous_deployed_binary_sha256": "4f44d0c297f5a5bc2892d4a6695ad1cc906741e43c5b71d7d48a2004cf5d7969",
+      "deployed_release": "QC5-7.3.1-R46-RC1"
     },
     {
       "component": "illumination",

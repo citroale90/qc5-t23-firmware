@@ -1,0 +1,23 @@
+{
+  "kernel_unchanged": true,
+  "baseline_R45_module_reproduced_byte_identically": true,
+  "baseline_module_sha256": "4f44d0c297f5a5bc2892d4a6695ad1cc906741e43c5b71d7d48a2004cf5d7969",
+  "R46_module_sha256": "1b10361348838e6cf67a563c0dbe1e5cbe99920f6694e36c4761d294ed32fed8",
+  "module_bytes": 27652,
+  "source_sha256": {
+    "i2c2-bus.h": "afd59d564e9af1576912d527825f296d0e7c596b104c1e21aa89e83a78781a1f",
+    "board-qc5.h": "6713740e9f1215b2e072fc2a6e2e00270a834c3e94c2b8f233617ec21bf8a23f",
+    "motor-direction.h": "769b67a75972b66257458f3bf19b5ecdc08c50356b0cec9c6fda048dda5df2f1",
+    "Makefile": "36b706f874e48ee4b4e00e23b6b8a1ee3a6527eb36452504aa622dd60ef070fa",
+    "speaker-gate.h": "3498dd0e9a303b406fd31c39cfe18d27e24d8e50bcabd22f4e22aa8c1e571467",
+    "motor-id-plan.h": "3aa15b645417578f65b39b49ee90d5e5f5ba91c9e57f67e22b97bdc55b0b318a",
+    "move-progress.h": "9a129d3ad08f60348a354799bd6021d16a822621261f76f9b502c2e0732e6d36",
+    "peripheral-abi.h": "b800dea9830b97204efc50360c37ccd49dda77534558eb49185859c365b50422",
+    "ptz-manual-plan.h": "762a5c5809a86d269c920205f1b23a5b82a89ba8c512839d7213a165975f554e",
+    "speaker-abi.h": "00ebb2c3562e0e578adaeb7d0a18090dbf8e35eaa640469dc098d616abb5f52c",
+    "motor-sequence.h": "26ebf9c7a438c12b0f559fce9be94f57a8355c71ee86ca7fad358214a05464ec",
+    "ptz-counter.h": "a31e3cd8666ba172ce4f067a1b42afaea97a17177c535de63a9cdb50a72f2565",
+    "qc5-peripheral.c": "bb33e0e299d577a22a2f11977069f915b8231f365b33f11456f0c5e52157cf43"
+  },
+  "physical_qualification": "native/R46-validation.json"
+}

@@ -143,7 +143,18 @@ static void control_work(struct work_struct *unused)
  if(result<0){movement.active=0;movement.reason=QMP_IO;publish_progress();status.last_error=EIO;status.busy=0;goto done;}
  if(result==1){
   if((command==QCM_JOG||command==QCM_MOVE||command==QCM_HOME)&&status.phase==1){status.phase=2;sample_at=now;goto again;}
-  if(command==QCM_INITIALIZE){status.initialized=1;memset(&movement,0,sizeof movement);memset(&progress,0,sizeof progress);progress.version=2;}
+  if(command==QCM_INITIALIZE){
+   unsigned x=0,y=0;int x_ok=read_counter(0,&x),y_ok=read_counter(1,&y);
+   pr_info("QC5_PTZ_INIT x=%u x_valid=%u y=%u y_valid=%u\n",x,x_ok,y,y_ok);
+   status.x_counter=x;status.y_counter=y;
+   /* The movement policy starts from zero after INITIALIZE. A completed
+    * write sequence alone does not establish that hardware precondition. */
+   if(!x_ok||!y_ok||x||y){
+    (void)qmc_abort(&sequence,&actor);status.initialized=0;
+    status.last_error=EIO;status.busy=status.phase=0;goto done;
+   }
+   status.initialized=1;memset(&movement,0,sizeof movement);memset(&progress,0,sizeof progress);progress.version=2;
+  }
   if(movement.active){
    unsigned count=0;int ok=read_counter(movement.selected,&count);
    if(ok){if(movement.selected)status.y_counter=count;else status.x_counter=count;}
@@ -195,7 +206,16 @@ static long device_ioctl(struct file *file,unsigned int request,unsigned long ar
   ok=p.value>=4&&p.value<=maximum&&!(p.value&3)&&(p.command!=QCM_JOG||p.value<=256)&&
    (p.command!=QCM_HOME||p.value==maximum)&&progress.generation!=~0u&&
    qmc_jog(&plan,p.axis,qmd_hardware_direction(p.axis,p.direction),p.value,maximum,p.command==QCM_HOME?1:2);
-  if(ok)ok=qmp_begin(&movement,p.axis,p.direction,p.value,clock_us());
+  if(ok){
+   unsigned observed=0;int valid=read_counter(p.axis,&observed);
+   pr_info("QC5_PTZ_START axis=%u direction=%u known=%u previous_direction=%u observed=%u valid=%u previous_raw=%u requested=%u\n",
+    p.axis,p.direction,movement.axis[p.axis].known,movement.axis[p.axis].direction,
+    observed,valid,movement.axis[p.axis].raw,p.value);
+   if(!valid){result=-EIO;goto done;}
+   /* Observation is diagnostic; it must not silently forgive an overshoot
+    * or become a baseline for a hardware phase that changes direction. */
+   ok=qmp_begin(&movement,p.axis,p.direction,p.value,clock_us());
+  }
   if(ok){progress=(struct qcm_progress){.version=2,.generation=progress.generation+1,.axis=p.axis,.requested=p.value,.active=1};}
  }
  else if(p.command==QCM_FILTER)ok=qmc_filter(&plan,p.value);
@@ -209,6 +229,7 @@ static long device_ioctl(struct file *file,unsigned int request,unsigned long ar
  if(!ok||!qmc_begin(&sequence,&plan,clock_us(),p.command==QCM_STOP)){result=-EINVAL;goto done;}
  if(p.command==QCM_JOG||p.command==QCM_MOVE||p.command==QCM_HOME)
   motor_directions=(motor_directions&~(1u<<p.axis))|(qmd_hardware_direction(p.axis,p.direction)<<p.axis);
+ if(p.command==QCM_INITIALIZE)status.initialized=0;
  cancelled=p.command==QCM_STOP;command=p.command;status.busy=1;status.phase=1;status.last_error=0;schedule_delayed_work(&work,0);
 done:mutex_unlock(&control_lock);return result;
 }

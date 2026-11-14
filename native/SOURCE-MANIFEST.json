@@ -571,14 +571,14 @@
       "adapted_for_public_tree": false
     },
     "installer/release.generated.h": {
-      "sha256": "1e12076efa141c0d1392c1b811ae4a3a823a6e137025ca93734f59c16349d3e1",
-      "source_sha256": "80b6bd92719df7057cc410b70ff257f3fb990050e85cfeab1ff1c5b22ffb113f",
-      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/installer/release.generated.h",
+      "sha256": "c6d6d5b8bc65eaf233b21e1d0ace38f2e1ab8968f3329cbac768e8480b48793b",
+      "source_sha256": "c6d6d5b8bc65eaf233b21e1d0ace38f2e1ab8968f3329cbac768e8480b48793b",
+      "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r46-ptz-init/installer/release.generated.h",
       "SPDX": [],
       "adapted_for_public_tree": false,
       "post_R43_generated_update": true,
       "deployed": true,
-      "deployed_release": "QC5-7.3.1-R44-RC1"
+      "deployed_release": "QC5-7.3.1-R46-RC1"
     },
     "installer/full-recovery.h": {
       "sha256": "77a345876a18f11ef5004f83ded3059c25a9586f452971a5f67bc7f647b9a059",
