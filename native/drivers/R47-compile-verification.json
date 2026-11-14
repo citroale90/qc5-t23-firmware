@@ -1,0 +1,36 @@
+{
+  "kernel_unchanged": true,
+  "baseline_reproduced": true,
+  "modules": [
+    {
+      "label": "baseline",
+      "module_sha256": "1b10361348838e6cf67a563c0dbe1e5cbe99920f6694e36c4761d294ed32fed8",
+      "bytes": 27652
+    },
+    {
+      "label": "candidate",
+      "module_sha256": "b25213812e22ad757979a8a893180e73ea6b180ab4df2b395fe469711d99370a",
+      "bytes": 28476
+    }
+  ],
+  "camera_accessed": false,
+  "module_loaded": false,
+  "flash_written": false,
+  "sources": {
+    "ptz/Makefile": "36b706f874e48ee4b4e00e23b6b8a1ee3a6527eb36452504aa622dd60ef070fa",
+    "ptz/board-qc5.h": "6713740e9f1215b2e072fc2a6e2e00270a834c3e94c2b8f233617ec21bf8a23f",
+    "ptz/i2c2-bus.h": "afd59d564e9af1576912d527825f296d0e7c596b104c1e21aa89e83a78781a1f",
+    "ptz/motor-direction.h": "769b67a75972b66257458f3bf19b5ecdc08c50356b0cec9c6fda048dda5df2f1",
+    "ptz/motor-id-plan.h": "3aa15b645417578f65b39b49ee90d5e5f5ba91c9e57f67e22b97bdc55b0b318a",
+    "ptz/motor-sequence.h": "26ebf9c7a438c12b0f559fce9be94f57a8355c71ee86ca7fad358214a05464ec",
+    "ptz/move-progress.h": "ca03ed4985cbdc1f6605dbee7444cdf3361e5df4cd1253706be8633017b8e17b",
+    "ptz/peripheral-abi.h": "f3fc0a7ee0bb321d5e6299905e76d0037262a6d9d9c79775b0258106a0fdb22d",
+    "ptz/ptz-counter.h": "a31e3cd8666ba172ce4f067a1b42afaea97a17177c535de63a9cdb50a72f2565",
+    "ptz/ptz-manual-plan.h": "762a5c5809a86d269c920205f1b23a5b82a89ba8c512839d7213a165975f554e",
+    "ptz/qc5-peripheral.c": "1c56430180be5d0593b3ed5cd975a9251e171523bd0358b91cf769b23e440f72",
+    "ptz/speaker-abi.h": "00ebb2c3562e0e578adaeb7d0a18090dbf8e35eaa640469dc098d616abb5f52c",
+    "ptz/speaker-gate.h": "3498dd0e9a303b406fd31c39cfe18d27e24d8e50bcabd22f4e22aa8c1e571467"
+  },
+  "proof_scope": "Module compilation before hardware qualification; deployment evidence is R47-validation.json",
+  "existing_R46_baseline_byte_identical": true
+}

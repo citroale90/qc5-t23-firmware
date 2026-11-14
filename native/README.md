@@ -1,4 +1,6 @@
-# Native QC5 Linux 7.3.1 — R44 RC1
+# Native QC5 Linux 7.3.1 — R47 RC1
+
+Current R47 deployment and calibration checks are recorded in [R47 validation](R47-validation.json). Earlier source receipts below remain historical.
 
 This tree retains the R43 source baseline and matching rebuild receipts.
 R44 deploys the audited SSH key/startup fixes and the open-source AIC Linux
@@ -119,3 +121,12 @@ The current native release updates PTZ initialization and preserves the R45
 imaging/audio/network runtime. See [R46 release notes](../docs/R46-release.md)
 and [flash/RAM validation](R46-validation.json). The common SD kit supports
 first installation, native updates and unit-specific recovery.
+
+## R47 RC1
+
+R47 adds cooperative six-phase PTZ startup calibration and a
+distinct full-span homing result. Ordinary moves still require exact counts.
+See [source integration and qualification](../docs/R47-release.md) and
+[the current receipt](R47-validation.json). Image quality, media and persistence
+services are unchanged from R46. A software-boot test does not qualify the
+intermittent first-move issue after removing power.

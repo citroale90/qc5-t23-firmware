@@ -1,0 +1,37 @@
+{
+  "release": "QC5-7.3.1-R47-RC1",
+  "startup_calibration_hardware_qualified": true,
+  "qualification_method": "Instrumented RAM boot after software reboot; physical endpoint observation pending",
+  "six_phases_completed": true,
+  "center_steps": {
+    "X": 4000,
+    "Y": 1252
+  },
+  "first_UP_exact256": true,
+  "all_four_jogs_exact256": true,
+  "WebUI_HTTP200": true,
+  "root_SSH": true,
+  "intercom_transport_using_silence": true,
+  "decoded_video_frames": 278,
+  "decoded_audio_samples": 179000,
+  "media_unmodified_from_R46": true,
+  "OOM_kills": 0,
+  "automatic_return_to_R46_without_QR": true,
+  "WiFi_SSH_PARAM_preserved": true,
+  "cold_power_first_jog_fix_physically_qualified": false,
+  "physical_endpoints_confirmation_pending": true,
+  "flash_installation_qualified": true,
+  "flash_installations_verified": 2,
+  "six_phase_startup_calibration_from_flash_verified_on_both": true,
+  "four_exact_jogs_after_startup_on_both": true,
+  "original_SD_backup_pairs_rehashed_after_install": true,
+  "per_unit_rollback_rehashed_after_install": true,
+  "native_image_sha256": "25a600b2be79152db7ac460e18f194183b27648af92684d00aa995dd3c86bffc",
+  "peripheral_sha256": "b25213812e22ad757979a8a893180e73ea6b180ab4df2b395fe469711d99370a",
+  "portal_sha256": "c43d5909f8cd476bbfe87494b0d8d33bab42da32ce431fa07ce47dff50ecad88",
+  "media_sha256": "a76a0f95b8effb9a146761bef0d6c75bff14a7360954a835878cbb64b7c2f05a",
+  "runtime_delta_from_R46": [
+    "bin/qc5-native-portal",
+    "modules/qc5-peripheral.ko"
+  ]
+}
