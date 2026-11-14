@@ -4,12 +4,12 @@
     {
       "component": "ptz",
       "module": "qc5-peripheral.ko",
-      "deployed_binary_sha256": "1b10361348838e6cf67a563c0dbe1e5cbe99920f6694e36c4761d294ed32fed8",
+      "deployed_binary_sha256": "b25213812e22ad757979a8a893180e73ea6b180ab4df2b395fe469711d99370a",
       "files": [
         {
           "path": "board-qc5.h",
           "sha256": "6713740e9f1215b2e072fc2a6e2e00270a834c3e94c2b8f233617ec21bf8a23f",
-          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/board-qc5.h",
+          "origin": "work/rea-nas/ptz-startup-calibration-r47/ptz/board-qc5.h",
           "license": "GPL-2.0-only",
           "source_sha256": "6713740e9f1215b2e072fc2a6e2e00270a834c3e94c2b8f233617ec21bf8a23f",
           "include_paths_adapted": false
@@ -17,7 +17,7 @@
         {
           "path": "i2c2-bus.h",
           "sha256": "afd59d564e9af1576912d527825f296d0e7c596b104c1e21aa89e83a78781a1f",
-          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/i2c2-bus.h",
+          "origin": "work/rea-nas/ptz-startup-calibration-r47/ptz/i2c2-bus.h",
           "license": "GPL-2.0-only",
           "source_sha256": "afd59d564e9af1576912d527825f296d0e7c596b104c1e21aa89e83a78781a1f",
           "include_paths_adapted": false
@@ -25,7 +25,7 @@
         {
           "path": "motor-direction.h",
           "sha256": "769b67a75972b66257458f3bf19b5ecdc08c50356b0cec9c6fda048dda5df2f1",
-          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/motor-direction.h",
+          "origin": "work/rea-nas/ptz-startup-calibration-r47/ptz/motor-direction.h",
           "license": "GPL-2.0-only",
           "source_sha256": "769b67a75972b66257458f3bf19b5ecdc08c50356b0cec9c6fda048dda5df2f1",
           "include_paths_adapted": false
@@ -33,7 +33,7 @@
         {
           "path": "motor-id-plan.h",
           "sha256": "3aa15b645417578f65b39b49ee90d5e5f5ba91c9e57f67e22b97bdc55b0b318a",
-          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/motor-id-plan.h",
+          "origin": "work/rea-nas/ptz-startup-calibration-r47/ptz/motor-id-plan.h",
           "license": "GPL-2.0-only",
           "source_sha256": "3aa15b645417578f65b39b49ee90d5e5f5ba91c9e57f67e22b97bdc55b0b318a",
           "include_paths_adapted": false
@@ -41,7 +41,7 @@
         {
           "path": "motor-sequence.h",
           "sha256": "26ebf9c7a438c12b0f559fce9be94f57a8355c71ee86ca7fad358214a05464ec",
-          "origin": "work/rea-nas/ptz-first-move-r46/ptz/motor-sequence.h",
+          "origin": "work/rea-nas/ptz-startup-calibration-r47/ptz/motor-sequence.h",
           "license": "GPL-2.0-only",
           "source_sha256": "26ebf9c7a438c12b0f559fce9be94f57a8355c71ee86ca7fad358214a05464ec",
           "include_paths_adapted": false,
@@ -49,24 +49,24 @@
         },
         {
           "path": "move-progress.h",
-          "sha256": "9a129d3ad08f60348a354799bd6021d16a822621261f76f9b502c2e0732e6d36",
-          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/move-progress.h",
+          "sha256": "ca03ed4985cbdc1f6605dbee7444cdf3361e5df4cd1253706be8633017b8e17b",
+          "origin": "work/rea-nas/ptz-startup-calibration-r47/ptz/move-progress.h",
           "license": "GPL-2.0-only",
-          "source_sha256": "9a129d3ad08f60348a354799bd6021d16a822621261f76f9b502c2e0732e6d36",
+          "source_sha256": "ca03ed4985cbdc1f6605dbee7444cdf3361e5df4cd1253706be8633017b8e17b",
           "include_paths_adapted": false
         },
         {
           "path": "peripheral-abi.h",
-          "sha256": "b800dea9830b97204efc50360c37ccd49dda77534558eb49185859c365b50422",
-          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/peripheral-abi.h",
+          "sha256": "f3fc0a7ee0bb321d5e6299905e76d0037262a6d9d9c79775b0258106a0fdb22d",
+          "origin": "work/rea-nas/ptz-startup-calibration-r47/ptz/peripheral-abi.h",
           "license": "GPL-2.0-only",
-          "source_sha256": "b800dea9830b97204efc50360c37ccd49dda77534558eb49185859c365b50422",
+          "source_sha256": "f3fc0a7ee0bb321d5e6299905e76d0037262a6d9d9c79775b0258106a0fdb22d",
           "include_paths_adapted": false
         },
         {
           "path": "ptz-counter.h",
           "sha256": "a31e3cd8666ba172ce4f067a1b42afaea97a17177c535de63a9cdb50a72f2565",
-          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/ptz-counter.h",
+          "origin": "work/rea-nas/ptz-startup-calibration-r47/ptz/ptz-counter.h",
           "license": "GPL-2.0-only",
           "source_sha256": "a31e3cd8666ba172ce4f067a1b42afaea97a17177c535de63a9cdb50a72f2565",
           "include_paths_adapted": false
@@ -74,24 +74,24 @@
         {
           "path": "ptz-manual-plan.h",
           "sha256": "762a5c5809a86d269c920205f1b23a5b82a89ba8c512839d7213a165975f554e",
-          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/ptz-manual-plan.h",
+          "origin": "work/rea-nas/ptz-startup-calibration-r47/ptz/ptz-manual-plan.h",
           "license": "GPL-2.0-or-later",
           "source_sha256": "762a5c5809a86d269c920205f1b23a5b82a89ba8c512839d7213a165975f554e",
           "include_paths_adapted": false
         },
         {
           "path": "qc5-peripheral.c",
-          "sha256": "bb33e0e299d577a22a2f11977069f915b8231f365b33f11456f0c5e52157cf43",
-          "origin": "work/rea-nas/ptz-first-move-r46/ptz/qc5-peripheral.c",
+          "sha256": "1c56430180be5d0593b3ed5cd975a9251e171523bd0358b91cf769b23e440f72",
+          "origin": "work/rea-nas/ptz-startup-calibration-r47/ptz/qc5-peripheral.c",
           "license": "GPL-2.0-only",
-          "source_sha256": "bb33e0e299d577a22a2f11977069f915b8231f365b33f11456f0c5e52157cf43",
+          "source_sha256": "1c56430180be5d0593b3ed5cd975a9251e171523bd0358b91cf769b23e440f72",
           "include_paths_adapted": false,
           "previous_source_sha256": "42291483f7b5b58e3c64cc432dff40442233f99dd449d60b407254f511188107"
         },
         {
           "path": "speaker-abi.h",
           "sha256": "00ebb2c3562e0e578adaeb7d0a18090dbf8e35eaa640469dc098d616abb5f52c",
-          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/speaker-abi.h",
+          "origin": "work/rea-nas/ptz-startup-calibration-r47/ptz/speaker-abi.h",
           "license": "GPL-2.0-only",
           "source_sha256": "00ebb2c3562e0e578adaeb7d0a18090dbf8e35eaa640469dc098d616abb5f52c",
           "include_paths_adapted": false
@@ -99,7 +99,7 @@
         {
           "path": "speaker-gate.h",
           "sha256": "3498dd0e9a303b406fd31c39cfe18d27e24d8e50bcabd22f4e22aa8c1e571467",
-          "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-peripheral-re-r40/ptz/speaker-gate.h",
+          "origin": "work/rea-nas/ptz-startup-calibration-r47/ptz/speaker-gate.h",
           "license": "GPL-2.0-only",
           "source_sha256": "3498dd0e9a303b406fd31c39cfe18d27e24d8e50bcabd22f4e22aa8c1e571467",
           "include_paths_adapted": false
@@ -107,8 +107,9 @@
       ],
       "external_binary_firmware_dependency": false,
       "hardware_modified": false,
-      "previous_deployed_binary_sha256": "4f44d0c297f5a5bc2892d4a6695ad1cc906741e43c5b71d7d48a2004cf5d7969",
-      "deployed_release": "QC5-7.3.1-R46-RC1"
+      "previous_deployed_binary_sha256": "1b10361348838e6cf67a563c0dbe1e5cbe99920f6694e36c4761d294ed32fed8",
+      "deployed_release": "QC5-7.3.1-R47-RC1",
+      "candidate_only": false
     },
     {
       "component": "illumination",

@@ -68,13 +68,17 @@ static int qdf_prepare(void)
 static void qdf_tick(void)
 {
  uint64_t now=(uint64_t)now_ms()*1000;if(!now||now<qdf_due||!qdf_prepare())return;
- qdf_due=now+250000;(void)qnd_tick(&qdf_state,now);
+ qdf_due=now+250000;if(qph_motor.action==QPT_HOME)return;
+ (void)qnd_tick(&qdf_state,now);
 }
 static unsigned qdf_busy(void){return qdf_initialized&&qnd_busy(&qdf_state);}
 static void qdf_cancel(void)
 {
  if(qdf_busy()){uint64_t now=(uint64_t)now_ms()*1000;if(now&&now<=UINT64_MAX-60000000)(void)qnd_fail(&qdf_state,9,now);}
 }
+static unsigned qdf_mode(void){return qdf_state.mode;}
+static unsigned qdf_night(void){return qdf_state.night;}
+static unsigned qdf_error(void){return qdf_state.error;}
 static unsigned qdf_ready(void){return qdf_initialized&&qdf_state.known&&!qdf_state.error;}
 static void qdf_status(int fd)
 {
