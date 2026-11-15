@@ -1,4 +1,4 @@
-# R47 RC1 — automatic PTZ startup calibration
+# R47 stable — automatic PTZ startup calibration
 
 At each owner startup the PTZ controller runs the full calibration sequence:
 pan left, pan right, pan to center; tilt down, tilt up, tilt to center.
@@ -45,11 +45,35 @@ completed four exact 256-step jogs, WebUI/SSH and media/intercom checks. The
 original backup pairs and restore capsules were rehashed on both SD cards;
 PARAM, Wi-Fi and SSH records stayed unchanged.
 
-That trial was started by a software reboot. Physical endpoint observation
-and the intermittent first-move behavior after removing power remain
-unqualified. See [the current validation receipt](../native/R47-validation.json)
-for flash-installation status. Do not interpret a successful software reboot
-as proof of every cold-power cycle.
+On 2026-11-15 the owner confirmed that the behavior is OK and requested the
+stable designation. The runtime payload is byte-identical to the installed
+R47 RC1. This is an owner acceptance report, not a new instrumented power-cut
+measurement. The [validation receipt](../native/R47-validation.json) keeps
+that provenance distinct from the automatic RAM/flash tests.
+
+## Extract-to-SD factory installation
+
+Extract the complete ZIP directly into the root of a FAT32/MBR card. No PC
+script is required for an original supported camera. Insert with power off,
+power on holding Reset and release after about three seconds; leave power
+applied for at least fifteen minutes. `qc5-run` and `qc5-installer` must be
+at the card root, without an enclosing folder. The installer action and entry
+trigger are already present. Configuration and previous backup folders are
+not included as overwrite targets. See the [quick guide](../native/installer/common/AVVIO-RAPIDO.txt).
+
+The old common RC1 kit carried a stale preparer payload pin and loader hash.
+It would refuse factory installation; native runtime updates followed a
+separate qualified path and were unaffected. The stable kit regenerates its
+preparer for the actual native payload and generates script checks from the
+packaged binaries. The real MIPS preparer accepted the correct image and
+refused six invalid/old/path cases; eight C capsule checks passed with two
+independent original units and refused cross-unit data. The read-only
+verification mode does not access a camera, MTD or watchdog.
+
+Cameras already running R47 need no reflash. Older native QC5 versions use
+`aggiorna_qc5.py` with their own backup, then boot normally without Reset;
+plain extraction is the factory-install workflow. The new stable factory
+kit has not been re-run physically on another untouched unit for publication.
 
 ## Source integration
 

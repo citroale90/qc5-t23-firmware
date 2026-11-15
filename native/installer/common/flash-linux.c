@@ -69,6 +69,15 @@ static void *package(const char *name,size_t bytes,int *fd)
  struct stat st;*fd=open(name,O_RDONLY|O_NOFOLLOW|O_CLOEXEC);if(*fd<0||fstat(*fd,&st)||!S_ISREG(st.st_mode)||st.st_size!=(off_t)bytes)return MAP_FAILED;
  return mmap(NULL,bytes,PROT_READ,MAP_PRIVATE,*fd,0);
 }
+/* Also used by the read-only release regression mode. No MTD, watchdog or
+ * environment access is needed to validate the exact shipped payload. */
+static u8 *checked_payload(const char *name,int *fd)
+{
+ u8 *p=package(name,0x750000,fd),digest[32];
+ static const u8 wanted[32]=QTU_PAYLOAD_SHA_BYTES;
+ if(p!=MAP_FAILED){hash(p,0x750000,digest);if(!memcmp(digest,wanted,32))return p;munmap(p,0x750000);}
+ if(*fd>=0){close(*fd);*fd=-1;}return MAP_FAILED;
+}
 static int no_vendor_processes(void)
 {
  DIR *d=opendir("/proc");if(!d)return 0;struct dirent *e;int okay=1;
@@ -138,8 +147,8 @@ static int prepare(const char *payload_name,const char *base,const char *helper_
  if(statvfs(base,&space)||(uint64_t)space.f_bavail*space.f_frsize<0x8000000ull)return 80;
  char directory[900],path[1024];if(snprintf(directory,sizeof directory,"%s/unit-XXXXXX",base)>=(int)sizeof directory||!mkdtemp(directory))return 66;
  snprintf(path,sizeof path,"%s/prepare.log",directory);struct state s={.fd=-1,.log=-1};int rc=initialize(&s,path);if(rc)return rc;
- int payload_fd=-1,a_fd=-1,b_fd=-1;u8 *payload=package(payload_name,0x750000,&payload_fd);if(payload==MAP_FAILED)return 71;
- static const u8 wanted[32]=QTU_PAYLOAD_SHA_BYTES;u8 digest[32],first[32],second[32];hash(payload,0x750000,digest);if(memcmp(digest,wanted,32))return 71;
+ int payload_fd=-1,a_fd=-1,b_fd=-1;u8 *payload=checked_payload(payload_name,&payload_fd);if(payload==MAP_FAILED)return 71;
+ static const u8 wanted[32]=QTU_PAYLOAD_SHA_BYTES;u8 digest[32],first[32],second[32];
  if(!snapshot_file(&s,directory,"original-1.bin",first)||!snapshot_file(&s,directory,"original-2.bin",second)||memcmp(first,second,32))return 77;
  snprintf(path,sizeof path,"%s/original-1.bin",directory);u8 *a=package(path,0x800000,&a_fd);snprintf(path,sizeof path,"%s/original-2.bin",directory);u8 *b=package(path,0x800000,&b_fd);
  if(a==MAP_FAILED||b==MAP_FAILED||memcmp(a,b,0x800000))return 77;
@@ -169,6 +178,10 @@ static int prepare(const char *payload_name,const char *base,const char *helper_
 }
 int main(int argc,char **argv)
 {
+ if(argc==3&&!strcmp(argv[1],"--verify-payload")){
+  int fd=-1;u8 *p=checked_payload(argv[2],&fd);if(p==MAP_FAILED)return 71;
+  munmap(p,0x750000);close(fd);puts("QC5_PAYLOAD_VERIFIED no_device_access=1");return 0;
+ }
  if((argc==4||argc==5)&&!strcmp(argv[1],"--prepare"))return prepare(argv[2],argv[3],argc==5?argv[4]:0);
 #ifdef QC5_PREPARE_ONLY
  /* The common first-boot preparer cannot reach a writable MTD open. */

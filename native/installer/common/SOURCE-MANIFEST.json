@@ -1,30 +1,33 @@
 {
-  "release": "QC5-R45-SD-RC2",
+  "release": "QC5-R47-SD",
   "files": {
     "prepara_sd.py": "1ddd12c4593fd796696b0209262ee2fb13b2f3088a326e0833ff7be963ca3d6a",
-    "build_preparer.py": "88398b4f96de914715573ca385f4e657c3018f687e26b81524bae271a0e20a2d",
+    "build_preparer.py": "09741e4a0a484cc5f964c60b4a850fd1a3f45a14dc914b42f3debca5d35c10a7",
     "boot-policy.generated.h": "86fd73b801cb5022f39ebb74ad05d18f81b879b212efffc7cae6e8b06311e34d",
     "factory-profile.generated.h": "8c3a841bda46d98ebda38983285e4b7a6e8d124cc104b6f8d8969891a296b519",
     "factory-mac-check.h": "f233cb7269c8296bd83e0aedc319f5d9d610aa397ffb68fa3e25f486cebc1569",
     "qc5-run.in": "c9ed8c55341e071e2928401334d2e14fc51180976f30684c234bd6bc5830fb73",
     "run.sh.in": "e16af972c53db9fc22e965cb06267298c73a9e83bbd09536f56fe7b15ddf9ac2",
     "qc5_sha256.h": "ca7b28c90ee449640066742548232de7adbdfd8e9116c9010ffed49d4fe5ed25",
-    "flash-linux.c": "240f8f151430148df42f3662aa880ada7db586b836dd85892c378b3329b44792",
+    "flash-linux.c": "28bd802a607c7283ba1ffd6782fea26f63778c94d5a229e30ec899c6a8c3a6b4",
     "full-recovery.c": "2f09396f6947bec2b787cb7efc5b4ec643917029b1ae43895bb10798462975bd",
     "watchdog-counter.h": "b45f207ddaaddd676725de34fe714d6bef283583258ba401285e6431f13a13a9",
     "ripristina_sd.py": "c59f94eb2dbede5222cf27e7e148332741fb177546a99a708479d0c13a319f99",
     "env-sector.c": "bf12ad753a9b049d5d326e3ee11243b285dcfbfe6da856a260b1a36f741b8962",
     "env-helper.generated.h": "bf7a9744cb5fb0b7ad569f7ab6c47290d3af6c637afe12e9b7eef33f469878b9",
-    "release.generated.h": "52bb0e48b71020cf1ea7874f57a40b05990e6ecba0303469ebb56405265bbfdb",
+    "release.generated.h": "0b08842972b1d6db086db3c04ea065d05800ed1868b9d55fec3d38daf974b7c5",
     "full-recovery.h": "77a345876a18f11ef5004f83ded3059c25a9586f452971a5f67bc7f647b9a059",
     "boot-policy.h": "d042f9d2a2f249b87568f689cea0fb8d0e1f58d1909ab6d27b765bae475cf15b",
-    "aggiorna_qc5.py": "d69372cd225053525614831dde435dc3170c70904933f08191f6e715126341d0"
+    "aggiorna_qc5.py": "d69372cd225053525614831dde435dc3170c70904933f08191f6e715126341d0",
+    "build_sd_package.py": "92a85386e3b0f45527a820edeb68a8736c23d1146b851b7f8e753bca0a8d4974",
+    "factory-entry-pins.json": "c7a6d9db5939bda5f0a5f5b5a3757949ef1501c70c84bce7b75ff00c38af0ff6"
   },
   "production_preparer_compile_definition": "QC5_PREPARE_ONLY",
   "production_read_write_MTD_open_absent": true,
-  "native_image_sha256": "142f9600b91e121c5e18f7fe5ac6a562b191ce04a720f83c6fd6f25288c0deb6",
+  "native_image_sha256": "25a600b2be79152db7ac460e18f194183b27648af92684d00aa995dd3c86bffc",
   "binary_payload_and_factory_dumps_published": false,
   "per_unit_data_published": false,
   "manifest_scope": "public source directory; binary release assets documented separately",
-  "common_native_image_release": "r45-sd-rc2"
+  "common_native_image_release": "r47-sd",
+  "factory_extract_to_root_ready": true
 }

@@ -1,6 +1,6 @@
 # VeePai QC5 T23 firmware tools
 
-Local firmware development for the **QC5_YA_CODE_V82** camera with Ingenic T23DL, GC1084, AIC8800DC USB Wi-Fi, and 8 MiB NOR flash. The current deployed native release is **QC5 Linux 7.3.1 R47 RC1** (2026-11-14).
+Local firmware development for the **QC5_YA_CODE_V82** camera with Ingenic T23DL, GC1084, AIC8800DC USB Wi-Fi, and 8 MiB NOR flash. The current deployed native release is **QC5 Linux 7.3.1 R47 stable** (2026-11-14).
 
 The native sources and validation record are in [`native/`](native/README.md).
 The top-level application builder and `src/`, `web/`, `firmware/` still
@@ -13,16 +13,22 @@ The camera serves an Italian/English WebUI, a local H.264 player with audio and 
 
 [Italiano](docs/README.it.md) · [Build and install](docs/build.md) · [Credits and licensing](NOTICE.md)
 
-## R47 RC1 update
+## R47 stable
+
+For an original compatible camera, extract the ZIP contents directly into the
+root of a FAT32/MBR SD card, insert it with the camera off, power on with Reset
+and release after about three seconds. No PC script is needed. Keep power
+applied for at least fifteen minutes. [Quick guide](native/installer/common/AVVIO-RAPIDO.txt).
 
 R47 calibrates both PTZ axes automatically at startup: full travel in both
 ways and return to center. It keeps the exact-count checks for ordinary
 moves and preserves the R46 video/audio, image-quality and network services.
 Six startup phases, four exact jogs, Wi-Fi without QR, SSH and media after
-intercom were verified on both installed cameras. Cold-power behavior and
-physical endpoint observation remain unqualified.
+intercom were verified on both installed cameras. The owner confirmed stable operation on 2026-11-15. The runtime payload
+is unchanged from the qualified R47 RC1; the factory SD preparation chain
+is now regenerated for that payload.
 
-[Changes, qualification and recovery](docs/R47-release.md) · [Common install/update SD ZIP](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r47-sd-rc1)
+[Changes, qualification and recovery](docs/R47-release.md) · [Common install/update SD ZIP](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r47-sd)
 
 ## R46 RC1 update
 
@@ -77,13 +83,13 @@ source publication does not distribute another camera's backup or identity.
 
 ## Factory twin-camera SD installer
 
-The common R47 RC1 SD kit automates two verified full backups and
+The common R47 stable SD kit automates two verified full backups and
 per-unit update/recovery capsules on compatible factory QC5 cameras. It
 retains each unit's own loader and manifest, and includes offline PC tools
 for card preparation, reuse and recovery without an AI or server.
 The shared R44 runtime is qualified; the new kit's first cold installation
 on an untouched twin remains physically unqualified.
-Download the [common SD ZIP and instructions](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r47-sd-rc1).
+Download the [common SD ZIP and instructions](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r47-sd).
 See [source and verification](native/installer/common/README.md).
 The common image is separate from the existing per-unit migration package.
 

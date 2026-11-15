@@ -1,6 +1,6 @@
 BACKUP PRIVATO DELLA SINGOLA CAMERA — NON USARE SU UN'ALTRA UNITÀ
 original-1.bin e original-2.bin: due letture identiche della flash da 8 MiB.
-QC5FULL.BIN: ripristino originale; QC5UPD.BIN: R44 legata a questa unità.
+QC5FULL.BIN: ripristino originale; QC5UPD.BIN: R47 legata a questa unità.
 Q73BOOT.IMG e manifest.json: caricatore e versione abbinati al backup.
 
 Dal computer, con la SD montata:
