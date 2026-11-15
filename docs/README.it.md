@@ -2,7 +2,13 @@
 
 Il progetto riguarda la **QC5_YA_CODE_V82** con Ingenic T23, GC1084,
 AIC8800DC USB e flash NOR da 8 MiB. La versione nativa installata e
-collaudata è **QC5 Linux 7.3.1 R44 RC1**, del 13 novembre 2026.
+collaudata è **QC5 Linux 7.3.1 R48 stabile**, del 15 novembre 2026.
+
+La R48 aggiunge **Sistema → Nome della telecamera → Salva nome**. Il nome
+resta nella flash, insieme al profilo Wi-Fi, anche senza SD e dopo il riavvio.
+Campo vuoto: nome automatico univoco dal MAC. Un config.txt vecchio sulla SD
+non sovrascrive il nome scelto nella WebUI. Kernel, video, audio e calibrazione
+PTZ sono invariati rispetto alla R47. [Pacchetto SD completo](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r48-sd).
 
 R43 conserva nella flash le credenziali Wi-Fi e la chiave del server SSH,
 senza dipendere dalla SD. La chiave già conosciuta dal client rimane la

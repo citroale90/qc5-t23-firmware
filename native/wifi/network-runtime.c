@@ -40,7 +40,7 @@ static void qnr_probe_log(const char *message)
 #ifndef QNR_BB
 #define QNR_BB "/rom/bin/busybox"
 #endif
-struct qnr_runtime {struct qc5_wifi_profile boot_profile;unsigned migrate_pending;uint64_t migrate_since;int control,directory;pid_t dhcp;char iface[16],local[108];const char *sd;unsigned scan_networks;};
+struct qnr_runtime {struct qc5_wifi_profile boot_profile;unsigned migrate_pending;uint64_t migrate_since;int control,directory;pid_t dhcp;char iface[16],local[108],hostname[64],custom_hostname[64],default_hostname[64];const char *sd;unsigned scan_networks;};
 static volatile sig_atomic_t quit;
 static void qnr_signal(int sig){(void)sig;quit=1;}
 static uint64_t qnr_now(void)
@@ -92,6 +92,13 @@ static int qnr_exec(char *const argv[])
  }
  (void)qnr_stop_child(&child);return 0;
 }
+static int qnr_dhcp_start(struct qnr_runtime *r)
+{
+ if(!qnr_stop_child(&r->dhcp))return 0;
+ char option[80];snprintf(option,sizeof option,"hostname:%s",r->hostname);
+ char *args[]={QNR_BB,"udhcpc","-f","-i",r->iface,"-s","/bin/qc5-native-dhcp","-x",option,NULL};
+ r->dhcp=qnr_spawn(args);return r->dhcp>0;
+}
 static int qnr_role(void *opaque,enum qnw_role role)
 {
  struct qnr_runtime *r=opaque;if(role>QNW_AP||!qnr_stop_child(&r->dhcp))return 0;
@@ -100,8 +107,7 @@ static int qnr_role(void *opaque,enum qnw_role role)
  if(!qnr_exec(flush)||!qnr_exec(routes))return 0;if(role==QNW_NONE)return 1;
  char *up[]={QNR_BB,"ip","link","set","dev",r->iface,"up",NULL};if(!qnr_exec(up))return 0;
  if(role==QNW_STATION){
-  char *args[]={QNR_BB,"udhcpc","-f","-i",r->iface,"-s","/bin/qc5-native-dhcp",NULL};
-  r->dhcp=qnr_spawn(args);return r->dhcp>0;
+  return qnr_dhcp_start(r);
  }
  char *address[]={QNR_BB,"ip","addr","add","192.168.168.1/24","dev",r->iface,NULL};
  if(!qnr_exec(address))return 0;
@@ -192,13 +198,16 @@ static int qnr_saved_profile(const char *sd,const char *iface,struct qc5_wifi_pr
 static int qnr_persist(void *opaque,const struct qc5_wifi_profile *profile)
 {
  struct qnr_runtime *r=opaque;
- if(qwf_linux_store(r->iface,profile)){puts("QC5_WIFI_SAVE failed durable_confirmation=0");return 0;}
+ struct qc5_wifi_profile named=*profile;memcpy(named.hostname,r->custom_hostname,sizeof named.hostname);
+ if(qwf_linux_store(r->iface,&named)){memset(&named,0,sizeof named);puts("QC5_WIFI_SAVE failed durable_confirmation=0");return 0;}
  puts("QC5_WIFI_SAVE verified source=flash SD_required=0");
  /* The flash transaction is authoritative. Mirror a writable SD when it
   * exists, preserving other user settings; no card is needed for success. */
- if(qc5_sd_mounted(r->sd,1)) (void)qc5_wifi_store(r->sd,NULL,0,profile);
+ if(qc5_sd_mounted(r->sd,1)) (void)qc5_wifi_store(r->sd,NULL,0,&named);
+ memset(&named,0,sizeof named);
  return 1;
 }
+#include "hostname-owner.h"
 static void qnr_migration_tick(struct qnr_runtime *r,const struct qnt_transaction *t,uint64_t now,unsigned leased)
 {
  if(!r->migrate_pending||t->phase!=QNT_IDLE)return;
@@ -278,6 +287,7 @@ int main(int argc,char **argv)
  /* A crashed previous owner cannot leave the portal falsely ready. */
  unlinkat(r.directory,"wifi-controller",0);
  strcpy(r.iface,argv[1]);char suffix[7];if(!qnr_mac_suffix(r.iface,suffix))return qnr_exit_code(67);
+ snprintf(r.default_hostname,sizeof r.default_hostname,"qc5-%s",suffix);strcpy(r.hostname,r.default_hostname);
  struct sockaddr_un local={.sun_family=AF_UNIX},peer={.sun_family=AF_UNIX};
  if(snprintf(local.sun_path,sizeof local.sun_path,QNR_RUN "/control.%ld",(long)getpid())>=(int)sizeof local.sun_path||
   snprintf(peer.sun_path,sizeof peer.sun_path,"/run/wpa/%s",r.iface)>=(int)sizeof peer.sun_path)return qnr_exit_code(68);
@@ -299,6 +309,7 @@ int main(int argc,char **argv)
    * only its RAM network entries after loading the authoritative profile.
    * This bounds profile allocation and never changes flash credentials. */
   if(parsed<0||!qwr_reset_owned(&mode)){memset(&saved,0,sizeof saved);return qnr_exit_code(69);}
+  qhn_boot(&r,parsed==1?&saved:NULL);
   if(parsed==1){
 #ifdef QC5_NETWORK_AP_PROBE
    if(!did_probe){if(!qna_init(&ap_probe,&saved)){memset(&saved,0,sizeof saved);return qnr_exit_code(69);}}
@@ -309,12 +320,14 @@ int main(int argc,char **argv)
   }
   if(parsed<0)transaction.phase=QNT_JOIN_FAILED;memset(&saved,0,sizeof saved);
  }
+ if(strcmp(argv[2],"auto"))qhn_boot(&r,NULL);
  if(!qnr_publish(&r,&transaction)||!qnf_text(r.directory,"wifi-controller","QC5_WIFI_CONTROLLER_1\n"))return qnr_exit_code(69);
  signal(SIGTERM,qnr_signal);signal(SIGINT,qnr_signal);signal(SIGPIPE,SIG_IGN);int ok=1;
  qnr_initial_scan(&r);
  uint64_t scan_after=0,dhcp_retry=0;
  while(!quit){
   uint64_t now=qnr_now();if(!now||!qnr_setup_once(&r,&transaction,now)||!qnr_request(&r,&transaction)||!qnt_tick(&transaction,now,r.dhcp>0&&qnr_leased(r.iface),qnr_portal(now))||!qnr_publish(&r,&transaction)){ok=0;break;}
+  qhn_process(&r,&transaction);
   qnr_migration_tick(&r,&transaction,now,r.dhcp>0&&qnr_leased(r.iface));
   if(now>=scan_after){(void)qnr_scan_cache(&r);scan_after=now+15000;}
   if(!qnr_dhcp_health(&r,&mode,now,&dhcp_retry)){ok=0;break;}

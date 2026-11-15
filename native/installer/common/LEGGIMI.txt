@@ -1,4 +1,4 @@
-QC5 R47 STABILE — PACCHETTO SD
+QC5 R48 STABILE — PACCHETTO SD
 
 HARDWARE SUPPORTATO
 QC5_YA_CODE_V82, Ingenic T23DL, sensore GC1084, Wi-Fi AIC8800DC USB,
@@ -48,8 +48,7 @@ Al termine la camera presenta la WebUI e SSH sul suo IP o l'hotspot QC5.
 Conserva l'intera cartella qc5-backups anche su un altro supporto.
 
 CAMERE GIA MODIFICATE
-Le due camere già sulla R47 hanno gli stessi binari della stabile: non occorre
-riscriverle. Per aggiornare una QC5 nativa precedente usa la sua SD con il suo
+Per aggiornare una QC5 nativa precedente (R47 inclusa) usa la sua SD con il suo
 backup. Dalla cartella del pacchetto estratta sul computer:
   python3 aggiorna_qc5.py --sd "/percorso/SD"
 Espelli, inserisci nella SUA camera spenta e accendi SENZA Reset; attendi
@@ -75,15 +74,16 @@ anche i controlli precedenti nella radice usa, facoltativamente:
   python3 prepara_sd.py --sd "/percorso/SD"
 Non eseguire queste operazioni mentre un aggiornamento è ancora in corso.
 
-R47 STABILE
-Stesso kernel, driver e programma media della R47 collaudata e installata.
-Calibrazione completa dei due assi a ogni avvio; i movimenti normali conservano
-il controllo esatto dei passi. Promossa stabile su conferma dell'utilizzatore
-il 15 novembre 2026. Il preparatore e i controlli dello ZIP sono rigenerati
-per il payload R47: le protezioni non sono state rimosse.
-La prima installazione di questo pacchetto stabile su una gemella originale
-non è stata ripetuta fisicamente per questa pubblicazione. Le prove del
-preparatore, dei pin e del verificatore sono distinte dai collaudi del runtime.
+R48 STABILE
+Sistema → Nome della telecamera → Salva nome permette un nome DNS di 1–63
+lettere, cifre o trattini. Il campo vuoto ripristina qc5-xxxxxx dal MAC.
+Il nome si salva in flash con verifica, anche senza SD; un config.txt vecchio
+non lo sovrascrive. Password Wi-Fi e chiave SSH restano conservate. Il nome
+viene inviato al DHCP; la risoluzione DNS dipende dal router.
+Kernel, video, audio, qualità immagine e calibrazione PTZ restano quelli R47.
+Il pacchetto rigenera il preparatore e tutti i controlli per il payload R48.
+La prima installazione su un'originale non è stata ripetuta fisicamente in
+questa release; collaudo del runtime e verifiche dell'installatore sono distinti.
 Dettagli: VERIFICA-HARDWARE.json e QUALIFICA.json.
 
 SORGENTI E LICENZE

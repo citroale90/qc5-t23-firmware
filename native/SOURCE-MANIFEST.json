@@ -1,5 +1,5 @@
 {
-  "release": "QC5-7.3.1-R47",
+  "release": "QC5-7.3.1-R48",
   "files": {
     "ssh/key-core.h": {
       "sha256": "07995a17e338c41ffbad4bef4f510f5e194abc5dc742f267abc9b2de6a7f11be",
@@ -301,18 +301,24 @@
       "adapted_for_public_tree": false
     },
     "common/qc5_wifi_profile.h": {
-      "sha256": "d9526164304d12ed083538a6ec443bdaf5ddcbcd60221b8848abadf571eb351f",
+      "sha256": "b1525c7c9eef539197cdd37cc66204146ff76cd91b9f94926ab785722b19d966",
       "source_sha256": "d9526164304d12ed083538a6ec443bdaf5ddcbcd60221b8848abadf571eb351f",
       "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_wifi_profile.h",
       "SPDX": [],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
     },
     "common/qc5_wifi_store.h": {
-      "sha256": "64f58d85fbf37c5a5c67cec26a62ccc236d9932853ff49b0a2f7d948a925a33f",
+      "sha256": "431a04d9dbe6bbbcd0b45aeeda3443d607c45652119f9cad2333735fba140983",
       "source_sha256": "64f58d85fbf37c5a5c67cec26a62ccc236d9932853ff49b0a2f7d948a925a33f",
       "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_wifi_store.h",
       "SPDX": [],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
     },
     "common/qc5_wifi_supplicant.h": {
       "sha256": "2333e6a3e0415cad11e0a19a9e162ebf804aa22270d42f72e818c5290e6aa754",
@@ -329,11 +335,14 @@
       "adapted_for_public_tree": false
     },
     "common/qc5_wifi_store.c": {
-      "sha256": "08ab8530abeb74dd21f6b6a61846ed5296538fbe0ad24b6b1ec45d5337568c81",
+      "sha256": "77312dd31ebfcf80fef1ebffd185cb9c3a987a3f4c81535228819f2ea7de4517",
       "source_sha256": "b0275fc6e42101166e36baffbf3594ee08caf8a0cd54ef39f46ba0a94a31bd79",
       "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-services/frontend/tree/qc5-t23-firmware/src/qc5_wifi_store.c",
       "SPDX": [],
-      "adapted_for_public_tree": true
+      "adapted_for_public_tree": true,
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
     },
     "common/config-lock.h": {
       "sha256": "3bbb2780dbaa3ccf72d28226bcdb2703c1cec0c29904775a166b7d37defe4192",
@@ -345,13 +354,16 @@
       "adapted_for_public_tree": false
     },
     "wifi/wifi-flash-core.h": {
-      "sha256": "5a268d7098a4a77b850b2e0aeed05128d48a3db21fa851ada21a9aaa5c953213",
+      "sha256": "86e6c18bcaca132438471b511d0ed505e1701b7645d4b6afd7d3d238d841ff60",
       "source_sha256": "5a268d7098a4a77b850b2e0aeed05128d48a3db21fa851ada21a9aaa5c953213",
       "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r41/wifi-flash-core.h",
       "SPDX": [
         "GPL-3.0-only"
       ],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
     },
     "wifi/wifi-flash-linux.h": {
       "sha256": "2ea49eeba1726e909d309e496a199a5f69f0ebac8541046277f8f9eed3857c45",
@@ -456,13 +468,16 @@
       "adapted_for_public_tree": false
     },
     "wifi/network-runtime.c": {
-      "sha256": "7316f5c014ec3d5bc9e16a4eca74dea666fc4be271e108ae150e8d6c2db86d36",
+      "sha256": "ec3aec945ecd829cefd42adda4438eec7409efbe59371c2bf0c1228b82907c49",
       "source_sha256": "2bbf2776ffcd1f02b0613f0798f15f6e161f8399ce60da790a1fb50b02d32c5a",
       "origin": "work/kernel-port-latest/build/linux73/native-wifi-flash-r42/network-runtime.c",
       "SPDX": [
         "GPL-3.0-only"
       ],
-      "adapted_for_public_tree": true
+      "adapted_for_public_tree": true,
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
     },
     "wifi/network-stack.c": {
       "sha256": "75ca7fe8d70148236edb36bfc2435f67d0dc546a7c65d1df1dd9fee33685d3dc",
@@ -726,18 +741,24 @@
       "adapted_for_public_tree": false
     },
     "media/frontend/qc5_wifi_profile.h": {
-      "sha256": "d9526164304d12ed083538a6ec443bdaf5ddcbcd60221b8848abadf571eb351f",
+      "sha256": "b1525c7c9eef539197cdd37cc66204146ff76cd91b9f94926ab785722b19d966",
       "source_sha256": "d9526164304d12ed083538a6ec443bdaf5ddcbcd60221b8848abadf571eb351f",
       "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/qc5-t23-firmware/src/qc5_wifi_profile.h",
       "SPDX": [],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
     },
     "media/frontend/qc5_wifi_store.h": {
-      "sha256": "64f58d85fbf37c5a5c67cec26a62ccc236d9932853ff49b0a2f7d948a925a33f",
+      "sha256": "431a04d9dbe6bbbcd0b45aeeda3443d607c45652119f9cad2333735fba140983",
       "source_sha256": "64f58d85fbf37c5a5c67cec26a62ccc236d9932853ff49b0a2f7d948a925a33f",
       "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/qc5-t23-firmware/src/qc5_wifi_store.h",
       "SPDX": [],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
     },
     "media/audio-continuous/stream-alaw.h": {
       "sha256": "c930ecbf639a9975b1c98863ca6dadec2c28814fa1c220c780a76ff2d36a4d42",
@@ -2173,11 +2194,14 @@
       "adapted_for_public_tree": false
     },
     "web/index.html": {
-      "sha256": "7ad62393ed76a45f7b1781bdcabad306b7dd8dfb8c2861e989be881d323bc044",
+      "sha256": "1b71d74de8e8e7e51bc84df7999cc5b9a7ea26dccaed3d60e1920757fd944b7d",
       "source_sha256": "7ad62393ed76a45f7b1781bdcabad306b7dd8dfb8c2861e989be881d323bc044",
       "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-release-r43-rc1/assets/index.html",
       "SPDX": [],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
     },
     "web/listen.js": {
       "sha256": "b4e12b31eb8be1ee27bcbcb3dd00079cc938109f83b11071aa4792d7431296f2",
@@ -2783,14 +2807,17 @@
       ]
     },
     "installer/common/build_sd_package.py": {
-      "sha256": "92a85386e3b0f45527a820edeb68a8736c23d1146b851b7f8e753bca0a8d4974",
+      "sha256": "d4643b3efe664566062835fd4c9455a804d26b4ca51e649e5707211da88012b0",
       "source_sha256": "92a85386e3b0f45527a820edeb68a8736c23d1146b851b7f8e753bca0a8d4974",
       "origin": "work/github-r47-stable/native/installer/common/build_sd_package.py",
       "adapted_for_public_tree": false,
       "installer_release": "QC5-R47-SD",
       "SPDX": [
         "GPL-3.0-only"
-      ]
+      ],
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
     },
     "installer/common/full-recovery.c": {
       "sha256": "2f09396f6947bec2b787cb7efc5b4ec643917029b1ae43895bb10798462975bd",
@@ -2837,12 +2864,15 @@
       "SPDX": []
     },
     "installer/common/release.generated.h": {
-      "sha256": "0b08842972b1d6db086db3c04ea065d05800ed1868b9d55fec3d38daf974b7c5",
+      "sha256": "5e2adce8ff351dcddc40ee57ca90a556ebb02c9427b244715def6daa7ae81ebd",
       "source_sha256": "0b08842972b1d6db086db3c04ea065d05800ed1868b9d55fec3d38daf974b7c5",
       "origin": "work/github-r47-stable/native/installer/common/release.generated.h",
       "adapted_for_public_tree": false,
       "installer_release": "QC5-R47-SD",
-      "SPDX": []
+      "SPDX": [],
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
     },
     "installer/common/full-recovery.h": {
       "sha256": "77a345876a18f11ef5004f83ded3059c25a9586f452971a5f67bc7f647b9a059",
@@ -2863,6 +2893,84 @@
       "SPDX": [
         "GPL-3.0-only"
       ]
+    },
+    "wifi/hostname-owner.h": {
+      "sha256": "3acd607d4dd824aa0538553a536908676a4a2546a294b6a826966800b2e611e6",
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
+    },
+    "wifi/test-hostname-owner.c": {
+      "sha256": "b671d111c024a6f0bf6c7284aa219aa3da529428c5f74048eb27f281a449ac46",
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
+    },
+    "wifi/test-hostname-banks.c": {
+      "sha256": "99f59d092ce817f95bfee1fd71387adc1f551df3f1f93a2fdb20eae92ca5d418",
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
+    },
+    "media/native-integrated/native-services/hostname-http.h": {
+      "sha256": "9c3bcdafd0aa089f5a0c1097401f180671b8e531dd32cb493dc4fe3af920ae63",
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
+    },
+    "media/frontend/hostname-route.patch": {
+      "sha256": "f2c15b2a7dc084d004b793d820d23495dab82fe708c49b5b62ece66d20dba557",
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
+    },
+    "installer/common/LEGGIMI.txt": {
+      "sha256": "981e32bb6561beaaf6b3b8cd760818662068520455a96553f051ef0eae8bbee6",
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
+    },
+    "installer/common/AVVIO-RAPIDO.txt": {
+      "sha256": "2a2a33256cae766b0984714f7d06704c48dae524b12bebc1ce64f156dcd76e48",
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
+    },
+    "installer/common/README.md": {
+      "sha256": "2ad829922b25f38c655ffc7e3fb1ec7fdf92ab44d88a9c9a57668a64d6fe4281",
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
+    },
+    "installer/common/SOURCE-MANIFEST.json": {
+      "sha256": "6495e2c2a6702837ee92eb1fd95e3cfc912386098b6fe642833b2dc1d7a85254",
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
+    },
+    "installer/common/REBUILD-VERIFICATION.json": {
+      "sha256": "3d345dc4a84f2a306f2f8621e120147b0a40fcd225c3a9c2d6a7da010a530af2",
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
+    },
+    "installer/common/config.txt.example": {
+      "sha256": "f7bc7e7ff317c3b9e14641255214507c87c4e82a8f53b7423d75a98767404a7d",
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
+    },
+    "installer/common/DIRECT-EXTRACT-VALIDATION.json": {
+      "sha256": "f5a53d2323e78a8ccf3606c838de70eba81ffeb9c31b004e8180e2f499418c07",
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
+    },
+    "R48-validation.json": {
+      "sha256": "512b3a31c4a4449364adf9e661fbdaa50ce2d2aab7a2bc6b2ab48df7b8813457",
+      "deployed_release": "QC5-7.3.1-R48",
+      "candidate_only": false,
+      "post_R47_hostname": true
     }
   },
   "excluded_generated_inputs": [

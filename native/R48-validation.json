@@ -1,0 +1,42 @@
+{
+  "release": "QC5-7.3.1-R48",
+  "date": "2026-11-15",
+  "kernel": "7.3.1-qc5-sd-tiny",
+  "native_payload_sha256": "a891f2f7d3afa9672d0046778db117cc15f8ffeaa8d0318b2ffaf76e2f74e58e",
+  "runtime_changes": [
+    "bin/qc5-network",
+    "bin/qc5-native-portal",
+    "usr/share/qc5/www/index.html"
+  ],
+  "kernel_media_peripheral_byte_identical_to_R47": true,
+  "offline": {
+    "host_ASAN_UBSAN": true,
+    "actual_MIPS": true,
+    "interrupted_write_simulations": 1536,
+    "hostname_HTTP_cases_per_backend": 10,
+    "CSRF_invalid_names_and_busy_requests_rejected": true,
+    "JS_syntax": true,
+    "install_restore_corruption_models": true,
+    "production_SD_preparer_cases": 7,
+    "independent_unit_capsule_checks": 8,
+    "PC_installer_and_recovery_cases": 12
+  },
+  "hardware": {
+    "updated_units": 3,
+    "hostname_saved_with_SD_unmounted": true,
+    "flash_V2_readback_verified": true,
+    "DHCP_advertises_name": true,
+    "name_survived_normal_reboot_without_QR": true,
+    "stale_SD_did_not_override_name": true,
+    "original_automatic_name_restored": true,
+    "credentials_and_SSH_preserved": true,
+    "PTZ_all_four_256_steps": true,
+    "intercom_transport": true,
+    "RTSP_video_and_audio_after_intercom": true,
+    "physical_speaker_not_retested_for_unchanged_media": true,
+    "final_post_reboot_video_audio_decoded_on_all_units": true,
+    "all_three_online": true,
+    "OOM_kills_after_final_reboots": 0
+  },
+  "factory_install_on_untouched_twin_repeated_for_this_release": false
+}

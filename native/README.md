@@ -1,6 +1,6 @@
-# Native QC5 Linux 7.3.1 — R47 stable
+# Native QC5 Linux 7.3.1 — R48 stable
 
-Current R47 deployment and calibration checks are recorded in [R47 validation](R47-validation.json). Earlier source receipts below remain historical.
+Current hostname persistence checks are recorded in [R48 validation](R48-validation.json). R47 calibration is retained. Earlier source receipts below remain historical.
 
 This tree retains the R43 source baseline and matching rebuild receipts.
 R44 deploys the audited SSH key/startup fixes and the open-source AIC Linux

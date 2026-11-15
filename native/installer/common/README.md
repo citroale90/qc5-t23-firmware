@@ -1,7 +1,7 @@
-# R47 stable — extract-to-SD factory installer
+# R48 stable — extract-to-SD factory installer
 
 The common kit creates each unit's own two verified 8 MiB backups and paired
-update/factory-return capsules before changing flash. The native R47 payload is
+update/factory-return capsules before changing flash. The native R48 payload is
 shared; no reference camera's PARAM, MAC, Wi-Fi profile or SSH key is copied.
 Each backup retains its matching loader, manifest and local restore instructions.
 
@@ -25,7 +25,7 @@ KERNEL/ROOT/SYSTEM transaction. Recovery still requires intact U-Boot.
 
 ## Operator workflow
 
-Download the [R47 stable SD kit](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r47-sd)
+Download the [R48 stable SD kit](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r48-sd)
 and extract its contents directly into the root of an already formatted
 FAT32/MBR card (8–64 KiB clusters, at least 160 MiB free). The archive has
 no enclosing folder and already includes `qc5-run`, the cold-entry trigger
@@ -114,6 +114,15 @@ a camera. `build_sd_package.py` assembles the direct-extract archive from a
 verified base kit and compiled preparer receipt. Runtime payload and streamed
 U-Boot installer remain unchanged from the qualified R47 RC1.
 
-Native cameras already on R47 need no reflash. Updating an older native
+R47 stable and R47 RC1 had identical runtime payloads. R48 adds persistent
+hostname support and is a new firmware update. Updating an older native
 release still uses `aggiorna_qc5.py` and its own per-unit backup before a
 normal boot without Reset; plain extraction is the factory-install workflow.
+
+## R48 hostname
+
+System → Camera name → Save name persists a validated DNS label in the flash
+Wi-Fi banks, even without SD. Empty restores the MAC-based default. V1
+profiles are accepted; V2 records retain a V1 credential mirror for downgrade.
+Kernel, media and peripheral modules remain byte-identical to R47. The
+preparer and all script checks are regenerated for the exact R48 image.
