@@ -2,7 +2,12 @@
 
 Il progetto riguarda la **QC5_YA_CODE_V82** con Ingenic T23, GC1084,
 AIC8800DC USB e flash NOR da 8 MiB. La versione nativa installata e
-collaudata è **QC5 Linux 7.3.1 R48 stabile**, del 15 novembre 2026.
+collaudata è **QC5 Linux 7.3.1 R49 stabile**, del 15 novembre 2026.
+
+La R49 corregge il passaggio Notte → Auto: verifica subito la luce con IR
+spenti e torna a Giorno quando la luce è sufficiente. Al buio rimane in Notte.
+Le soglie sono allineate all'esposizione a 1/50 s; qualità immagine e kernel
+restano invariati. [Pacchetto aggiornato](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r49-sd).
 
 La R48 aggiunge **Sistema → Nome della telecamera → Salva nome**. Il nome
 resta nella flash, insieme al profilo Wi-Fi, anche senza SD e dopo il riavvio.

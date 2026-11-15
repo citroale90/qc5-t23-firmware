@@ -1,5 +1,5 @@
 {
-  "release": "QC5-R48-SD",
+  "release": "QC5-R49-SD",
   "files": {
     "prepara_sd.py": "1ddd12c4593fd796696b0209262ee2fb13b2f3088a326e0833ff7be963ca3d6a",
     "build_preparer.py": "09741e4a0a484cc5f964c60b4a850fd1a3f45a14dc914b42f3debca5d35c10a7",
@@ -15,20 +15,20 @@
     "ripristina_sd.py": "c59f94eb2dbede5222cf27e7e148332741fb177546a99a708479d0c13a319f99",
     "env-sector.c": "bf12ad753a9b049d5d326e3ee11243b285dcfbfe6da856a260b1a36f741b8962",
     "env-helper.generated.h": "bf7a9744cb5fb0b7ad569f7ab6c47290d3af6c637afe12e9b7eef33f469878b9",
-    "release.generated.h": "5e2adce8ff351dcddc40ee57ca90a556ebb02c9427b244715def6daa7ae81ebd",
+    "release.generated.h": "c83a75e91df601a07958e457c15d88411a80b8a4796a25b9a1988678a168516d",
     "full-recovery.h": "77a345876a18f11ef5004f83ded3059c25a9586f452971a5f67bc7f647b9a059",
     "boot-policy.h": "d042f9d2a2f249b87568f689cea0fb8d0e1f58d1909ab6d27b765bae475cf15b",
     "aggiorna_qc5.py": "d69372cd225053525614831dde435dc3170c70904933f08191f6e715126341d0",
-    "build_sd_package.py": "d4643b3efe664566062835fd4c9455a804d26b4ca51e649e5707211da88012b0",
+    "build_sd_package.py": "801206de3ffabe7aaa38e8c10c0d8f22051ecd3509222dc4383d7355e91eda69",
     "factory-entry-pins.json": "c7a6d9db5939bda5f0a5f5b5a3757949ef1501c70c84bce7b75ff00c38af0ff6",
-    "config.txt.example": "f7bc7e7ff317c3b9e14641255214507c87c4e82a8f53b7423d75a98767404a7d"
+    "config.txt.example": "8af8b485d9c54ef0a550c305ebf27a62e2597e2e7c9bb43be1667f4469a5fb8a"
   },
   "production_preparer_compile_definition": "QC5_PREPARE_ONLY",
   "production_read_write_MTD_open_absent": true,
-  "native_image_sha256": "a891f2f7d3afa9672d0046778db117cc15f8ffeaa8d0318b2ffaf76e2f74e58e",
+  "native_image_sha256": "ac1220920e9a78df523f81a8a9e34deae4b9addc59ac1b221306e7c5be0f4316",
   "binary_payload_and_factory_dumps_published": false,
   "per_unit_data_published": false,
   "manifest_scope": "public source directory; binary release assets documented separately",
-  "common_native_image_release": "r48-sd",
+  "common_native_image_release": "r49-sd",
   "factory_extract_to_root_ready": true
 }

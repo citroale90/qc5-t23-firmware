@@ -3,13 +3,8 @@
   "actual_MIPS_execution": true,
   "production_preparer_cases": [
     {
-      "input": "native.img",
+      "input": "native.img.DISABLED",
       "exit_code": 0,
-      "no_device_access": true
-    },
-    {
-      "input": "old.img",
-      "exit_code": 71,
       "no_device_access": true
     },
     {
@@ -38,14 +33,11 @@
       "no_device_access": true
     }
   ],
-  "unit_capsule_checks": 8,
-  "unit_capsule_stdout": "PASS cases=8 two_units=1 cross_unit_refused=1 readonly=1",
   "camera_accessed": false,
   "flash_written": false,
-  "shipped_preparer_sha256": "9ab9fbdc082cb461371f31db05de74a47e4a3fd00c5631dbda892a6ee42b0183",
-  "native_payload_sha256": "a891f2f7d3afa9672d0046778db117cc15f8ffeaa8d0318b2ffaf76e2f74e58e",
-  "release": "QC5-R48-SD",
-  "ZIP_layout_tests_passed": true,
-  "PC_kit_cases": 12,
+  "shipped_preparer_sha256": "93fb34eb2d8a065269628d05e5f1d05c41cf28b80a1d3859692c2f3798ba9467",
+  "native_payload_sha256": "ac1220920e9a78df523f81a8a9e34deae4b9addc59ac1b221306e7c5be0f4316",
+  "release": "QC5-R49-SD",
+  "factory_layout_and_PC_wrapper_checks": 12,
   "physical_factory_twin_installation_repeated": false
 }

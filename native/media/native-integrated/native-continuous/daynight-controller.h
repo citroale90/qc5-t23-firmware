@@ -23,7 +23,7 @@ struct qnd_io {
 struct qnd_state {
  struct qnd_io io;struct qdi_status meter;
  uint64_t now,phase_since,deadline,switched,last_probe,candidate,bright_since;
- unsigned mode,white,known,night,applied_white,target,target_white,phase,error;
+ unsigned mode,white,known,night,applied_white,target,target_white,phase,error,auto_pending,probe_reentry;
 };
 static int qnd_init(struct qnd_state *s,struct qnd_io io)
 {
@@ -33,6 +33,9 @@ static int qnd_init(struct qnd_state *s,struct qnd_io io)
 static int qnd_request(struct qnd_state *s,unsigned mode,unsigned white)
 {
  if(!s||mode>QND_AUTO||white>1||(white&&mode!=QND_DAY))return 0;
+ if(mode==s->mode&&white==s->white)return 1;
+ if(mode==QND_AUTO&&s->mode!=QND_AUTO)s->auto_pending=1;
+ else if(mode!=QND_AUTO)s->auto_pending=0;
  s->mode=mode;s->white=white;s->candidate=s->bright_since=0;return 1;
 }
 static int qnd_fail(struct qnd_state *s,unsigned error,uint64_t now)
@@ -44,11 +47,20 @@ static int qnd_fresh(const struct qdi_status *m,uint64_t now)
 {return m->ok&&m->magic==QDI_MAGIC&&m->stamp&&m->stamp<=now&&now-m->stamp<=2000000&&m->frames>120&&m->mean<=255&&m->exposure>=4&&m->exposure<=896&&m->gain<=24&&m->night<=1&&m->pending<=1&&m->settled<=1;}
 static unsigned qnd_darkness(const struct qdi_status *m)
 {
- /* These are sensor exposure/gain-index thresholds, not invented lux.
-  * Daylight requires low exposure as well as a populated luminance sample. */
- if(m->exposure>=800&&m->gain>=8)return 100;
- if(m->exposure<=224&&m->gain<=2&&m->mean>=48)return 0;
+ /* R45+ uses 450 lines (20 ms), not the former 896-line AE ceiling.
+  * GC1084's verified gain table: index8=4x, index16=16x. Keep a two-stop
+  * hysteresis band: leave night only below4x; enter night at16x after
+  * five seconds. These are image-quality policy limits, not lux readings.
+  * Luminance and no-IR probing still guard against artificial brightness. */
+ if(m->exposure>=400&&m->gain>=16)return 100;
+ if(m->exposure<=450&&m->gain<=8&&m->mean>=48)return 0;
  return 50;
+}
+static int qnd_begin_probe(struct qnd_state *s,uint64_t now)
+{
+ if(!s->io.hold(s->io.opaque,8)||!s->io.lights(s->io.opaque,0))return qnd_fail(s,8,now);
+ s->phase=QND_PROBE;s->phase_since=s->last_probe=now;s->deadline=now+8000000;
+ s->bright_since=s->candidate=0;s->probe_reentry=s->auto_pending;s->auto_pending=0;return 1;
 }
 static int qnd_begin(struct qnd_state *s,unsigned night,unsigned white,uint64_t now)
 {
@@ -60,6 +72,7 @@ static int qnd_tick(struct qnd_state *s,uint64_t now)
  if(!s||!now||now<s->now||now>UINT64_MAX-60000000)return 0;s->now=now;
  if(s->phase==QND_FAILED){if(now<s->deadline)return 1;s->phase=QND_IDLE;}
  struct qdi_status meter={0};int fresh=s->io.meter(s->io.opaque,&meter)&&qnd_fresh(&meter,now);
+ int advancing=fresh&&meter.stamp>s->meter.stamp;
  if(fresh)s->meter=meter;
  if(s->phase==QND_IMAGE){
   if(now>=s->deadline)return qnd_fail(s,2,now);
@@ -85,27 +98,30 @@ static int qnd_tick(struct qnd_state *s,uint64_t now)
  if(s->phase==QND_PROBE){
   /* A manual command cancels a probe by entering its proper full sequence. */
   if(s->mode!=QND_AUTO||s->white)return qnd_begin(s,s->mode==QND_NIGHT,s->white,now);
-  if(now>=s->phase_since+3000000&&fresh&&meter.stamp>=s->phase_since+3000000&&meter.settled){
-   if(qnd_darkness(&meter)==0){
+  if(now>=s->phase_since+3000000&&advancing&&!meter.pending&&meter.stamp>=s->phase_since+3000000){
+   /* A manual override must not bias Auto inside the hysteresis band.
+    * Explicit entry prefers colour if usable; periodic probes keep the
+    * stricter threshold to avoid repeatedly toggling around dusk. */
+   if(qnd_darkness(&meter)==0||(s->probe_reentry&&meter.exposure<=450&&meter.gain<16&&meter.mean>=48)){
     if(!s->bright_since)s->bright_since=now;
     else if(now-s->bright_since>=1000000)return qnd_begin(s,0,0,now);
    }else s->bright_since=0;
-  }
+  }else s->bright_since=0;
   if(now>=s->deadline){if(!s->io.lights(s->io.opaque,2)||!s->io.hold(s->io.opaque,3))return qnd_fail(s,7,now);s->phase=QND_IDLE;s->bright_since=0;}
   return 1;
  }
  unsigned wanted=s->mode==QND_AUTO?(s->known?s->night:0):s->mode;
  if(!s->known||wanted!=s->night||s->white!=s->applied_white){if(fresh)return qnd_begin(s,wanted,s->white,now);return 1;}
- if(s->mode!=QND_AUTO||s->white||!fresh||!meter.settled||meter.transition){s->candidate=0;return 1;}
- if(now-s->switched<30000000)return 1;
+ if(s->mode!=QND_AUTO||s->white||!advancing||meter.pending||meter.transition){s->candidate=0;return 1;}
+ /* Explicit Auto entry re-evaluates a manual override immediately.
+  * Never choose day using the IR-lit night sample. */
+ if(s->night&&s->auto_pending)return qnd_begin_probe(s,now);
+ if(now-s->switched<30000000&&!s->auto_pending)return 1;
  if(!s->night){
-  if(qnd_darkness(&meter)!=100){s->candidate=0;return 1;}
+  if(qnd_darkness(&meter)!=100){s->candidate=0;s->auto_pending=0;return 1;}
   if(!s->candidate)s->candidate=now;
-  else if(now-s->candidate>=5000000)return qnd_begin(s,1,0,now);
- }else if(now-s->last_probe>=60000000){
-  if(!s->io.hold(s->io.opaque,5)||!s->io.lights(s->io.opaque,0))return qnd_fail(s,8,now);
-  s->phase=QND_PROBE;s->phase_since=s->last_probe=now;s->deadline=now+5000000;s->bright_since=0;
- }
+  else if(now-s->candidate>=5000000){s->auto_pending=0;return qnd_begin(s,1,0,now);}
+ }else if(now-s->last_probe>=60000000)return qnd_begin_probe(s,now);
  return 1;
 }
 static unsigned qnd_busy(const struct qnd_state *s)
