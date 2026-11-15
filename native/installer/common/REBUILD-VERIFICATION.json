@@ -1,19 +1,19 @@
 {
   "passed": true,
-  "release": "QC5-R48-SD",
+  "release": "QC5-R49-SD",
   "public_builder_recreates_shipped_preparer_and_ENV_module_byte_identically": true,
-  "preparer_sha256": "9ab9fbdc082cb461371f31db05de74a47e4a3fd00c5631dbda892a6ee42b0183",
+  "preparer_sha256": "93fb34eb2d8a065269628d05e5f1d05c41cf28b80a1d3859692c2f3798ba9467",
   "ENV_helper_sha256": "ca84ea48c44918e78ab346c899b549371ff961ba54f1dc5fc3985c7f14e89bb3",
   "ENV_template_recompiled_byte_identically": true,
   "factory_MAC_guard_included": true,
   "ROOT_SYSTEM_build_hash_gate_removed": true,
   "camera_accessed": false,
   "SD_accessed": false,
-  "native_image_sha256": "a891f2f7d3afa9672d0046778db117cc15f8ffeaa8d0318b2ffaf76e2f74e58e",
+  "native_image_sha256": "ac1220920e9a78df523f81a8a9e34deae4b9addc59ac1b221306e7c5be0f4316",
   "required_payload_argument": true,
   "production_preparer_readonly": true,
   "ENV_module_sha256": "ca84ea48c44918e78ab346c899b549371ff961ba54f1dc5fc3985c7f14e89bb3",
-  "native_payload_sha256": "a891f2f7d3afa9672d0046778db117cc15f8ffeaa8d0318b2ffaf76e2f74e58e",
+  "native_payload_sha256": "ac1220920e9a78df523f81a8a9e34deae4b9addc59ac1b221306e7c5be0f4316",
   "current_preparer_rebuild_repeated": true,
   "ENV_module_source_rebuild_unchanged_from_R47": true
 }

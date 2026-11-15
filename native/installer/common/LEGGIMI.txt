@@ -1,4 +1,4 @@
-QC5 R48 STABILE — PACCHETTO SD
+QC5 R49 STABILE — PACCHETTO SD
 
 HARDWARE SUPPORTATO
 QC5_YA_CODE_V82, Ingenic T23DL, sensore GC1084, Wi-Fi AIC8800DC USB,
@@ -74,14 +74,16 @@ anche i controlli precedenti nella radice usa, facoltativamente:
   python3 prepara_sd.py --sd "/percorso/SD"
 Non eseguire queste operazioni mentre un aggiornamento è ancora in corso.
 
-R48 STABILE
+R49 STABILE
+R49 corregge Notte → Auto, senza modificare kernel o qualità immagine.
+Luce ambiente verificata con IR spenti; al buio rimane in Notte.
 Sistema → Nome della telecamera → Salva nome permette un nome DNS di 1–63
 lettere, cifre o trattini. Il campo vuoto ripristina qc5-xxxxxx dal MAC.
 Il nome si salva in flash con verifica, anche senza SD; un config.txt vecchio
 non lo sovrascrive. Password Wi-Fi e chiave SSH restano conservate. Il nome
 viene inviato al DHCP; la risoluzione DNS dipende dal router.
 Kernel, video, audio, qualità immagine e calibrazione PTZ restano quelli R47.
-Il pacchetto rigenera il preparatore e tutti i controlli per il payload R48.
+Il pacchetto rigenera il preparatore e tutti i controlli per il payload R49.
 La prima installazione su un'originale non è stata ripetuta fisicamente in
 questa release; collaudo del runtime e verifiche dell'installatore sono distinti.
 Dettagli: VERIFICA-HARDWARE.json e QUALIFICA.json.

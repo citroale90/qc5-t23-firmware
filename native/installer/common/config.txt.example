@@ -1,4 +1,4 @@
-# QC5 R48: configurazione locale, letta come dati.
+# QC5 R49: configurazione locale, letta come dati.
 # SSID vuoto: prima accensione tramite hotspot QC5-xxxxxx.
 # Inserisci qui le credenziali oppure nella pagina HTTP dell'hotspot.
 SSID=""

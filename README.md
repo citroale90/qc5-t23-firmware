@@ -1,6 +1,6 @@
 # VeePai QC5 T23 firmware tools
 
-Local firmware development for the **QC5_YA_CODE_V82** camera with Ingenic T23DL, GC1084, AIC8800DC USB Wi-Fi, and 8 MiB NOR flash. The current deployed native release is **QC5 Linux 7.3.1 R48 stable** (2026-11-15).
+Local firmware development for the **QC5_YA_CODE_V82** camera with Ingenic T23DL, GC1084, AIC8800DC USB Wi-Fi, and 8 MiB NOR flash. The current deployed native release is **QC5 Linux 7.3.1 R49 stable** (2026-11-15).
 
 The native sources and validation record are in [`native/`](native/README.md).
 The top-level application builder and `src/`, `web/`, `firmware/` still
@@ -12,6 +12,16 @@ source/licensing gaps are documented explicitly.
 The camera serves an Italian/English WebUI, a local H.264 player with audio and talk, RTSP, PTZ, IR and white-light controls, and SD recordings. The Wi-Fi setup page is available on the camera's fallback hotspot. The WebUI can generate Home Assistant controls using the address from which the page is opened. RTSP is configured separately in Generic Camera.
 
 [Italiano](docs/README.it.md) · [Build and install](docs/build.md) · [Credits and licensing](NOTICE.md)
+
+## R49 stable — Day/Night Auto re-entry
+
+Switching from manual Night back to Auto now starts an ambient-light check
+without the former one-minute wait. The IR LEDs are turned off before the
+measurement, and fresh samples must confirm usable light before colour/day
+is restored. In true darkness Auto keeps Night. Thresholds match the current
+20 ms exposure cap; normal automatic changes retain hysteresis, including
+with small AE fluctuations. Kernel and the media/image-quality binaries are
+unchanged. [Details and validation](docs/R49-release.md) · [SD ZIP](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r49-sd)
 
 ## R48 stable — camera hostname
 
@@ -97,7 +107,7 @@ source publication does not distribute another camera's backup or identity.
 
 ## Factory twin-camera SD installer
 
-The common R48 stable SD kit automates two verified full backups and
+The common R49 stable SD kit automates two verified full backups and
 per-unit update/recovery capsules on compatible factory QC5 cameras. It
 retains each unit's own loader and manifest, and includes offline PC tools
 for card preparation, reuse and recovery without an AI or server.

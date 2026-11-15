@@ -1,5 +1,5 @@
 {
-  "release": "QC5-7.3.1-R48",
+  "release": "QC5-7.3.1-R49",
   "files": {
     "ssh/key-core.h": {
       "sha256": "07995a17e338c41ffbad4bef4f510f5e194abc5dc742f267abc9b2de6a7f11be",
@@ -1121,13 +1121,16 @@
       "adapted_for_public_tree": false
     },
     "media/native-integrated/native-continuous/daynight-controller.h": {
-      "sha256": "4a89f17cdb55dfc69342f2ddf3c8f58622313ac942565510bc7b849f8c577009",
+      "sha256": "b03603aa2108486b6fe98c01ff608b260b716b18cda5199d4a5743f450bb6a00",
       "source_sha256": "4a89f17cdb55dfc69342f2ddf3c8f58622313ac942565510bc7b849f8c577009",
       "origin": "work/kernel-port-latest/build/linux73/native-integrated/native-r4d40e-intercom-reverb/native-halfduplex/tree/work/kernel-port-latest/build/linux73/native-integrated/native-continuous/daynight-controller.h",
       "SPDX": [
         "GPL-3.0-only"
       ],
-      "adapted_for_public_tree": false
+      "adapted_for_public_tree": false,
+      "deployed_release": "QC5-7.3.1-R49",
+      "candidate_only": false,
+      "post_R48_daynight": true
     },
     "media/native-integrated/native-continuous/daynight-frontend.h": {
       "sha256": "bfd37d56deb2f901d6067dcc29aee82f4608679d77ce5f798f52ab8a4563e51d",
@@ -2807,7 +2810,7 @@
       ]
     },
     "installer/common/build_sd_package.py": {
-      "sha256": "d4643b3efe664566062835fd4c9455a804d26b4ca51e649e5707211da88012b0",
+      "sha256": "801206de3ffabe7aaa38e8c10c0d8f22051ecd3509222dc4383d7355e91eda69",
       "source_sha256": "92a85386e3b0f45527a820edeb68a8736c23d1146b851b7f8e753bca0a8d4974",
       "origin": "work/github-r47-stable/native/installer/common/build_sd_package.py",
       "adapted_for_public_tree": false,
@@ -2815,9 +2818,10 @@
       "SPDX": [
         "GPL-3.0-only"
       ],
-      "deployed_release": "QC5-7.3.1-R48",
+      "deployed_release": "QC5-7.3.1-R49",
       "candidate_only": false,
-      "post_R47_hostname": true
+      "post_R47_hostname": true,
+      "post_R48_daynight": true
     },
     "installer/common/full-recovery.c": {
       "sha256": "2f09396f6947bec2b787cb7efc5b4ec643917029b1ae43895bb10798462975bd",
@@ -2864,15 +2868,16 @@
       "SPDX": []
     },
     "installer/common/release.generated.h": {
-      "sha256": "5e2adce8ff351dcddc40ee57ca90a556ebb02c9427b244715def6daa7ae81ebd",
+      "sha256": "c83a75e91df601a07958e457c15d88411a80b8a4796a25b9a1988678a168516d",
       "source_sha256": "0b08842972b1d6db086db3c04ea065d05800ed1868b9d55fec3d38daf974b7c5",
       "origin": "work/github-r47-stable/native/installer/common/release.generated.h",
       "adapted_for_public_tree": false,
       "installer_release": "QC5-R47-SD",
       "SPDX": [],
-      "deployed_release": "QC5-7.3.1-R48",
+      "deployed_release": "QC5-7.3.1-R49",
       "candidate_only": false,
-      "post_R47_hostname": true
+      "post_R47_hostname": true,
+      "post_R48_daynight": true
     },
     "installer/common/full-recovery.h": {
       "sha256": "77a345876a18f11ef5004f83ded3059c25a9586f452971a5f67bc7f647b9a059",
@@ -2925,52 +2930,65 @@
       "post_R47_hostname": true
     },
     "installer/common/LEGGIMI.txt": {
-      "sha256": "981e32bb6561beaaf6b3b8cd760818662068520455a96553f051ef0eae8bbee6",
-      "deployed_release": "QC5-7.3.1-R48",
+      "sha256": "0c5fa1756ac27387961aa2c5c802f7d4d20a533d54b435c03d258d21777be9a5",
+      "deployed_release": "QC5-7.3.1-R49",
       "candidate_only": false,
-      "post_R47_hostname": true
+      "post_R47_hostname": true,
+      "post_R48_daynight": true
     },
     "installer/common/AVVIO-RAPIDO.txt": {
-      "sha256": "2a2a33256cae766b0984714f7d06704c48dae524b12bebc1ce64f156dcd76e48",
-      "deployed_release": "QC5-7.3.1-R48",
+      "sha256": "65ed334e56bc1e8a4f74fc4a004f0d5dcbacffcffeb7a1804cb9168059b782ad",
+      "deployed_release": "QC5-7.3.1-R49",
       "candidate_only": false,
-      "post_R47_hostname": true
+      "post_R47_hostname": true,
+      "post_R48_daynight": true
     },
     "installer/common/README.md": {
-      "sha256": "2ad829922b25f38c655ffc7e3fb1ec7fdf92ab44d88a9c9a57668a64d6fe4281",
-      "deployed_release": "QC5-7.3.1-R48",
+      "sha256": "c9ca0bebc25615eb3545ad8ae9e6c36c361ea875559023eea58a2b4f1a61646d",
+      "deployed_release": "QC5-7.3.1-R49",
       "candidate_only": false,
-      "post_R47_hostname": true
+      "post_R47_hostname": true,
+      "post_R48_daynight": true
     },
     "installer/common/SOURCE-MANIFEST.json": {
-      "sha256": "6495e2c2a6702837ee92eb1fd95e3cfc912386098b6fe642833b2dc1d7a85254",
-      "deployed_release": "QC5-7.3.1-R48",
+      "sha256": "93e4b2b52405cfb143d75da6b0c010e4674ff67bd72d853a34330bcddc90da43",
+      "deployed_release": "QC5-7.3.1-R49",
       "candidate_only": false,
-      "post_R47_hostname": true
+      "post_R47_hostname": true,
+      "post_R48_daynight": true
     },
     "installer/common/REBUILD-VERIFICATION.json": {
-      "sha256": "3d345dc4a84f2a306f2f8621e120147b0a40fcd225c3a9c2d6a7da010a530af2",
-      "deployed_release": "QC5-7.3.1-R48",
+      "sha256": "025f27dc29bc508e200a16970ad883f01bf21fff662daac198f2b55295850b9d",
+      "deployed_release": "QC5-7.3.1-R49",
       "candidate_only": false,
-      "post_R47_hostname": true
+      "post_R47_hostname": true,
+      "post_R48_daynight": true
     },
     "installer/common/config.txt.example": {
-      "sha256": "f7bc7e7ff317c3b9e14641255214507c87c4e82a8f53b7423d75a98767404a7d",
-      "deployed_release": "QC5-7.3.1-R48",
+      "sha256": "8af8b485d9c54ef0a550c305ebf27a62e2597e2e7c9bb43be1667f4469a5fb8a",
+      "deployed_release": "QC5-7.3.1-R49",
       "candidate_only": false,
-      "post_R47_hostname": true
+      "post_R47_hostname": true,
+      "post_R48_daynight": true
     },
     "installer/common/DIRECT-EXTRACT-VALIDATION.json": {
-      "sha256": "f5a53d2323e78a8ccf3606c838de70eba81ffeb9c31b004e8180e2f499418c07",
-      "deployed_release": "QC5-7.3.1-R48",
+      "sha256": "07b309d91b202e5397299b0201f5037543e904aaa25a9148adec864a4ec95360",
+      "deployed_release": "QC5-7.3.1-R49",
       "candidate_only": false,
-      "post_R47_hostname": true
+      "post_R47_hostname": true,
+      "post_R48_daynight": true
     },
     "R48-validation.json": {
       "sha256": "512b3a31c4a4449364adf9e661fbdaa50ce2d2aab7a2bc6b2ab48df7b8813457",
       "deployed_release": "QC5-7.3.1-R48",
       "candidate_only": false,
       "post_R47_hostname": true
+    },
+    "R49-validation.json": {
+      "sha256": "f421db92fab5efe9903c04b84367b5e8f0a0cd6b409cb37e4eb1452dbf6a1c46",
+      "deployed_release": "QC5-7.3.1-R49",
+      "candidate_only": false,
+      "post_R48_daynight": true
     }
   },
   "excluded_generated_inputs": [

@@ -105,7 +105,7 @@ def assemble(base,prepared,out,release,validation,checks=None):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     for name in ['base-kit','prepared','output']:p.add_argument('--'+name,required=True,type=Path)
-    p.add_argument('--release',default='QC5-7.3.1-R48-SD');p.add_argument('--validation',type=Path);p.add_argument('--checks',type=Path)
+    p.add_argument('--release',default='QC5-7.3.1-R49-SD');p.add_argument('--validation',type=Path);p.add_argument('--checks',type=Path)
     a=p.parse_args();print(json.dumps(assemble(a.base_kit,a.prepared,a.output,a.release,a.validation,a.checks),indent=2))
 
 if __name__=='__main__':main()

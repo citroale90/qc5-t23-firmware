@@ -1,7 +1,7 @@
-# R48 stable — extract-to-SD factory installer
+# R49 stable — extract-to-SD factory installer
 
 The common kit creates each unit's own two verified 8 MiB backups and paired
-update/factory-return capsules before changing flash. The native R48 payload is
+update/factory-return capsules before changing flash. The native R49 payload is
 shared; no reference camera's PARAM, MAC, Wi-Fi profile or SSH key is copied.
 Each backup retains its matching loader, manifest and local restore instructions.
 
@@ -25,7 +25,7 @@ KERNEL/ROOT/SYSTEM transaction. Recovery still requires intact U-Boot.
 
 ## Operator workflow
 
-Download the [R48 stable SD kit](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r48-sd)
+Download the [R49 stable SD kit](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r49-sd)
 and extract its contents directly into the root of an already formatted
 FAT32/MBR card (8–64 KiB clusters, at least 160 MiB free). The archive has
 no enclosing folder and already includes `qc5-run`, the cold-entry trigger
@@ -126,3 +126,11 @@ Wi-Fi banks, even without SD. Empty restores the MAC-based default. V1
 profiles are accepted; V2 records retain a V1 credential mirror for downgrade.
 Kernel, media and peripheral modules remain byte-identical to R47. The
 preparer and all script checks are regenerated for the exact R48 image.
+
+## R49 automatic day/night
+
+Explicit Auto entry re-evaluates a manual override immediately using a no-IR
+ambient probe. The gain/exposure policy matches the existing450-line cap,
+retains normal hysteresis, tolerates AE jitter, and never blindly forces day
+in darkness. Only the portal owner changes; media, kernel and drivers retain
+the R48 bytes. See R49-validation.json and the release guide.

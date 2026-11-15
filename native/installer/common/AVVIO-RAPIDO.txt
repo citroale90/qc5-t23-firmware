@@ -1,4 +1,4 @@
-QC5 R48 STABILE — INSTALLAZIONE DIRETTA DA SD
+QC5 R49 STABILE — INSTALLAZIONE DIRETTA DA SD
 
 PER UNA GEMELLA ANCORA CON IL FIRMWARE ORIGINALE
 
@@ -6,7 +6,7 @@ PER UNA GEMELLA ANCORA CON IL FIRMWARE ORIGINALE
    liberi. Non usare exFAT. Per la prima installazione è preferibile una SD vuota.
 2. Estrai il CONTENUTO dello ZIP direttamente nella RADICE della SD.
    Devi vedere qc5-run e la cartella qc5-installer, senza una cartella
-   QC5-R48-SD intermedia. Non serve eseguire Python o altri script sul PC.
+   QC5-R49-SD intermedia. Non serve eseguire Python o altri script sul PC.
    Non rinominare o eliminare il file di avvio con il nome lungo.
 3. Espelli normalmente la SD. Inseriscila nella telecamera spenta.
    Tieni Reset mentre ridai alimentazione e rilascialo dopo circa 3 secondi.
