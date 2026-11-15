@@ -1,7 +1,7 @@
-# R45 RC2 common SD installer for factory QC5 cameras
+# R47 stable — extract-to-SD factory installer
 
 The common kit creates each unit's own two verified 8 MiB backups and paired
-update/factory-return capsules before changing flash. The native R45 RC2 payload is
+update/factory-return capsules before changing flash. The native R47 payload is
 shared; no reference camera's PARAM, MAC, Wi-Fi profile or SSH key is copied.
 Each backup retains its matching loader, manifest and local restore instructions.
 
@@ -25,13 +25,21 @@ KERNEL/ROOT/SYSTEM transaction. Recovery still requires intact U-Boot.
 
 ## Operator workflow
 
-Download the [R45 RC2 SD kit](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r44-sd-originali-rc2) and use its [quick guide](AVVIO-RAPIDO.txt): extract it,
-run `python3 prepara_sd.py --sd /mounted/card`, optionally edit root `config.txt`,
-then insert it into the powered-off original camera. Power on holding Reset
-for about three seconds and leave power applied for at least fifteen minutes.
-The card must already be FAT32/MBR with 8–64 KiB clusters and 160 MiB free.
-The PC tool does not format, access a raw device, create Finder resource forks,
-or delete recordings, configuration or previous backups.
+Download the [R47 stable SD kit](https://github.com/citroale90/qc5-t23-firmware/releases/tag/r47-sd)
+and extract its contents directly into the root of an already formatted
+FAT32/MBR card (8–64 KiB clusters, at least 160 MiB free). The archive has
+no enclosing folder and already includes `qc5-run`, the cold-entry trigger
+and `qc5-installer/AZIONE.txt` set to `INSTALLA`. No Python or other PC script
+is required for a factory camera. Root `config.txt` is deliberately absent
+so extraction preserves existing settings; the camera creates a default
+when needed. Optionally copy `qc5-installer/config.txt.example` to `config.txt`
+and edit Wi-Fi settings, or use the local hotspot after installation.
+
+Safely eject, insert in the powered-off original camera, power on holding
+Reset, release after about three seconds, and keep power applied for at
+least fifteen minutes. Backup and unit binding are performed on the camera.
+See the [quick guide](AVVIO-RAPIDO.txt). `prepara_sd.py` remains an optional
+helper for archiving root controls and reusing a card.
 
 The first native boot can use the local QC5 hotspot and HTTP setup without QR
 or an app. Wi-Fi credentials and each camera's newly generated SSH host key
@@ -61,6 +69,7 @@ prefix binding for the selected toolchain, without device or SD access:
 
 ```sh
 python3 build_preparer.py --output /new/build/directory \
+  --payload /path/to/verified/native.img \
   --zig /path/to/zig --mips-cc /path/to/mipsel-linux-gnu-gcc
 ```
 
@@ -88,4 +97,23 @@ refusal stage to `qc5-backups/unit-*/prepare.log`. Read these before repeating
 Reset; a white LED alone is not evidence of a completed installation.
 The common RC2 cold installation itself still requires its physical test.
 
-Existing native QC5 units use the packaged aggiorna_qc5.py and power on without Reset. Factory units use prepara_sd.py and the Reset entry. Per-unit backups and identities must never be exchanged. See the R45 release notes.
+Older native QC5 units use aggiorna_qc5.py and power on without Reset. Factory units use the direct-extraction ZIP and Reset entry; prepara_sd.py is optional. Per-unit backups and identities must never be exchanged.
+
+## Release-chain correction in stable R47
+
+The earlier RC1 common kit retained an R45 payload pin in its preparer and
+an old loader digest in `run.sh`. Native R47 runtime installations were
+verified separately and were unaffected, but a factory install would refuse
+that inconsistent kit before changing firmware. The stable kit rebuilds
+the read-only preparer for the actual payload and generates all SHA-256/MD5
+script checks from the packaged binaries. A required `--payload` argument
+prevents future preparer builds from silently reusing a historical pin.
+`prepare --verify-payload native.img` checks the same production payload
+validation routine without opening MTD, accessing the watchdog or requiring
+a camera. `build_sd_package.py` assembles the direct-extract archive from a
+verified base kit and compiled preparer receipt. Runtime payload and streamed
+U-Boot installer remain unchanged from the qualified R47 RC1.
+
+Native cameras already on R47 need no reflash. Updating an older native
+release still uses `aggiorna_qc5.py` and its own per-unit backup before a
+normal boot without Reset; plain extraction is the factory-install workflow.

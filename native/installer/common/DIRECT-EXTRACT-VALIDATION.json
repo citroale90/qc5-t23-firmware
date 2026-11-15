@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "actual_MIPS_execution": true,
+  "production_preparer_cases": [
+    {
+      "input": "native.img",
+      "exit_code": 0,
+      "no_device_access": true
+    },
+    {
+      "input": "old.img",
+      "exit_code": 71,
+      "no_device_access": true
+    },
+    {
+      "input": "bad.img",
+      "exit_code": 71,
+      "no_device_access": true
+    },
+    {
+      "input": "short.img",
+      "exit_code": 71,
+      "no_device_access": true
+    },
+    {
+      "input": "long.img",
+      "exit_code": 71,
+      "no_device_access": true
+    },
+    {
+      "input": "link.img",
+      "exit_code": 71,
+      "no_device_access": true
+    },
+    {
+      "input": "missing.img",
+      "exit_code": 71,
+      "no_device_access": true
+    }
+  ],
+  "unit_capsule_checks": 8,
+  "unit_capsule_stdout": "PASS cases=8 two_units=1 cross_unit_refused=1 readonly=1",
+  "camera_accessed": false,
+  "flash_written": false,
+  "shipped_preparer_sha256": "70d94c7f6b02f528eb403f01b98cfb66c7f525da8b138e1ff8a3957bce5f8900",
+  "native_payload_sha256": "25a600b2be79152db7ac460e18f194183b27648af92684d00aa995dd3c86bffc"
+}

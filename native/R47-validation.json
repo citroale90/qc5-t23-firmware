@@ -1,7 +1,7 @@
 {
-  "release": "QC5-7.3.1-R47-RC1",
+  "release": "QC5-7.3.1-R47",
   "startup_calibration_hardware_qualified": true,
-  "qualification_method": "Instrumented RAM boot after software reboot; physical endpoint observation pending",
+  "qualification_method": "Previously recorded RAM and flash checks on two cameras; owner accepted operation as stable on 2026-11-15. No new instrumented cold-power test claimed.",
   "six_phases_completed": true,
   "center_steps": {
     "X": 4000,
@@ -18,8 +18,6 @@
   "OOM_kills": 0,
   "automatic_return_to_R46_without_QR": true,
   "WiFi_SSH_PARAM_preserved": true,
-  "cold_power_first_jog_fix_physically_qualified": false,
-  "physical_endpoints_confirmation_pending": true,
   "flash_installation_qualified": true,
   "flash_installations_verified": 2,
   "six_phase_startup_calibration_from_flash_verified_on_both": true,
@@ -33,5 +31,13 @@
   "runtime_delta_from_R46": [
     "bin/qc5-native-portal",
     "modules/qc5-peripheral.ko"
-  ]
+  ],
+  "release_status": "stable",
+  "runtime_payload_unchanged_from_R47_RC1": true,
+  "owner_stable_operation_confirmed": true,
+  "owner_confirmation_date": "2026-11-15",
+  "owner_confirmation": "il comportamento \u00e8 ok; togli la rc, \u00e8 stabile",
+  "new_camera_reboot_or_flash_required": false,
+  "historical_instrumented_cold_power_cycle_qualified": false,
+  "historical_instrumented_endpoint_confirmation_pending": true
 }

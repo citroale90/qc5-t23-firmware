@@ -1,30 +1,35 @@
-QC5 R44 — SD PER LE GEMELLE ANCORA ORIGINALI
+QC5 R47 STABILE — INSTALLAZIONE DIRETTA DA SD
 
-1. Estrai questo ZIP in una cartella del computer. Usa una SD FAT32/MBR,
-   cluster da 8–64 KiB, con almeno 160 MiB liberi. Non usare exFAT o GPT.
-2. Dal computer esegui, dalla cartella estratta:
-   python3 prepara_sd.py --sd "/percorso/della/SD"
-   Sul Mac, per esempio: --sd "/Volumes/SENZA NOME"
-   Non formatta e non elimina registrazioni o backup esistenti.
-3. Facoltativo: modifica SSID e PWD nel config.txt della radice della SD.
-   Senza credenziali, dopo l'installazione usa l'hotspot QC5-xxxxxx e
-   http://192.168.168.1/setup per scegliere la rete e inserire la password.
-4. Espelli normalmente la SD. Inseriscila nella gemella ORIGINALE spenta.
-   Alimenta tenendo Reset e rilascialo dopo circa 3 secondi. Lascia
-   alimentata almeno 15 minuti, senza QR, altri Reset o spegnimenti.
-5. Il backup e il ripristino vengono creati automaticamente per questa
-   unità. Dopo l'installazione apri il nuovo IP del router in HTTP,
-   oppure la pagina del tuo proxy locale. SSH root e RTSP sono disponibili.
+PER UNA GEMELLA ANCORA CON IL FIRMWARE ORIGINALE
 
-Per un'altra gemella: rimetti la SD nel computer ed esegui nuovamente
-prepara_sd.py. I vecchi backup vengono conservati, senza clonare identità.
+1. Usa una SD FAT32 con tabella MBR, cluster 8–64 KiB e almeno 160 MiB
+   liberi. Non usare exFAT. Per la prima installazione è preferibile una SD vuota.
+2. Estrai il CONTENUTO dello ZIP direttamente nella RADICE della SD.
+   Devi vedere qc5-run e la cartella qc5-installer, senza una cartella
+   QC5-R47-SD intermedia. Non serve eseguire Python o altri script sul PC.
+   Non rinominare o eliminare il file di avvio con il nome lungo.
+3. Espelli normalmente la SD. Inseriscila nella telecamera spenta.
+   Tieni Reset mentre ridai alimentazione e rilascialo dopo circa 3 secondi.
+4. Lascia alimentata la camera almeno 15 minuti, anche se si riavvia.
+   Non togliere la SD e non ripetere Reset durante l'installazione.
+5. Il backup originale viene salvato e verificato due volte sulla SD.
+   Al termine usa l'hotspot QC5-xxxxxx e la sua pagina Wi-Fi per collegarla
+   alla rete, poi apri in HTTP l'IP assegnato dal router. Nessuna app cloud.
 
-RIPRISTINO (camera spenta, SD nel computer)
-  python3 ripristina_sd.py --sd "/percorso/SD" --elenca
-  python3 ripristina_sd.py --sd "/percorso/SD" --prepara-ripristino
-Per scegliere un'altra unità aggiungi --backup qc5-backups/unit-XXXXXX.
-Espelli la SD, inseriscila nella camera del backup, accendi SENZA Reset e
-attendi 15 minuti. Dopo il ripristino togli la SD prima della prossima
-accensione, o esegui --disattiva dal computer.
+SSID e password su SD sono facoltativi: copia qc5-installer/config.txt.example
+come config.txt nella radice e modifica SSID/PWD prima dell'accensione.
+Senza questo file puoi configurare il Wi-Fi dall'hotspot. Dopo la configurazione,
+Wi-Fi e chiave SSH persistono in flash: la SD serve per backup e registrazioni.
 
-Dettagli e limiti: LEGGIMI.txt. Stato della transazione: --stato.
+LE CAMERE GIA SULLA R47
+Usano già lo stesso firmware della versione stabile: non occorre reinstallare.
+
+AGGIORNAMENTO DA UNA VERSIONE QC5 NATIVA PRECEDENTE
+La sola estrazione non attiva l'aggiornamento delle camere già modificate.
+Usa la SD e il backup della stessa camera e, dalla cartella estratta sul PC:
+  python3 aggiorna_qc5.py --sd "/percorso/SD"
+Espelli, inserisci nella SUA camera spenta e accendi SENZA Reset.
+Lascia alimentata almeno 15 minuti. Questa procedura resta separata dalla
+prima installazione sulle originali, già pronta con la sola estrazione.
+
+Backup, recupero e riuso della SD: LEGGIMI.txt e qc5-installer/RIPRISTINO.txt.
