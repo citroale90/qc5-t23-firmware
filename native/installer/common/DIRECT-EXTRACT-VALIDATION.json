@@ -42,6 +42,10 @@
   "unit_capsule_stdout": "PASS cases=8 two_units=1 cross_unit_refused=1 readonly=1",
   "camera_accessed": false,
   "flash_written": false,
-  "shipped_preparer_sha256": "70d94c7f6b02f528eb403f01b98cfb66c7f525da8b138e1ff8a3957bce5f8900",
-  "native_payload_sha256": "25a600b2be79152db7ac460e18f194183b27648af92684d00aa995dd3c86bffc"
+  "shipped_preparer_sha256": "9ab9fbdc082cb461371f31db05de74a47e4a3fd00c5631dbda892a6ee42b0183",
+  "native_payload_sha256": "a891f2f7d3afa9672d0046778db117cc15f8ffeaa8d0318b2ffaf76e2f74e58e",
+  "release": "QC5-R48-SD",
+  "ZIP_layout_tests_passed": true,
+  "PC_kit_cases": 12,
+  "physical_factory_twin_installation_repeated": false
 }

@@ -1,4 +1,4 @@
-QC5 R47 STABILE — INSTALLAZIONE DIRETTA DA SD
+QC5 R48 STABILE — INSTALLAZIONE DIRETTA DA SD
 
 PER UNA GEMELLA ANCORA CON IL FIRMWARE ORIGINALE
 
@@ -6,7 +6,7 @@ PER UNA GEMELLA ANCORA CON IL FIRMWARE ORIGINALE
    liberi. Non usare exFAT. Per la prima installazione è preferibile una SD vuota.
 2. Estrai il CONTENUTO dello ZIP direttamente nella RADICE della SD.
    Devi vedere qc5-run e la cartella qc5-installer, senza una cartella
-   QC5-R47-SD intermedia. Non serve eseguire Python o altri script sul PC.
+   QC5-R48-SD intermedia. Non serve eseguire Python o altri script sul PC.
    Non rinominare o eliminare il file di avvio con il nome lungo.
 3. Espelli normalmente la SD. Inseriscila nella telecamera spenta.
    Tieni Reset mentre ridai alimentazione e rilascialo dopo circa 3 secondi.
@@ -21,8 +21,10 @@ come config.txt nella radice e modifica SSID/PWD prima dell'accensione.
 Senza questo file puoi configurare il Wi-Fi dall'hotspot. Dopo la configurazione,
 Wi-Fi e chiave SSH persistono in flash: la SD serve per backup e registrazioni.
 
-LE CAMERE GIA SULLA R47
-Usano già lo stesso firmware della versione stabile: non occorre reinstallare.
+NOME DELLA TELECAMERA
+Sistema → Nome della telecamera → Salva nome. Il nome resta in flash anche
+senza SD. Campo vuoto: nome automatico univoco ricavato dal MAC.
+
 
 AGGIORNAMENTO DA UNA VERSIONE QC5 NATIVA PRECEDENTE
 La sola estrazione non attiva l'aggiornamento delle camere già modificate.

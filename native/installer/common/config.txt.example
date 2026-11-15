@@ -1,0 +1,22 @@
+# QC5 R48: configurazione locale, letta come dati.
+# SSID vuoto: prima accensione tramite hotspot QC5-xxxxxx.
+# Inserisci qui le credenziali oppure nella pagina HTTP dell'hotspot.
+SSID=""
+PWD=""
+WIFI_OPEN=0
+WIFI_APPLY=1
+CAM_ID="auto"
+CAM_NAME="QC5"
+WEB_PORT=80
+RTSP_ENABLE=1
+RTSP_PORT=8554
+# auto = server NTP locale fornito dal router, modificabile.
+NTP_SERVER="auto"
+# Le registrazioni si configurano dalla WebUI.
+RECORD_TARGET=sd
+RECORD_EXPORT_EXISTING=0
+
+# Nome di rete opzionale per la prima configurazione. Vuoto = qc5-xxxxxx.
+# Dopo il salvataggio in flash, modifica il nome da Sistema nella WebUI.
+# La configurazione in flash ha precedenza su un vecchio file SD.
+HOSTNAME=""

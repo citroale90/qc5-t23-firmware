@@ -14,11 +14,16 @@
 #define qc5_config_get qc5_store_config_get
 #include "config_parser.h"
 #undef qc5_config_get
+int qc5_wifi_config_hostname(const char *text,unsigned long n,char out[64]){
+ char raw[64];int rc=qc5_store_config_get(text,n,"HOSTNAME",raw,sizeof raw);
+ out[0]=0;if(rc<=0)return rc;return qc5_hostname_normalize(out,raw)?1:-1;
+}
 int qc5_wifi_config_profile(const char*b,unsigned long n,struct qc5_wifi_profile*p){
  char apply[8],open_net[8];memset(p,0,sizeof(*p));
  if(qc5_store_config_get(b,n,"SSID",p->ssid,sizeof(p->ssid))<0||qc5_store_config_get(b,n,"PWD",p->password,sizeof(p->password))<0||
     qc5_store_config_get(b,n,"WIFI_OPEN",open_net,sizeof(open_net))<0||qc5_store_config_get(b,n,"WIFI_APPLY",apply,sizeof(apply))<0)return -1;
  if((apply[0]&&strcmp(apply,"0")&&strcmp(apply,"1"))||(open_net[0]&&strcmp(open_net,"0")&&strcmp(open_net,"1")))return -1;
+ char hostname[64];if(qc5_wifi_config_hostname(b,n,hostname)==1)memcpy(p->hostname,hostname,sizeof p->hostname);
  p->open=!strcmp(open_net,"1");if(!p->ssid[0]||!strcmp(apply,"0"))return 0;
  return qc5_wifi_valid(p)?1:-1;
 }
@@ -27,7 +32,7 @@ static int wifi_key(const char*b,size_t n){
  size_t key=0;while(key<n&&b[key]!='=')key++;
  if(key==n)return 0;while(key&&qc5_space(b[key-1]))key--;
  return (key==4&&!memcmp(b,"SSID",4))||(key==3&&!memcmp(b,"PWD",3))||
-        (key==10&&!memcmp(b,"WIFI_APPLY",10))||(key==9&&!memcmp(b,"WIFI_OPEN",9));
+        (key==8&&!memcmp(b,"HOSTNAME",8))||(key==10&&!memcmp(b,"WIFI_APPLY",10))||(key==9&&!memcmp(b,"WIFI_OPEN",9));
 }
 static int write_synced(int directory,const char*name,const void*b,size_t n){
  int fd=openat(directory,name,O_WRONLY|O_CREAT|O_EXCL|O_NOFOLLOW|O_CLOEXEC,0600);if(fd<0)return -1;
@@ -54,7 +59,7 @@ int qc5_wifi_store(const char*sd,const char*seed,unsigned long seed_size,const s
  /* Reject malformed unrelated syntax, but allow repairing invalid Wi-Fi values. */
  if(qc5_store_config_get(old,(unsigned long)size,"_QC5_SYNTAX_ONLY",unused,sizeof(unused))<0){errno=EINVAL;goto done;}
  int parsed=qc5_wifi_config_profile(old,(unsigned long)size,&previous);
- if(existing&&parsed==1&&qc5_wifi_equal(p,&previous)){result=0;goto done;}
+ if(existing&&parsed==1&&qc5_wifi_profile_equal(p,&previous)){result=0;goto done;}
  size_t used=0,at=0;
  /* Preserve a UTF-8 BOM and every unrelated literal line/comment. */
  if(size>=3&&!memcmp(old,"\xef\xbb\xbf",3)){memcpy(next,old,3);used=at=3;}
@@ -62,9 +67,9 @@ int qc5_wifi_store(const char*sd,const char*seed,unsigned long seed_size,const s
   if(!wifi_key(old+start,at-start)){if(used+at-start>=sizeof(next)){errno=EFBIG;goto done;}memcpy(next+used,old+start,at-start);used+=at-start;}
  }
  if(used&&next[used-1]!='\n'){if(used+1>=sizeof(next)){errno=EFBIG;goto done;}next[used++]='\n';}
- int count=snprintf(next+used,sizeof(next)-used,"SSID=\"%s\"\nPWD=\"%s\"\nWIFI_APPLY=1\nWIFI_OPEN=%u\n",p->ssid,p->password,p->open);
+ int count=snprintf(next+used,sizeof(next)-used,"SSID=\"%s\"\nPWD=\"%s\"\nWIFI_APPLY=1\nWIFI_OPEN=%u\nHOSTNAME=\"%s\"\n",p->ssid,p->password,p->open,p->hostname);
  if(count<0||(size_t)count>=sizeof(next)-used){errno=EFBIG;goto done;}used+=(size_t)count;
- struct qc5_wifi_profile check;if(qc5_wifi_config_profile(next,used,&check)!=1||!qc5_wifi_equal(&check,p)){errno=EINVAL;goto done;}
+ struct qc5_wifi_profile check;if(qc5_wifi_config_profile(next,used,&check)!=1||!qc5_wifi_profile_equal(&check,p)){errno=EINVAL;goto done;}
  if(qc5_random_hex(nonce))goto done;
  snprintf(fresh,sizeof(fresh),".qc5-wifi-new-%s",nonce);snprintf(backup,sizeof(backup),".qc5-wifi-old-%s",nonce);
  if(write_synced(dir,fresh,next,used))goto done;

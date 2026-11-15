@@ -1,0 +1,18 @@
+--- a/frontend-features.c
++++ b/frontend-features.c
+@@ -53,6 +53,7 @@
+ #include "native-continuous/heartbeat.h"
+ #include "native-services/settings-http.h"
+ #include "wifi-apply.h"
++#include "native-services/hostname-http.h"
+ static int qfh_feature_ready(void){struct qfs_status s;return qfh_exchange(QFS_STATUS,0,&s);}
+ static int qfh_ptz_ready(void){return qfh_motor_open();}
+ static int qfh_ptz_calibrated(void){return qfh_motor_fd>=0&&qph_motor.homed;}
+@@ -92,6 +93,7 @@
+   return;
+  }
+  if(!strncmp(path,"/api/rec/",9)||!strncmp(path,"/api/motion/",12)){qnc_handle(fd,method,path,first+2,end+4,used-(size_t)(end+4-request),deadline);return;}
++ if(!strcmp(path,"/api/system/hostname")){qhh_handle(fd,method,first+2,end+4,used-(size_t)(end+4-request),deadline);return;}
+  if(!strcmp(method,"POST")){
+   if(strcmp(path,"/setup/wifi")){http_reply(fd,404,"text/plain","Not found",9);return;}
+   char form[513];size_t available=used-(size_t)(end+4-request);if(available>512)goto invalid;memcpy(form,end+4,available);provision_post(fd,first+2,form,available,deadline);return;
